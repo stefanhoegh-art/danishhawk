@@ -556,79 +556,63 @@
 </script>
 
 <script>
-window.setLang = function(lang) { setLang(lang); };
-  function updateMetaTags(lang) {
-  if (lang === 'en') {
-    document.title = 'Danish Hawk — Bespoke CNC Furniture | Denmark';
-    document.querySelector('meta[name="description"]').setAttribute('content',
-      'Danish Hawk crafts bespoke CNC-machined furniture in collaboration with Denmark's finest manufacturers. Rare materials, original design. Your vision, is your vision.');
-    document.querySelector('meta[property="og:title"]').setAttribute('content', 'Danish Hawk — Bespoke CNC Furniture');
-    document.querySelector('meta[property="og:description"]').setAttribute('content', 'Bespoke CNC-machined furniture designed from scratch. Your vision, is your vision.');
-    document.querySelector('meta[name="twitter:title"]').setAttribute('content', 'Danish Hawk — Bespoke CNC Furniture');
-    document.querySelector('meta[name="twitter:description"]').setAttribute('content', 'Bespoke CNC-machined furniture designed from scratch. Your vision, is your vision.');
-    document.documentElement.setAttribute('lang', 'en');
-    // Update canonical URL to English version
-    let canonical = document.querySelector('link[rel="canonical"]');
-    if (canonical) canonical.setAttribute('href', 'https://danishhawk.com?lang=en');
-  } else {
-    document.title = 'Danish Hawk — Specialdesignede Møbler & CNC Fræsning | Danmark';
-    document.querySelector('meta[name="description"]').setAttribute('content',
-      'Danish Hawk designer og producerer speciallavede møbler i samarbejde med Danmarks bedste møbelproducenter. CNC-fræsning, CAD-design og unikke træmøbler. Din vision, er din vision.');
-    document.querySelector('meta[property="og:title"]').setAttribute('content', 'Danish Hawk — Specialdesignede Møbler');
-    document.querySelector('meta[property="og:description"]').setAttribute('content', 'CNC-fræsede møbler designet fra bunden. Din vision, er din vision.');
-    document.querySelector('meta[name="twitter:title"]').setAttribute('content', 'Danish Hawk — Specialdesignede Møbler');
-    document.querySelector('meta[name="twitter:description"]').setAttribute('content', 'CNC-fræsede møbler designet fra bunden. Din vision, er din vision.');
-    document.documentElement.setAttribute('lang', 'da');
-    let canonical = document.querySelector('link[rel="canonical"]');
-    if (canonical) canonical.setAttribute('href', 'https://danishhawk.com');
-  }
-}
+// Translation data
+var translations = {};
+document.querySelectorAll('[data-da]').forEach(function(el) {
+  var id = el.id || (el.className + '_' + el.textContent.slice(0,10));
+});
 
 function setLang(lang) {
-  document.querySelectorAll('[data-da],[data-en]').forEach(el => {
-    const val = el.getAttribute('data-' + lang);
+  // Update all translatable elements
+  document.querySelectorAll('[data-da],[data-en]').forEach(function(el) {
+    var val = el.getAttribute('data-' + lang);
     if (!val) return;
-    // For elements that may contain HTML (h1, h2, p with em tags)
-    const tags = ['H1','H2','P','DIV','SPAN','LABEL','BUTTON','A'];
-    if (tags.includes(el.tagName)) {
-      el.innerHTML = val;
-    } else {
-      el.textContent = val;
-    }
+    el.innerHTML = val;
   });
-  // Form placeholders
-  if (lang === 'da') {
-    document.querySelectorAll('.fi,.fta').forEach(el => {
-      if (el.placeholder === 'Full name') el.placeholder = 'Fulde navn';
-      if (el.placeholder === 'your@email.com') el.placeholder = 'din@email.dk';
-      if (el.placeholder === 'Custom furniture, CNC job, CAD file...') el.placeholder = 'Tilpasset møbel, CNC-job, CAD-fil...';
-      if (el.placeholder === 'Tell us about your project...') el.placeholder = 'Fortæl os om dit projekt...';
+
+  // Update placeholders
+  var placeholders = {
+    da: ['Fulde navn', 'din@email.dk', 'Tilpasset møbel, CNC-job, CAD-fil...', 'Fortæl os om dit projekt...'],
+    en: ['Full name', 'your@email.com', 'Custom furniture, CNC job, CAD file...', 'Tell us about your project...']
+  };
+  var inputs = document.querySelectorAll('.fi, .fta');
+  var p = placeholders[lang];
+  var daP = placeholders['da'];
+  var enP = placeholders['en'];
+  inputs.forEach(function(el) {
+    daP.forEach(function(da, i) {
+      if (el.placeholder === da || el.placeholder === enP[i]) {
+        el.placeholder = p[i];
+      }
     });
+  });
+
+  // Update buttons
+  var btnDa = document.getElementById('btn-da');
+  var btnEn = document.getElementById('btn-en');
+  if (btnDa) btnDa.className = lang === 'da' ? 'lang-btn active' : 'lang-btn';
+  if (btnEn) btnEn.className = lang === 'en' ? 'lang-btn active' : 'lang-btn';
+
+  // Update page title and meta
+  if (lang === 'en') {
+    document.title = 'Danish Hawk — Bespoke CNC Furniture | Denmark';
   } else {
-    document.querySelectorAll('.fi,.fta').forEach(el => {
-      if (el.placeholder === 'Fulde navn') el.placeholder = 'Full name';
-      if (el.placeholder === 'din@email.dk') el.placeholder = 'your@email.com';
-      if (el.placeholder === 'Tilpasset møbel, CNC-job, CAD-fil...') el.placeholder = 'Custom furniture, CNC job, CAD file...';
-      if (el.placeholder === 'Fortæl os om dit projekt...') el.placeholder = 'Tell us about your project...';
-    });
+    document.title = 'Danish Hawk — Specialdesignede Møbler & CNC Fræsning | Danmark';
   }
-  document.getElementById('btn-da').classList.toggle('active', lang === 'da');
-  document.getElementById('btn-en').classList.toggle('active', lang === 'en');
-  updateMetaTags(lang);
-  // Update URL param so sharing the page preserves language
-  const url = new URL(window.location);
-  if (lang === 'en') { url.searchParams.set('lang', 'en'); }
-  else { url.searchParams.delete('lang'); }
-  window.history.replaceState({}, '', url);
+  document.documentElement.lang = lang;
 }
-  // Auto-detect: URL param takes priority, then browser language, default Danish
-  (function() {
-    var urlLang = new URLSearchParams(window.location.search).get('lang');
-    if (urlLang === 'en') { setLang('en'); return; }
-    if (urlLang === 'da') { setLang('da'); return; }
-    var bl = (navigator.language || navigator.userLanguage || 'da').toLowerCase();
-    setLang(bl.startsWith('da') ? 'da' : 'en');
-  })();
+
+// Make globally available
+window.setLang = setLang;
+
+// Auto-detect on load
+(function() {
+  var urlLang = new URLSearchParams(window.location.search).get('lang');
+  if (urlLang === 'en') { setLang('en'); return; }
+  if (urlLang === 'da') { setLang('da'); return; }
+  var bl = (navigator.language || navigator.userLanguage || 'da').toLowerCase();
+  setLang(bl.startsWith('da') ? 'da' : 'en');
+})();
 </script>
 
 <script>
