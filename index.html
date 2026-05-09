@@ -2,6 +2,10 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8"/>
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
+  <meta http-equiv="Pragma" content="no-cache"/>
+  <meta http-equiv="Expires" content="0"/>
+  <!-- v3 -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Danish Hawk — Specialdesignede Møbler & CNC Fræsning | Danmark</title>
   <meta name="description" content="Danish Hawk designer og producerer speciallavede møbler i samarbejde med Danmarks bedste møbelproducenter. CNC-fræsning, CAD-design og unikke træmøbler. Din vision, er din vision."/>
@@ -607,7 +611,7 @@ window.setLang = setLang;
 
 // Auto-detect on load
 (function() {
-  var urlLang = new URLSearchParams(window.location.search).get('lang');
+  var urlLang = (new URLSearchParams(window.location.search).get('lang') || '').toLowerCase();
   if (urlLang === 'en') { setLang('en'); return; }
   if (urlLang === 'da') { setLang('da'); return; }
   var bl = (navigator.language || navigator.userLanguage || 'da').toLowerCase();
