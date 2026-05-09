@@ -560,12 +560,6 @@
 </script>
 
 <script>
-// Translation data
-var translations = {};
-document.querySelectorAll('[data-da]').forEach(function(el) {
-  var id = el.id || (el.className + '_' + el.textContent.slice(0,10));
-});
-
 function setLang(lang) {
   // Update all translatable elements
   document.querySelectorAll('[data-da],[data-en]').forEach(function(el) {
