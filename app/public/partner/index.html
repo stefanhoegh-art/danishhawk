@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Danish Hawk — Partner</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/admin/admin.css">
+<style>
+  main { max-width: 940px; margin: 0 auto; padding: 54px 24px 90px; }
+  .top { border-bottom: 1px solid var(--line); padding-bottom: 26px; margin-bottom: 36px; }
+</style>
+</head>
+<body>
+<main id="app"><p class="empty">Loading…</p></main>
+<script type="module">
+const app = document.getElementById('app');
+const key = new URLSearchParams(location.search).get('key') || '';
+
+const esc = (v) => String(v ?? '').replace(/[&<>"']/g, (c) =>
+  ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]));
+const date = (iso) => new Date(iso.replace(' ', 'T') + 'Z')
+  .toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+
+const LABELS = {
+  awaiting_payment: 'Awaiting payment', quote_requested: 'Quote requested', quote_sent: 'Quote sent',
+  deposit_paid: 'Deposit paid', paid: 'Paid', in_production: 'In production',
+  shipped: 'Shipped', completed: 'Completed', cancelled: 'Cancelled',
+};
+
+if (!key) {
+  app.innerHTML = `<div class="msg err">This page needs your partner link.
+    Ask Danish Hawk for the address that ends in <code>?key=…</code>.</div>`;
+} else {
+  fetch('/api/partner/summary?key=' + encodeURIComponent(key))
+    .then((res) => res.json().then((data) => { if (!res.ok) throw new Error(data.error); return data; }))
+    .then(render)
+    .catch((err) => { app.innerHTML = `<div class="msg err">${esc(err.message)}</div>`; });
+}
+
+function render(data) {
+  const views = data.traffic.view || 0;
+  const orders = data.totals.orders || 0;
+
+  app.innerHTML = `
+    <div class="top">
+      <div class="sub" style="font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:var(--accent)">
+        Danish Hawk · Partner</div>
+      <h1 style="font-size:42px;margin-top:8px">${esc(data.partner.name)}</h1>
+      <p class="hint">You earn ${(data.partner.commissionRate * 100).toFixed(1)}% of the
+        ex-VAT value of every order placed through your site.</p>
+    </div>
+
+    <div class="cards">
+      <div class="stat"><div class="k">Commission owed to you</div>
+        <div class="v gold">${esc(data.totals.dueLabel)}</div>
+        <div class="n">${esc(data.totals.paidLabel)} already transferred</div></div>
+      <div class="stat"><div class="k">Orders</div><div class="v">${orders}</div>
+        <div class="n">${esc(data.totals.revenueLabel)} of furniture</div></div>
+      <div class="stat"><div class="k">Views (30 days)</div><div class="v">${views}</div>
+        <div class="n">${views ? ((orders / views) * 100).toFixed(1) + '% converted' : 'No traffic yet'}</div></div>
+      <div class="stat"><div class="k">Earned in total</div>
+        <div class="v">${esc(data.totals.commissionLabel)}</div></div>
+    </div>
+
+    ${data.topProducts.length ? `<div class="panel"><h3>Your best sellers</h3><div class="wrap"><table>
+      <thead><tr><th>Piece</th><th class="num">Units</th><th class="num">Value</th></tr></thead>
+      <tbody>${data.topProducts.map((p) => `<tr><td>${esc(p.name)}</td>
+        <td class="num">${p.units}</td><td class="num">${esc(p.revenueLabel)}</td></tr>`).join('')}
+      </tbody></table></div></div>` : ''}
+
+    <div class="panel"><h3>Orders through your site</h3><div class="wrap">
+      ${data.orders.length ? `<table>
+        <thead><tr><th>Order</th><th>Date</th><th>Status</th><th class="num">Value</th>
+          <th class="num">Your commission</th><th>Paid out</th></tr></thead>
+        <tbody>${data.orders.map((o) => `<tr>
+          <td><code>${esc(o.order_no)}</code></td>
+          <td>${date(o.created_at)}</td>
+          <td><span class="pill">${esc(LABELS[o.status] || o.status)}</span></td>
+          <td class="num">${esc(o.totalLabel)}</td>
+          <td class="num">${esc(o.commissionLabel)}</td>
+          <td><span class="pill ${o.commission_status === 'paid' ? 'ok' : o.commission_status === 'payable' ? 'gold' : ''}">
+            ${esc(o.commission_status)}</span></td></tr>`).join('')}</tbody></table>`
+        : `<div class="empty">No orders yet. Once someone buys through your site it shows up here
+             within seconds.</div>`}
+    </div></div>
+
+    <div class="panel"><h3>Your embed code</h3><div class="body">
+      <p class="hint" style="margin-bottom:12px">Paste this wherever you want the collection to appear.
+        It works on ${data.partner.domains.length
+          ? data.partner.domains.map((d) => `<code>${esc(d)}</code>`).join(', ')
+          : 'any page of your site'}.</p>
+      <div class="snippet"><pre>${esc(data.embedSnippet)}</pre>
+        <button class="copy" id="copy">Copy</button></div>
+    </div></div>`;
+
+  document.getElementById('copy').addEventListener('click', () => {
+    navigator.clipboard.writeText(data.embedSnippet);
+    document.getElementById('copy').textContent = 'Copied';
+  });
+}
+</script>
+</body>
+</html>
