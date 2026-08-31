@@ -1,8 +1,10 @@
 # Netlify builds danishhawk.com straight from this repository.
-# The site is plain static HTML in the repository root — there is no build step.
+# The site is plain static HTML in the repository root. The explicit no-op command
+# stops Netlify auto-detecting a build from _config.yml, which is only there for
+# GitHub Pages and must not trigger a Jekyll build here.
 [build]
   publish = "."
-  command = ""
+  command = "echo Static site - nothing to build."
 
 # The webshop application is server software (Node + SQLite) and cannot run on
 # Netlify, so its files are not served as part of the public site.
