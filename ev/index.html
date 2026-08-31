@@ -126,6 +126,8 @@
 
   .tabpanel[hidden] { display: none; }
   .panel-lede { padding-top: 40px; max-width: 66ch; font-size: 1.06rem; line-height: 1.5; color: var(--ink-2); }
+  .panel-lede.tail { margin-top: 46px; padding-top: 24px; border-top: 1px solid var(--line);
+    font-size: .93rem; color: var(--ink-3); }
   .tabpanel > section:first-of-type { padding-top: 40px; }
   .panel-lede + section { padding-top: 34px; }
 
@@ -456,6 +458,32 @@
   }
   @media (max-width: 760px) {
     .wrap { padding: 0 16px 72px; }
+
+    /* the whole point of a phone view: get to the cars */
+    .ab-inner { padding: 8px 14px; gap: 9px 12px; }
+    .ab-brand h1 { font-size: .89rem; }
+    .ab-car { padding: 5px 10px; }
+    .ab-car .md { font-size: .8rem; }
+    .chip { font-size: .59rem; padding: 4px 7px; }
+    .chip b { font-size: .69rem; }
+    .ab-toggle { padding: 6px 10px; font-size: .58rem; }
+    .tabs { padding: 0 14px; }
+    .tabs button { padding: 9px 11px; font-size: .61rem; }
+    .cond-inner { padding: 10px 14px 11px; gap: 9px 16px; }
+    .filters { padding: 11px 13px; gap: 10px 14px; margin-bottom: 14px; }
+    .fslide { min-width: 0; flex: 1 1 100%; }
+
+    /* one swipeable line each, rather than three wrapped rows */
+    .chips { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; max-width: 100%; }
+    .chips::-webkit-scrollbar { display: none; }
+    .chips button { padding: 7px 11px; font-size: .59rem; }
+    .pick { flex-wrap: nowrap; width: 100%; }
+
+    section { padding-top: 32px; }
+    .tabpanel > section:first-of-type { padding-top: 20px; }
+    .sechead h2 { font-size: 1.24rem; }
+    .secnote { font-size: .88rem; margin-bottom: 16px; }
+    .panel-lede { padding-top: 26px; font-size: .95rem; }
     .masthead { padding: 40px 0 32px; }
     .masthead .lede { font-size: 1.12rem; }
     .equation { grid-template-columns: 1fr; gap: 20px; padding: 26px 20px; }
@@ -544,27 +572,11 @@
 <div class="wrap">
 
   <div class="tabpanel" id="p-compare" role="tabpanel" aria-labelledby="tab-compare">
-  <p class="panel-lede">
-    Every electric car on sale, ranked by what it actually costs to drive rather than by the number
-    on the brochure. The conditions in the bar above drive every figure on every tab.
-  </p>
-  <!-- ============ BEST FOR WHAT ============ -->
-  <section>
-    <div class="sechead"><h2>Best for what</h2></div>
-    <p class="secnote">
-      There is no best electric car, only a best answer to a question. All six recompute under the
-      conditions you set at the top &mdash; switch the weather to <b>Winter</b> and you are reading a
-      winter ranking. Pick one to load it into every other tab.
-    </p>
-    <div class="awards" id="awards"></div>
-  </section>
   <!-- ============ THE FIELD ============ -->
   <section>
-    <div class="sechead"><h2>The whole field</h2></div>
+    <div class="sechead"><h2>Every electric car</h2></div>
     <p class="secnote">
-      Every headline figure is the energy speed at your current settings, so the order changes with
-      the conditions. It lists alphabetically until you sort by something &mdash; then the order means
-      what the chip says. Select any car to make it the one every other tab is about.
+      Alphabetical until you sort. Tap a car to make it the one every other tab is about.
     </p>
 
     <div class="filters">
@@ -579,7 +591,7 @@
       </div>
       <div class="fslide">
         <label class="cl" for="mx">Up to</label>
-        <input type="range" id="mx" min="150000" max="1300000" step="10000" value="1300000">
+        <input type="range" id="mx" min="130000" max="1500000" step="10000" value="1500000">
         <span class="cv" id="mx-v">any price</span>
       </div>
       <div class="chips" role="group" aria-label="Sort by">
@@ -596,6 +608,23 @@
     <div class="cards" id="cards"></div>
     <div class="demo-flag">Reference data &middot; indicative prices, verify before buying</div>
   </section>
+
+  <!-- ============ BEST FOR WHAT ============ -->
+  <section>
+    <div class="sechead"><h2>Best for what</h2></div>
+    <p class="secnote">
+      There is no best electric car, only a best answer to a question. All six recompute under the
+      conditions you set at the top &mdash; switch the weather to <b>Winter</b> and you are reading a
+      winter ranking. Pick one to load it into every other tab.
+    </p>
+    <div class="awards" id="awards"></div>
+  </section>
+
+  <p class="panel-lede tail">
+    Every electric car on sale, ranked by what it actually costs to drive rather than by the number
+    on the brochure. The conditions in the bar above drive every figure on every tab.
+  </p>
+
   </div>
 
   <div class="tabpanel" id="p-car" role="tabpanel" hidden>
@@ -1260,7 +1289,7 @@
 
   var state = {
     car: CARS[42], speed: 110, temp: 10, price: 2.75, charger: 150,
-    sort: "brand", seg: "all", maxPrice: 1300000,
+    sort: "brand", seg: "all", maxPrice: 1500000,
     ov: { battery:null, wltp:null, mass:null, cda:null, dc:null, price:null },
     chargeTo: 100, reserve: 0, health: 100,
     kmYear: 18000, depRate: 13, insRate: 1.4, service: 3500,
@@ -1692,7 +1721,7 @@
     document.getElementById("ch-v").textContent =
       (state.charger < 10 ? state.charger.toFixed(1) : Math.round(state.charger)) + " kW";
     document.getElementById("mx-v").textContent =
-      state.maxPrice >= 1300000 ? "any price" : kr(state.maxPrice) + " kr";
+      state.maxPrice >= 1500000 ? "any price" : kr(state.maxPrice) + " kr";
     document.getElementById("u-top-v").textContent = state.chargeTo + " %";
     document.getElementById("u-res-v").textContent = state.reserve + " %";
     document.getElementById("u-hp-v").textContent = state.health + " %";
