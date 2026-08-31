@@ -1,0 +1,1774 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#ffffff">
+<meta name="description" content="Compare every electric car on sale by what it actually costs to drive: real range, energy use, charging speed and cost per year under your own conditions.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Energy Speed">
+<meta property="og:description" content="Compare every electric car on sale by what it actually costs to drive, not by the number on the brochure.">
+<meta property="og:url" content="https://danishhawk.com/ev/">
+<style>
+  html { -webkit-text-size-adjust: 100%; }
+  body { margin: 0; }
+  img, svg { max-width: 100%; }
+  [hidden] { display: none !important; }
+</style>
+<title>Energy Speed</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+
+<style>
+  /* Committed to a single light world: white ground, hairline structure.
+     Every colour is stated here, so the page holds whatever theme the viewer's client is in. */
+  :root {
+    color-scheme: light;
+    --ground: #ffffff;
+    --surface: #ffffff;
+    --surface-2: #f4f6f8;
+    --ink: #10161c;
+    --ink-2: #47535f;
+    --ink-3: #6b7885;
+    --line: #e5e9ed;
+    --line-2: #cbd2d9;
+    --aero: #c2410c;
+    --roll: #0e7490;
+    --aux:  #5b5bd6;
+    --gain: #0e7490;
+    --burn: #c2410c;
+    --shadow: 0 1px 2px rgba(16,22,28,.045);
+    --display: "Familjen Grotesk", "Helvetica Neue", Arial, sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  body { background: var(--ground); color: var(--ink); font-family: var(--display);
+    font-size: 16px; line-height: 1.55; -webkit-font-smoothing: antialiased; }
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 0 24px 96px; }
+
+  .eyebrow { font-family: var(--mono); font-size: .68rem; font-weight: 500;
+    letter-spacing: .16em; text-transform: uppercase; color: var(--ink-3); }
+  h1, h2, h3 { text-wrap: balance; margin: 0; font-weight: 600; letter-spacing: -.015em; }
+  p { margin: 0; }
+  .num { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+
+  /* ---------- app shell ---------- */
+  .appbar { position: sticky; top: 0; z-index: 50; background: var(--surface); border-bottom: 1px solid var(--line); }
+  .ab-inner { max-width: 1180px; margin: 0 auto; padding: 11px 24px; display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+  .ab-brand { display: flex; align-items: center; gap: 9px; font-weight: 600; font-size: .97rem; letter-spacing: -.012em; white-space: nowrap; }
+  .ab-brand .bolt { color: var(--burn); font-size: .78rem; }
+  .ab-car { display: flex; align-items: baseline; gap: 9px; background: var(--surface-2); border: 1px solid var(--line);
+    border-radius: 3px; padding: 6px 12px; cursor: pointer; font: inherit; color: inherit; min-width: 0; }
+  .ab-car:hover { border-color: var(--line-2); }
+  .ab-car:focus-visible { outline: 2px solid var(--burn); outline-offset: 2px; }
+  .ab-car .mk { font-family: var(--mono); font-size: .54rem; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-3); }
+  .ab-car .md { font-size: .85rem; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .ab-chips { display: flex; gap: 7px; flex-wrap: wrap; }
+  .chip { font-family: var(--mono); font-size: .64rem; color: var(--ink-3); background: var(--surface-2);
+    border: 1px solid var(--line); border-radius: 3px; padding: 5px 9px; white-space: nowrap; }
+  .chip b { color: var(--ink); font-weight: 600; font-size: .76rem; font-variant-numeric: tabular-nums; }
+  .ab-toggle { margin-left: auto; font-family: var(--mono); font-size: .62rem; letter-spacing: .1em; text-transform: uppercase;
+    background: none; border: 1px solid var(--line); border-radius: 3px; padding: 7px 12px; color: var(--ink-2); cursor: pointer; white-space: nowrap; }
+  .ab-toggle:hover { border-color: var(--line-2); color: var(--ink); }
+  .ab-toggle:focus-visible { outline: 2px solid var(--burn); outline-offset: 2px; }
+  .ab-toggle::after { content: " \25BE"; }
+  .ab-toggle[aria-expanded="false"]::after { content: " \25B8"; }
+
+  .tabs { max-width: 1180px; margin: 0 auto; padding: 0 24px; display: flex; gap: 2px; overflow-x: auto; }
+  .tabs button { font-family: var(--mono); font-size: .65rem; letter-spacing: .12em; text-transform: uppercase;
+    background: none; border: none; border-bottom: 2px solid transparent; color: var(--ink-3);
+    padding: 11px 14px; cursor: pointer; white-space: nowrap; transition: color .18s; }
+  .tabs button:hover { color: var(--ink); }
+  .tabs button[aria-selected="true"] { color: var(--ink); border-bottom-color: var(--burn); }
+  .tabs button:focus-visible { outline: 2px solid var(--burn); outline-offset: -3px; }
+
+  .cond { border-top: 1px solid var(--line); background: var(--surface-2); }
+  .cond-inner { max-width: 1180px; margin: 0 auto; padding: 12px 24px 13px;
+    display: flex; align-items: center; gap: 12px 26px; flex-wrap: wrap; }
+  .cond .ctl { background: none; padding: 0; }
+
+  .pick { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .pick .pl { font-family: var(--mono); font-size: .59rem; letter-spacing: .13em;
+    text-transform: uppercase; color: var(--ink-3); white-space: nowrap; }
+  .advbtn { font-family: var(--mono); font-size: .59rem; letter-spacing: .11em; text-transform: uppercase;
+    background: none; border: 1px solid var(--line); border-radius: 3px; padding: 7px 12px;
+    color: var(--ink-3); cursor: pointer; white-space: nowrap; }
+  .advbtn:hover { color: var(--ink); border-color: var(--line-2); }
+  .advbtn::after { content: " +"; }
+  .advbtn[aria-expanded="true"]::after { content: " \2212"; }
+  .advbtn:focus-visible { outline: 2px solid var(--burn); outline-offset: 2px; }
+  .advpanel[hidden] { display: none; }
+  .adv-inner { padding: 16px 24px 18px; display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(178px, 1fr)); gap: 18px 24px;
+    background: var(--surface-2); border-top: 1px solid var(--line); }
+  .adv-inner .ctl { background: none; padding: 0; }
+  .adv-note { grid-column: 1 / -1; font-size: .82rem; color: var(--ink-3); line-height: 1.5; }
+
+  .tabpanel[hidden] { display: none; }
+  .panel-lede { padding-top: 40px; max-width: 66ch; font-size: 1.06rem; line-height: 1.5; color: var(--ink-2); }
+  .tabpanel > section:first-of-type { padding-top: 40px; }
+  .panel-lede + section { padding-top: 34px; }
+
+  .masthead { padding: 56px 0 40px; border-bottom: 1px solid var(--line); }
+  .brandrow { display: flex; align-items: baseline; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+  .brandmark { display: flex; align-items: baseline; gap: 12px; }
+  .brandmark .bolt { font-size: 1.05rem; color: var(--burn); }
+  .brandmark h1 { font-size: 1.35rem; letter-spacing: -.02em; }
+  .masthead .lede { margin-top: 28px; max-width: 62ch; font-size: 1.32rem; line-height: 1.42;
+    color: var(--ink-2); letter-spacing: -.011em; }
+  .masthead .lede strong { color: var(--ink); font-weight: 600; }
+
+  section { padding-top: 56px; }
+  .sechead { display: flex; align-items: baseline; gap: 16px; margin-bottom: 8px; flex-wrap: wrap; }
+  .sechead h2 { font-size: 1.5rem; }
+  .secnote { color: var(--ink-2); font-size: .95rem; max-width: 68ch; margin-bottom: 26px; }
+  .panel { background: var(--surface); border: 1px solid var(--line); border-radius: 4px; box-shadow: var(--shadow); }
+
+  /* ---------- equation ---------- */
+  .equation { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 8px; padding: 36px 32px; }
+  .dial { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+  .dial svg { width: 100%; max-width: 246px; height: auto; display: block; }
+  .dial-cap { font-family: var(--mono); font-size: .66rem; letter-spacing: .15em; text-transform: uppercase; color: var(--ink-3); }
+  .op { display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 0 8px; }
+  .op-sign { font-family: var(--mono); font-size: 1.5rem; color: var(--ink-3); line-height: 1; }
+  .op-chip { background: var(--surface-2); border: 1px solid var(--line); border-radius: 3px;
+    padding: 10px 14px; text-align: center; min-width: 116px; }
+  .op-chip .v { font-family: var(--mono); font-size: 1.12rem; font-weight: 600; }
+  .op-chip .l { font-family: var(--mono); font-size: .6rem; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3); margin-top: 2px; }
+  .gauge-val { font-family: var(--mono); font-weight: 600; letter-spacing: -.03em; }
+
+  /* ---------- breakdown ---------- */
+  .breakdown { padding: 30px 32px 32px; }
+  .bd-top { display: flex; align-items: baseline; justify-content: space-between; gap: 20px; flex-wrap: wrap; margin-bottom: 22px; }
+  .bd-hero { display: flex; align-items: baseline; gap: 10px; }
+  .bd-hero .n { font-family: var(--mono); font-size: 2.7rem; font-weight: 600; letter-spacing: -.035em; line-height: 1; color: var(--burn); }
+  .bd-hero .u { font-family: var(--mono); font-size: .9rem; color: var(--ink-2); }
+  .bd-compare { color: var(--ink-2); font-size: .95rem; max-width: 40ch; text-align: right; text-wrap: pretty; }
+  .bd-compare b { color: var(--ink); font-weight: 600; }
+  .bd-bar { display: flex; gap: 2px; height: 46px; margin-bottom: 16px; }
+  .bd-seg { border-radius: 2px; min-width: 3px; transition: width .35s cubic-bezier(.4,0,.2,1); }
+  .bd-seg[data-k="aero"] { background: var(--aero); }
+  .bd-seg[data-k="roll"] { background: var(--roll); }
+  .bd-seg[data-k="aux"]  { background: var(--aux); }
+  .bd-keys { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+  .bd-key { padding: 14px 16px 15px; background: var(--surface-2); border-radius: 2px; }
+  .bd-key .kh { display: flex; align-items: center; gap: 8px; margin-bottom: 7px; }
+  .bd-key .sw { width: 10px; height: 10px; border-radius: 2px; flex: none; }
+  .bd-key[data-k="aero"] .sw { background: var(--aero); }
+  .bd-key[data-k="roll"] .sw { background: var(--roll); }
+  .bd-key[data-k="aux"]  .sw { background: var(--aux); }
+  .bd-key .kn { font-family: var(--mono); font-size: .63rem; letter-spacing: .13em; text-transform: uppercase; color: var(--ink-2); }
+  .bd-key .kv { font-family: var(--mono); font-size: 1.28rem; font-weight: 600; letter-spacing: -.02em; }
+  .bd-key .kv small { font-size: .68rem; font-weight: 400; color: var(--ink-3); margin-left: 3px; }
+  .bd-key .kd { font-size: .84rem; color: var(--ink-3); line-height: 1.5; margin-top: 5px; }
+
+  /* ---------- controls + stats ---------- */
+  .controls { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1px;
+    background: var(--line); border: 1px solid var(--line); border-radius: 4px; overflow: hidden; }
+  .ctl { background: var(--surface); padding: 18px 20px 20px; }
+  .ctl label { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; margin-bottom: 12px; }
+  .ctl .cl { font-family: var(--mono); font-size: .63rem; letter-spacing: .13em; text-transform: uppercase; color: var(--ink-3); }
+  .ctl .cv { font-family: var(--mono); font-size: .95rem; font-weight: 600; }
+
+  input[type="range"] { -webkit-appearance: none; appearance: none; width: 100%; height: 20px; background: transparent; cursor: pointer; display: block; }
+  input[type="range"]::-webkit-slider-runnable-track { height: 2px; background: var(--line-2); border-radius: 2px; }
+  input[type="range"]::-moz-range-track { height: 2px; background: var(--line-2); border-radius: 2px; }
+  input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; width: 15px; height: 15px; border-radius: 50%; background: var(--ink); border: none; margin-top: -6.5px; }
+  input[type="range"]::-moz-range-thumb { width: 15px; height: 15px; border-radius: 50%; background: var(--ink); border: none; }
+  input[type="range"]:focus-visible { outline: 2px solid var(--burn); outline-offset: 3px; border-radius: 3px; }
+
+  .stats { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1px; background: var(--line);
+    border: 1px solid var(--line); border-radius: 4px; overflow: hidden; margin-top: 1px; }
+  .stat { background: var(--surface); padding: 18px 20px 20px; }
+  .stat .sl { font-family: var(--mono); font-size: .62rem; letter-spacing: .13em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 9px; }
+  .stat .sv { font-family: var(--mono); font-size: 1.42rem; font-weight: 600; letter-spacing: -.025em; line-height: 1.1; }
+  .stat .sv small { font-size: .66rem; font-weight: 400; color: var(--ink-3); margin-left: 3px; letter-spacing: 0; }
+  .stat .sd { font-size: .82rem; color: var(--ink-3); margin-top: 5px; line-height: 1.45; }
+  .stat.accent .sv { color: var(--gain); }
+
+  /* ---------- tune panel ---------- */
+  .tune { padding: 0; overflow: hidden; }
+  .tune-head { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+    padding: 15px 22px; border-bottom: 1px solid var(--line); background: var(--surface-2); }
+  .tune-pick { display: flex; align-items: center; gap: 12px; min-width: 0; flex: 1 1 300px; }
+  .tune-pick .cl { font-family: var(--mono); font-size: .62rem; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-3); flex: none; }
+  .nsel { font-family: var(--mono); font-size: .84rem; padding: 9px 11px; border-radius: 3px; min-width: 0;
+    border: 1px solid var(--line-2); background: var(--surface); color: var(--ink); cursor: pointer; max-width: 340px; flex: 1 1 auto; }
+  .nsel:focus-visible { outline: 2px solid var(--burn); outline-offset: 2px; }
+  .reset { font-family: var(--mono); font-size: .6rem; letter-spacing: .12em; text-transform: uppercase;
+    padding: 9px 15px; border-radius: 3px; border: 1px solid var(--burn); background: transparent;
+    color: var(--burn); cursor: pointer; transition: background .18s, color .18s; }
+  .reset:hover { background: var(--burn); color: var(--surface); }
+  .reset:focus-visible { outline: 2px solid var(--burn); outline-offset: 2px; }
+
+  .tune-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(166px, 1fr)); gap: 1px; background: var(--line); }
+  .tf { background: var(--surface); padding: 15px 18px 16px; }
+  .tf > label { display: block; font-family: var(--mono); font-size: .6rem; letter-spacing: .13em;
+    text-transform: uppercase; color: var(--ink-3); margin-bottom: 10px; }
+  .tin { display: flex; align-items: baseline; gap: 6px; }
+  .nin { font-family: var(--mono); font-size: 1.04rem; font-weight: 600; width: 100%; min-width: 0;
+    background: transparent; border: none; border-bottom: 1px solid var(--line-2); color: var(--ink); padding: 3px 0; }
+  .nin:focus { outline: none; border-bottom-color: var(--burn); }
+  .nin.edited { color: var(--burn); border-bottom-color: var(--burn); }
+  .tin .un { font-family: var(--mono); font-size: .66rem; color: var(--ink-3); flex: none; }
+  .hint { font-family: var(--mono); font-size: .58rem; letter-spacing: .05em; color: var(--ink-3); margin-top: 7px; }
+
+  .tune-sub { display: grid; grid-template-columns: 1.7fr 1fr; gap: 1px; background: var(--line); border-top: 1px solid var(--line); }
+  .tune-usage { background: var(--surface); padding: 18px 20px 20px; }
+  .tune-usage .uh { font-family: var(--mono); font-size: .6rem; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--ink-3); margin-bottom: 16px; }
+  .ugrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px; }
+  .tune-out { background: var(--surface); padding: 16px 22px 18px; display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(186px, 1fr)); gap: 14px 24px; align-items: start; }
+  .tune-out .row { display: flex; flex-direction: column; gap: 4px; }
+  .tune-out .rl { font-family: var(--mono); font-size: .59rem; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3); }
+  .tune-out .rv { font-family: var(--mono); font-size: .98rem; font-weight: 600; white-space: nowrap; }
+  .tune-out .rv.hi { color: var(--burn); }
+  .tune-out .foot { grid-column: 1 / -1; font-size: .8rem; color: var(--ink-3); line-height: 1.5; padding-top: 2px; }
+
+  /* ---------- cost to own ---------- */
+  .cost { padding: 26px 30px 28px; }
+  .cost-top { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; flex-wrap: wrap; margin-bottom: 22px; }
+  .cost-hero .n { font-family: var(--mono); font-size: 2.7rem; font-weight: 600; letter-spacing: -.035em; line-height: 1; }
+  .cost-hero .u { font-family: var(--mono); font-size: .62rem; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-3); margin-top: 8px; }
+  .cost-perkm { text-align: right; }
+  .cost-perkm .n { font-family: var(--mono); font-size: 1.7rem; font-weight: 600; letter-spacing: -.03em; color: var(--gain); line-height: 1; }
+  .cost-perkm .u { font-family: var(--mono); font-size: .6rem; letter-spacing: .13em; text-transform: uppercase; color: var(--ink-3); margin-top: 7px; }
+  .cbar { display: flex; gap: 2px; height: 40px; margin-bottom: 14px; }
+  .cseg { border-radius: 2px; min-width: 3px; transition: width .35s cubic-bezier(.4,0,.2,1); }
+  .cseg[data-k="dep"] { background: var(--aero); }
+  .cseg[data-k="ins"] { background: var(--aux); }
+  .cseg[data-k="nrg"] { background: var(--roll); }
+  .cseg[data-k="svc"] { background: var(--ink-3); }
+  .ckeys { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; }
+  .ckey { background: var(--surface-2); border-radius: 2px; padding: 12px 14px 13px; }
+  .ckey .kh { display: flex; align-items: center; gap: 7px; margin-bottom: 6px; }
+  .ckey .sw { width: 9px; height: 9px; border-radius: 2px; flex: none; }
+  .ckey[data-k="dep"] .sw { background: var(--aero); }
+  .ckey[data-k="ins"] .sw { background: var(--aux); }
+  .ckey[data-k="nrg"] .sw { background: var(--roll); }
+  .ckey[data-k="svc"] .sw { background: var(--ink-3); }
+  .ckey .kn { font-family: var(--mono); font-size: .58rem; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-2); }
+  .ckey .kv { font-family: var(--mono); font-size: 1.1rem; font-weight: 600; letter-spacing: -.02em; }
+  .cost-charthost { margin-top: 26px; padding-top: 22px; border-top: 1px solid var(--line); }
+  .cost-charthost h3 { font-size: 1rem; margin-bottom: 2px; }
+  .cost-charthost .ch-sub { font-size: .85rem; color: var(--ink-3); margin-bottom: 14px; }
+
+  /* ---------- reliability ---------- */
+  .rel { display: inline-flex; align-items: center; gap: 6px; font-family: var(--mono);
+    font-size: .55rem; letter-spacing: .1em; text-transform: uppercase; border-radius: 2px; padding: 3px 7px; border: 1px solid var(--line); color: var(--ink-3); }
+  .rel .rd { width: 7px; height: 7px; border-radius: 50%; flex: none; background: var(--line-2); }
+  .rel[data-b="strong"] .rd { background: var(--roll); }
+  .rel[data-b="average"] .rd { background: var(--aero); }
+  .rel[data-b="weak"] .rd { background: var(--aux); }
+  .relbox { display: grid; gap: 12px; }
+  .relrow { display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap; }
+  .relrow .rn { font-size: .95rem; }
+  .relrow .rn b { font-weight: 600; }
+
+  /* ---------- service log ---------- */
+  .svc { padding: 0; overflow: hidden; }
+  .svc-head { display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap;
+    padding: 14px 22px; border-bottom: 1px solid var(--line); background: var(--surface-2); }
+  .svc-head .st { font-family: var(--mono); font-size: .62rem; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-3); }
+  .svc-form { display: grid; grid-template-columns: 122px 104px minmax(0,1fr) 124px 104px auto; gap: 11px; align-items: end; padding: 16px 22px; border-bottom: 1px solid var(--line); }
+  .svc-form select { font-family: var(--mono); font-size: .78rem; width: 100%; background: transparent; color: var(--ink);
+    border: none; border-bottom: 1px solid var(--line-2); padding: 5px 0; cursor: pointer; }
+  .svc-form select:focus { outline: none; border-bottom-color: var(--burn); }
+  .rcp { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1px; background: var(--line); border-bottom: 1px solid var(--line); }
+  .rcp .rc { background: var(--surface); padding: 14px 18px 15px; }
+  .rcp .rc .l { font-family: var(--mono); font-size: .57rem; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 6px; }
+  .rcp .rc .v { font-family: var(--mono); font-size: 1.16rem; font-weight: 600; letter-spacing: -.02em; }
+  .rcp .rc .d { font-size: .78rem; color: var(--ink-3); margin-top: 4px; }
+  .catbars { padding: 16px 22px; border-bottom: 1px solid var(--line); display: grid; gap: 10px; }
+  .catrow { display: grid; grid-template-columns: 122px 1fr 92px; gap: 12px; align-items: center; font-size: .84rem; }
+  .catrow .cn { font-family: var(--mono); font-size: .6rem; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-2); }
+  .catrow .ct { height: 9px; border-radius: 2px; background: var(--roll); min-width: 3px; }
+  .catrow .cvv { font-family: var(--mono); font-size: .82rem; font-weight: 600; text-align: right; }
+  .usebox { display: flex; align-items: center; gap: 10px; padding: 13px 22px; border-bottom: 1px solid var(--line); background: var(--surface-2); font-size: .87rem; color: var(--ink-2); flex-wrap: wrap; }
+  .usebox input { width: 16px; height: 16px; accent-color: var(--burn); cursor: pointer; }
+  .usebox label { cursor: pointer; }
+  .svc-form .fld label { display: block; font-family: var(--mono); font-size: .57rem; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 6px; }
+  .svc-form input[type="date"], .svc-form input[type="number"], .svc-form input[type="text"] {
+    font-family: var(--mono); font-size: .82rem; width: 100%; background: transparent; color: var(--ink);
+    border: none; border-bottom: 1px solid var(--line-2); padding: 5px 0; }
+  .svc-form input:focus { outline: none; border-bottom-color: var(--burn); }
+  .addbtn { font-family: var(--mono); font-size: .6rem; letter-spacing: .12em; text-transform: uppercase;
+    padding: 9px 16px; border-radius: 3px; border: 1px solid var(--ink); background: var(--ink); color: var(--surface); cursor: pointer; white-space: nowrap; }
+  .addbtn:focus-visible { outline: 2px solid var(--burn); outline-offset: 2px; }
+  .svc-list { display: grid; }
+  .svc-item { display: grid; grid-template-columns: 108px 96px 1fr auto auto; gap: 12px; align-items: center;
+    padding: 12px 22px; border-bottom: 1px solid var(--line); font-size: .88rem; }
+  .svc-item:last-child { border-bottom: none; }
+  .svc-item .sd { font-family: var(--mono); font-size: .78rem; color: var(--ink-2); }
+  .svc-item .sk { font-family: var(--mono); font-size: .78rem; color: var(--ink-2); }
+  .svc-item .sw2 { color: var(--ink); }
+  .badge { font-family: var(--mono); font-size: .54rem; letter-spacing: .1em; text-transform: uppercase;
+    padding: 3px 8px; border-radius: 2px; border: 1px solid var(--line); color: var(--ink-3); white-space: nowrap; }
+  .badge.ok { border-color: var(--roll); color: var(--roll); }
+  .del { background: none; border: none; color: var(--ink-3); cursor: pointer; font-family: var(--mono); font-size: .8rem; padding: 4px 6px; }
+  .del:hover { color: var(--aero); }
+  .del:focus-visible { outline: 2px solid var(--burn); outline-offset: 2px; }
+  .svc-foot { padding: 16px 22px 18px; }
+  .svc-foot p { font-size: .87rem; color: var(--ink-2); line-height: 1.6; max-width: 74ch; }
+  .svc-foot p + p { margin-top: 9px; }
+  .svc-foot b { color: var(--ink); font-weight: 600; }
+  .filebtn { display: inline-flex; align-items: center; gap: 9px; font-family: var(--mono); font-size: .6rem;
+    letter-spacing: .12em; text-transform: uppercase; padding: 9px 15px; border-radius: 3px;
+    border: 1px dashed var(--line-2); color: var(--ink-2); cursor: pointer; }
+  .filebtn:hover { border-color: var(--ink-3); color: var(--ink); }
+  .filebtn input { display: none; }
+  .shots { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 14px; }
+  .shot { position: relative; width: 104px; height: 78px; border-radius: 3px; overflow: hidden; border: 1px solid var(--line); }
+  .shot img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .shot button { position: absolute; top: 3px; right: 3px; background: rgba(0,0,0,.62); color: #fff;
+    border: none; border-radius: 2px; width: 19px; height: 19px; cursor: pointer; font-size: .7rem; line-height: 1; }
+
+  /* ---------- charts ---------- */
+  .charts { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .chart { padding: 22px 24px 18px; }
+  .chart h3 { font-size: 1rem; margin-bottom: 2px; }
+  .chart .ch-sub { font-size: .85rem; color: var(--ink-3); margin-bottom: 14px; }
+  .chart svg { width: 100%; height: auto; display: block; overflow: visible; touch-action: pan-y; }
+  .grid-line { stroke: var(--line); stroke-width: 1; }
+  .axis-txt { font-family: var(--mono); font-size: 10px; fill: var(--ink-3); }
+  .plot-line { fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .cross { stroke: var(--ink-3); stroke-width: 1; stroke-dasharray: 3 3; }
+  .ttip { position: absolute; pointer-events: none; background: var(--ink); color: var(--ground);
+    font-family: var(--mono); font-size: .72rem; padding: 7px 10px; border-radius: 3px; white-space: nowrap; opacity: 0; transition: opacity .12s; z-index: 5; }
+  .ch-host { position: relative; }
+
+  /* ---------- awards ---------- */
+  .awards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .award { background: var(--surface); border: 1px solid var(--line); border-radius: 4px;
+    padding: 17px 18px 16px; cursor: pointer; text-align: left; font: inherit; color: inherit;
+    display: flex; flex-direction: column; gap: 10px; transition: border-color .18s, transform .18s, box-shadow .18s; }
+  .award:hover { border-color: var(--line-2); transform: translateY(-2px); box-shadow: var(--shadow); }
+  .award:focus-visible { outline: 2px solid var(--burn); outline-offset: 2px; }
+  .award .at { font-family: var(--mono); font-size: .6rem; letter-spacing: .14em; text-transform: uppercase; color: var(--burn); }
+  .award .aw { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+  .award .amk { font-family: var(--mono); font-size: .58rem; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-3); }
+  .award .amd { font-size: 1.02rem; font-weight: 600; line-height: 1.2; }
+  .award .av { font-family: var(--mono); font-size: 1.5rem; font-weight: 600; letter-spacing: -.03em; line-height: 1; }
+  .award .av small { font-size: .62rem; font-weight: 400; color: var(--ink-3); margin-left: 4px; letter-spacing: 0; }
+  .award .ar { font-size: .8rem; color: var(--ink-3); border-top: 1px solid var(--line); padding-top: 9px; line-height: 1.45; }
+
+  /* ---------- filters + inventory ---------- */
+  .filters { display: flex; align-items: center; gap: 14px 20px; flex-wrap: wrap; margin-bottom: 20px;
+    padding: 14px 18px; background: var(--surface); border: 1px solid var(--line); border-radius: 4px; }
+  .chips { display: flex; gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 3px; overflow: hidden; flex-wrap: wrap; }
+  .chips button { font-family: var(--mono); font-size: .61rem; letter-spacing: .1em; text-transform: uppercase;
+    padding: 8px 13px; background: var(--surface); color: var(--ink-3); border: none; cursor: pointer; transition: background .18s, color .18s; }
+  .chips button:hover { color: var(--ink); }
+  .chips button[aria-pressed="true"] { background: var(--ink); color: var(--ground); }
+  .chips button:focus-visible { outline: 2px solid var(--burn); outline-offset: -2px; }
+  .fslide { display: flex; align-items: center; gap: 12px; min-width: 240px; flex: 1 1 240px; }
+  .fslide .cl { font-family: var(--mono); font-size: .61rem; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3); white-space: nowrap; }
+  .fslide .cv { font-family: var(--mono); font-size: .8rem; font-weight: 600; white-space: nowrap; min-width: 92px; text-align: right; }
+  .fcount { font-family: var(--mono); font-size: .68rem; color: var(--ink-3); white-space: nowrap; }
+
+  .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(252px, 1fr)); gap: 14px; }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 4px;
+    padding: 17px 17px 15px; cursor: pointer; text-align: left; font: inherit; color: inherit;
+    display: flex; flex-direction: column; gap: 12px; transition: border-color .18s, transform .18s, box-shadow .18s; }
+  .card:hover { border-color: var(--line-2); transform: translateY(-2px); box-shadow: var(--shadow); }
+  .card:focus-visible { outline: 2px solid var(--burn); outline-offset: 2px; }
+  .card[aria-pressed="true"] { border-color: var(--burn); box-shadow: inset 0 0 0 1px var(--burn); }
+  .card .chead { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
+  .card .marque { font-family: var(--mono); font-size: .58rem; letter-spacing: .15em; text-transform: uppercase; color: var(--ink-3); }
+  .card .seg { font-family: var(--mono); font-size: .54rem; letter-spacing: .1em; text-transform: uppercase;
+    color: var(--ink-3); border: 1px solid var(--line); border-radius: 2px; padding: 2px 6px; }
+  .card .model { font-size: 1rem; font-weight: 600; line-height: 1.22; letter-spacing: -.01em; }
+  .card .headline { display: flex; align-items: baseline; gap: 7px; }
+  .card .headline .n { font-family: var(--mono); font-size: 1.55rem; font-weight: 600; letter-spacing: -.03em; color: var(--burn); line-height: 1; }
+  .card .headline .u { font-family: var(--mono); font-size: .65rem; color: var(--ink-3); }
+  .card .facts { display: grid; grid-template-columns: 1fr 1fr; gap: 9px 12px; border-top: 1px solid var(--line); padding-top: 11px; }
+  .card .fact .fl { font-family: var(--mono); font-size: .55rem; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3); }
+  .card .fact .fv { font-family: var(--mono); font-size: .82rem; font-weight: 500; margin-top: 1px; }
+  .card .price { font-family: var(--mono); font-size: .78rem; color: var(--ink-2); border-top: 1px solid var(--line); padding-top: 10px; }
+  .empty { padding: 40px 20px; text-align: center; color: var(--ink-3); font-size: .92rem; grid-column: 1 / -1; }
+
+  .demo-flag { display: inline-flex; align-items: center; gap: 8px; margin-top: 14px;
+    font-family: var(--mono); font-size: .64rem; letter-spacing: .1em; text-transform: uppercase;
+    color: var(--ink-3); background: var(--surface-2); border: 1px solid var(--line); border-radius: 3px; padding: 7px 11px; }
+
+  .notes { margin-top: 56px; padding-top: 28px; border-top: 1px solid var(--line); }
+  .notes h3 { font-family: var(--mono); font-size: .66rem; letter-spacing: .15em; text-transform: uppercase; color: var(--ink-3); font-weight: 500; margin-bottom: 14px; }
+  .notes ul { margin: 0; padding-left: 18px; display: grid; gap: 9px; max-width: 78ch; }
+  .notes li { color: var(--ink-2); font-size: .9rem; line-height: 1.6; }
+  .notes li b { color: var(--ink); font-weight: 600; }
+
+  @media (max-width: 940px) {
+    .stats { grid-template-columns: repeat(2, 1fr); }
+    .charts { grid-template-columns: 1fr; }
+    .awards { grid-template-columns: repeat(2, 1fr); }
+    .ab-chips { order: 3; width: 100%; }
+    .ab-toggle { margin-left: 0; }
+    .tune-sub { grid-template-columns: 1fr; }
+    .ckeys { grid-template-columns: repeat(2, 1fr); }
+    .svc-form { grid-template-columns: 1fr 1fr; }
+    .svc-item { grid-template-columns: 1fr 1fr; gap: 6px; }
+  }
+  @media (max-width: 760px) {
+    .wrap { padding: 0 16px 72px; }
+    .masthead { padding: 40px 0 32px; }
+    .masthead .lede { font-size: 1.12rem; }
+    .equation { grid-template-columns: 1fr; gap: 20px; padding: 26px 20px; }
+    .op { flex-direction: row; gap: 14px; }
+    .op-sign { font-size: 1.1rem; }
+    .breakdown { padding: 24px 20px; }
+    .bd-compare { text-align: left; }
+    .bd-keys { grid-template-columns: 1fr; }
+    .bd-hero .n { font-size: 2.2rem; }
+    .awards { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 460px) { .stats { grid-template-columns: 1fr; } }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+</style>
+</head>
+<body>
+<header class="appbar">
+  <div class="ab-inner">
+    <div class="ab-brand"><span class="bolt">&#9679;</span><span>Energy Speed</span></div>
+    <button type="button" class="ab-car" id="ab-car" title="Open Your car">
+      <span class="mk" id="ab-marque">BMW</span><span class="md" id="ab-model">i5 eDrive40</span>
+    </button>
+    <div class="ab-chips">
+      <span class="chip"><b id="ab-kwhh">22.1</b> kWh/h</span>
+      <span class="chip"><b id="ab-range">404</b> km</span>
+      <span class="chip"><b id="ab-yr">—</b> kr/yr</span>
+    </div>
+    <button type="button" class="ab-toggle" id="cond-toggle" aria-expanded="true" aria-controls="cond">
+      <span id="cond-sum">110 km/h · 10 °C</span>
+    </button>
+  </div>
+
+  <nav class="tabs" role="tablist" aria-label="Sections">
+    <button type="button" role="tab" data-tab="compare" aria-selected="true" aria-controls="p-compare">Compare</button>
+    <button type="button" role="tab" data-tab="car" aria-selected="false" aria-controls="p-car">Your car</button>
+    <button type="button" role="tab" data-tab="drive" aria-selected="false" aria-controls="p-drive">Driving</button>
+    <button type="button" role="tab" data-tab="costs" aria-selected="false" aria-controls="p-costs">Costs</button>
+    <button type="button" role="tab" data-tab="history" aria-selected="false" aria-controls="p-history">History</button>
+    <button type="button" role="tab" data-tab="method" aria-selected="false" aria-controls="p-method">Method</button>
+  </nav>
+
+  <div class="cond" id="cond">
+    <div class="cond-inner">
+      <div class="pick">
+        <span class="pl">Driving</span>
+        <div class="chips" id="g-speed">
+          <button type="button" data-v="50">Town</button>
+          <button type="button" data-v="80">Country</button>
+          <button type="button" data-v="110" aria-pressed="true">Motorway</button>
+          <button type="button" data-v="130">Fast</button>
+        </div>
+      </div>
+      <div class="pick">
+        <span class="pl">Weather</span>
+        <div class="chips" id="g-temp">
+          <button type="button" data-v="20">Summer</button>
+          <button type="button" data-v="10" aria-pressed="true">Spring</button>
+          <button type="button" data-v="-5">Winter</button>
+        </div>
+      </div>
+      <button type="button" class="advbtn" data-adv="cond-adv" aria-expanded="false" aria-controls="cond-adv">Fine tune</button>
+    </div>
+    <div class="advpanel" id="cond-adv" hidden>
+      <div class="adv-inner">
+        <div class="ctl">
+          <label for="sp"><span class="cl">Exact speed</span><span class="cv" id="sp-v">110 km/h</span></label>
+          <input type="range" id="sp" min="30" max="180" step="5" value="110">
+        </div>
+        <div class="ctl">
+          <label for="tp"><span class="cl">Exact temperature</span><span class="cv" id="tp-v">10 &deg;C</span></label>
+          <input type="range" id="tp" min="-15" max="35" step="1" value="10">
+        </div>
+        <div class="ctl">
+          <label for="pr"><span class="cl">Electricity</span><span class="cv" id="pr-v">2.75 kr</span></label>
+          <input type="range" id="pr" min="0.5" max="8" step="0.25" value="2.75">
+        </div>
+        <div class="ctl">
+          <label for="ch"><span class="cl">Charger</span><span class="cv" id="ch-v">150 kW</span></label>
+          <input type="range" id="ch" min="3.7" max="350" step="0.1" value="150">
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="tabpanel" id="p-compare" role="tabpanel" aria-labelledby="tab-compare">
+  <p class="panel-lede">
+    Every electric car on sale, ranked by what it actually costs to drive rather than by the number
+    on the brochure. The conditions in the bar above drive every figure on every tab.
+  </p>
+  <!-- ============ BEST FOR WHAT ============ -->
+  <section>
+    <div class="sechead"><h2>Best for what</h2></div>
+    <p class="secnote">
+      There is no best electric car, only a best answer to a question. All six recompute under the
+      conditions you set at the top &mdash; switch the weather to <b>Winter</b> and you are reading a
+      winter ranking. Pick one to load it into every other tab.
+    </p>
+    <div class="awards" id="awards"></div>
+  </section>
+  <!-- ============ THE FIELD ============ -->
+  <section>
+    <div class="sechead"><h2>The whole field</h2></div>
+    <p class="secnote">
+      Every headline figure is the energy speed at your current settings, so the order changes with
+      the conditions. It lists alphabetically until you sort by something &mdash; then the order means
+      what the chip says. Select any car to make it the one every other tab is about.
+    </p>
+
+    <div class="filters">
+      <div class="chips" role="group" aria-label="Filter by type">
+        <button type="button" data-seg="all" aria-pressed="true">All</button>
+        <button type="button" data-seg="city" aria-pressed="false">City</button>
+        <button type="button" data-seg="family" aria-pressed="false">Family</button>
+        <button type="button" data-seg="suv" aria-pressed="false">SUV</button>
+        <button type="button" data-seg="premium" aria-pressed="false">Premium</button>
+        <button type="button" data-seg="sport" aria-pressed="false">Sport</button>
+        <button type="button" data-seg="van" aria-pressed="false">Van</button>
+      </div>
+      <div class="fslide">
+        <label class="cl" for="mx">Up to</label>
+        <input type="range" id="mx" min="150000" max="1300000" step="10000" value="1300000">
+        <span class="cv" id="mx-v">any price</span>
+      </div>
+      <div class="chips" role="group" aria-label="Sort by">
+        <button type="button" data-sort="brand" aria-pressed="true">Brand</button>
+        <button type="button" data-sort="eco" aria-pressed="false">Economy</button>
+        <button type="button" data-sort="range" aria-pressed="false">Range</button>
+        <button type="button" data-sort="charge" aria-pressed="false">Charging</button>
+        <button type="button" data-sort="own" aria-pressed="false">Cost/yr</button>
+        <button type="button" data-sort="price" aria-pressed="false">Price</button>
+      </div>
+      <span class="fcount" id="fcount">58 cars</span>
+    </div>
+
+    <div class="cards" id="cards"></div>
+    <div class="demo-flag">Reference data &middot; indicative prices, verify before buying</div>
+  </section>
+  </div>
+
+  <div class="tabpanel" id="p-car" role="tabpanel" hidden>
+  <!-- ============ YOUR CAR ============ -->
+  <section>
+    <div class="sechead"><h2>Your car</h2></div>
+    <p class="secnote">
+      Pick the model, then correct anything the table got wrong &mdash; a different trim, winter
+      wheels, a roof box, four passengers, a battery that has done 90,000&nbsp;km. Edited figures turn
+      orange and every other tab follows them. <b>Compare</b> deliberately stays on stock specs, so
+      the ranking there is never skewed by your roof box.
+    </p>
+
+    <div class="panel tune">
+      <div class="tune-head">
+        <div class="tune-pick">
+          <label class="cl" for="model">Model</label>
+          <select id="model" class="nsel"></select>
+        </div>
+        <div class="pick">
+          <span class="pl">Battery use</span>
+          <div class="chips" id="g-use">
+            <button type="button" data-top="100" data-res="0" aria-pressed="true">Full pack</button>
+            <button type="button" data-top="90" data-res="10">Everyday</button>
+            <button type="button" data-top="80" data-res="20">Careful</button>
+          </div>
+        </div>
+        <button type="button" class="advbtn" data-adv="car-adv" aria-expanded="false" aria-controls="car-adv">Adjust spec</button>
+        <button type="button" class="reset" id="reset" hidden>Reset to stock</button>
+      </div>
+
+      <div class="tune-out">
+        <div class="row"><span class="rl">Energy you drive on</span><span class="rv" id="o-window">81.2 kWh</span></div>
+        <div class="row"><span class="rl">Of a nominal</span><span class="rv" id="o-nominal">81.2 kWh</span></div>
+        <div class="row"><span class="rl">Rated consumption</span><span class="rv" id="o-fac">140 Wh/km</span></div>
+        <div class="row"><span class="rl">Owner reliability</span><span class="rv" id="o-rel">&mdash;</span></div>
+        <p class="foot" id="o-foot">At 100% charge with no reserve you are reading brochure conditions.</p>
+      </div>
+
+      <div class="advpanel" id="car-adv" hidden>
+        <div class="tune-grid">
+          <div class="tf">
+            <label for="o-batt">Usable battery</label>
+            <div class="tin"><input class="nin" type="number" id="o-batt" step="0.1" min="8" max="250"><span class="un">kWh</span></div>
+            <div class="hint" id="h-batt">stock 81.2</div>
+          </div>
+          <div class="tf">
+            <label for="o-wltp">WLTP range</label>
+            <div class="tin"><input class="nin" type="number" id="o-wltp" step="1" min="80" max="1200"><span class="un">km</span></div>
+            <div class="hint" id="h-wltp">stock 582</div>
+          </div>
+          <div class="tf">
+            <label for="o-mass">Weight with load</label>
+            <div class="tin"><input class="nin" type="number" id="o-mass" step="10" min="800" max="4000"><span class="un">kg</span></div>
+            <div class="hint" id="h-mass">stock 2200</div>
+          </div>
+          <div class="tf">
+            <label for="o-cda">Drag area</label>
+            <div class="tin"><input class="nin" type="number" id="o-cda" step="0.01" min="0.3" max="2"><span class="un">m&sup2;</span></div>
+            <div class="hint" id="h-cda">stock 0.55 &middot; roof box +0.25</div>
+          </div>
+          <div class="tf">
+            <label for="o-dc">Max DC charge</label>
+            <div class="tin"><input class="nin" type="number" id="o-dc" step="1" min="10" max="400"><span class="un">kW</span></div>
+            <div class="hint" id="h-dc">stock 205</div>
+          </div>
+        </div>
+        <div class="adv-inner">
+          <div class="ctl">
+            <label for="u-top"><span class="cl">Charge to</span><span class="cv" id="u-top-v">100 %</span></label>
+            <input type="range" id="u-top" min="50" max="100" step="1" value="100">
+          </div>
+          <div class="ctl">
+            <label for="u-res"><span class="cl">Keep in reserve</span><span class="cv" id="u-res-v">0 %</span></label>
+            <input type="range" id="u-res" min="0" max="40" step="1" value="0">
+          </div>
+          <div class="ctl">
+            <label for="u-hp"><span class="cl">Battery health</span><span class="cv" id="u-hp-v">100 %</span></label>
+            <input type="range" id="u-hp" min="70" max="100" step="1" value="100">
+          </div>
+          <p class="adv-note">Battery-use settings apply to every car, so the Compare ranking stays fair.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sechead"><h2>This car, under your conditions</h2></div>
+    <p class="secnote">Change the conditions in the bar above and these move with them.</p>
+    <div class="stats">
+      <div class="stat">
+        <div class="sl">Real range</div>
+        <div class="sv"><span id="s-range">404</span><small>km</small></div>
+        <div class="sd" id="s-range-d">vs 582 km on paper</div>
+      </div>
+      <div class="stat">
+        <div class="sl">Until empty</div>
+        <div class="sv" id="s-time">3h 40m</div>
+        <div class="sd">of driving at this speed</div>
+      </div>
+      <div class="stat">
+        <div class="sl">Cost per hour</div>
+        <div class="sv"><span id="s-cph">61</span><small>kr</small></div>
+        <div class="sd" id="s-cpk">0.55 kr per km</div>
+      </div>
+      <div class="stat">
+        <div class="sl">Cost per 100 km</div>
+        <div class="sv"><span id="s-c100">55</span><small>kr</small></div>
+        <div class="sd">at the price you set</div>
+      </div>
+      <div class="stat accent">
+        <div class="sl">Charging speed</div>
+        <div class="sv"><span id="s-chg">672</span><small>km/h</small></div>
+        <div class="sd" id="s-chg-d">range gained while plugged in</div>
+      </div>
+    </div>
+  </section>
+  </div>
+
+  <div class="tabpanel" id="p-drive" role="tabpanel" hidden>
+  <!-- ============ EQUATION ============ -->
+  <section>
+    <div class="sechead"><h2>Two speeds, one drive</h2></div>
+    <p class="secnote">
+      Your road speed multiplied by what the car drinks per kilometre gives your energy speed.
+      Same grammar as km/h &mdash; just measuring the tank instead of the tarmac.
+    </p>
+
+    <div class="panel equation">
+      <div class="dial">
+        <svg viewBox="0 0 240 168" role="img" aria-labelledby="d1t">
+          <title id="d1t">Road speed dial</title>
+          <path id="trk1" fill="none" stroke="var(--line)" stroke-width="9" stroke-linecap="round"></path>
+          <path id="arc1" fill="none" stroke="var(--ink-2)" stroke-width="9" stroke-linecap="round"></path>
+          <text id="v1" class="gauge-val" x="120" y="126" text-anchor="middle" font-size="46" fill="var(--ink)">110</text>
+          <text x="120" y="150" text-anchor="middle" font-size="12" fill="var(--ink-3)" font-family="IBM Plex Mono, monospace">km/h</text>
+        </svg>
+        <span class="dial-cap">Road speed</span>
+      </div>
+      <div class="op">
+        <span class="op-sign">&times;</span>
+        <div class="op-chip">
+          <div class="v num" id="whkm">201</div>
+          <div class="l">Wh / km</div>
+        </div>
+        <span class="op-sign">=</span>
+      </div>
+      <div class="dial">
+        <svg viewBox="0 0 240 168" role="img" aria-labelledby="d2t">
+          <title id="d2t">Energy speed dial</title>
+          <path id="trk2" fill="none" stroke="var(--line)" stroke-width="9" stroke-linecap="round"></path>
+          <path id="arc2" fill="none" stroke="var(--burn)" stroke-width="9" stroke-linecap="round"></path>
+          <text id="v2" class="gauge-val" x="120" y="126" text-anchor="middle" font-size="46" fill="var(--burn)">22.1</text>
+          <text x="120" y="150" text-anchor="middle" font-size="12" fill="var(--ink-3)" font-family="IBM Plex Mono, monospace">kWh/h</text>
+        </svg>
+        <span class="dial-cap">Energy speed</span>
+      </div>
+    </div>
+  </section>
+  <!-- ============ POWER ============ -->
+  <section>
+    <div class="sechead"><h2>Where the power actually goes</h2></div>
+    <p class="secnote">
+      Three things spend your battery. Push the speed slider and watch air resistance take over &mdash;
+      it grows with the cube of speed, which is why motorway range collapses so fast.
+    </p>
+
+    <div class="panel breakdown">
+      <div class="bd-top">
+        <div class="bd-hero">
+          <span class="n" id="bd-total">22.1</span>
+          <span class="u">kWh per hour</span>
+        </div>
+        <p class="bd-compare" id="bd-compare">
+          About <b>11 kettles</b> going flat out, or the average draw of <b>43 Danish homes</b>.
+        </p>
+      </div>
+      <div class="bd-bar" role="img" aria-label="Power split between air resistance, rolling resistance and cabin load">
+        <div class="bd-seg" data-k="aero" id="seg-aero" style="width:57%"></div>
+        <div class="bd-seg" data-k="roll" id="seg-roll" style="width:38.5%"></div>
+        <div class="bd-seg" data-k="aux"  id="seg-aux"  style="width:4.5%"></div>
+      </div>
+      <div class="bd-keys">
+        <div class="bd-key" data-k="aero">
+          <div class="kh"><span class="sw"></span><span class="kn">Pushing air</span></div>
+          <div class="kv"><span id="k-aero">12.6</span> <small>kW</small></div>
+          <div class="kd">Shoving a car-shaped hole through the atmosphere.</div>
+        </div>
+        <div class="bd-key" data-k="roll">
+          <div class="kh"><span class="sw"></span><span class="kn">Rolling</span></div>
+          <div class="kv"><span id="k-roll">8.5</span> <small>kW</small></div>
+          <div class="kd">Tyres flexing under the car's weight, plus drivetrain friction.</div>
+        </div>
+        <div class="bd-key" data-k="aux">
+          <div class="kh"><span class="sw"></span><span class="kn">Keeping you comfortable</span></div>
+          <div class="kv"><span id="k-aux">1.03</span> <small>kW</small></div>
+          <div class="kd">Heating, cooling, lights, screens. Brutal in traffic, trivial at speed.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============ CHARTS ============ -->
+  <section>
+    <div class="sechead"><h2>The speed penalty</h2></div>
+    <p class="secnote">Both curves are for the car you have selected, at the temperature you set.</p>
+    <div class="charts">
+      <div class="panel chart">
+        <h3>Energy speed</h3>
+        <p class="ch-sub">kWh per hour, by road speed</p>
+        <div class="ch-host">
+          <svg id="c1" viewBox="0 0 420 220" role="img" aria-label="Energy consumption per hour rising with speed"></svg>
+          <div class="ttip" id="t1"></div>
+        </div>
+      </div>
+      <div class="panel chart">
+        <h3>Range</h3>
+        <p class="ch-sub">Kilometres on a full battery, by road speed</p>
+        <div class="ch-host">
+          <svg id="c2" viewBox="0 0 420 220" role="img" aria-label="Driving range falling as speed rises"></svg>
+          <div class="ttip" id="t2"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  </div>
+
+  <div class="tabpanel" id="p-costs" role="tabpanel" hidden>
+  <!-- ============ COST TO OWN ============ -->
+  <section>
+    <div class="sechead"><h2>What it costs to own</h2></div>
+    <p class="secnote">
+      Electricity is the small number. Depreciation is the big one, and it does not care how far you
+      drive &mdash; which is why cost per kilometre falls off a cliff as the annual distance rises.
+      These four assumptions are yours to argue with.
+    </p>
+
+    <div class="panel" style="margin-bottom:16px">
+      <div class="cond-inner" style="padding:14px 22px 15px">
+        <div class="pick" style="flex:1 1 300px">
+          <span class="pl">Driven per year</span>
+          <div class="chips" id="g-km">
+            <button type="button" data-v="8000">8,000</button>
+            <button type="button" data-v="15000">15,000</button>
+            <button type="button" data-v="18000" aria-pressed="true">18,000</button>
+            <button type="button" data-v="25000">25,000</button>
+            <button type="button" data-v="40000">40,000</button>
+          </div>
+        </div>
+        <button type="button" class="advbtn" data-adv="cost-adv" aria-expanded="false" aria-controls="cost-adv">Assumptions</button>
+      </div>
+      <div class="advpanel" id="cost-adv" hidden>
+        <div class="adv-inner">
+          <div class="ctl">
+            <label for="ky"><span class="cl">Exact distance</span><span class="cv" id="ky-v">18,000 km</span></label>
+            <input type="range" id="ky" min="5000" max="60000" step="1000" value="18000">
+          </div>
+          <div class="ctl">
+            <label for="dp"><span class="cl">Depreciation</span><span class="cv" id="dp-v">13 %/yr</span></label>
+            <input type="range" id="dp" min="0" max="25" step="0.5" value="13">
+          </div>
+          <div class="ctl">
+            <label for="ins"><span class="cl">Insurance</span><span class="cv" id="ins-v">1.4 %/yr</span></label>
+            <input type="range" id="ins" min="0" max="5" step="0.1" value="1.4">
+          </div>
+          <div class="ctl">
+            <label for="sv"><span class="cl">Service &amp; tyres</span><span class="cv" id="sv-v">3,500 kr</span></label>
+            <input type="range" id="sv" min="0" max="20000" step="500" value="3500">
+          </div>
+          <p class="adv-note">Depreciation is a flat share of the purchase price each year &mdash; the crude version of a curve, and the number most worth arguing with.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel cost">
+      <div class="cost-top">
+        <div class="cost-hero">
+          <div class="n" id="c-total">— kr</div>
+          <div class="u" id="c-total-u">per year</div>
+        </div>
+        <div class="cost-perkm">
+          <div class="n" id="c-perkm">—</div>
+          <div class="u">kr per kilometre</div>
+        </div>
+      </div>
+
+      <div class="cbar" role="img" aria-label="Yearly cost split between depreciation, insurance, electricity and servicing">
+        <div class="cseg" data-k="dep" id="cs-dep" style="width:60%"></div>
+        <div class="cseg" data-k="ins" id="cs-ins" style="width:15%"></div>
+        <div class="cseg" data-k="nrg" id="cs-nrg" style="width:18%"></div>
+        <div class="cseg" data-k="svc" id="cs-svc" style="width:7%"></div>
+      </div>
+
+      <div class="ckeys">
+        <div class="ckey" data-k="dep"><div class="kh"><span class="sw"></span><span class="kn">Depreciation</span></div><div class="kv" id="ck-dep">—</div></div>
+        <div class="ckey" data-k="ins"><div class="kh"><span class="sw"></span><span class="kn">Insurance</span></div><div class="kv" id="ck-ins">—</div></div>
+        <div class="ckey" data-k="nrg"><div class="kh"><span class="sw"></span><span class="kn">Electricity</span></div><div class="kv" id="ck-nrg">—</div></div>
+        <div class="ckey" data-k="svc"><div class="kh"><span class="sw"></span><span class="kn">Service &amp; tyres</span></div><div class="kv" id="ck-svc">—</div></div>
+      </div>
+
+      <div class="cost-charthost">
+        <h3>Cost per kilometre, by how far you drive</h3>
+        <p class="ch-sub">The same car, the same costs &mdash; only the distance they are spread over changes</p>
+        <div class="ch-host">
+          <svg id="c3" viewBox="0 0 860 220" role="img" aria-label="Cost per kilometre falling as annual distance rises"></svg>
+          <div class="ttip" id="t3"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  </div>
+
+  <div class="tabpanel" id="p-history" role="tabpanel" hidden>
+  <!-- ============ SERVICE HISTORY ============ -->
+  <section>
+    <div class="sechead"><h2>Service history</h2></div>
+    <p class="secnote">
+      A used electric car is worth what its history can prove. Log the stamps, attach a photo of the
+      service book, and the record travels with the listing.
+    </p>
+
+    <div class="panel svc">
+      <div class="svc-head">
+        <span class="st" id="svc-for">Record for the selected car</span>
+        <label class="filebtn">
+          Attach service book photo
+          <input type="file" id="svc-photo" accept="image/*" multiple>
+        </label>
+      </div>
+
+      <div class="svc-form">
+        <div class="fld"><label for="sf-date">Date</label><input type="date" id="sf-date"></div>
+        <div class="fld"><label for="sf-km">Odometer</label><input type="number" id="sf-km" min="0" step="100" placeholder="km"></div>
+        <div class="fld"><label for="sf-what">Work done and workshop</label><input type="text" id="sf-what" placeholder="Annual service — Autohuset Vestergaard"></div>
+        <div class="fld"><label for="sf-cat">Type</label>
+          <select id="sf-cat">
+            <option value="Service">Service</option>
+            <option value="Tyres">Tyres</option>
+            <option value="Brakes">Brakes</option>
+            <option value="Battery">Battery</option>
+            <option value="Suspension">Suspension</option>
+            <option value="Bodywork">Bodywork</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+        <div class="fld"><label for="sf-cost">Receipt</label><input type="number" id="sf-cost" min="0" step="50" placeholder="kr"></div>
+        <button type="button" class="addbtn" id="sf-add">Add stamp</button>
+      </div>
+
+      <div class="rcp" id="svc-summary"></div>
+      <div class="catbars" id="svc-cats"></div>
+      <div class="usebox">
+        <input type="checkbox" id="use-receipts">
+        <label for="use-receipts">Use my receipts instead of the estimate in <b>What it costs to own</b></label>
+      </div>
+
+      <div class="svc-list" id="svc-list"></div>
+
+      <div class="svc-foot">
+        <div class="shots" id="svc-shots"></div>
+        <p style="margin-top:14px">
+          <b>On proving any of this.</b> Everything above is entered by whoever is holding the phone,
+          so it is a claim, not a fact &mdash; which is why every stamp shows as <b>unverified</b> and
+          nothing here pretends otherwise. Photos stay in this browser and are never uploaded anywhere.
+        </p>
+        <p>
+          <b>On average repair costs.</b> The averages above are yours alone &mdash; your receipts,
+          divided your way. A trustworthy benchmark for what a brake job on an Ioniq&nbsp;5 <em>should</em>
+          cost cannot be conjured from one owner's history; it needs a pool of them, which is the
+          real asset a service like this would accumulate. Every receipt logged makes the next
+          owner's comparison better, and that is worth being straight with people about rather than
+          showing an invented national average.
+        </p>
+        <p>
+          Real verification does not come from a photo. It comes from the workshop that did the work:
+          a franchised dealer network will confirm a car's digital service record against its VIN, and
+          in Denmark the periodic inspection history is already public through
+          Synsbasen. The credible product is to check the claim against those two
+          sources and show a green stamp only when they agree &mdash; with an odometer that never runs
+          backwards being the single strongest signal that a history is honest.
+        </p>
+      </div>
+    </div>
+  </section>
+  </div>
+
+  <div class="tabpanel" id="p-method" role="tabpanel" hidden>
+  <section>
+    <div class="sechead"><h2>Method</h2></div>
+    <p class="secnote">Where every number on the other tabs comes from, and what it is worth.</p>
+    <div class="notes" style="margin-top:0;border-top:none;padding-top:0">
+    
+    <ul>
+      <li>
+        <b>Factory settings are derived, not typed in.</b> Each car's baseline consumption comes
+        from its own published battery and WLTP range &mdash; battery &divide; range. The physics model
+        is then calibrated so it reproduces exactly that figure at a steady 80&nbsp;km/h and 20&nbsp;&deg;C,
+        which is roughly what the WLTP cycle corresponds to. That is why every car's paper range is
+        reproduced exactly at the reference condition, and diverges honestly away from it.
+      </li>
+      <li>
+        <b>The speed curve is physics.</b> Rolling resistance scales with weight and stays flat with speed;
+        aerodynamic drag scales with frontal area and the square of speed, so the <em>power</em> it
+        demands scales with the cube. Cabin load is a fixed wattage spread over fewer kilometres the
+        faster you go.
+      </li>
+      <li>
+        <b>Cold is charged twice.</b> Below 15&nbsp;&deg;C the model adds cabin heating, stiffens the tyres
+        slightly, and shaves usable battery capacity &mdash; up to 14% at the bottom of the scale.
+      </li>
+      <li>
+        <b>Charging speed is capped by the car.</b> Each car carries its own peak DC rate, so a 350&nbsp;kW
+        charger will not make a 100&nbsp;kW car charge faster. It assumes 90% efficiency and a constant
+        rate; real DC charging tapers hard above roughly 60% state of charge, so read it as a best case
+        for the bottom half of the battery.
+      </li>
+      <li>
+        <b>Weights, drag areas and prices are approximations.</b> They are good enough to rank cars
+        honestly against each other, and not good enough to sign a contract on. A production version
+        would pull specs from a maintained database rather than a table written by hand.
+      </li>
+    </ul>
+  </div></section>
+  </div>
+
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  var RHO = 1.2, G = 9.81, ETA = 0.88, CRR = 0.0095;
+  var CHARGE_EFF = 0.90;
+  var HOME_KW = 4500 / 8760;
+  var KETTLE_KW = 2.0;
+
+  /* battery = usable kWh · wltp = km · mass = kg incl. driver · cda = drag area m²
+     dc = peak DC charge kW · price = indicative DKK */
+  var CARS = [
+    ["Dacia","Spring 45",26.8,225,1060,0.72,30,159000,"city"],
+    ["Leapmotor","T03",37.3,265,1200,0.70,48,149000,"city"],
+    ["BYD","Dolphin Surf",43.2,322,1390,0.69,85,179000,"city"],
+    ["Citroën","ë-C3",44,320,1500,0.70,100,199000,"city"],
+    ["Hyundai","Inster Long Range",49,370,1400,0.68,85,209000,"city"],
+    ["Fiat","500e 42",37.3,320,1400,0.67,85,229000,"city"],
+    ["Renault","5 E-Tech 52",52,410,1550,0.68,100,239000,"city"],
+    ["Opel","Corsa Electric 51",51,402,1600,0.67,100,239000,"city"],
+    ["Peugeot","e-208 51",51,410,1600,0.67,100,245000,"city"],
+    ["Mini","Cooper SE",49.2,402,1660,0.66,95,269000,"city"],
+
+    ["MG","MG4 Long Range",61.7,435,1720,0.65,140,249000,"family"],
+    ["BYD","Dolphin Comfort",60.4,427,1660,0.66,88,239000,"family"],
+    ["Nissan","Leaf e+",59,385,1750,0.72,100,259000,"family"],
+    ["Renault","Megane E-Tech 60",60,470,1710,0.63,130,279000,"family"],
+    ["VW","ID.3 Pro",59,429,1850,0.62,120,289000,"family"],
+    ["Cupra","Born 59",59,424,1850,0.62,120,299000,"family"],
+    ["VW","ID.3 Pro S",77,559,1950,0.62,170,329000,"family"],
+    ["Tesla","Model 3 RWD",57.5,513,1830,0.49,170,339000,"family"],
+    ["Hyundai","Ioniq 6 Long Range",77.4,614,2050,0.47,233,379000,"family"],
+    ["Tesla","Model 3 Long Range",75,629,1900,0.49,250,399000,"family"],
+    ["Polestar","2 Long range",79,655,2050,0.63,205,429000,"family"],
+    ["BMW","i4 eDrive40",81.2,590,2100,0.62,205,549000,"family"],
+
+    ["MG","ZS EV Long Range",68.3,440,1730,0.75,92,259000,"suv"],
+    ["Hyundai","Kona Electric 65",65.4,514,1850,0.72,102,289000,"suv"],
+    ["Volvo","EX30 Single ER",64,476,1830,0.63,153,289000,"suv"],
+    ["Kia","Niro EV",64.8,460,1840,0.74,80,299000,"suv"],
+    ["Škoda","Elroq 85",77,581,2100,0.68,175,319000,"suv"],
+    ["Toyota","bZ4X",64,460,2050,0.71,150,329000,"suv"],
+    ["VW","ID.4 Pro",77,552,2190,0.72,175,349000,"suv"],
+    ["Renault","Scenic E-Tech 87",87,625,2000,0.66,150,349000,"suv"],
+    ["Ford","Explorer EV ER",77,602,2170,0.69,135,349000,"suv"],
+    ["XPeng","G6 Long Range",87.5,570,2100,0.66,280,349000,"suv"],
+    ["Škoda","Enyaq 85",77,581,2180,0.71,175,359000,"suv"],
+    ["Peugeot","e-3008 73",73,525,2180,0.70,160,359000,"suv"],
+    ["Hyundai","Ioniq 5 77",77.4,507,2130,0.70,233,379000,"suv"],
+    ["Škoda","Enyaq Coupé 85",77,594,2180,0.68,175,379000,"suv"],
+    ["Kia","EV6 Long Range",77.4,528,2090,0.67,233,389000,"suv"],
+    ["Tesla","Model Y Long Range",75,565,2030,0.61,250,419000,"suv"],
+
+    ["Audi","Q4 e-tron 45",77,562,2150,0.70,175,419000,"premium"],
+    ["Genesis","GV60 Sport",74,466,2150,0.68,233,599000,"premium"],
+    ["Kia","EV9 Long Range",96,563,2680,0.80,210,649000,"premium"],
+    ["Audi","Q6 e-tron",94.9,625,2340,0.70,270,699000,"premium"],
+    ["BMW","i5 eDrive40",81.2,582,2200,0.55,205,749000,"premium"],
+    ["Mercedes","EQE 350+",89,639,2355,0.55,170,799000,"premium"],
+    ["Polestar","3 Long range",107,631,2600,0.75,250,849000,"premium"],
+    ["Volvo","EX90 Twin Motor",107,614,2790,0.78,250,899000,"premium"],
+    ["BMW","iX xDrive50",105,633,2585,0.68,195,899000,"premium"],
+    ["Tesla","Model S Long Range",95,723,2100,0.50,250,899000,"premium"],
+    ["Lucid","Air Pure",88,725,2100,0.47,250,899000,"premium"],
+    ["Mercedes","EQS 450+",108,782,2480,0.50,200,1250000,"premium"],
+
+    ["BMW","i4 M50",80.7,521,2290,0.60,205,699000,"sport"],
+    ["Hyundai","Ioniq 5 N",84,448,2270,0.72,233,749000,"sport"],
+    ["Porsche","Macan 4 Electric",95,613,2405,0.60,270,799000,"sport"],
+    ["Audi","e-tron GT quattro",84,501,2300,0.56,270,1050000,"sport"],
+    ["Porsche","Taycan 4S",83,507,2270,0.51,320,1095000,"sport"],
+
+    ["Ford","E-Transit Custom",64,307,2400,1.00,125,449000,"van"],
+    ["VW","ID. Buzz Pro",79,461,2500,0.95,185,549000,"van"],
+    ["Mercedes","EQV 300",90,356,2800,1.05,110,699000,"van"]
+  ].map(function (r) {
+    return { marque:r[0], model:r[1], battery:r[2], wltp:r[3], mass:r[4],
+             cda:r[5], dc:r[6], price:r[7], seg:r[8] };
+  });
+
+  var SEGNAME = { city:"City", family:"Family", suv:"SUV", premium:"Premium", sport:"Sport", van:"Van" };
+
+  /* alphabetical by marque, then model — the order a person scanning a list expects */
+  function byName(a, b) {
+    return a.marque.localeCompare(b.marque, "da") || a.model.localeCompare(b.model, "da");
+  }
+
+  /* Brand reliability, from Consumer Reports' owner survey. Only brands the survey
+     actually scores appear here — the rest are shown as "no data" rather than guessed. */
+  var REL = {
+    "Toyota":  { s:66 },
+    "BMW":     { s:58 },
+    "Tesla":   { s:50 },
+    "Kia":     { s:49 },
+    "Hyundai": { s:48 },
+    "Volvo":   { s:42 },
+    "Porsche": { s:null, note:"too few cars surveyed to score" }
+  };
+  function relOf(marque) {
+    var r = REL[marque];
+    if (!r) return { band:"nodata", label:"No survey data", score:null };
+    if (r.s == null) return { band:"nodata", label:"Not scored", score:null, note:r.note };
+    return { band: r.s >= 55 ? "strong" : r.s >= 45 ? "average" : "weak",
+             label: "Reliability " + r.s, score: r.s };
+  }
+
+  /* ---------- model ---------- */
+
+  function auxWatts(t) {
+    return 250 + Math.min(Math.max(0, 16 - t) * 130, 3200) + Math.min(Math.max(0, t - 24) * 110, 1400);
+  }
+  function batteryFactor(t) { return 1 - Math.min(Math.max(0, 10 - t) * 0.007, 0.14); }
+  function usableFrac() { return (state.chargeTo - state.reserve) / 100 * (state.health / 100); }
+
+  function rawTraction(car, kmh, t) {
+    var v = kmh / 3.6, crr = CRR * (1 + Math.max(0, 15 - t) * 0.004);
+    return { roll: crr * car.mass * G / (3.6 * ETA), aero: 0.5 * RHO * car.cda * v * v / (3.6 * ETA) };
+  }
+  function factory(car) {
+    if (car._f) return car._f;
+    var whkm = car.battery * 1000 / car.wltp, ref = rawTraction(car, 80, 20);
+    var k = (whkm - auxWatts(20) / 80) / (ref.roll + ref.aero);
+    car._f = { whkm: whkm, k: Math.max(0.6, Math.min(2.0, k)) };
+    return car._f;
+  }
+  function consume(car, kmh, t) {
+    var fc = factory(car._cal || car), raw = rawTraction(car, kmh, t);
+    var aero = raw.aero * fc.k, roll = raw.roll * fc.k, aux = auxWatts(t) / kmh;
+    var total = aero + roll + aux;
+    return { whkm: total, kwhh: kmh * total / 1000,
+             aeroKw: kmh * aero / 1000, rollKw: kmh * roll / 1000, auxKw: kmh * aux / 1000,
+             range: car.battery * batteryFactor(t) * usableFrac() * 1000 / total };
+  }
+  function chargeKmh(car, whkm) {
+    return Math.min(car.dc, state.charger) * CHARGE_EFF * 1000 / whkm;
+  }
+
+  var state = {
+    car: CARS[42], speed: 110, temp: 10, price: 2.75, charger: 150,
+    sort: "brand", seg: "all", maxPrice: 1300000,
+    ov: { battery:null, wltp:null, mass:null, cda:null, dc:null },
+    chargeTo: 100, reserve: 0, health: 100,
+    kmYear: 18000, depRate: 13, insRate: 1.4, service: 3500,
+    useReceipts: false, log: [], shots: []
+  };
+
+  /* effective spec: stock everywhere, overridden only for the car you are tuning */
+  function eff(car) {
+    if (car !== state.car) return car;
+    var o = state.ov, any = false, k;
+    for (k in o) if (o[k] != null) any = true;
+    if (!any) return car;
+    var battery = o.battery != null ? o.battery : car.battery;
+    var wltp    = o.wltp    != null ? o.wltp    : car.wltp;
+    return { marque:car.marque, model:car.model, seg:car.seg, price:car.price,
+      battery: battery, wltp: wltp,
+      mass:    o.mass != null ? o.mass : car.mass,
+      cda:     o.cda  != null ? o.cda  : car.cda,
+      dc:      o.dc   != null ? o.dc   : car.dc,
+      /* the lab car: your battery and range, but the shape and weight it was tested at */
+      _cal: { battery: battery, wltp: wltp, mass: car.mass, cda: car.cda } };
+  }
+  function tuned() { var o = state.ov, k; for (k in o) if (o[k] != null) return true; return false; }
+
+  /* ---------- cost of ownership ---------- */
+
+  function serviceCost() {
+    if (state.useReceipts) {
+      var r = receipts();
+      if (r.count) return r.perYear;
+    }
+    return state.service;
+  }
+  function annual(car) {
+    var spec = eff(car);
+    var energy = consume(spec, state.speed, state.temp).whkm / 1000 * state.kmYear * state.price;
+    var dep = car.price * state.depRate / 100;
+    var ins = car.price * state.insRate / 100;
+    var svc = serviceCost();
+    var total = energy + dep + ins + svc;
+    return { energy:energy, dep:dep, ins:ins, svc:svc, total:total, perKm: total / state.kmYear };
+  }
+
+  /* ---------- receipts ---------- */
+
+  function receipts() {
+    var log = state.log, i, total = 0, dates = [], odos = [], cats = {};
+    for (i = 0; i < log.length; i++) {
+      total += log[i].cost || 0;
+      if (log[i].date) dates.push(new Date(log[i].date).getTime());
+      if (log[i].km) odos.push(log[i].km);
+      var c = log[i].cat || "Other";
+      if (!cats[c]) cats[c] = { sum:0, n:0 };
+      cats[c].sum += log[i].cost || 0;
+      cats[c].n++;
+    }
+    var span = 1;
+    if (dates.length > 1) {
+      span = Math.max(0.5, (Math.max.apply(null, dates) - Math.min.apply(null, dates)) / 31557600000);
+    }
+    var km = odos.length > 1 ? Math.max.apply(null, odos) - Math.min.apply(null, odos) : 0;
+    return { count: log.length, total: total, avg: log.length ? total / log.length : 0,
+             perYear: total / span, span: span, perKm: km > 0 ? total / km : null, cats: cats };
+  }
+
+  /* ---------- dials ---------- */
+
+  function polar(cx, cy, r, deg) {
+    var a = (deg - 90) * Math.PI / 180;
+    return [cx + r * Math.cos(a), cy + r * Math.sin(a)];
+  }
+  function arcPath(cx, cy, r, from, to) {
+    var s = polar(cx, cy, r, to), e = polar(cx, cy, r, from);
+    return "M " + s[0].toFixed(2) + " " + s[1].toFixed(2) + " A " + r + " " + r + " 0 " +
+      ((to - from) <= 180 ? 0 : 1) + " 0 " + e[0].toFixed(2) + " " + e[1].toFixed(2);
+  }
+  var A0 = -125, A1 = 125;
+  function setDial(trackId, arcId, valId, frac, text) {
+    frac = Math.max(0, Math.min(1, frac));
+    document.getElementById(trackId).setAttribute("d", arcPath(120, 118, 88, A0, A1));
+    document.getElementById(arcId).setAttribute("d",
+      frac < 0.002 ? "" : arcPath(120, 118, 88, A0, A0 + (A1 - A0) * frac));
+    document.getElementById(valId).textContent = text;
+  }
+
+  /* ---------- charts ---------- */
+
+  var SPEEDS = [];
+  for (var s = 30; s <= 180; s += 5) SPEEDS.push(s);
+  var KMS = [];
+  for (var q = 5000; q <= 60000; q += 1000) KMS.push(q);
+
+  var NICE = [1, 1.5, 2, 2.5, 3, 4, 5, 6, 7, 8, 9, 10];
+  function niceCeil(v) {
+    var mag = Math.pow(10, Math.floor(Math.log(v) / Math.LN10)), n = v / mag;
+    for (var i = 0; i < NICE.length; i++) if (n <= NICE[i]) return NICE[i] * mag;
+    return 10 * mag;
+  }
+
+  function drawChart(cfg) {
+    var svg = document.getElementById(cfg.svg), tip = document.getElementById(cfg.tip);
+    var W = cfg.width || 420, xs = cfg.xs, ys = cfg.ys;
+    var box = { x0: 46, x1: W - 12, y0: 22, y1: 176 };
+    var lo = xs[0], hi = xs[xs.length - 1];
+    var max = niceCeil(Math.max.apply(null, ys) * 1.05);
+    var sx = function (v) { return box.x0 + (v - lo) / (hi - lo) * (box.x1 - box.x0); };
+    var sy = function (v) { return box.y1 - (v / max) * (box.y1 - box.y0); };
+    var p = [], i;
+
+    for (i = 0; i <= 4; i++) {
+      var val = max * i / 4, y = sy(val);
+      p.push('<line class="grid-line" x1="' + box.x0 + '" y1="' + y.toFixed(1) + '" x2="' + box.x1 + '" y2="' + y.toFixed(1) + '"></line>');
+      p.push('<text class="axis-txt" x="' + (box.x0 - 8) + '" y="' + (y + 3.5).toFixed(1) + '" text-anchor="end">' + cfg.yFmt(val) + '</text>');
+    }
+    cfg.xTicks.forEach(function (k) {
+      p.push('<text class="axis-txt" x="' + sx(k).toFixed(1) + '" y="' + (box.y1 + 17) + '" text-anchor="middle">' + cfg.xFmt(k) + '</text>');
+    });
+    p.push('<text class="axis-txt" x="' + box.x1 + '" y="' + (box.y1 + 34) + '" text-anchor="end">' + cfg.xUnit + '</text>');
+
+    p.push('<path class="plot-line" d="' + ys.map(function (v, j) {
+      return (j ? "L" : "M") + sx(xs[j]).toFixed(1) + " " + sy(v).toFixed(1);
+    }).join(" ") + '" stroke="var(' + cfg.color + ')"></path>');
+
+    var idx = cfg.markIndex();
+    if (idx >= 0) {
+      var mx = sx(xs[idx]), my = sy(ys[idx]);
+      p.push('<line class="cross" x1="' + mx.toFixed(1) + '" y1="' + box.y0 + '" x2="' + mx.toFixed(1) + '" y2="' + box.y1 + '"></line>');
+      p.push('<circle cx="' + mx.toFixed(1) + '" cy="' + my.toFixed(1) + '" r="5.5" fill="var(' + cfg.color + ')" stroke="var(--surface)" stroke-width="2"></circle>');
+    }
+    p.push('<rect id="' + cfg.svg + '-hit" x="' + box.x0 + '" y="' + box.y0 + '" width="' + (box.x1 - box.x0) +
+      '" height="' + (box.y1 - box.y0) + '" fill="transparent" style="cursor:crosshair"></rect>');
+    svg.innerHTML = p.join("");
+
+    var hit = document.getElementById(cfg.svg + "-hit");
+    function move(ev) {
+      var pt = ev.touches ? ev.touches[0] : ev, r = svg.getBoundingClientRect();
+      var rel = (pt.clientX - r.left) / r.width * W;
+      var frac = (rel - box.x0) / (box.x1 - box.x0);
+      var j = Math.max(0, Math.min(xs.length - 1, Math.round(frac * (xs.length - 1))));
+      tip.innerHTML = cfg.tipFmt(xs[j], ys[j]);
+      tip.style.opacity = "1";
+      var host = svg.parentNode.getBoundingClientRect(), px = sx(xs[j]) / W * r.width;
+      tip.style.left = Math.max(4, Math.min(host.width - tip.offsetWidth - 4, px - tip.offsetWidth / 2)) + "px";
+      tip.style.top = (sy(ys[j]) / 220 * r.height - tip.offsetHeight - 10) + "px";
+    }
+    hit.addEventListener("mousemove", move);
+    hit.addEventListener("touchmove", move, { passive: true });
+    hit.addEventListener("mouseleave", function () { tip.style.opacity = "0"; });
+    hit.addEventListener("touchend", function () { tip.style.opacity = "0"; });
+  }
+
+  /* ---------- formatting ---------- */
+
+  var kr = function (n) { return n.toLocaleString("da-DK", { maximumFractionDigits: 0 }); };
+  var kshort = function (n) { return n >= 1000 ? Math.round(n / 1000) + "k" : String(n); };
+
+  /* ---------- awards ---------- */
+
+  var AWARDS = [
+    { title:"Longest real range", note:"at your speed and temperature, not the brochure's",
+      score:function(c,r){ return r.range; }, best:"max",
+      fmt:function(v){ return Math.round(v) + '<small>km</small>'; } },
+    { title:"Most efficient", note:"least energy burned per kilometre covered",
+      score:function(c,r){ return r.whkm; }, best:"min",
+      fmt:function(v){ return Math.round(v) + '<small>Wh/km</small>'; } },
+    { title:"Cheapest to own", note:"everything in, per year, at the distance you drive",
+      score:function(c){ return annual(c).total; }, best:"min",
+      fmt:function(v){ return kr(v) + '<small>kr/yr</small>'; } },
+    { title:"Most range per krone", note:"kilometres of real range per 100,000 kr spent",
+      score:function(c,r){ return r.range / c.price * 100000; }, best:"max",
+      fmt:function(v){ return v.toFixed(0) + '<small>km / 100k kr</small>'; } },
+    { title:"Fastest to add 200 km", note:"on a charger quick enough to feed it, so this is the car's own limit",
+      score:function(c,r){ return 200 / (c.dc * CHARGE_EFF * 1000 / r.whkm) * 60; }, best:"min",
+      fmt:function(v){ return Math.round(v) + '<small>min</small>'; } },
+    { title:"Least punished by speed", note:"keeps the most range going 130 instead of 90",
+      score:function(c){ return consume(c,130,state.temp).range / consume(c,90,state.temp).range * 100; },
+      best:"max", fmt:function(v){ return Math.round(v) + '<small>% kept</small>'; } }
+  ];
+
+  function renderAwards() {
+    document.getElementById("awards").innerHTML = AWARDS.map(function (a) {
+      var scored = CARS.map(function (c) {
+        return { c: c, v: a.score(c, consume(c, state.speed, state.temp)) };
+      }).sort(function (x, y) { return a.best === "max" ? y.v - x.v : x.v - y.v; });
+      var w = scored[0], up = scored[1];
+      return '<button type="button" class="award" data-model="' + w.c.marque + " " + w.c.model + '">' +
+        '<div class="at">' + a.title + '</div>' +
+        '<div class="aw"><span class="amk">' + w.c.marque + '</span><span class="amd">' + w.c.model + '</span></div>' +
+        '<div class="av">' + a.fmt(w.v) + '</div>' +
+        '<div class="ar">' + a.note + '.<br>Runner-up: ' + up.c.marque + ' ' + up.c.model + '.</div>' +
+      '</button>';
+    }).join("");
+    bindPick(".award");
+  }
+
+  /* ---------- the field ---------- */
+
+  function renderCards() {
+    var list = CARS.filter(function (c) {
+      return (state.seg === "all" || c.seg === state.seg) && c.price <= state.maxPrice;
+    });
+    list.forEach(function (c) { c._c = consume(c, state.speed, state.temp); c._a = annual(c); });
+    if (state.sort === "brand")  list.sort(byName);
+    if (state.sort === "eco")    list.sort(function (a, b) { return a._c.whkm - b._c.whkm; });
+    if (state.sort === "range")  list.sort(function (a, b) { return b._c.range - a._c.range; });
+    if (state.sort === "charge") list.sort(function (a, b) { return chargeKmh(b, b._c.whkm) - chargeKmh(a, a._c.whkm); });
+    if (state.sort === "price")  list.sort(function (a, b) { return a.price - b.price; });
+    if (state.sort === "own")    list.sort(function (a, b) { return a._a.total - b._a.total; });
+
+    document.getElementById("fcount").textContent = list.length + (list.length === 1 ? " car" : " cars");
+
+    document.getElementById("cards").innerHTML = list.length ? list.map(function (c) {
+      var rl = relOf(c.marque);
+      return '<button type="button" class="card" data-model="' + c.marque + " " + c.model +
+        '" aria-pressed="' + (c === state.car) + '">' +
+        '<div><div class="chead"><span class="marque">' + c.marque + '</span>' +
+        '<span class="seg">' + SEGNAME[c.seg] + '</span></div>' +
+        '<div class="model">' + c.model + '</div></div>' +
+        '<div class="headline"><span class="n">' + c._c.kwhh.toFixed(1) + '</span>' +
+        '<span class="u">kWh/h at ' + state.speed + ' km/h</span></div>' +
+        '<div class="facts">' +
+          '<div class="fact"><div class="fl">Real range</div><div class="fv">' + Math.round(c._c.range) + ' km</div></div>' +
+          '<div class="fact"><div class="fl">Cost / year</div><div class="fv">' + kr(c._a.total) + ' kr</div></div>' +
+          '<div class="fact"><div class="fl">Battery</div><div class="fv">' + c.battery + ' kWh</div></div>' +
+          '<div class="fact"><div class="fl">Charging</div><div class="fv">' + Math.round(chargeKmh(c, c._c.whkm)) + ' km/h</div></div>' +
+        '</div>' +
+        '<div class="price"><span class="rel" data-b="' + rl.band + '"><span class="rd"></span>' + rl.label + '</span></div>' +
+        '<div class="price">from ' + kr(c.price) + ' kr</div>' +
+      '</button>';
+    }).join("") : '<p class="empty">No cars match that combination. Widen the price or pick another type.</p>';
+    bindPick(".card");
+  }
+
+  function bindPick(sel) {
+    Array.prototype.forEach.call(document.querySelectorAll(sel), function (el) {
+      el.addEventListener("click", function () {
+        var m = el.getAttribute("data-model"), i;
+        for (i = 0; i < CARS.length; i++) {
+          if (CARS[i].marque + " " + CARS[i].model === m) setCar(CARS[i]);
+        }
+        
+      });
+    });
+  }
+
+  /* ---------- the tune panel ---------- */
+
+  var FIELDS = [
+    { id:"batt", key:"battery", stock:function(c){ return c.battery; }, hint:function(c){ return "stock " + c.battery; } },
+    { id:"wltp", key:"wltp", stock:function(c){ return c.wltp; }, hint:function(c){ return "stock " + c.wltp; } },
+    { id:"mass", key:"mass", stock:function(c){ return c.mass; }, hint:function(c){ return "stock " + c.mass + " · each passenger +80"; } },
+    { id:"cda",  key:"cda",  stock:function(c){ return c.cda; },  hint:function(c){ return "stock " + c.cda.toFixed(2) + " · roof box +0.25"; } },
+    { id:"dc",   key:"dc",   stock:function(c){ return c.dc; },   hint:function(c){ return "stock " + c.dc; } }
+  ];
+
+  function fillTune() {
+    var c = state.car;
+    FIELDS.forEach(function (fd) {
+      var el = document.getElementById("o-" + fd.id), o = state.ov[fd.key];
+      el.value = o != null ? o : fd.stock(c);
+      el.classList.toggle("edited", o != null);
+      document.getElementById("h-" + fd.id).textContent = fd.hint(c);
+    });
+    document.getElementById("reset").hidden = !tuned();
+    document.getElementById("svc-for").textContent = "Record for " + c.marque + " " + c.model;
+  }
+
+  function setCar(c) {
+    state.car = c;
+    state.ov = { battery:null, wltp:null, mass:null, cda:null, dc:null };
+    document.getElementById("model").value = String(CARS.indexOf(c));
+    fillTune();
+    render();
+  }
+
+  /* ---------- service log ---------- */
+
+  function renderLog() {
+    var list = document.getElementById("svc-list");
+    list.innerHTML = state.log.length ? state.log.slice().sort(function (a, b) {
+      return (b.date || "").localeCompare(a.date || "");
+    }).map(function (e) {
+      return '<div class="svc-item">' +
+        '<span class="sd">' + (e.date || "—") + '</span>' +
+        '<span class="sk">' + (e.km ? kr(e.km) + " km" : "—") + '</span>' +
+        '<span class="sw2">' + (e.what || e.cat) + ' <span class="badge">' + e.cat + '</span></span>' +
+        '<span class="sk">' + (e.cost ? kr(e.cost) + " kr" : "—") + '</span>' +
+        '<span><span class="badge">Unverified</span> <button class="del" data-id="' + e.id + '" aria-label="Delete stamp">✕</button></span>' +
+      '</div>';
+    }).join("") : '<div class="svc-item" style="grid-template-columns:1fr;color:var(--ink-3)">No stamps yet. Add one above, or attach a photo of the service book.</div>';
+
+    Array.prototype.forEach.call(list.querySelectorAll(".del"), function (b) {
+      b.addEventListener("click", function () {
+        var id = +b.getAttribute("data-id");
+        state.log = state.log.filter(function (x) { return x.id !== id; });
+        renderLog(); renderInstruments(); scheduleHeavy();
+      });
+    });
+
+    var r = receipts();
+    document.getElementById("svc-summary").innerHTML = r.count ? [
+      ['Receipts logged', r.count + '', r.span.toFixed(1) + ' years of history'],
+      ['Total spent', kr(r.total) + ' kr', 'across every stamp'],
+      ['Average per visit', kr(r.avg) + ' kr', 'your own average, not a national one'],
+      ['Per year', kr(r.perYear) + ' kr', r.perKm ? (r.perKm).toFixed(2) + ' kr per km driven' : 'add odometer readings for a per-km figure']
+    ].map(function (x) {
+      return '<div class="rc"><div class="l">' + x[0] + '</div><div class="v">' + x[1] + '</div><div class="d">' + x[2] + '</div></div>';
+    }).join("") : '<div class="rc"><div class="l">Receipts logged</div><div class="v">0</div><div class="d">Add a stamp with its bill to build an average</div></div>';
+
+    var cats = r.cats, keys = Object.keys(cats);
+    var maxAvg = 0;
+    keys.forEach(function (k) { maxAvg = Math.max(maxAvg, cats[k].sum / cats[k].n); });
+    document.getElementById("svc-cats").innerHTML = keys.length ? keys.sort(function (a, b) {
+      return cats[b].sum / cats[b].n - cats[a].sum / cats[a].n;
+    }).map(function (k) {
+      var avg = cats[k].sum / cats[k].n;
+      return '<div class="catrow"><span class="cn">' + k + ' <span style="color:var(--ink-3)">×' + cats[k].n + '</span></span>' +
+        '<span class="ct" style="width:' + (maxAvg ? Math.max(3, avg / maxAvg * 100) : 3) + '%"></span>' +
+        '<span class="cvv">' + kr(avg) + ' kr</span></div>';
+    }).join("") : '';
+  }
+
+  function renderShots() {
+    document.getElementById("svc-shots").innerHTML = state.shots.map(function (s, i) {
+      return '<div class="shot"><img src="' + s + '" alt="Service book page ' + (i + 1) + '">' +
+        '<button data-i="' + i + '" aria-label="Remove photo">✕</button></div>';
+    }).join("");
+    Array.prototype.forEach.call(document.querySelectorAll(".shot button"), function (b) {
+      b.addEventListener("click", function () {
+        state.shots.splice(+b.getAttribute("data-i"), 1);
+        renderShots();
+      });
+    });
+  }
+
+  /* ---------- render ---------- */
+
+  function renderInstruments() {
+    var car = state.car, c = eff(car), r = consume(c, state.speed, state.temp);
+
+    setDial("trk1", "arc1", "v1", state.speed / 180, String(state.speed));
+    setDial("trk2", "arc2", "v2", r.kwhh / 80, r.kwhh.toFixed(1));
+    document.getElementById("whkm").textContent = Math.round(r.whkm);
+
+    document.getElementById("sp-v").textContent = state.speed + " km/h";
+    document.getElementById("tp-v").textContent = state.temp + " °C";
+    document.getElementById("pr-v").textContent = state.price.toFixed(2) + " kr";
+    document.getElementById("ch-v").textContent =
+      (state.charger < 10 ? state.charger.toFixed(1) : Math.round(state.charger)) + " kW";
+    document.getElementById("mx-v").textContent =
+      state.maxPrice >= 1300000 ? "any price" : kr(state.maxPrice) + " kr";
+    document.getElementById("u-top-v").textContent = state.chargeTo + " %";
+    document.getElementById("u-res-v").textContent = state.reserve + " %";
+    document.getElementById("u-hp-v").textContent = state.health + " %";
+    document.getElementById("ky-v").textContent = kr(state.kmYear) + " km";
+    document.getElementById("dp-v").textContent = state.depRate + " %/yr";
+    document.getElementById("ins-v").textContent = state.insRate.toFixed(1) + " %/yr";
+    document.getElementById("sv-v").textContent = kr(state.service) + " kr";
+
+    var hours = c.battery * batteryFactor(state.temp) * usableFrac() / r.kwhh;
+    document.getElementById("s-range").textContent = Math.round(r.range);
+    document.getElementById("s-range-d").textContent = "vs " + c.wltp + " km on paper";
+    document.getElementById("s-time").textContent =
+      Math.floor(hours) + "h " + String(Math.round((hours % 1) * 60)).padStart(2, "0") + "m";
+    document.getElementById("s-cph").textContent = Math.round(r.kwhh * state.price);
+    document.getElementById("s-cpk").textContent = (r.whkm / 1000 * state.price).toFixed(2) + " kr per km";
+    document.getElementById("s-c100").textContent = Math.round(r.whkm / 10 * state.price);
+    document.getElementById("s-chg").textContent = Math.round(chargeKmh(c, r.whkm));
+    document.getElementById("s-chg-d").textContent = state.charger > c.dc
+      ? "this car caps at " + c.dc + " kW" : "range gained while plugged in";
+
+    /* tune read-outs */
+    var nominal = c.battery, window = nominal * usableFrac();
+    document.getElementById("o-window").textContent = window.toFixed(1) + " kWh";
+    document.getElementById("o-nominal").textContent = nominal.toFixed(1) + " kWh";
+    document.getElementById("o-fac").textContent = Math.round(factory(c).whkm) + " Wh/km";
+    var rl = relOf(car.marque);
+    document.getElementById("o-rel").innerHTML =
+      '<span class="rel" data-b="' + rl.band + '"><span class="rd"></span>' + rl.label + '</span>';
+    document.getElementById("o-foot").textContent = usableFrac() >= 0.999
+      ? "At 100% charge with no reserve you are reading brochure conditions."
+      : "You drive on " + Math.round(usableFrac() * 100) + "% of the pack, so every range here reflects that.";
+
+    syncPickers();
+
+    /* app-bar summary */
+    document.getElementById("ab-marque").textContent = car.marque;
+    document.getElementById("ab-model").textContent = car.model;
+    document.getElementById("ab-kwhh").textContent = r.kwhh.toFixed(1);
+    document.getElementById("ab-range").textContent = Math.round(r.range);
+    document.getElementById("cond-sum").textContent = state.speed + " km/h · " + state.temp + " °C";
+
+    /* power split */
+    document.getElementById("bd-total").textContent = r.kwhh.toFixed(1);
+    document.getElementById("k-aero").textContent = r.aeroKw.toFixed(1);
+    document.getElementById("k-roll").textContent = r.rollKw.toFixed(1);
+    document.getElementById("k-aux").textContent  = r.auxKw.toFixed(2);
+    var tot = r.aeroKw + r.rollKw + r.auxKw;
+    document.getElementById("seg-aero").style.width = (r.aeroKw / tot * 100).toFixed(2) + "%";
+    document.getElementById("seg-roll").style.width = (r.rollKw / tot * 100).toFixed(2) + "%";
+    document.getElementById("seg-aux").style.width  = (r.auxKw  / tot * 100).toFixed(2) + "%";
+    document.getElementById("bd-compare").innerHTML =
+      "About <b>" + Math.round(r.kwhh / KETTLE_KW) + " kettles</b> going flat out, or the average draw of <b>" +
+      Math.round(r.kwhh / HOME_KW) + " Danish homes</b>.";
+
+    /* cost of ownership */
+    var a = annual(car);
+    document.getElementById("c-total").textContent = kr(a.total) + " kr";
+    document.getElementById("c-total-u").textContent = "per year at " + kr(state.kmYear) + " km";
+    document.getElementById("c-perkm").textContent = a.perKm.toFixed(2);
+    document.getElementById("ck-dep").textContent = kr(a.dep) + " kr";
+    document.getElementById("ck-ins").textContent = kr(a.ins) + " kr";
+    document.getElementById("ck-nrg").textContent = kr(a.energy) + " kr";
+    document.getElementById("ck-svc").textContent = kr(a.svc) + " kr";
+    document.getElementById("cs-dep").style.width = (a.dep / a.total * 100).toFixed(2) + "%";
+    document.getElementById("cs-ins").style.width = (a.ins / a.total * 100).toFixed(2) + "%";
+    document.getElementById("cs-nrg").style.width = (a.energy / a.total * 100).toFixed(2) + "%";
+    document.getElementById("cs-svc").style.width = (a.svc / a.total * 100).toFixed(2) + "%";
+    document.getElementById("ab-yr").textContent = kr(a.total);
+  }
+
+  function renderHeavy() {
+    var car = state.car, c = eff(car);
+
+    drawChart({ svg:"c1", tip:"t1", xs:SPEEDS, width:420, color:"--burn",
+      ys: SPEEDS.map(function (k) { return consume(c, k, state.temp).kwhh; }),
+      xTicks:[30,60,90,120,150,180], xFmt:String, xUnit:"km/h",
+      yFmt:function (v) { return Math.round(v); },
+      markIndex:function () { return SPEEDS.indexOf(state.speed); },
+      tipFmt:function (x, y) { return x + " km/h · " + y.toFixed(1) + " kWh/h"; } });
+
+    drawChart({ svg:"c2", tip:"t2", xs:SPEEDS, width:420, color:"--gain",
+      ys: SPEEDS.map(function (k) { return consume(c, k, state.temp).range; }),
+      xTicks:[30,60,90,120,150,180], xFmt:String, xUnit:"km/h",
+      yFmt:function (v) { return Math.round(v); },
+      markIndex:function () { return SPEEDS.indexOf(state.speed); },
+      tipFmt:function (x, y) { return x + " km/h · " + Math.round(y) + " km"; } });
+
+    var whkm = consume(c, state.speed, state.temp).whkm;
+    var fixed = car.price * (state.depRate + state.insRate) / 100 + serviceCost();
+    var perKmEnergy = whkm / 1000 * state.price;
+    drawChart({ svg:"c3", tip:"t3", xs:KMS, width:860, color:"--gain",
+      ys: KMS.map(function (k) { return fixed / k + perKmEnergy; }),
+      xTicks:[10000,20000,30000,40000,50000,60000], xFmt:kshort, xUnit:"km/year",
+      yFmt:function (v) { return v.toFixed(1); },
+      markIndex:function () { return KMS.indexOf(Math.round(state.kmYear / 1000) * 1000); },
+      tipFmt:function (x, y) { return kshort(x) + " km/yr · " + y.toFixed(2) + " kr/km"; } });
+
+    renderAwards();
+    renderCards();
+  }
+
+  var queued = false;
+  function scheduleHeavy() {
+    if (queued) return;
+    queued = true;
+    requestAnimationFrame(function () { queued = false; renderHeavy(); });
+  }
+  function render() { renderInstruments(); renderHeavy(); }
+
+  /* ---------- wiring ---------- */
+
+  function bind(id, key) {
+    document.getElementById(id).addEventListener("input", function () {
+      state[key] = Number(this.value);
+      renderInstruments();
+      scheduleHeavy();
+    });
+  }
+  ["sp:speed","tp:temp","pr:price","ch:charger","mx:maxPrice",
+   "u-top:chargeTo","u-res:reserve","u-hp:health",
+   "ky:kmYear","dp:depRate","ins:insRate","sv:service"].forEach(function (pair) {
+    var p = pair.split(":");
+    bind(p[0], p[1]);
+  });
+
+  /* model picker, grouped by type */
+  var sel = document.getElementById("model");
+  var MARQUES = CARS.map(function (c) { return c.marque; })
+    .filter(function (v, i, a) { return a.indexOf(v) === i; })
+    .sort(function (a, b) { return a.localeCompare(b, "da"); });
+  sel.innerHTML = MARQUES.map(function (mq) {
+    var opts = CARS.map(function (c, i) { return { c:c, i:i }; })
+      .filter(function (x) { return x.c.marque === mq; })
+      .sort(function (x, y) { return x.c.model.localeCompare(y.c.model, "da"); })
+      .map(function (x) { return '<option value="' + x.i + '">' + x.c.model + "</option>"; }).join("");
+    return '<optgroup label="' + mq + '">' + opts + "</optgroup>";
+  }).join("");
+  sel.addEventListener("change", function () { setCar(CARS[+this.value]); });
+
+  FIELDS.forEach(function (fd) {
+    document.getElementById("o-" + fd.id).addEventListener("input", function () {
+      var v = parseFloat(this.value);
+      state.ov[fd.key] = (isFinite(v) && v > 0) ? v : null;
+      this.classList.toggle("edited", state.ov[fd.key] != null);
+      document.getElementById("reset").hidden = !tuned();
+      renderInstruments();
+      scheduleHeavy();
+    });
+  });
+
+  document.getElementById("reset").addEventListener("click", function () {
+    state.ov = { battery:null, wltp:null, mass:null, cda:null, dc:null };
+    fillTune();
+    render();
+  });
+
+  /* service log */
+  document.getElementById("sf-add").addEventListener("click", function () {
+    var d = document.getElementById("sf-date").value;
+    var km = parseFloat(document.getElementById("sf-km").value);
+    var what = document.getElementById("sf-what").value.trim();
+    var cat = document.getElementById("sf-cat").value;
+    var cost = parseFloat(document.getElementById("sf-cost").value);
+    if (!d && !what && !isFinite(cost)) return;
+    state.log.push({ id: Date.now() + Math.random(), date: d, km: isFinite(km) ? km : null,
+                     what: what, cat: cat, cost: isFinite(cost) ? cost : 0 });
+    document.getElementById("sf-date").value = "";
+    document.getElementById("sf-km").value = "";
+    document.getElementById("sf-what").value = "";
+    document.getElementById("sf-cost").value = "";
+    renderLog();
+    renderInstruments();
+    scheduleHeavy();
+  });
+
+  document.getElementById("use-receipts").addEventListener("change", function () {
+    state.useReceipts = this.checked;
+    renderInstruments();
+    scheduleHeavy();
+  });
+
+  document.getElementById("svc-photo").addEventListener("change", function () {
+    Array.prototype.forEach.call(this.files, function (file) {
+      if (!/^image\//.test(file.type) || file.size > 8e6) return;
+      var fr = new FileReader();
+      fr.onload = function () { state.shots.push(fr.result); renderShots(); };
+      fr.readAsDataURL(file);
+    });
+    this.value = "";
+  });
+
+  /* ---------- app shell ---------- */
+
+  var TABS = ["compare","car","drive","costs","history","method"];
+  function showTab(name) {
+    if (TABS.indexOf(name) < 0) name = "compare";
+    Array.prototype.forEach.call(document.querySelectorAll(".tabs button"), function (t) {
+      t.setAttribute("aria-selected", String(t.getAttribute("data-tab") === name));
+    });
+    Array.prototype.forEach.call(document.querySelectorAll(".tabpanel"), function (p) {
+      p.hidden = p.id !== "p-" + name;
+    });
+    try { history.replaceState(null, "", "#" + name); } catch (e) {}
+  }
+  Array.prototype.forEach.call(document.querySelectorAll(".tabs button"), function (t) {
+    t.addEventListener("click", function () {
+      showTab(t.getAttribute("data-tab"));
+      window.scrollTo(0, 0);
+    });
+  });
+  document.getElementById("ab-car").addEventListener("click", function () {
+    showTab("car"); window.scrollTo(0, 0);
+  });
+
+  var condPanel = document.getElementById("cond"), condBtn = document.getElementById("cond-toggle");
+  function setCond(open) {
+    condPanel.hidden = !open;
+    condBtn.setAttribute("aria-expanded", String(open));
+  }
+  condBtn.addEventListener("click", function () { setCond(condPanel.hidden); });
+  setCond(window.innerWidth >= 900);
+
+  Array.prototype.forEach.call(document.querySelectorAll(".filters .chips button"), function (b) {
+    b.addEventListener("click", function () {
+      Array.prototype.forEach.call(b.parentNode.querySelectorAll("button"), function (o) {
+        o.setAttribute("aria-pressed", String(o === b));
+      });
+      if (b.hasAttribute("data-seg")) state.seg = b.getAttribute("data-seg");
+      else state.sort = b.getAttribute("data-sort");
+      renderCards();
+    });
+  });
+
+  /* ---------- plain-language pickers, with the sliders kept in sync ---------- */
+
+  function syncGroup(id, match) {
+    var g = document.getElementById(id);
+    if (!g) return;
+    Array.prototype.forEach.call(g.querySelectorAll("button"), function (btn) {
+      btn.setAttribute("aria-pressed", String(!!match(btn)));
+    });
+  }
+  function pickGroup(id, apply) {
+    var g = document.getElementById(id);
+    Array.prototype.forEach.call(g.querySelectorAll("button"), function (btn) {
+      btn.addEventListener("click", function () {
+        apply(btn);
+        renderInstruments();
+        scheduleHeavy();
+      });
+    });
+  }
+  pickGroup("g-speed", function (b) {
+    state.speed = +b.getAttribute("data-v");
+    document.getElementById("sp").value = state.speed;
+  });
+  pickGroup("g-temp", function (b) {
+    state.temp = +b.getAttribute("data-v");
+    document.getElementById("tp").value = state.temp;
+  });
+  pickGroup("g-use", function (b) {
+    state.chargeTo = +b.getAttribute("data-top");
+    state.reserve = +b.getAttribute("data-res");
+    document.getElementById("u-top").value = state.chargeTo;
+    document.getElementById("u-res").value = state.reserve;
+  });
+  pickGroup("g-km", function (b) {
+    state.kmYear = +b.getAttribute("data-v");
+    document.getElementById("ky").value = state.kmYear;
+  });
+
+  function syncPickers() {
+    syncGroup("g-speed", function (b) { return +b.getAttribute("data-v") === state.speed; });
+    syncGroup("g-temp",  function (b) { return +b.getAttribute("data-v") === state.temp; });
+    syncGroup("g-km",    function (b) { return +b.getAttribute("data-v") === state.kmYear; });
+    syncGroup("g-use",   function (b) {
+      return +b.getAttribute("data-top") === state.chargeTo && +b.getAttribute("data-res") === state.reserve;
+    });
+  }
+
+  Array.prototype.forEach.call(document.querySelectorAll(".advbtn"), function (btn) {
+    btn.addEventListener("click", function () {
+      var panel = document.getElementById(btn.getAttribute("data-adv"));
+      var open = panel.hidden;
+      panel.hidden = !open;
+      btn.setAttribute("aria-expanded", String(open));
+    });
+  });
+
+  try { showTab((location.hash || "#compare").slice(1)); } catch (e) { showTab("compare"); }
+  document.getElementById("model").value = String(CARS.indexOf(state.car));
+  fillTune();
+  renderLog();
+  renderShots();
+  render();
+})();
+</script>
+
+
+</body>
+</html>
