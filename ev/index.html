@@ -423,8 +423,9 @@
   .card[aria-pressed="true"] { border-color: var(--burn); box-shadow: inset 0 0 0 1px var(--burn); }
   .card .chead { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
   .card .marque { font-family: var(--mono); font-size: .58rem; letter-spacing: .15em; text-transform: uppercase; color: var(--ink-3); }
-  .card .seg { font-family: var(--mono); font-size: .54rem; letter-spacing: .1em; text-transform: uppercase;
-    color: var(--ink-3); border: 1px solid var(--line); border-radius: 2px; padding: 2px 6px; }
+  .card .seg, .segtag { font-family: var(--mono); font-size: .54rem; letter-spacing: .1em; text-transform: uppercase;
+    color: var(--ink-3); border: 1px solid var(--line); border-radius: 2px; padding: 2px 6px; white-space: nowrap; }
+  .ab-car .segtag { border-color: var(--line-2); }
   .card .model { font-size: 1rem; font-weight: 600; line-height: 1.22; letter-spacing: -.01em; }
   .card .headline { display: flex; align-items: baseline; gap: 7px; }
   .card .headline .n { font-family: var(--mono); font-size: 1.55rem; font-weight: 600; letter-spacing: -.03em; color: var(--burn); line-height: 1; }
@@ -505,6 +506,7 @@
     <div class="ab-brand"><span class="bolt">&#9679;</span><h1>Energy Speed</h1></div>
     <button type="button" class="ab-car" id="ab-car" title="Open Your car">
       <span class="mk" id="ab-marque">BMW</span><span class="md" id="ab-model">i5 eDrive40</span>
+      <span class="segtag" id="ab-seg">Premium</span>
     </button>
     <div class="ab-chips">
       <span class="chip"><b id="ab-kwhh">22.1</b> kWh/h</span>
@@ -689,6 +691,7 @@
         <div class="row"><span class="rl">Rated consumption</span><span class="rv" id="o-fac">140 Wh/km</span></div>
         <div class="row"><span class="rl">Owner reliability</span><span class="rv" id="o-rel">&mdash;</span></div>
         <div class="row"><span class="rl">Model year</span><span class="rv" id="o-year">&mdash;</span></div>
+        <div class="row"><span class="rl">Category</span><span class="rv" id="o-seg">&mdash;</span></div>
         <div class="row" id="o-price-row" hidden><span class="rl">Expected price</span><span class="rv pricehl" id="o-price">&mdash;</span></div>
         <p class="genwarn" id="o-gen" hidden></p>
         <p class="foot" id="o-foot">At 100% charge with no reserve you are reading brochure conditions.</p>
@@ -1879,6 +1882,8 @@
     /* app-bar summary */
     document.getElementById("ab-marque").textContent = car.marque;
     document.getElementById("ab-model").textContent = car.model;
+    document.getElementById("ab-seg").textContent = SEGNAME[car.seg];
+    document.getElementById("o-seg").textContent = SEGNAME[car.seg];
     document.getElementById("ab-kwhh").textContent = r.kwhh.toFixed(1);
     document.getElementById("ab-range").textContent = Math.round(r.range);
     document.getElementById("cond-sum").textContent = state.speed + " km/h · " + state.temp + " °C";
