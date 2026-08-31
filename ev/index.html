@@ -39,6 +39,7 @@
     --aux:  #5b5bd6;
     --gain: #0e7490;
     --burn: #c2410c;
+    --price: #15803d;
     --shadow: 0 1px 2px rgba(16,22,28,.045);
     --display: "Familjen Grotesk", "Helvetica Neue", Arial, sans-serif;
     --mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
@@ -91,9 +92,24 @@
     display: flex; align-items: center; gap: 12px 26px; flex-wrap: wrap; }
   .cond .ctl { background: none; padding: 0; }
 
+  .pricehl { color: var(--price); font-weight: 600; }
+  .tune-picks { display: flex; align-items: center; gap: 12px 26px; flex-wrap: wrap;
+    padding: 13px 22px; border-bottom: 1px solid var(--line); background: var(--surface-2); }
+  .card .yr { font-family: var(--mono); font-size: .55rem; letter-spacing: .1em; color: var(--ink-3);
+    border: 1px solid var(--line); border-radius: 2px; padding: 2px 6px; }
+  .card .price .exp { color: var(--price); font-weight: 600; }
+  .genwarn { grid-column: 1 / -1; font-size: .8rem; line-height: 1.5; color: var(--price);
+    border-left: 3px solid var(--price); padding: 8px 0 8px 11px; }
+
   .pick { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
   .pick .pl { font-family: var(--mono); font-size: .59rem; letter-spacing: .13em;
     text-transform: uppercase; color: var(--ink-3); white-space: nowrap; }
+  .minibtn { font-family: var(--mono); font-size: .59rem; letter-spacing: .11em; text-transform: uppercase;
+    background: none; border: 1px solid var(--line-2); border-radius: 3px; padding: 8px 13px;
+    color: var(--ink-2); cursor: pointer; white-space: nowrap; }
+  .minibtn:hover { color: var(--ink); border-color: var(--ink-3); }
+  .minibtn:focus-visible { outline: 2px solid var(--burn); outline-offset: 2px; }
+
   .advbtn { font-family: var(--mono); font-size: .59rem; letter-spacing: .11em; text-transform: uppercase;
     background: none; border: 1px solid var(--line); border-radius: 3px; padding: 7px 12px;
     color: var(--ink-3); cursor: pointer; white-space: nowrap; }
@@ -322,6 +338,31 @@
     border: 1px dashed var(--line-2); color: var(--ink-2); cursor: pointer; }
   .filebtn:hover { border-color: var(--ink-3); color: var(--ink); }
   .filebtn input { display: none; }
+  .svc-acts { display: flex; align-items: center; gap: 9px; flex-wrap: wrap; }
+  .svc-saved { font-family: var(--mono); font-size: .58rem; letter-spacing: .1em; text-transform: uppercase;
+    color: var(--price); display: inline-flex; align-items: center; gap: 7px; }
+  .svc-saved::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--price); }
+  .svc-saved.off { color: var(--ink-3); }
+  .svc-saved.off::before { background: var(--ink-3); }
+  .xfer { padding: 16px 22px 18px; border-bottom: 1px solid var(--line); background: var(--surface-2); }
+  .xfer .pl { display: block; margin-bottom: 9px; }
+  .xfer textarea { width: 100%; font-family: var(--mono); font-size: .72rem; line-height: 1.5;
+    background: var(--surface); color: var(--ink-2); border: 1px solid var(--line); border-radius: 3px;
+    padding: 10px 12px; resize: vertical; min-height: 104px; }
+  .xfer textarea:focus { outline: none; border-color: var(--burn); }
+  .xfer .row2 { display: flex; gap: 9px; flex-wrap: wrap; margin-top: 11px; align-items: center; }
+  .xfer .hint2 { font-size: .8rem; color: var(--ink-3); line-height: 1.5; }
+  .ident { display: grid; grid-template-columns: 200px 240px 1fr; gap: 12px 18px; align-items: end;
+    padding: 16px 22px; border-bottom: 1px solid var(--line); }
+  .ident .fld label { display: block; font-family: var(--mono); font-size: .57rem; letter-spacing: .12em;
+    text-transform: uppercase; color: var(--ink-3); margin-bottom: 6px; }
+  .ident input { font-family: var(--mono); font-size: .86rem; font-weight: 600; width: 100%;
+    background: transparent; color: var(--ink); border: none; border-bottom: 1px solid var(--line-2);
+    padding: 5px 0; text-transform: uppercase; letter-spacing: .06em; }
+  .ident input:focus { outline: none; border-bottom-color: var(--burn); }
+  .ident .identnote { font-size: .8rem; color: var(--ink-3); line-height: 1.5; align-self: center; }
+  .ident .identnote b { color: var(--price); font-weight: 600; }
+  @media (max-width: 760px) { .ident { grid-template-columns: 1fr; } }
   .shots { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 14px; }
   .shot { position: relative; width: 104px; height: 78px; border-radius: 3px; overflow: hidden; border: 1px solid var(--line); }
   .shot img { width: 100%; height: 100%; object-fit: cover; display: block; }
@@ -574,6 +615,27 @@
           <label class="cl" for="model">Model</label>
           <select id="model" class="nsel"></select>
         </div>
+        <button type="button" class="advbtn" data-adv="car-adv" aria-expanded="false" aria-controls="car-adv">Adjust spec</button>
+        <button type="button" class="reset" id="reset" hidden>Reset to stock</button>
+      </div>
+
+      <div class="tune-picks">
+        <div class="pick">
+          <span class="pl">Buying</span>
+          <div class="chips" id="g-cond">
+            <button type="button" data-used="0" aria-pressed="true">New</button>
+            <button type="button" data-used="1">Used</button>
+          </div>
+        </div>
+        <div class="pick" id="agepick" hidden>
+          <span class="pl">Age</span>
+          <div class="chips" id="g-age">
+            <button type="button" data-v="1">1 yr</button>
+            <button type="button" data-v="3" aria-pressed="true">3 yr</button>
+            <button type="button" data-v="5">5 yr</button>
+            <button type="button" data-v="8">8 yr</button>
+          </div>
+        </div>
         <div class="pick">
           <span class="pl">Battery use</span>
           <div class="chips" id="g-use">
@@ -582,8 +644,6 @@
             <button type="button" data-top="80" data-res="20">Careful</button>
           </div>
         </div>
-        <button type="button" class="advbtn" data-adv="car-adv" aria-expanded="false" aria-controls="car-adv">Adjust spec</button>
-        <button type="button" class="reset" id="reset" hidden>Reset to stock</button>
       </div>
 
       <div class="tune-out">
@@ -591,6 +651,9 @@
         <div class="row"><span class="rl">Of a nominal</span><span class="rv" id="o-nominal">81.2 kWh</span></div>
         <div class="row"><span class="rl">Rated consumption</span><span class="rv" id="o-fac">140 Wh/km</span></div>
         <div class="row"><span class="rl">Owner reliability</span><span class="rv" id="o-rel">&mdash;</span></div>
+        <div class="row"><span class="rl">Model year</span><span class="rv" id="o-year">&mdash;</span></div>
+        <div class="row" id="o-price-row" hidden><span class="rl">Expected price</span><span class="rv pricehl" id="o-price">&mdash;</span></div>
+        <p class="genwarn" id="o-gen" hidden></p>
         <p class="foot" id="o-foot">At 100% charge with no reserve you are reading brochure conditions.</p>
       </div>
 
@@ -877,11 +940,55 @@
 
     <div class="panel svc">
       <div class="svc-head">
-        <span class="st" id="svc-for">Record for the selected car</span>
-        <label class="filebtn">
-          Attach service book photo
-          <input type="file" id="svc-photo" accept="image/*" multiple>
-        </label>
+        <div>
+          <span class="st" id="svc-for">Record for the selected car</span><br>
+          <span class="svc-saved" id="svc-saved">Saved in this browser</span>
+        </div>
+        <div class="svc-acts">
+          <label class="filebtn">
+            Photo
+            <input type="file" id="svc-photo" accept="image/*" multiple>
+          </label>
+          <button type="button" class="advbtn" id="svc-export" data-adv="svc-transfer" aria-expanded="false" aria-controls="svc-transfer">Hand over</button>
+          <label class="filebtn">
+            Import
+            <input type="file" id="svc-import" accept="application/json,.json">
+          </label>
+        </div>
+      </div>
+
+      <div class="advpanel" id="svc-transfer" hidden>
+        <div class="xfer">
+          <span class="pl">The car's record, ready to hand on</span>
+          <textarea id="svc-json" readonly spellcheck="false"></textarea>
+          <div class="row2">
+            <button type="button" class="addbtn" id="svc-copy">Copy</button>
+            <button type="button" class="minibtn" id="svc-download">Download file</button>
+            <button type="button" class="minibtn" id="svc-paste">Paste a record in</button>
+          </div>
+          <p class="hint2" style="margin-top:11px">
+            This is the whole service record as text. Send it to the next owner and they use
+            <b>Import</b> &mdash; or paste one in here to load it. Photos are not included; they stay on the
+            device that added them.
+          </p>
+        </div>
+      </div>
+
+      <div class="ident">
+        <div class="fld">
+          <label for="sf-plate">Registration number</label>
+          <input type="text" id="sf-plate" placeholder="AB 12 345" autocomplete="off" maxlength="10">
+        </div>
+        <div class="fld">
+          <label for="sf-vin">VIN &mdash; optional</label>
+          <input type="text" id="sf-vin" placeholder="WBA1A2C3D4E567890" autocomplete="off" maxlength="17">
+        </div>
+        <p class="identnote" id="ident-note">
+          Without these the record belongs to the <b>model</b>. Add a plate or VIN and it belongs to
+          <b>that one car</b> &mdash; which is what makes handing it on mean anything. Filling the rest
+          in <em>automatically</em> from the plate is a server job, not something this page can do &mdash;
+          see <b>Method</b>.
+        </p>
       </div>
 
       <div class="svc-form">
@@ -971,6 +1078,24 @@
         for the bottom half of the battery.
       </li>
       <li>
+        <b>A plate could fill this in for you &mdash; but not from here.</b> In Denmark a registration
+        number resolves to the exact variant, first registration date and full inspection history
+        through the Motorregister and Synsbasen, and several commercial APIs wrap them. None of it can
+        happen in this page: a browser cannot call those services directly (they block cross-origin
+        requests), and an API key put into a public page is a key you have given away. It needs a small
+        server of your own that holds the key and answers plate lookups &mdash; a day's work, and the point
+        at which this stops being a static file. Until then the plate is an identifier you type, and
+        everything else is entered by hand.
+      </li>
+      <li>
+        <b>The service record lives in the browser that typed it.</b> Stamps are saved against the plate
+        or VIN, so they survive a refresh and each car keeps its own history. They are not on a server,
+        which means they do not follow you to another phone &mdash; use <b>Hand over</b> to export the
+        record and <b>Import</b> to load it somewhere else. Photos are never included; they stay on the
+        device that added them. Real accounts that carry a car's history between owners need that same
+        server.
+      </li>
+      <li>
         <b>Weights, drag areas and prices are approximations.</b> They are good enough to rank cars
         honestly against each other, and not good enough to sign a contract on. A production version
         would pull specs from a maintained database rather than a table written by hand.
@@ -993,72 +1118,72 @@
   /* battery = usable kWh · wltp = km · mass = kg incl. driver · cda = drag area m²
      dc = peak DC charge kW · price = indicative DKK */
   var CARS = [
-    ["Dacia","Spring 45",26.8,225,1060,0.72,30,159000,"city"],
-    ["Leapmotor","T03",37.3,265,1200,0.70,48,149000,"city"],
-    ["BYD","Dolphin Surf",43.2,322,1390,0.69,85,179000,"city"],
-    ["Citroën","ë-C3",44,320,1500,0.70,100,199000,"city"],
-    ["Hyundai","Inster Long Range",49,370,1400,0.68,85,209000,"city"],
-    ["Fiat","500e 42",37.3,320,1400,0.67,85,229000,"city"],
-    ["Renault","5 E-Tech 52",52,410,1550,0.68,100,239000,"city"],
-    ["Opel","Corsa Electric 51",51,402,1600,0.67,100,239000,"city"],
-    ["Peugeot","e-208 51",51,410,1600,0.67,100,245000,"city"],
-    ["Mini","Cooper SE",49.2,402,1660,0.66,95,269000,"city"],
+    ["Dacia","Spring 45",26.8,225,1060,0.72,30,159000,"city",2024],
+    ["Leapmotor","T03",37.3,265,1200,0.70,48,149000,"city",2024],
+    ["BYD","Dolphin Surf",43.2,322,1390,0.69,85,179000,"city",2025],
+    ["Citroën","ë-C3",44,320,1500,0.70,100,199000,"city",2024],
+    ["Hyundai","Inster Long Range",49,370,1400,0.68,85,209000,"city",2024],
+    ["Fiat","500e 42",37.3,320,1400,0.67,85,229000,"city",2021],
+    ["Renault","5 E-Tech 52",52,410,1550,0.68,100,239000,"city",2024],
+    ["Opel","Corsa Electric 51",51,402,1600,0.67,100,239000,"city",2023],
+    ["Peugeot","e-208 51",51,410,1600,0.67,100,245000,"city",2023],
+    ["Mini","Cooper SE",49.2,402,1660,0.66,95,269000,"city",2024],
 
-    ["MG","MG4 Long Range",61.7,435,1720,0.65,140,249000,"family"],
-    ["BYD","Dolphin Comfort",60.4,427,1660,0.66,88,239000,"family"],
-    ["Nissan","Leaf e+",59,385,1750,0.72,100,259000,"family"],
-    ["Renault","Megane E-Tech 60",60,470,1710,0.63,130,279000,"family"],
-    ["VW","ID.3 Pro",59,429,1850,0.62,120,289000,"family"],
-    ["Cupra","Born 59",59,424,1850,0.62,120,299000,"family"],
-    ["VW","ID.3 Pro S",77,559,1950,0.62,170,329000,"family"],
-    ["Tesla","Model 3 RWD",57.5,513,1830,0.49,170,339000,"family"],
-    ["Hyundai","Ioniq 6 Long Range",77.4,614,2050,0.47,233,379000,"family"],
-    ["Tesla","Model 3 Long Range",75,629,1900,0.49,250,399000,"family"],
-    ["Polestar","2 Long range",79,655,2050,0.63,205,429000,"family"],
-    ["BMW","i4 eDrive40",81.2,590,2100,0.62,205,549000,"family"],
+    ["MG","MG4 Long Range",61.7,435,1720,0.65,140,249000,"family",2022],
+    ["BYD","Dolphin Comfort",60.4,427,1660,0.66,88,239000,"family",2023],
+    ["Nissan","Leaf e+",59,385,1750,0.72,100,259000,"family",2019],
+    ["Renault","Megane E-Tech 60",60,470,1710,0.63,130,279000,"family",2022],
+    ["VW","ID.3 Pro",59,429,1850,0.62,120,289000,"family",2023],
+    ["Cupra","Born 59",59,424,1850,0.62,120,299000,"family",2021],
+    ["VW","ID.3 Pro S",77,559,1950,0.62,170,329000,"family",2023],
+    ["Tesla","Model 3 RWD",57.5,513,1830,0.49,170,339000,"family",2024],
+    ["Hyundai","Ioniq 6 Long Range",77.4,614,2050,0.47,233,379000,"family",2023],
+    ["Tesla","Model 3 Long Range",75,629,1900,0.49,250,399000,"family",2024],
+    ["Polestar","2 Long range",79,655,2050,0.63,205,429000,"family",2024],
+    ["BMW","i4 eDrive40",81.2,590,2100,0.62,205,549000,"family",2021],
 
-    ["MG","ZS EV Long Range",68.3,440,1730,0.75,92,259000,"suv"],
-    ["Hyundai","Kona Electric 65",65.4,514,1850,0.72,102,289000,"suv"],
-    ["Volvo","EX30 Single ER",64,476,1830,0.63,153,289000,"suv"],
-    ["Kia","Niro EV",64.8,460,1840,0.74,80,299000,"suv"],
-    ["Škoda","Elroq 85",77,581,2100,0.68,175,319000,"suv"],
-    ["Toyota","bZ4X",64,460,2050,0.71,150,329000,"suv"],
-    ["VW","ID.4 Pro",77,552,2190,0.72,175,349000,"suv"],
-    ["Renault","Scenic E-Tech 87",87,625,2000,0.66,150,349000,"suv"],
-    ["Ford","Explorer EV ER",77,602,2170,0.69,135,349000,"suv"],
-    ["XPeng","G6 Long Range",87.5,570,2100,0.66,280,349000,"suv"],
-    ["Škoda","Enyaq 85",77,581,2180,0.71,175,359000,"suv"],
-    ["Peugeot","e-3008 73",73,525,2180,0.70,160,359000,"suv"],
-    ["Hyundai","Ioniq 5 77",77.4,507,2130,0.70,233,379000,"suv"],
-    ["Škoda","Enyaq Coupé 85",77,594,2180,0.68,175,379000,"suv"],
-    ["Kia","EV6 Long Range",77.4,528,2090,0.67,233,389000,"suv"],
-    ["Tesla","Model Y Long Range",75,565,2030,0.61,250,419000,"suv"],
+    ["MG","ZS EV Long Range",68.3,440,1730,0.75,92,259000,"suv",2022],
+    ["Hyundai","Kona Electric 65",65.4,514,1850,0.72,102,289000,"suv",2023],
+    ["Volvo","EX30 Single ER",64,476,1830,0.63,153,289000,"suv",2024],
+    ["Kia","Niro EV",64.8,460,1840,0.74,80,299000,"suv",2022],
+    ["Škoda","Elroq 85",77,581,2100,0.68,175,319000,"suv",2024],
+    ["Toyota","bZ4X",64,460,2050,0.71,150,329000,"suv",2022],
+    ["VW","ID.4 Pro",77,552,2190,0.72,175,349000,"suv",2023],
+    ["Renault","Scenic E-Tech 87",87,625,2000,0.66,150,349000,"suv",2024],
+    ["Ford","Explorer EV ER",77,602,2170,0.69,135,349000,"suv",2024],
+    ["XPeng","G6 Long Range",87.5,570,2100,0.66,280,349000,"suv",2024],
+    ["Škoda","Enyaq 85",77,581,2180,0.71,175,359000,"suv",2024],
+    ["Peugeot","e-3008 73",73,525,2180,0.70,160,359000,"suv",2024],
+    ["Hyundai","Ioniq 5 77",77.4,507,2130,0.70,233,379000,"suv",2024],
+    ["Škoda","Enyaq Coupé 85",77,594,2180,0.68,175,379000,"suv",2024],
+    ["Kia","EV6 Long Range",77.4,528,2090,0.67,233,389000,"suv",2024],
+    ["Tesla","Model Y Long Range",75,565,2030,0.61,250,419000,"suv",2024],
 
-    ["Audi","Q4 e-tron 45",77,562,2150,0.70,175,419000,"premium"],
-    ["Genesis","GV60 Sport",74,466,2150,0.68,233,599000,"premium"],
-    ["Kia","EV9 Long Range",96,563,2680,0.80,210,649000,"premium"],
-    ["Audi","Q6 e-tron",94.9,625,2340,0.70,270,699000,"premium"],
-    ["BMW","i5 eDrive40",81.2,582,2200,0.55,205,749000,"premium"],
-    ["Mercedes","EQE 350+",89,639,2355,0.55,170,799000,"premium"],
-    ["Polestar","3 Long range",107,631,2600,0.75,250,849000,"premium"],
-    ["Volvo","EX90 Twin Motor",107,614,2790,0.78,250,899000,"premium"],
-    ["BMW","iX xDrive50",105,633,2585,0.68,195,899000,"premium"],
-    ["Tesla","Model S Long Range",95,723,2100,0.50,250,899000,"premium"],
-    ["Lucid","Air Pure",88,725,2100,0.47,250,899000,"premium"],
-    ["Mercedes","EQS 450+",108,782,2480,0.50,200,1250000,"premium"],
+    ["Audi","Q4 e-tron 45",77,562,2150,0.70,175,419000,"premium",2023],
+    ["Genesis","GV60 Sport",74,466,2150,0.68,233,599000,"premium",2022],
+    ["Kia","EV9 Long Range",96,563,2680,0.80,210,649000,"premium",2023],
+    ["Audi","Q6 e-tron",94.9,625,2340,0.70,270,699000,"premium",2024],
+    ["BMW","i5 eDrive40",81.2,582,2200,0.55,205,749000,"premium",2023],
+    ["Mercedes","EQE 350+",89,639,2355,0.55,170,799000,"premium",2022],
+    ["Polestar","3 Long range",107,631,2600,0.75,250,849000,"premium",2024],
+    ["Volvo","EX90 Twin Motor",107,614,2790,0.78,250,899000,"premium",2024],
+    ["BMW","iX xDrive50",105,633,2585,0.68,195,899000,"premium",2021],
+    ["Tesla","Model S Long Range",95,723,2100,0.50,250,899000,"premium",2023],
+    ["Lucid","Air Pure",88,725,2100,0.47,250,899000,"premium",2022],
+    ["Mercedes","EQS 450+",108,782,2480,0.50,200,1250000,"premium",2024],
 
-    ["BMW","i4 M50",80.7,521,2290,0.60,205,699000,"sport"],
-    ["Hyundai","Ioniq 5 N",84,448,2270,0.72,233,749000,"sport"],
-    ["Porsche","Macan 4 Electric",95,613,2405,0.60,270,799000,"sport"],
-    ["Audi","e-tron GT quattro",84,501,2300,0.56,270,1050000,"sport"],
-    ["Porsche","Taycan 4S",83,507,2270,0.51,320,1095000,"sport"],
+    ["BMW","i4 M50",80.7,521,2290,0.60,205,699000,"sport",2021],
+    ["Hyundai","Ioniq 5 N",84,448,2270,0.72,233,749000,"sport",2024],
+    ["Porsche","Macan 4 Electric",95,613,2405,0.60,270,799000,"sport",2024],
+    ["Audi","e-tron GT quattro",84,501,2300,0.56,270,1050000,"sport",2021],
+    ["Porsche","Taycan 4S",83,507,2270,0.51,320,1095000,"sport",2024],
 
-    ["Ford","E-Transit Custom",64,307,2400,1.00,125,449000,"van"],
-    ["VW","ID. Buzz Pro",79,461,2500,0.95,185,549000,"van"],
-    ["Mercedes","EQV 300",90,356,2800,1.05,110,699000,"van"]
+    ["Ford","E-Transit Custom",64,307,2400,1.00,125,449000,"van",2024],
+    ["VW","ID. Buzz Pro",79,461,2500,0.95,185,549000,"van",2022],
+    ["Mercedes","EQV 300",90,356,2800,1.05,110,699000,"van",2020]
   ].map(function (r) {
     return { marque:r[0], model:r[1], battery:r[2], wltp:r[3], mass:r[4],
-             cda:r[5], dc:r[6], price:r[7], seg:r[8] };
+             cda:r[5], dc:r[6], price:r[7], seg:r[8], year:r[9] };
   });
 
   var SEGNAME = { city:"City", family:"Family", suv:"SUV", premium:"Premium", sport:"Sport", van:"Van" };
@@ -1124,7 +1249,8 @@
     ov: { battery:null, wltp:null, mass:null, cda:null, dc:null },
     chargeTo: 100, reserve: 0, health: 100,
     kmYear: 18000, depRate: 13, insRate: 1.4, service: 3500,
-    useReceipts: false, log: [], shots: []
+    used: false, age: 3,
+    useReceipts: false, log: [], shots: [], saved: true, plate: "", vin: ""
   };
 
   /* effective spec: stock everywhere, overridden only for the car you are tuning */
@@ -1147,6 +1273,15 @@
 
   /* ---------- cost of ownership ---------- */
 
+  var THIS_YEAR = 2026;
+
+  /* A used car is worth the new price decayed by the depreciation rate, compounded.
+     Everything money-related keys off this rather than the showroom price. */
+  function valueOf(car) {
+    if (!state.used) return car.price;
+    return car.price * Math.pow(1 - state.depRate / 100, state.age);
+  }
+
   function serviceCost() {
     if (state.useReceipts) {
       var r = receipts();
@@ -1157,11 +1292,57 @@
   function annual(car) {
     var spec = eff(car);
     var energy = consume(spec, state.speed, state.temp).whkm / 1000 * state.kmYear * state.price;
-    var dep = car.price * state.depRate / 100;
-    var ins = car.price * state.insRate / 100;
+    var val = valueOf(car);
+    var dep = val * state.depRate / 100;
+    var ins = val * state.insRate / 100;
     var svc = serviceCost();
     var total = energy + dep + ins + svc;
     return { energy:energy, dep:dep, ins:ins, svc:svc, total:total, perKm: total / state.kmYear };
+  }
+
+  /* ---------- the record, kept per car in this browser ----------
+     Every read and write is guarded: private windows and blocked site data
+     make localStorage throw rather than simply come back empty. */
+
+  var LS_KEY = "energyspeed.service.v1";
+  function norm(s) { return String(s || "").toUpperCase().replace(/[^A-Z0-9]/g, ""); }
+  /* A record belongs to a specific car once you name one. Plate wins over VIN,
+     VIN over the model, so a record never silently merges two different cars. */
+  function carKey(c) {
+    if (norm(state.plate)) return "plate:" + norm(state.plate);
+    if (norm(state.vin))   return "vin:" + norm(state.vin);
+    return "model:" + c.marque + " " + c.model;
+  }
+  function loadStore() {
+    try { return JSON.parse(localStorage.getItem(LS_KEY)) || {}; } catch (e) { return {}; }
+  }
+  function saveStore(store) {
+    try { localStorage.setItem(LS_KEY, JSON.stringify(store)); return true; } catch (e) { return false; }
+  }
+  function loadLog() {
+    var store = loadStore(), rec = store[carKey(state.car)];
+    state.log = (rec && rec.entries) ? rec.entries : [];
+  }
+  function persistLog() {
+    var store = loadStore();
+    if (state.log.length) {
+      store[carKey(state.car)] = {
+        car: state.car.marque + " " + state.car.model, year: state.car.year,
+        plate: norm(state.plate), vin: norm(state.vin),
+        updated: new Date().toISOString().slice(0, 10), entries: state.log
+      };
+    } else { delete store[carKey(state.car)]; }
+    state.saved = saveStore(store);
+    return state.saved;
+  }
+  function recordJSON() {
+    return JSON.stringify({
+      format: "energy-speed.service.v1",
+      car: state.car.marque + " " + state.car.model, modelYear: state.car.year,
+      plate: norm(state.plate), vin: norm(state.vin),
+      exported: new Date().toISOString().slice(0, 10),
+      entries: state.log
+    }, null, 2);
   }
 
   /* ---------- receipts ---------- */
@@ -1290,7 +1471,7 @@
       score:function(c){ return annual(c).total; }, best:"min",
       fmt:function(v){ return kr(v) + '<small>kr/yr</small>'; } },
     { title:"Most range per krone", note:"kilometres of real range per 100,000 kr spent",
-      score:function(c,r){ return r.range / c.price * 100000; }, best:"max",
+      score:function(c,r){ return r.range / valueOf(c) * 100000; }, best:"max",
       fmt:function(v){ return v.toFixed(0) + '<small>km / 100k kr</small>'; } },
     { title:"Fastest to add 200 km", note:"on a charger quick enough to feed it, so this is the car's own limit",
       score:function(c,r){ return 200 / (c.dc * CHARGE_EFF * 1000 / r.whkm) * 60; }, best:"min",
@@ -1348,7 +1529,9 @@
           '<div class="fact"><div class="fl">Charging</div><div class="fv">' + Math.round(chargeKmh(c, c._c.whkm)) + ' km/h</div></div>' +
         '</div>' +
         '<div class="price"><span class="rel" data-b="' + rl.band + '"><span class="rd"></span>' + rl.label + '</span></div>' +
-        '<div class="price">from ' + kr(c.price) + ' kr</div>' +
+        '<div class="price"><span class="yr">' + c.year + '</span> &middot; new ' + kr(c.price) + ' kr' +
+          (state.used ? '<br><span class="exp">' + state.age + ' yr old &middot; ' + kr(valueOf(c)) + ' kr</span>' : '') +
+        '</div>' +
       '</button>';
     }).join("") : '<p class="empty">No cars match that combination. Widen the price or pick another type.</p>';
     bindPick(".card");
@@ -1390,15 +1573,33 @@
 
   function setCar(c) {
     state.car = c;
+    loadLog();
     state.ov = { battery:null, wltp:null, mass:null, cda:null, dc:null };
     document.getElementById("model").value = String(CARS.indexOf(c));
     fillTune();
+    renderLog();
     render();
   }
 
   /* ---------- service log ---------- */
 
   function renderLog() {
+    var badge = document.getElementById("svc-saved");
+    if (state.log.length === 0) {
+      badge.className = "svc-saved off";
+      badge.textContent = "Nothing recorded yet";
+    } else if (state.saved) {
+      var who = norm(state.plate) ? " · " + state.plate.toUpperCase()
+              : norm(state.vin) ? " · VIN " + norm(state.vin).slice(-6) : " · model record";
+      badge.className = "svc-saved";
+      badge.textContent = state.log.length + " stamps saved" + who;
+    } else {
+      badge.className = "svc-saved off";
+      badge.textContent = "Could not save — this browser blocks storage";
+    }
+    var json = document.getElementById("svc-json");
+    if (json) json.value = recordJSON();
+
     var list = document.getElementById("svc-list");
     list.innerHTML = state.log.length ? state.log.slice().sort(function (a, b) {
       return (b.date || "").localeCompare(a.date || "");
@@ -1416,7 +1617,7 @@
       b.addEventListener("click", function () {
         var id = +b.getAttribute("data-id");
         state.log = state.log.filter(function (x) { return x.id !== id; });
-        renderLog(); renderInstruments(); scheduleHeavy();
+        persistLog(); renderLog(); renderInstruments(); scheduleHeavy();
       });
     });
 
@@ -1500,6 +1701,19 @@
     var rl = relOf(car.marque);
     document.getElementById("o-rel").innerHTML =
       '<span class="rel" data-b="' + rl.band + '"><span class="rd"></span>' + rl.label + '</span>';
+    document.getElementById("o-year").textContent = String(car.year);
+    document.getElementById("o-price-row").hidden = !state.used;
+    document.getElementById("o-price").textContent = kr(valueOf(car)) + " kr";
+    document.getElementById("agepick").hidden = !state.used;
+
+    /* the spec quoted may be a later update than a car of this age would be */
+    var gen = document.getElementById("o-gen"), build = THIS_YEAR - state.age;
+    if (state.used && build < car.year) {
+      gen.hidden = false;
+      gen.textContent = "These figures describe the " + car.year + " version. A " + state.age +
+        "-year-old car is roughly a " + build + ", built before that update, so its battery, " +
+        "efficiency and charging speed may be lower.";
+    } else { gen.hidden = true; }
     document.getElementById("o-foot").textContent = usableFrac() >= 0.999
       ? "At 100% charge with no reserve you are reading brochure conditions."
       : "You drive on " + Math.round(usableFrac() * 100) + "% of the pack, so every range here reflects that.";
@@ -1642,6 +1856,7 @@
     document.getElementById("sf-km").value = "";
     document.getElementById("sf-what").value = "";
     document.getElementById("sf-cost").value = "";
+    persistLog();
     renderLog();
     renderInstruments();
     scheduleHeavy();
@@ -1651,6 +1866,86 @@
     state.useReceipts = this.checked;
     renderInstruments();
     scheduleHeavy();
+  });
+
+  ["sf-plate", "sf-vin"].forEach(function (id) {
+    document.getElementById(id).addEventListener("input", function () {
+      state[id === "sf-plate" ? "plate" : "vin"] = this.value;
+      loadLog();
+      renderLog();
+      renderInstruments();
+      scheduleHeavy();
+    });
+  });
+
+  document.getElementById("svc-copy").addEventListener("click", function () {
+    var ta = document.getElementById("svc-json"), btn = this;
+    ta.select();
+    var done = function () { btn.textContent = "Copied"; setTimeout(function () { btn.textContent = "Copy"; }, 1600); };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(ta.value).then(done, function () { done(); });
+    } else { try { document.execCommand("copy"); } catch (e) {} done(); }
+  });
+
+  document.getElementById("svc-download").addEventListener("click", function () {
+    var btn = this;
+    try {
+      var blob = new Blob([recordJSON()], { type: "application/json" });
+      var url = URL.createObjectURL(blob), a = document.createElement("a");
+      a.href = url;
+      a.download = carKey(state.car).replace(/[^\w]+/g, "-").toLowerCase() + "-service.json";
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+      setTimeout(function () { URL.revokeObjectURL(url); }, 4000);
+    } catch (e) {
+      btn.textContent = "Blocked — copy instead";
+      setTimeout(function () { btn.textContent = "Download file"; }, 2400);
+    }
+  });
+
+  function adoptRecord(text) {
+    var data;
+    try { data = JSON.parse(text); } catch (e) { return "That is not a valid record."; }
+    if (!data || !Array.isArray(data.entries)) return "That file has no service entries in it.";
+    var clean = data.entries.filter(function (e) { return e && (e.date || e.what || e.cost); })
+      .map(function (e) {
+        return { id: Date.now() + Math.random(), date: e.date || "", km: isFinite(+e.km) ? +e.km : null,
+                 what: String(e.what || ""), cat: String(e.cat || "Other"), cost: isFinite(+e.cost) ? +e.cost : 0 };
+      });
+    if (!clean.length) return "That record is empty.";
+    if (data.plate) { state.plate = data.plate; document.getElementById("sf-plate").value = data.plate; }
+    if (data.vin)   { state.vin = data.vin;     document.getElementById("sf-vin").value = data.vin; }
+    state.log = clean;
+    persistLog(); renderLog(); renderInstruments(); scheduleHeavy();
+    return null;
+  }
+
+  document.getElementById("svc-paste").addEventListener("click", function () {
+    var ta = document.getElementById("svc-json"), btn = this;
+    if (ta.readOnly) {
+      ta.readOnly = false; ta.value = ""; ta.focus();
+      btn.textContent = "Load pasted record";
+    } else {
+      var err = adoptRecord(ta.value);
+      ta.readOnly = true;
+      btn.textContent = "Paste a record in";
+      if (err) { ta.value = err; }
+    }
+  });
+
+  document.getElementById("svc-import").addEventListener("change", function () {
+    var file = this.files && this.files[0];
+    this.value = "";
+    if (!file) return;
+    var fr = new FileReader();
+    fr.onload = function () {
+      var err = adoptRecord(String(fr.result));
+      if (err) {
+        var ta = document.getElementById("svc-json");
+        document.getElementById("svc-transfer").hidden = false;
+        ta.value = err;
+      }
+    };
+    fr.readAsText(file);
   });
 
   document.getElementById("svc-photo").addEventListener("change", function () {
@@ -1738,6 +2033,12 @@
     document.getElementById("u-top").value = state.chargeTo;
     document.getElementById("u-res").value = state.reserve;
   });
+  pickGroup("g-cond", function (b) {
+    state.used = b.getAttribute("data-used") === "1";
+  });
+  pickGroup("g-age", function (b) {
+    state.age = +b.getAttribute("data-v");
+  });
   pickGroup("g-km", function (b) {
     state.kmYear = +b.getAttribute("data-v");
     document.getElementById("ky").value = state.kmYear;
@@ -1747,6 +2048,8 @@
     syncGroup("g-speed", function (b) { return +b.getAttribute("data-v") === state.speed; });
     syncGroup("g-temp",  function (b) { return +b.getAttribute("data-v") === state.temp; });
     syncGroup("g-km",    function (b) { return +b.getAttribute("data-v") === state.kmYear; });
+    syncGroup("g-cond",  function (b) { return (b.getAttribute("data-used") === "1") === state.used; });
+    syncGroup("g-age",   function (b) { return +b.getAttribute("data-v") === state.age; });
     syncGroup("g-use",   function (b) {
       return +b.getAttribute("data-top") === state.chargeTo && +b.getAttribute("data-res") === state.reserve;
     });
@@ -1754,7 +2057,8 @@
 
   Array.prototype.forEach.call(document.querySelectorAll(".advbtn"), function (btn) {
     btn.addEventListener("click", function () {
-      var panel = document.getElementById(btn.getAttribute("data-adv"));
+      var panel = document.getElementById(btn.getAttribute("data-adv") || "");
+      if (!panel) return;
       var open = panel.hidden;
       panel.hidden = !open;
       btn.setAttribute("aria-expanded", String(open));
@@ -1764,6 +2068,7 @@
   try { showTab((location.hash || "#compare").slice(1)); } catch (e) { showTab("compare"); }
   document.getElementById("model").value = String(CARS.indexOf(state.car));
   fillTune();
+  loadLog();
   renderLog();
   renderShots();
   render();
