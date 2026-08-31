@@ -1,0 +1,32 @@
+# Netlify builds danishhawk.com straight from this repository.
+# The site is plain static HTML in the repository root — there is no build step.
+[build]
+  publish = "."
+  command = ""
+
+# The webshop application is server software (Node + SQLite) and cannot run on
+# Netlify, so its files are not served as part of the public site.
+[[redirects]]
+  from = "/app/*"
+  to = "/404.html"
+  status = 404
+
+# Photograph filenames contain a content hash, so a changed image is always a
+# new filename. That makes a one-year cache safe: returning visitors and repeat
+# page views re-download no images at all.
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# The page itself is revalidated every time, so edits go live immediately.
+[[headers]]
+  for = "/index.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
