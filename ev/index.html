@@ -60,6 +60,7 @@
   .ab-inner { max-width: 1180px; margin: 0 auto; padding: 11px 24px; display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
   .ab-brand { display: flex; align-items: center; gap: 9px; font-weight: 600; font-size: .97rem; letter-spacing: -.012em; white-space: nowrap; }
   .ab-brand .bolt { color: var(--burn); font-size: .78rem; }
+  .ab-brand h1 { font-size: .97rem; font-weight: 600; letter-spacing: -.012em; margin: 0; }
   .ab-car { display: flex; align-items: baseline; gap: 9px; background: var(--surface-2); border: 1px solid var(--line);
     border-radius: 3px; padding: 6px 12px; cursor: pointer; font: inherit; color: inherit; min-width: 0; }
   .ab-car:hover { border-color: var(--line-2); }
@@ -432,7 +433,7 @@
 <body>
 <header class="appbar">
   <div class="ab-inner">
-    <div class="ab-brand"><span class="bolt">&#9679;</span><span>Energy Speed</span></div>
+    <div class="ab-brand"><span class="bolt">&#9679;</span><h1>Energy Speed</h1></div>
     <button type="button" class="ab-car" id="ab-car" title="Open Your car">
       <span class="mk" id="ab-marque">BMW</span><span class="md" id="ab-model">i5 eDrive40</span>
     </button>
