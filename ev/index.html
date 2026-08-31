@@ -580,6 +580,10 @@
     </p>
 
     <div class="filters">
+      <div class="pick">
+        <label class="pl" for="fbrand">Brand</label>
+        <select id="fbrand" class="nsel" style="max-width:190px;font-size:.76rem;padding:7px 9px"></select>
+      </div>
       <div class="chips" role="group" aria-label="Filter by type">
         <button type="button" data-seg="all" aria-pressed="true">All</button>
         <button type="button" data-seg="city" aria-pressed="false">City</button>
@@ -640,6 +644,10 @@
 
     <div class="panel tune">
       <div class="tune-head">
+        <div class="tune-pick">
+          <label class="cl" for="brand">Brand</label>
+          <select id="brand" class="nsel" style="max-width:180px"></select>
+        </div>
         <div class="tune-pick">
           <label class="cl" for="model">Model</label>
           <select id="model" class="nsel"></select>
@@ -1140,9 +1148,13 @@
         on the Costs tab follows it.
       </li>
       <li>
-        <b>Weights and drag areas are approximations.</b> They are good enough to rank cars honestly
-        against each other, and not good enough to sign a contract on. A production version would pull
-        specs and prices from a maintained feed rather than a table written by hand.
+        <b>The catalogue is 136 models across 40 brands, and most of it is estimated.</b> Battery and
+        WLTP range are the two figures that matter most, because every consumption number is derived
+        from them, and those are close to the published specs. Weights, drag areas and charging rates
+        are reasoned estimates; they shape the speed curve rather than the headline. Only sixteen
+        prices are sourced. All of it is good enough to rank cars honestly against each other and not
+        good enough to sign a contract on &mdash; which is why every one of these fields is editable
+        under <b>Adjust spec</b>. A production version would pull the lot from a maintained feed.
       </li>
     </ul>
   </div></section>
@@ -1224,7 +1236,101 @@
 
     ["Ford","E-Transit Custom",64,307,2400,1.00,125,449000,"van",2024],
     ["VW","ID. Buzz Pro",79,461,2500,0.95,185,549000,"van",2022],
-    ["Mercedes","EQV 300",90,356,2800,1.05,110,699000,"van",2020]
+    ["Mercedes","EQV 300",90,356,2800,1.05,110,699000,"van",2020],
+
+    ["BMW","i4 eDrive35",67.1,483,2050,0.62,180,449900,"family",2022],
+    ["BMW","i5 M60",81.2,516,2310,0.58,205,899900,"premium",2023],
+    ["BMW","i5 Touring eDrive40",81.2,560,2290,0.60,205,589900,"premium",2024],
+    ["BMW","i7 xDrive60",101.7,625,2715,0.62,195,1299000,"premium",2022],
+    ["BMW","iX xDrive40",68.8,425,2440,0.68,150,679000,"premium",2021],
+    ["BMW","iX M60",105,566,2660,0.70,195,1149000,"premium",2022],
+    ["BMW","iX1 xDrive30",64.7,440,2130,0.72,130,429000,"suv",2023],
+    ["BMW","iX2 xDrive30",64.8,449,2115,0.68,130,449000,"suv",2024],
+    ["BMW","iX3 80",74.9,460,2260,0.70,150,489000,"suv",2021],
+
+    ["Mercedes","EQA 250+",70.5,560,2100,0.70,110,459000,"suv",2023],
+    ["Mercedes","EQB 300",66.5,423,2180,0.78,100,479000,"suv",2022],
+    ["Mercedes","EQE SUV 350+",90.6,596,2610,0.66,170,689000,"premium",2023],
+    ["Mercedes","EQS SUV 450+",108,600,2810,0.62,200,999000,"premium",2023],
+    ["Mercedes","CLA 250+ EQ",85,792,2055,0.46,320,479000,"family",2025],
+
+    ["Audi","Q8 e-tron 55",106,582,2620,0.72,170,799000,"premium",2023],
+    ["Audi","A6 e-tron",94.9,756,2340,0.46,270,699000,"premium",2024],
+    ["Audi","Q4 Sportback 45",77,576,2160,0.68,175,439000,"premium",2023],
+    ["Audi","Q6 Sportback e-tron",94.9,641,2350,0.68,270,709000,"premium",2024],
+
+    ["VW","ID.5 Pro",77,553,2200,0.70,175,339000,"suv",2022],
+    ["VW","ID.7 Pro",77,621,2170,0.55,175,389000,"family",2023],
+    ["VW","ID.7 Tourer Pro S",86,685,2280,0.58,200,429000,"family",2024],
+    ["VW","ID.3 GTX",79,600,1990,0.62,185,369000,"family",2024],
+
+    ["Tesla","Model 3 Performance",75,528,1930,0.51,250,499000,"sport",2024],
+    ["Tesla","Model Y RWD",57.5,455,1960,0.61,170,349000,"suv",2024],
+    ["Tesla","Model X Long Range",95,576,2455,0.58,250,999000,"premium",2023],
+
+    ["Škoda","Enyaq RS",79,545,2250,0.72,185,429000,"suv",2023],
+    ["Škoda","Elroq 60",59,436,2010,0.68,165,249995,"suv",2024],
+
+    ["Hyundai","Ioniq 9",110.3,620,2680,0.72,233,749000,"premium",2025],
+    ["Hyundai","Kona Electric 48",48.4,377,1750,0.72,74,249000,"suv",2023],
+
+    ["Kia","EV3 Long Range",81.4,605,1955,0.70,128,299000,"suv",2024],
+    ["Kia","EV5 Long Range",88,530,2200,0.74,150,349000,"suv",2024],
+    ["Kia","EV6 GT",77.4,424,2200,0.68,233,599000,"sport",2022],
+
+    ["Volvo","EX40 Single ER",79,573,2050,0.68,200,379000,"suv",2024],
+    ["Volvo","EC40 Twin",79,562,2130,0.66,200,419000,"suv",2024],
+    ["Polestar","4 Long range",94,620,2355,0.58,200,589000,"premium",2024],
+
+    ["Porsche","Taycan Turbo",97,630,2320,0.53,320,1799000,"sport",2024],
+    ["Porsche","Macan Turbo Electric",95,591,2440,0.62,270,1249000,"sport",2024],
+
+    ["Renault","4 E-Tech 52",52,409,1660,0.72,100,229000,"city",2025],
+    ["Peugeot","e-2008 54",51,406,1620,0.72,100,279000,"suv",2023],
+    ["Peugeot","e-5008 73",73,502,2200,0.74,160,399000,"suv",2024],
+    ["Citroën","ë-C4 54",50,420,1660,0.70,100,269000,"family",2023],
+    ["Citroën","ë-C3 Aircross",44,306,1550,0.74,100,169990,"suv",2025],
+    ["Opel","Mokka Electric 54",51,403,1600,0.70,100,269000,"suv",2023],
+    ["Opel","Astra Electric",51,418,1700,0.66,100,299000,"family",2023],
+    ["Opel","Frontera Electric",44,305,1560,0.76,100,199000,"suv",2024],
+    ["Fiat","Grande Panda",44,320,1560,0.72,100,169000,"city",2024],
+    ["Alfa Romeo","Junior Elettrica",51,410,1590,0.72,100,289000,"suv",2024],
+    ["Jeep","Avenger Electric",51,400,1580,0.74,100,269000,"suv",2023],
+
+    ["Ford","Capri EV ER",77,627,2130,0.62,135,369000,"suv",2024],
+    ["Ford","Mustang Mach-E ER",91,600,2270,0.66,150,449000,"suv",2023],
+
+    ["MG","MGS5 EV Long Range",64,480,1750,0.72,139,239000,"suv",2025],
+    ["MG","MG5 Estate Long Range",61,400,1650,0.66,87,229000,"family",2022],
+    ["BYD","Atto 3",60,420,1850,0.76,88,259000,"suv",2022],
+    ["BYD","Seal AWD",82.5,520,2185,0.55,150,349000,"family",2023],
+    ["BYD","Seal U Comfort",71.8,420,2010,0.76,115,299000,"suv",2024],
+    ["BYD","Sealion 7 AWD",82.5,456,2340,0.66,150,369000,"suv",2025],
+
+    ["Nissan","Ariya 87",87,533,2200,0.68,130,389000,"suv",2022],
+    ["Toyota","Urban Cruiser",61,428,1800,0.72,67,269000,"suv",2025],
+    ["Subaru","Solterra",64,466,2010,0.71,150,349000,"suv",2022],
+    ["Lexus","RZ 450e",64,395,2100,0.70,150,499000,"premium",2023],
+    ["Honda","e:Ny1",61.9,412,1750,0.72,78,299000,"suv",2023],
+    ["Mazda","MX-30",30,200,1720,0.70,50,239000,"suv",2020],
+    ["Jaguar","I-Pace EV400",84.7,470,2208,0.74,100,599000,"premium",2018],
+
+    ["Cupra","Tavascan Endurance",77,570,2200,0.66,135,389000,"suv",2024],
+    ["Mini","Countryman E",64.6,462,1970,0.74,130,349000,"suv",2024],
+    ["Mini","Aceman SE",49.2,406,1770,0.68,95,299000,"city",2024],
+    ["Genesis","GV70 Electrified",77.4,455,2325,0.74,233,699000,"premium",2022],
+
+    ["XPeng","G9 Long Range",93.1,570,2340,0.66,300,499000,"premium",2024],
+    ["XPeng","P7 Long Range",82.7,576,2080,0.50,175,449000,"family",2023],
+    ["NIO","ET5 Long Range",90,590,2165,0.53,140,529000,"family",2022],
+    ["NIO","EL6 Long Range",90,529,2325,0.62,140,589000,"suv",2023],
+    ["Zeekr","X Long Range",66,440,1980,0.70,150,299000,"suv",2024],
+    ["Zeekr","001 Long Range",95,620,2320,0.56,200,499000,"premium",2024],
+    ["Leapmotor","C10",69.9,420,2010,0.72,84,269000,"suv",2024],
+    ["Smart","#1 Pro+",62,440,1820,0.68,150,289000,"suv",2022],
+    ["Smart","#3 Pro+",62,455,1810,0.62,150,299000,"suv",2023],
+    ["KGM","Torres EVX",73.4,462,2100,0.78,120,299000,"suv",2024],
+    ["Lotus","Eletre S",112,600,2595,0.72,350,1199000,"premium",2023]
   ].map(function (r) {
     return { marque:r[0], model:r[1], battery:r[2], wltp:r[3], mass:r[4],
              cda:r[5], dc:r[6], price:r[7], seg:r[8], year:r[9] };
@@ -1289,7 +1395,7 @@
 
   var state = {
     car: CARS[42], speed: 110, temp: 10, price: 2.75, charger: 150,
-    sort: "brand", seg: "all", maxPrice: 1500000,
+    sort: "brand", seg: "all", brand: "all", maxPrice: 0,
     ov: { battery:null, wltp:null, mass:null, cda:null, dc:null, price:null },
     chargeTo: 100, reserve: 0, health: 100,
     kmYear: 18000, depRate: 13, insRate: 1.4, service: 3500,
@@ -1548,7 +1654,8 @@
 
   function renderCards() {
     var list = CARS.filter(function (c) {
-      return (state.seg === "all" || c.seg === state.seg) && c.price <= state.maxPrice;
+      return (state.seg === "all" || c.seg === state.seg) &&
+             (state.brand === "all" || c.marque === state.brand) && c.price <= state.maxPrice;
     });
     list.forEach(function (c) { c._c = consume(c, state.speed, state.temp); c._a = annual(c); });
     if (state.sort === "brand")  list.sort(byName);
@@ -1624,7 +1731,7 @@
     state.car = c;
     loadLog();
     state.ov = { battery:null, wltp:null, mass:null, cda:null, dc:null, price:null };
-    document.getElementById("model").value = String(CARS.indexOf(c));
+    syncCarPickers();
     fillTune();
     renderLog();
     render();
@@ -1721,7 +1828,7 @@
     document.getElementById("ch-v").textContent =
       (state.charger < 10 ? state.charger.toFixed(1) : Math.round(state.charger)) + " kW";
     document.getElementById("mx-v").textContent =
-      state.maxPrice >= 1500000 ? "any price" : kr(state.maxPrice) + " kr";
+      state.maxPrice >= PRICE_TOP ? "any price" : kr(state.maxPrice) + " kr";
     document.getElementById("u-top-v").textContent = state.chargeTo + " %";
     document.getElementById("u-res-v").textContent = state.reserve + " %";
     document.getElementById("u-hp-v").textContent = state.health + " %";
@@ -1862,17 +1969,51 @@
 
   /* model picker, grouped by type */
   var sel = document.getElementById("model");
+  /* the ceiling comes from the data, so adding a pricier car can never
+     quietly drop it out of "any price" again */
+  var PRICE_TOP = Math.ceil(Math.max.apply(null, CARS.map(function (c) { return c.price; })) / 50000) * 50000;
+  (function () {
+    var mx = document.getElementById("mx");
+    mx.max = String(PRICE_TOP); mx.value = String(PRICE_TOP);
+    state.maxPrice = PRICE_TOP;
+  })();
+
   var MARQUES = CARS.map(function (c) { return c.marque; })
     .filter(function (v, i, a) { return a.indexOf(v) === i; })
     .sort(function (a, b) { return a.localeCompare(b, "da"); });
-  sel.innerHTML = MARQUES.map(function (mq) {
-    var opts = CARS.map(function (c, i) { return { c:c, i:i }; })
-      .filter(function (x) { return x.c.marque === mq; })
-      .sort(function (x, y) { return x.c.model.localeCompare(y.c.model, "da"); })
-      .map(function (x) { return '<option value="' + x.i + '">' + x.c.model + "</option>"; }).join("");
-    return '<optgroup label="' + mq + '">' + opts + "</optgroup>";
+
+  /* with 135 cars a single list is unusable: pick the brand, then the model */
+  function modelsOf(marque) {
+    return CARS.map(function (c, i) { return { c:c, i:i }; })
+      .filter(function (x) { return x.c.marque === marque; })
+      .sort(function (x, y) { return x.c.model.localeCompare(y.c.model, "da"); });
+  }
+  function fillModels(marque, pick) {
+    sel.innerHTML = modelsOf(marque).map(function (x) {
+      return '<option value="' + x.i + '">' + x.c.model + "</option>";
+    }).join("");
+    if (pick != null) sel.value = String(pick);
+  }
+  function syncCarPickers() {
+    document.getElementById("brand").value = state.car.marque;
+    fillModels(state.car.marque, CARS.indexOf(state.car));
+  }
+
+  var bsel = document.getElementById("brand");
+  bsel.innerHTML = MARQUES.map(function (mq) {
+    return '<option value="' + mq + '">' + mq + " (" + modelsOf(mq).length + ")</option>";
   }).join("");
+  bsel.addEventListener("change", function () {
+    setCar(modelsOf(this.value)[0].c);
+  });
   sel.addEventListener("change", function () { setCar(CARS[+this.value]); });
+
+  var fb = document.getElementById("fbrand");
+  fb.innerHTML = '<option value="all">All brands (' + CARS.length + ')</option>' +
+    MARQUES.map(function (mq) {
+      return '<option value="' + mq + '">' + mq + " (" + modelsOf(mq).length + ")</option>";
+    }).join("");
+  fb.addEventListener("change", function () { state.brand = this.value; renderCards(); });
 
   FIELDS.forEach(function (fd) {
     document.getElementById("o-" + fd.id).addEventListener("input", function () {
@@ -2115,7 +2256,7 @@
   });
 
   try { showTab((location.hash || "#compare").slice(1)); } catch (e) { showTab("compare"); }
-  document.getElementById("model").value = String(CARS.indexOf(state.car));
+  syncCarPickers();
   fillTune();
   loadLog();
   renderLog();
