@@ -684,6 +684,11 @@
             <div class="tin"><input class="nin" type="number" id="o-dc" step="1" min="10" max="400"><span class="un">kW</span></div>
             <div class="hint" id="h-dc">stock 205</div>
           </div>
+          <div class="tf">
+            <label for="o-price">Price</label>
+            <div class="tin"><input class="nin" type="number" id="o-price-in" step="1000" min="20000" max="4000000"><span class="un">kr</span></div>
+            <div class="hint" id="h-price-in">put a real listing in here</div>
+          </div>
         </div>
         <div class="adv-inner">
           <div class="ctl">
@@ -1096,9 +1101,19 @@
         server.
       </li>
       <li>
-        <b>Weights, drag areas and prices are approximations.</b> They are good enough to rank cars
-        honestly against each other, and not good enough to sign a contract on. A production version
-        would pull specs from a maintained database rather than a table written by hand.
+        <b>Prices are Danish list prices, and only some are sourced.</b> Sixteen of them were corrected
+        against published 2025 figures &mdash; among others the Citro&euml;n &euml;-C3 at 139.990, Cupra Born at
+        249.990, Volvo EX30 at 244.990, &Scaron;koda Enyaq and VW ID.4 at 304.995, BMW i5 at 564.900 and
+        Audi Q6 e-tron at 685.390. The rest are estimates, and Danish EV prices have fallen roughly
+        10&ndash;15% since 2023, so treat any unsourced figure as high rather than low. Because no
+        hand-written table survives contact with a real market, <b>price is editable</b>: open
+        <b>Adjust spec</b> and paste the actual asking price from Bilbasen or a dealer, and every cost
+        on the Costs tab follows it.
+      </li>
+      <li>
+        <b>Weights and drag areas are approximations.</b> They are good enough to rank cars honestly
+        against each other, and not good enough to sign a contract on. A production version would pull
+        specs and prices from a maintained feed rather than a table written by hand.
       </li>
     </ul>
   </div></section>
@@ -1118,10 +1133,10 @@
   /* battery = usable kWh · wltp = km · mass = kg incl. driver · cda = drag area m²
      dc = peak DC charge kW · price = indicative DKK */
   var CARS = [
-    ["Dacia","Spring 45",26.8,225,1060,0.72,30,159000,"city",2024],
+    ["Dacia","Spring 45",26.8,225,1060,0.72,30,139000,"city",2024],
     ["Leapmotor","T03",37.3,265,1200,0.70,48,149000,"city",2024],
     ["BYD","Dolphin Surf",43.2,322,1390,0.69,85,179000,"city",2025],
-    ["Citroën","ë-C3",44,320,1500,0.70,100,199000,"city",2024],
+    ["Citroën","ë-C3",44,320,1500,0.70,100,139990,"city",2024],
     ["Hyundai","Inster Long Range",49,370,1400,0.68,85,209000,"city",2024],
     ["Fiat","500e 42",37.3,320,1400,0.67,85,229000,"city",2021],
     ["Renault","5 E-Tech 52",52,410,1550,0.68,100,239000,"city",2024],
@@ -1129,42 +1144,42 @@
     ["Peugeot","e-208 51",51,410,1600,0.67,100,245000,"city",2023],
     ["Mini","Cooper SE",49.2,402,1660,0.66,95,269000,"city",2024],
 
-    ["MG","MG4 Long Range",61.7,435,1720,0.65,140,249000,"family",2022],
+    ["MG","MG4 Long Range",61.7,435,1720,0.65,140,215000,"family",2022],
     ["BYD","Dolphin Comfort",60.4,427,1660,0.66,88,239000,"family",2023],
     ["Nissan","Leaf e+",59,385,1750,0.72,100,259000,"family",2019],
     ["Renault","Megane E-Tech 60",60,470,1710,0.63,130,279000,"family",2022],
     ["VW","ID.3 Pro",59,429,1850,0.62,120,289000,"family",2023],
-    ["Cupra","Born 59",59,424,1850,0.62,120,299000,"family",2021],
+    ["Cupra","Born 59",59,424,1850,0.62,120,249990,"family",2021],
     ["VW","ID.3 Pro S",77,559,1950,0.62,170,329000,"family",2023],
     ["Tesla","Model 3 RWD",57.5,513,1830,0.49,170,339000,"family",2024],
     ["Hyundai","Ioniq 6 Long Range",77.4,614,2050,0.47,233,379000,"family",2023],
     ["Tesla","Model 3 Long Range",75,629,1900,0.49,250,399000,"family",2024],
     ["Polestar","2 Long range",79,655,2050,0.63,205,429000,"family",2024],
-    ["BMW","i4 eDrive40",81.2,590,2100,0.62,205,549000,"family",2021],
+    ["BMW","i4 eDrive40",81.2,590,2100,0.62,205,489900,"family",2021],
 
     ["MG","ZS EV Long Range",68.3,440,1730,0.75,92,259000,"suv",2022],
     ["Hyundai","Kona Electric 65",65.4,514,1850,0.72,102,289000,"suv",2023],
-    ["Volvo","EX30 Single ER",64,476,1830,0.63,153,289000,"suv",2024],
+    ["Volvo","EX30 Single ER",64,476,1830,0.63,153,244990,"suv",2024],
     ["Kia","Niro EV",64.8,460,1840,0.74,80,299000,"suv",2022],
-    ["Škoda","Elroq 85",77,581,2100,0.68,175,319000,"suv",2024],
+    ["Škoda","Elroq 85",77,581,2100,0.68,175,279995,"suv",2024],
     ["Toyota","bZ4X",64,460,2050,0.71,150,329000,"suv",2022],
-    ["VW","ID.4 Pro",77,552,2190,0.72,175,349000,"suv",2023],
+    ["VW","ID.4 Pro",77,552,2190,0.72,175,304995,"suv",2023],
     ["Renault","Scenic E-Tech 87",87,625,2000,0.66,150,349000,"suv",2024],
     ["Ford","Explorer EV ER",77,602,2170,0.69,135,349000,"suv",2024],
     ["XPeng","G6 Long Range",87.5,570,2100,0.66,280,349000,"suv",2024],
-    ["Škoda","Enyaq 85",77,581,2180,0.71,175,359000,"suv",2024],
+    ["Škoda","Enyaq 85",77,581,2180,0.71,175,304995,"suv",2024],
     ["Peugeot","e-3008 73",73,525,2180,0.70,160,359000,"suv",2024],
-    ["Hyundai","Ioniq 5 77",77.4,507,2130,0.70,233,379000,"suv",2024],
-    ["Škoda","Enyaq Coupé 85",77,594,2180,0.68,175,379000,"suv",2024],
+    ["Hyundai","Ioniq 5 77",77.4,507,2130,0.70,233,309000,"suv",2024],
+    ["Škoda","Enyaq Coupé 85",77,594,2180,0.68,175,324995,"suv",2024],
     ["Kia","EV6 Long Range",77.4,528,2090,0.67,233,389000,"suv",2024],
     ["Tesla","Model Y Long Range",75,565,2030,0.61,250,419000,"suv",2024],
 
     ["Audi","Q4 e-tron 45",77,562,2150,0.70,175,419000,"premium",2023],
     ["Genesis","GV60 Sport",74,466,2150,0.68,233,599000,"premium",2022],
     ["Kia","EV9 Long Range",96,563,2680,0.80,210,649000,"premium",2023],
-    ["Audi","Q6 e-tron",94.9,625,2340,0.70,270,699000,"premium",2024],
-    ["BMW","i5 eDrive40",81.2,582,2200,0.55,205,749000,"premium",2023],
-    ["Mercedes","EQE 350+",89,639,2355,0.55,170,799000,"premium",2022],
+    ["Audi","Q6 e-tron",94.9,625,2340,0.70,270,685390,"premium",2024],
+    ["BMW","i5 eDrive40",81.2,582,2200,0.55,205,564900,"premium",2023],
+    ["Mercedes","EQE 350+",89,639,2355,0.55,170,649000,"premium",2022],
     ["Polestar","3 Long range",107,631,2600,0.75,250,849000,"premium",2024],
     ["Volvo","EX90 Twin Motor",107,614,2790,0.78,250,899000,"premium",2024],
     ["BMW","iX xDrive50",105,633,2585,0.68,195,899000,"premium",2021],
@@ -1172,11 +1187,11 @@
     ["Lucid","Air Pure",88,725,2100,0.47,250,899000,"premium",2022],
     ["Mercedes","EQS 450+",108,782,2480,0.50,200,1250000,"premium",2024],
 
-    ["BMW","i4 M50",80.7,521,2290,0.60,205,699000,"sport",2021],
+    ["BMW","i4 M50",80.7,521,2290,0.60,205,599900,"sport",2021],
     ["Hyundai","Ioniq 5 N",84,448,2270,0.72,233,749000,"sport",2024],
     ["Porsche","Macan 4 Electric",95,613,2405,0.60,270,799000,"sport",2024],
     ["Audi","e-tron GT quattro",84,501,2300,0.56,270,1050000,"sport",2021],
-    ["Porsche","Taycan 4S",83,507,2270,0.51,320,1095000,"sport",2024],
+    ["Porsche","Taycan 4S",83,507,2270,0.51,320,1399990,"sport",2024],
 
     ["Ford","E-Transit Custom",64,307,2400,1.00,125,449000,"van",2024],
     ["VW","ID. Buzz Pro",79,461,2500,0.95,185,549000,"van",2022],
@@ -1246,7 +1261,7 @@
   var state = {
     car: CARS[42], speed: 110, temp: 10, price: 2.75, charger: 150,
     sort: "brand", seg: "all", maxPrice: 1300000,
-    ov: { battery:null, wltp:null, mass:null, cda:null, dc:null },
+    ov: { battery:null, wltp:null, mass:null, cda:null, dc:null, price:null },
     chargeTo: 100, reserve: 0, health: 100,
     kmYear: 18000, depRate: 13, insRate: 1.4, service: 3500,
     used: false, age: 3,
@@ -1261,7 +1276,8 @@
     if (!any) return car;
     var battery = o.battery != null ? o.battery : car.battery;
     var wltp    = o.wltp    != null ? o.wltp    : car.wltp;
-    return { marque:car.marque, model:car.model, seg:car.seg, price:car.price,
+    return { marque:car.marque, model:car.model, seg:car.seg,
+      price: o.price != null ? o.price : car.price,
       battery: battery, wltp: wltp,
       mass:    o.mass != null ? o.mass : car.mass,
       cda:     o.cda  != null ? o.cda  : car.cda,
@@ -1278,8 +1294,9 @@
   /* A used car is worth the new price decayed by the depreciation rate, compounded.
      Everything money-related keys off this rather than the showroom price. */
   function valueOf(car) {
-    if (!state.used) return car.price;
-    return car.price * Math.pow(1 - state.depRate / 100, state.age);
+    var price = eff(car).price;
+    if (!state.used) return price;
+    return price * Math.pow(1 - state.depRate / 100, state.age);
   }
 
   function serviceCost() {
@@ -1295,6 +1312,7 @@
     var val = valueOf(car);
     var dep = val * state.depRate / 100;
     var ins = val * state.insRate / 100;
+    void eff(car);
     var svc = serviceCost();
     var total = energy + dep + ins + svc;
     return { energy:energy, dep:dep, ins:ins, svc:svc, total:total, perKm: total / state.kmYear };
@@ -1556,7 +1574,9 @@
     { id:"wltp", key:"wltp", stock:function(c){ return c.wltp; }, hint:function(c){ return "stock " + c.wltp; } },
     { id:"mass", key:"mass", stock:function(c){ return c.mass; }, hint:function(c){ return "stock " + c.mass + " · each passenger +80"; } },
     { id:"cda",  key:"cda",  stock:function(c){ return c.cda; },  hint:function(c){ return "stock " + c.cda.toFixed(2) + " · roof box +0.25"; } },
-    { id:"dc",   key:"dc",   stock:function(c){ return c.dc; },   hint:function(c){ return "stock " + c.dc; } }
+    { id:"dc",   key:"dc",   stock:function(c){ return c.dc; },   hint:function(c){ return "stock " + c.dc; } },
+    { id:"price-in", key:"price", stock:function(c){ return c.price; },
+      hint:function(c){ return "list " + kr(c.price) + " kr &middot; paste a real one"; } }
   ];
 
   function fillTune() {
@@ -1565,7 +1585,7 @@
       var el = document.getElementById("o-" + fd.id), o = state.ov[fd.key];
       el.value = o != null ? o : fd.stock(c);
       el.classList.toggle("edited", o != null);
-      document.getElementById("h-" + fd.id).textContent = fd.hint(c);
+      document.getElementById("h-" + fd.id).innerHTML = fd.hint(c);
     });
     document.getElementById("reset").hidden = !tuned();
     document.getElementById("svc-for").textContent = "Record for " + c.marque + " " + c.model;
@@ -1574,7 +1594,7 @@
   function setCar(c) {
     state.car = c;
     loadLog();
-    state.ov = { battery:null, wltp:null, mass:null, cda:null, dc:null };
+    state.ov = { battery:null, wltp:null, mass:null, cda:null, dc:null, price:null };
     document.getElementById("model").value = String(CARS.indexOf(c));
     fillTune();
     renderLog();
@@ -1837,7 +1857,7 @@
   });
 
   document.getElementById("reset").addEventListener("click", function () {
-    state.ov = { battery:null, wltp:null, mass:null, cda:null, dc:null };
+    state.ov = { battery:null, wltp:null, mass:null, cda:null, dc:null, price:null };
     fillTune();
     render();
   });
