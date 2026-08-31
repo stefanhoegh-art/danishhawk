@@ -1,0 +1,6 @@
+# GitHub Pages builds danishhawk.com from this repository.
+# The webshop application is server software, not part of the public site —
+# it needs Node and a database, so publishing its files here would only expose
+# pages that cannot work. Keep the published site to the website itself.
+exclude:
+  - app
