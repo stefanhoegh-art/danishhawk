@@ -91,6 +91,33 @@
     background: none; border: none; border-bottom: 2px solid transparent; color: var(--ink-3);
     padding: 11px 14px; cursor: pointer; white-space: nowrap; transition: color .18s; }
   .tabs button[data-tab]:hover { color: var(--ink); }
+  .vs { display: grid; grid-template-columns: 1fr 1fr; gap: 13px; }
+  .vscol { background: var(--surface); border: 1px solid var(--line); border-radius: 11px; padding: 18px 19px 19px; }
+  .vscol.win { border-color: color-mix(in srgb, var(--roll) 42%, var(--line)); }
+  .vshead { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; margin-bottom: 3px; }
+  .vsname { font-size: .96rem; font-weight: 600; color: var(--ink); }
+  .vstag { font-family: var(--mono); font-size: .58rem; letter-spacing: .1em; text-transform: uppercase;
+    color: var(--roll); }
+  .vsnum { font-family: var(--mono); font-size: 1.5rem; color: var(--ink); letter-spacing: -.01em; }
+  .vsper { font-family: var(--mono); font-size: .6rem; letter-spacing: .1em; text-transform: uppercase;
+    color: var(--ink-3); margin-top: 3px; }
+  .vsterm { font-family: var(--mono); font-size: .68rem; color: var(--ink-3); margin-top: 9px;
+    padding-top: 9px; border-top: 1px solid var(--line); }
+  .vslist { margin: 12px 0 0; padding: 0; list-style: none; }
+  .vslist li { position: relative; padding-left: 17px; font-size: .8rem; line-height: 1.55;
+    color: var(--ink-2); margin-bottom: 6px; }
+  .vslist li::before { position: absolute; left: 0; font-family: var(--mono); }
+  .vslist li.pro::before { content: "+"; color: var(--roll); }
+  .vslist li.con::before { content: "\2212"; color: var(--burn); }
+  .vsdiff { grid-column: 1 / -1; font-size: .87rem; line-height: 1.6; color: var(--ink-2);
+    background: var(--surface-2); border: 1px solid var(--line); border-radius: 10px; padding: 14px 17px; }
+  .vsdiff b { color: var(--ink); }
+  .lq { flex: 1 1 100%; padding-top: 13px; border-top: 1px solid var(--line); }
+  .lq > label { display: block; font-family: var(--mono); font-size: .57rem; letter-spacing: .12em;
+    text-transform: uppercase; color: var(--ink-3); margin-bottom: 8px; }
+  .lq-row { display: flex; align-items: baseline; gap: 8px; }
+  .lq-row .nin { width: 116px; }
+  .lq-per { font-size: .8rem; color: var(--ink-3); }
   .depnote { margin: 14px 0 0; padding-top: 13px; border-top: 1px solid var(--line);
     font-size: .8rem; line-height: 1.6; color: var(--ink-2); }
   .depnote b { color: var(--ink); font-weight: 600; }
@@ -549,6 +576,7 @@
     .mp-box { padding: 24px 20px 20px; }
     .mp-box h2 { font-size: 1.22rem; }
     .mp-opts { grid-template-columns: 1fr; }
+    .vs { grid-template-columns: 1fr; }
     .mrow { grid-template-columns: 30px 1fr; padding: 13px 13px 14px; }
     .mrank { font-size: 1.05rem; }
     .cond-inner { padding: 10px 14px 11px; gap: 9px 16px; }
@@ -585,8 +613,8 @@
 <div class="modepick" id="modepick" hidden>
   <div class="mp-box" role="dialog" aria-modal="true" aria-labelledby="mp-h">
     <h2 id="mp-h" data-t="mode.h">Which one are you today?</h2>
-    <p class="mp-sub" data-t="mode.sub">It only sets where you land and what comes first. Everything stays reachable, and you can switch whenever.</p>
-    <div class="mp-opts">
+    <p class="mp-sub" id="mp-sub" data-t="mode.sub">It only sets where you land and what comes first. Everything stays reachable, and you can switch whenever.</p>
+    <div class="mp-opts" id="mp-step1">
       <button type="button" class="mp-opt" data-mode="buyer">
         <span class="mp-t" data-t="mode.buyer">Looking to buy</span>
         <span class="mp-d" data-t="mode.buyer.d">Start with all 136 cars ranked by what they actually cost to drive, then dig into the one you like.</span>
@@ -594,6 +622,16 @@
       <button type="button" class="mp-opt" data-mode="owner">
         <span class="mp-t" data-t="mode.owner">I own the car</span>
         <span class="mp-d" data-t="mode.owner.d">Start with your own car: its real range, what it costs you a year, its service record and what the next owner should know.</span>
+      </button>
+    </div>
+    <div class="mp-opts" id="mp-step2" hidden>
+      <button type="button" class="mp-opt" data-fin="own">
+        <span class="mp-t" data-t="fin.own">Buying it outright</span>
+        <span class="mp-d" data-t="fin.own.d">The car is yours, so the big cost is what it loses in value. Depreciation, insurance, electricity and servicing.</span>
+      </button>
+      <button type="button" class="mp-opt" data-fin="lease">
+        <span class="mp-t" data-t="fin.lease">Leasing it</span>
+        <span class="mp-d" data-t="fin.lease.d">You never own it, so it never loses value on you — the monthly payment already carries that. A different sum entirely.</span>
       </button>
     </div>
   </div>
@@ -626,6 +664,7 @@
     <button type="button" role="tab" data-tab="method" aria-selected="false" aria-controls="p-method" data-t="tab.method">Method</button>
   </nav>
   <button type="button" class="modebtn" id="modebtn" data-t="mode.buyer.short">Buying</button>
+  <button type="button" class="modebtn" id="finbtn" data-t="fin.own.short">Owning</button>
   <span class="langsw" role="group" aria-label="Sprog / Language">
     <button type="button" data-lang="da" aria-pressed="true">DA</button>
     <button type="button" data-lang="en" aria-pressed="false">EN</button>
@@ -1037,17 +1076,41 @@
             <label for="ky"><span class="cl" data-t="ctl.exactdistance">Exact distance</span><span class="cv" id="ky-v">18,000 km</span></label>
             <input type="range" id="ky" min="5000" max="60000" step="1000" value="18000">
           </div>
-          <div class="ctl">
-            <label for="dp"><span class="cl" data-t="ctl.depreciation">Depreciation</span><span class="cv" id="dp-v">13 %/yr</span></label>
+          <div class="ctl" id="ctl-dp">
+            <label for="dp"><span class="cl" id="dp-l" data-t="ctl.depreciation">Depreciation</span><span class="cv" id="dp-v">13 %/yr</span></label>
             <input type="range" id="dp" min="0" max="25" step="0.5" value="13">
+          </div>
+          <div class="ctl" id="ctl-lm" hidden>
+            <label for="lm"><span class="cl" data-t="ctl.leaseterm">Lease term</span><span class="cv" id="lm-v">36 mdr.</span></label>
+            <input type="range" id="lm" min="12" max="60" step="12" value="36">
+          </div>
+          <div class="ctl" id="ctl-lr" hidden>
+            <label for="lr"><span class="cl" data-t="ctl.leaserate">Interest</span><span class="cv" id="lr-v">5 %/yr</span></label>
+            <input type="range" id="lr" min="0" max="15" step="0.5" value="5">
+          </div>
+          <div class="ctl" id="ctl-lu" hidden>
+            <label for="lu"><span class="cl" data-t="ctl.leaseupfront">Upfront payment</span><span class="cv" id="lu-v">25.000 kr</span></label>
+            <input type="range" id="lu" min="0" max="100000" step="5000" value="25000">
           </div>
           <div class="ctl">
             <label for="ins"><span class="cl" data-t="ctl.insurance">Insurance</span><span class="cv" id="ins-v">1.4 %/yr</span></label>
             <input type="range" id="ins" min="0" max="5" step="0.1" value="1.4">
           </div>
-          <div class="ctl">
+          <div class="ctl" id="ctl-sv">
             <label for="sv"><span class="cl" data-t="ctl.service">Service &amp; tyres</span><span class="cv" id="sv-v">3,500 kr</span></label>
             <input type="range" id="sv" min="0" max="20000" step="500" value="3500">
+          </div>
+          <div class="lq" id="lq-box" hidden>
+            <label for="lq" data-t="ctl.leasequote">Got a real quote? Put the monthly payment in</label>
+            <div class="lq-row">
+              <input class="nin" type="number" id="lq" step="100" min="0" placeholder="—">
+              <span class="un" id="lq-cur">kr</span>
+              <span class="lq-per" data-t="ctl.permonth">per month</span>
+            </div>
+            <div class="usebox" style="padding:0;border:0;margin-top:11px">
+              <input type="checkbox" id="lq-svc" checked>
+              <label for="lq-svc" data-t="ctl.svcincluded">Servicing is included in the payment</label>
+            </div>
           </div>
           <p class="adv-note" data-t="adv.depnote">Depreciation is set as a yearly rate, but it is not spread evenly: the model runs it through a curve where the first year costs about 1.7&times; the rate and the eighth about 0.7&times;. The rate itself is still yours to argue with.</p>
         </div>
@@ -1074,10 +1137,10 @@
       </div>
 
       <div class="ckeys">
-        <div class="ckey" data-k="dep"><div class="kh"><span class="sw"></span><span class="kn" data-t="ck.dep">Depreciation</span></div><div class="kv" id="ck-dep">—</div></div>
+        <div class="ckey" data-k="dep"><div class="kh"><span class="sw"></span><span class="kn" id="ck-dep-l" data-t="ck.dep">Depreciation</span></div><div class="kv" id="ck-dep">—</div></div>
         <div class="ckey" data-k="ins"><div class="kh"><span class="sw"></span><span class="kn" data-t="ck.ins">Insurance</span></div><div class="kv" id="ck-ins">—</div></div>
         <div class="ckey" data-k="nrg"><div class="kh"><span class="sw"></span><span class="kn" data-t="ck.nrg">Electricity</span></div><div class="kv" id="ck-nrg">—</div></div>
-        <div class="ckey" data-k="svc"><div class="kh"><span class="sw"></span><span class="kn" data-t="ck.svc">Service &amp; tyres</span></div><div class="kv" id="ck-svc">—</div></div>
+        <div class="ckey" data-k="svc"><div class="kh"><span class="sw"></span><span class="kn" id="ck-svc-l" data-t="ck.svc">Service &amp; tyres</span></div><div class="kv" id="ck-svc">—</div></div>
       </div>
 
       <p class="depnote">
@@ -1094,6 +1157,26 @@
         </div>
       </div>
     </div>
+  </section>
+
+  <section>
+    <div class="sechead"><h2 data-t="sec.vs.h">Owning or leasing</h2></div>
+    <p class="secnote" data-t="sec.vs.note">
+      Both sums are an average per year across the lease term, for the car you have selected under the conditions you set — not the first year alone, which is why owning reads lower here than on the panel above.
+      That is a fair comparison: depreciation already accounts for the car still being worth something
+      at the end, so owning is not being charged for a value you keep.
+    </p>
+    <div class="vs" id="vs"></div>
+    <p class="msrc" data-t="vs.tax">
+      On registration tax: leasing under a &sect;3b agreement &mdash; flexleasing &mdash; pays Danish
+      registration tax only in proportion to the lease period, which is a real and substantial
+      difference. It is not automatic: it needs a &sect;3b agreement on market terms, and ordinary
+      leasing from a dealer usually carries the full tax inside the payment instead. The prices in
+      this catalogue are Danish retail prices with the full registration tax already in them, and
+      nothing here splits that tax back out &mdash; so the figures above do not model a
+      proportional-tax saving. If you are quoted a flexleasing deal, put its monthly payment into
+      <b>Assumptions</b> and the comparison will use the real number.
+    </p>
   </section>
   </div>
 
@@ -1420,6 +1503,38 @@
     "market.src":"Nyregistreringer {month}: {total} personbiler, heraf {ev} elbiler ({pc}%). Listen er indtastet i hånden fra offentliggjorte tal og dækker én måned. Danske salgslister opgøres pr. modelfamilie, så hver række står for én variant fra kataloget — ikke nødvendigvis den, der blev solgt mest af. Bundlisten offentliggøres ikke af nogen og findes derfor ikke her. Værditabstallene gælder årgang 2022 målt i 2026 — fire år, ikke tre — og findes kun for de få modeller, en kilde dækker; gennemsnittet for elbiler i samme vindue er 51%.",
     "month.1":"januar","month.2":"februar","month.3":"marts","month.4":"april","month.5":"maj","month.6":"juni",
     "month.7":"juli","month.8":"august","month.9":"september","month.10":"oktober","month.11":"november","month.12":"december",
+    "fin.h":"Køber du den, eller leaser du?",
+    "fin.sub":"Det er to helt forskellige regnestykker. Ejer du bilen, er værditabet den store post. Leaser du, findes værditabet ikke for dig — det ligger allerede i ydelsen.",
+    "fin.own":"Jeg køber den","fin.own.short":"Eje",
+    "fin.own.d":"Bilen er din, så den store udgift er det, den taber i værdi. Værditab, forsikring, strøm og service.",
+    "fin.lease":"Jeg leaser","fin.lease.short":"Leasing",
+    "fin.lease.d":"Du ejer den aldrig, så den taber aldrig værdi for dig — ydelsen bærer det allerede. Et helt andet regnestykke.",
+    "ctl.leaseterm":"Leasingperiode","ctl.leaserate":"Rente","ctl.leaseupfront":"Førstegangsydelse",
+    "ctl.residual":"Restværdi-sats","ctl.leasequote":"Har du et rigtigt tilbud? Skriv ydelsen ind",
+    "ctl.permonth":"per måned","ctl.svcincluded":"Service er inkluderet i ydelsen",
+    "unit.months":"mdr.","unit.peryear":"per år",
+    "ck.lease":"Leasingydelse","ck.upfront":"Førstegangsydelse","ck.upfrontsvc":"Førstegangsydelse og service",
+    "lease.modelled":"{m} om måneden i {n} måneder — modelleret ud fra prisen, ikke et tilbud.",
+    "lease.quoted":"{m} om måneden i {n} måneder — dit eget tilbud.",
+    "lease.note":"Bygget på, at bilen går fra {new} til {res} på {y} år. Ydelsen er værditabet delt ud på månederne plus rente af det, leasingselskabet har bundet.",
+    "sec.vs.h":"Eje eller lease",
+    "sec.vs.note":"Begge beløb er et gennemsnit per år over leasingperioden, for den bil du har valgt under de forhold du har sat — ikke det første år alene, og derfor står ejerskab lavere her end i panelet ovenfor. Det er en fair sammenligning: værditabet tager allerede højde for, at bilen er noget værd til sidst, så ejerskab bliver ikke straffet for en værdi, du beholder.",
+    "vs.cheaper":"Billigst","vs.over":"Over {y} år:","vs.avgyear":"i snit per år",
+    "vs.own.p1":"Bilen er din. Ingen kilometergrænse, intet returneringssyn, ingen bindingsperiode.",
+    "vs.own.p2":"Billigst i længden. Efter de første år er værditabet lille, og du kører videre uden ydelse.",
+    "vs.own.p3":"Du kan sælge når som helst, og du får restværdien.",
+    "vs.own.c1":"Værditabet rammer hårdest de første tre år — omkring 45% af nyprisen.",
+    "vs.own.c2":"Hele beløbet er bundet i bilen.",
+    "vs.own.c3":"Du bærer risikoen, hvis brugtmarkedet falder.",
+    "vs.lease.p1":"Ingen restværdirisiko. Falder markedet, er det leasingselskabets tab, ikke dit.",
+    "vs.lease.p2":"Lav binding: en førstegangsydelse i stedet for hele bilens pris.",
+    "vs.lease.p3":"Fast månedlig udgift, ofte med service inkluderet.",
+    "vs.lease.c1":"Kilometerloft. Kører du længere, koster hver ekstra kilometer.",
+    "vs.lease.c2":"Du ejer ingenting, når den afleveres.",
+    "vs.lease.c3":"Dyrere i længden, hvis du beholder bilen ud over perioden.",
+    "vs.ownwins":"Over {y} år er det {d} billigere at eje din {car} end at lease den — under dine egne forudsætninger. Det er typisk sådan det falder ud, når man beholder bilen hele perioden, fordi værditabet aftager mens ydelsen ikke gør.",
+    "vs.leasewins":"Over {y} år er det {d} billigere at lease din {car} end at eje den — under dine egne forudsætninger. Det sker, når værditabet i de første år er større end det, ydelsen og førstegangsydelsen koster tilsammen.",
+    "vs.tax":"Om registreringsafgift: leasing efter en §3b-aftale — flexleasing — betaler kun dansk registreringsafgift forholdsmæssigt for leasingperioden, og det er en reel og betydelig forskel. Den følger ikke automatisk med: den kræver en §3b-aftale på markedsvilkår, og almindelig forhandlerleasing bærer typisk den fulde afgift inde i ydelsen i stedet. Priserne i dette katalog er danske udsalgspriser med den fulde registreringsafgift allerede i sig, og intet her skiller afgiften ud igen — så tallene ovenfor modellerer <b>ikke</b> en besparelse på forholdsmæssig afgift. Får du et flexleasing-tilbud, så skriv ydelsen ind under <b>Forudsætninger</b>, så regner sammenligningen på det rigtige tal.",
     "mode.h":"Hvad er du i dag?",
     "mode.sub":"Det bestemmer kun, hvor du lander, og hvad der kommer først. Alt er stadig tilgængeligt, og du kan skifte når som helst.",
     "mode.buyer":"På udkig efter en bil","mode.buyer.short":"Køber",
@@ -1526,6 +1641,16 @@
     "market.src":"New registrations, {month}: {total} passenger cars, {ev} of them electric ({pc}%). The list is typed in by hand from published figures and covers one month, in Denmark. Danish sales lists are counted by model family, so each row stands for one variant from this catalogue — not necessarily the one that actually sold. Nobody publishes the bottom of the list, so it is not here. The residual figures are for 2022 cars measured in 2026 — four years, not three — and exist only for the handful of models a source covers; the average electric car lost 51% over the same window.",
     "month.1":"January","month.2":"February","month.3":"March","month.4":"April","month.5":"May","month.6":"June",
     "month.7":"July","month.8":"August","month.9":"September","month.10":"October","month.11":"November","month.12":"December",
+    "fin.own":"Buying it outright","fin.own.short":"Owning",
+    "fin.lease":"Leasing it","fin.lease.short":"Leasing",
+    "ck.lease":"Lease payment","ck.upfront":"Upfront payment","ck.upfrontsvc":"Upfront and servicing",
+    "lease.modelled":"{m} a month for {n} months — modelled from the price, not a quote.",
+    "lease.quoted":"{m} a month for {n} months — your own quote.",
+    "lease.note":"Built on the car going from {new} to {res} over {y} years. The payment is that loss spread over the months, plus interest on what the leasing company has tied up.",
+    "vs.cheaper":"Cheaper","vs.over":"Over {y} years:","vs.avgyear":"average per year",
+    "vs.ownwins":"Over {y} years, owning your {car} works out {d} cheaper than leasing it, on your own assumptions. That is the usual outcome when you keep the car for the whole period, because depreciation tapers while a lease payment does not.",
+    "vs.leasewins":"Over {y} years, leasing your {car} works out {d} cheaper than owning it, on your own assumptions. That happens when the first years' depreciation costs more than the payments and the upfront together.",
+    "unit.months":"months","unit.peryear":"per year",
     "mode.buyer.short":"Buying","mode.owner.short":"Owner",
     "btn.addnote":"Add note","notes.delete":"Delete note",
     "notes.none":"No notes yet. Write down what you would have wanted to know before you bought it.",
@@ -1619,6 +1744,36 @@
           if (m === "buyer" || m === "owner") return m; } catch (e) {}
     return null;
   })();
+  var FIN = (function () {
+    try { var m = localStorage.getItem("energyspeed.finance");
+          if (m === "own" || m === "lease") return m; } catch (e) {}
+    return null;
+  })();
+
+  /* which controls belong to which way of paying for a car */
+  function applyFinance() {
+    var lease = state.finance === "lease", el;
+    [["ctl-dp", lease], ["ctl-sv", lease && state.leaseSvc],
+     ["ctl-lm", !lease], ["ctl-lr", !lease], ["ctl-lu", !lease], ["lq-box", !lease]]
+      .forEach(function (p) { el = document.getElementById(p[0]); if (el) el.hidden = p[1]; });
+    el = document.getElementById("dp-l");
+    if (el) el.innerHTML = t(lease ? "ctl.residual" : "ctl.depreciation");
+    el = document.getElementById("finbtn");
+    if (el) el.innerHTML = t(lease ? "fin.lease.short" : "fin.own.short");
+  }
+
+  function setFinance(fin, close) {
+    if (fin !== "own" && fin !== "lease") return;
+    FIN = state.finance = fin;
+    try { localStorage.setItem("energyspeed.finance", fin); } catch (e) {}
+    applyFinance();
+    if (close) {
+      document.getElementById("modepick").hidden = true;
+      document.getElementById("mp-step2").hidden = true;
+      document.getElementById("mp-step1").hidden = false;
+    }
+    render();
+  }
 
   function applyMode() {
     var m = MODE || "buyer", nav = document.querySelector(".tabs"), i, btn;
@@ -1636,8 +1791,28 @@
     MODE = m;
     try { localStorage.setItem("energyspeed.mode", m); } catch (e) {}
     applyMode();
-    document.getElementById("modepick").hidden = true;
     if (andGo) { showTab(TAB_ORDER[m][0]); window.scrollTo(0, 0); }
+    if (!FIN) { askFinance(); return; }
+    document.getElementById("modepick").hidden = true;
+  }
+
+  function askFinance() {
+    document.getElementById("mp-step1").hidden = true;
+    document.getElementById("mp-step2").hidden = false;
+    document.getElementById("mp-h").innerHTML = t("fin.h");
+    document.getElementById("mp-sub").innerHTML = t("fin.sub");
+    document.getElementById("modepick").hidden = false;
+    var first = document.querySelector("#mp-step2 .mp-opt");
+    if (first) first.focus();
+  }
+  function askMode() {
+    document.getElementById("mp-step2").hidden = true;
+    document.getElementById("mp-step1").hidden = false;
+    document.getElementById("mp-h").innerHTML = t("mode.h");
+    document.getElementById("mp-sub").innerHTML = t("mode.sub");
+    document.getElementById("modepick").hidden = false;
+    var first = document.querySelector("#mp-step1 .mp-opt");
+    if (first) first.focus();
   }
 
   function setLang(l) {
@@ -1947,6 +2122,10 @@
     chargeTo: 100, reserve: 0, health: 100,
     kmYear: 18000, depRate: 13, insRate: 1.4, service: 3500,
     used: false, age: 3,
+    /* leasing: term in months, interest on the outstanding sum, the upfront
+       payment spread over the term, and an actual quote when the reader has one */
+    finance: "own", leaseMonths: 36, leaseRate: 5, leaseUpfront: 25000,
+    leaseQuote: null, leaseSvc: true,
     useReceipts: false, log: [], notes: [], shots: [], saved: true, plate: "", vin: ""
   };
 
@@ -2002,6 +2181,19 @@
     return Math.min(val, val * state.depRate / 100 * depShape(age));
   }
 
+  /* A lease payment is two things added together: the value the car loses while
+     you have it, divided by the months, plus interest on the money the leasing
+     company has tied up. Both come from figures this page already holds, so the
+     result is a model, not a quote — which is why a real quote overrides it. */
+  function leaseMonthly(car) {
+    if (state.leaseQuote) return state.leaseQuote;
+    var price = eff(car).price, months = state.leaseMonths;
+    var residual = price * retained(Math.round(months / 12));
+    return (price - residual) / months
+         + (price + residual) / 2 * (state.leaseRate / 100) / 12;
+  }
+  function leasing() { return state.finance === "lease"; }
+
   function serviceCost() {
     if (state.useReceipts) {
       var r = receipts();
@@ -2012,10 +2204,23 @@
   function annual(car) {
     var spec = eff(car);
     var energy = consume(spec, state.speed, state.temp).whkm / 1000 * state.kmYear * state.price;
+
+    if (leasing()) {
+      /* nothing depreciates on you: the payment already carries it */
+      var perMonth = leaseMonthly(car), years = state.leaseMonths / 12;
+      var lease = perMonth * 12;
+      var upfront = state.leaseUpfront / years;
+      var insL = spec.price * state.insRate / 100;
+      var svcL = state.leaseSvc ? 0 : serviceCost();
+      var totalL = lease + upfront + energy + insL + svcL;
+      return { energy: energy, dep: lease, ins: insL, svc: upfront + svcL,
+               lease: lease, upfront: upfront, perMonth: perMonth, service: svcL,
+               total: totalL, perKm: totalL / state.kmYear };
+    }
+
     var val = valueOf(car);
     var dep = depLoss(car);
     var ins = val * state.insRate / 100;
-    void eff(car);
     var svc = serviceCost();
     var total = energy + dep + ins + svc;
     return { energy:energy, dep:dep, ins:ins, svc:svc, total:total, perKm: total / state.kmYear };
@@ -2222,6 +2427,73 @@
       '</button>';
     }).join("");
 
+  }
+
+  /* ---------- owning against leasing ----------
+     Both sides are worked out with the page's own model, over the same period,
+     so the comparison is honest about what it is: two versions of the same
+     arithmetic, not two quotes from a market. */
+
+  function annualUnder(car, fin) {
+    var was = state.finance;
+    state.finance = fin;
+    var a = annual(car);
+    state.finance = was;
+    return a;
+  }
+
+  /* what owning costs across the term, year by year, because the first year is
+     the expensive one and an average would hide that */
+  function ownOverTerm(car, years) {
+    var spec = eff(car), price = spec.price;
+    var energy = consume(spec, state.speed, state.temp).whkm / 1000 * state.kmYear * state.price;
+    var v = price, total = 0, i, loss;
+    for (i = 0; i < years; i++) {
+      loss = Math.min(v, v * state.depRate / 100 * depShape(i));
+      total += loss + v * state.insRate / 100 + energy + serviceCost();
+      v -= loss;
+    }
+    return total;
+  }
+  function leaseOverTerm(car, years) {
+    return annualUnder(car, "lease").total * years;
+  }
+
+  var VS_PROS = {
+    own:   ["vs.own.p1", "vs.own.p2", "vs.own.p3"],
+    ownC:  ["vs.own.c1", "vs.own.c2", "vs.own.c3"],
+    lease: ["vs.lease.p1", "vs.lease.p2", "vs.lease.p3"],
+    leaseC:["vs.lease.c1", "vs.lease.c2", "vs.lease.c3"]
+  };
+
+  function renderVs() {
+    var host = document.getElementById("vs");
+    if (!host) return;
+    var car = state.car, years = Math.max(1, Math.round(state.leaseMonths / 12));
+    var ownT = ownOverTerm(car, years), leaseT = leaseOverTerm(car, years);
+    var ownY = ownT / years, leaseY = leaseT / years;
+    var ownWins = ownT <= leaseT, diff = Math.abs(ownT - leaseT);
+
+    function col(kind, yearly, termTotal, wins) {
+      return '<div class="vscol' + (wins ? " win" : "") + '">' +
+        '<div class="vshead"><span class="vsname">' + t("fin." + kind + ".short") + '</span>' +
+          (wins ? '<span class="vstag">' + t("vs.cheaper") + '</span>' : '') + '</div>' +
+        '<div class="vsnum">' + money(yearly) + '</div>' +
+        '<div class="vsper">' + t("vs.avgyear") + '</div>' +
+        '<div class="vsterm">' + t("vs.over").replace("{y}", years) + ' ' + money(termTotal) + '</div>' +
+        '<ul class="vslist">' +
+          VS_PROS[kind].map(function (k) { return '<li class="pro">' + t(k) + '</li>'; }).join("") +
+          VS_PROS[kind + "C"].map(function (k) { return '<li class="con">' + t(k) + '</li>'; }).join("") +
+        '</ul></div>';
+    }
+
+    host.innerHTML =
+      col("own", ownY, ownT, ownWins) +
+      col("lease", leaseY, leaseT, !ownWins) +
+      '<p class="vsdiff">' + t(ownWins ? "vs.ownwins" : "vs.leasewins")
+        .replace("{d}", "<b>" + money(diff) + "</b>")
+        .replace("{y}", years)
+        .replace("{car}", car.marque + " " + car.model) + '</p>';
   }
 
   /* ---------- why the best sellers sell ----------
@@ -2671,6 +2943,10 @@
     document.getElementById("u-hp-v").textContent = state.health + " %";
     document.getElementById("ky-v").textContent = kr(state.kmYear) + " " + t("unit.km");
     document.getElementById("dp-v").textContent = state.depRate + " " + t("unit.pcyr");
+    document.getElementById("lm-v").textContent = state.leaseMonths + " " + t("unit.months");
+    document.getElementById("lr-v").textContent = state.leaseRate + " " + t("unit.pcyr");
+    document.getElementById("lu-v").textContent = money(state.leaseUpfront);
+    var lqc = document.getElementById("lq-cur"); if (lqc) lqc.textContent = curSym();
     document.getElementById("ins-v").textContent = state.insRate.toFixed(1) + " " + t("unit.pcyr");
     document.getElementById("sv-v").textContent = money(state.service);
 
@@ -2695,9 +2971,11 @@
     document.getElementById("o-rel").innerHTML =
       '<span class="rel" data-b="' + rl.band + '"><span class="rd"></span>' + rl.label + '</span>';
     document.getElementById("o-year").textContent = String(car.year);
-    document.getElementById("o-price-row").hidden = !state.used;
+    document.getElementById("o-price-row").hidden = !state.used || leasing();
     document.getElementById("o-price").textContent = money(valueOf(car));
-    document.getElementById("agepick").hidden = !state.used;
+    document.getElementById("agepick").hidden = !state.used || leasing();
+    var buyPick = document.getElementById("g-cond");
+    if (buyPick && buyPick.parentNode) buyPick.parentNode.hidden = leasing();
 
     /* the spec quoted may be a later update than a car of this age would be */
     var gen = document.getElementById("o-gen"), build = THIS_YEAR - state.age;
@@ -2739,6 +3017,9 @@
     document.getElementById("c-total-u").textContent =
       t("cost.peryear") + " " + kr(state.kmYear) + " " + t("unit.km");
     document.getElementById("c-perkm").textContent = (a.perKm * CU.rate).toFixed(2);
+    var kd = document.getElementById("ck-dep-l"), ks = document.getElementById("ck-svc-l");
+    if (kd) kd.innerHTML = t(leasing() ? "ck.lease" : "ck.dep");
+    if (ks) ks.innerHTML = t(leasing() ? (state.leaseSvc ? "ck.upfront" : "ck.upfrontsvc") : "ck.svc");
     document.getElementById("ck-dep").textContent = money(a.dep);
     document.getElementById("ck-ins").textContent = money(a.ins);
     document.getElementById("ck-nrg").textContent = money(a.energy);
@@ -2748,18 +3029,28 @@
     document.getElementById("cs-nrg").style.width = (a.energy / a.total * 100).toFixed(2) + "%";
     document.getElementById("cs-svc").style.width = (a.svc / a.total * 100).toFixed(2) + "%";
 
-    /* the yearly loss next to the value it comes out of, so the number has a floor
-       and a ceiling a reader can check against */
-    var newPrice = eff(car).price, nowVal = valueOf(car), nextVal = nowVal - depLoss(car);
-    document.getElementById("dep-value").innerHTML =
-      t(state.used ? "dep.value.used" : "dep.value.new")
+    /* the yearly figure next to what it is made of, so it can be checked */
+    var newPrice = eff(car).price;
+    if (leasing()) {
+      document.getElementById("dep-value").innerHTML = t(state.leaseQuote ? "lease.quoted" : "lease.modelled")
+        .replace("{m}", "<b>" + money(a.perMonth) + "</b>")
+        .replace("{n}", state.leaseMonths);
+      document.getElementById("dep-front").innerHTML = t("lease.note")
         .replace("{new}", money(newPrice))
-        .replace("{age}", state.age)
-        .replace("{now}", "<b>" + money(nowVal) + "</b>")
-        .replace("{then}", "<b>" + money(nextVal) + "</b>");
-    document.getElementById("dep-front").innerHTML = t("dep.front")
-      .replace("{a}", Math.round((1 - retained(3)) * 100))
-      .replace("{b}", Math.round((retained(3) - retained(6)) * 100));
+        .replace("{res}", money(newPrice * retained(Math.round(state.leaseMonths / 12))))
+        .replace("{y}", Math.round(state.leaseMonths / 12));
+    } else {
+      var nowVal = valueOf(car), nextVal = nowVal - depLoss(car);
+      document.getElementById("dep-value").innerHTML =
+        t(state.used ? "dep.value.used" : "dep.value.new")
+          .replace("{new}", money(newPrice))
+          .replace("{age}", state.age)
+          .replace("{now}", "<b>" + money(nowVal) + "</b>")
+          .replace("{then}", "<b>" + money(nextVal) + "</b>");
+      document.getElementById("dep-front").innerHTML = t("dep.front")
+        .replace("{a}", Math.round((1 - retained(3)) * 100))
+        .replace("{b}", Math.round((retained(3) - retained(6)) * 100));
+    }
     document.getElementById("ab-yr").textContent = moneyN(a.total);
   }
 
@@ -2787,6 +3078,7 @@
     }
 
     if (onCosts) {
+    renderVs();
     var whkm = consume(c, state.speed, state.temp).whkm;
     var fixed = car.price * (state.depRate + state.insRate) / 100 + serviceCost();
     var perKmEnergy = whkm / 1000 * state.price;
@@ -3167,16 +3459,32 @@
   applyCurrency();
   applyNumbers();
   applyMode();
+  state.finance = FIN || "own";
+  applyFinance();
 
   Array.prototype.forEach.call(document.querySelectorAll("[data-mode]"), function (b) {
     b.addEventListener("click", function () { setMode(b.getAttribute("data-mode"), true); });
   });
-  document.getElementById("modebtn").addEventListener("click", function () {
-    var box = document.getElementById("modepick");
-    box.hidden = false;
-    var first = box.querySelector(".mp-opt");
-    if (first) first.focus();
+  Array.prototype.forEach.call(document.querySelectorAll("[data-fin]"), function (b) {
+    b.addEventListener("click", function () { setFinance(b.getAttribute("data-fin"), true); });
   });
+  document.getElementById("finbtn").addEventListener("click", askFinance);
+
+  bind("lm", "leaseMonths");
+  bind("lr", "leaseRate");
+  bind("lu", "leaseUpfront");
+  document.getElementById("lq").addEventListener("input", function () {
+    var v = parseFloat(this.value);
+    state.leaseQuote = (isFinite(v) && v > 0) ? v / CU.rate : null;
+    this.classList.toggle("edited", state.leaseQuote != null);
+    render();
+  });
+  document.getElementById("lq-svc").addEventListener("change", function () {
+    state.leaseSvc = this.checked;
+    applyFinance();
+    render();
+  });
+  document.getElementById("modebtn").addEventListener("click", askMode);
   document.addEventListener("keydown", function (ev) {
     var box = document.getElementById("modepick");
     if (ev.key === "Escape" && MODE && !box.hidden) box.hidden = true;
@@ -3196,7 +3504,7 @@
 
   var landing = (location.hash || "").slice(1) || TAB_ORDER[MODE || "buyer"][0];
   try { showTab(landing); } catch (e) { showTab("compare"); }
-  if (!MODE) document.getElementById("modepick").hidden = false;
+  if (!MODE) askMode(); else if (!FIN) askFinance();
   syncCarPickers();
   fillTune();
   loadLog();
