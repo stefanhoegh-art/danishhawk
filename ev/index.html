@@ -94,6 +94,24 @@
   .depnote { margin: 14px 0 0; padding-top: 13px; border-top: 1px solid var(--line);
     font-size: .8rem; line-height: 1.6; color: var(--ink-2); }
   .depnote b { color: var(--ink); font-weight: 600; }
+  .modepick { position: fixed; inset: 0; z-index: 60; background: rgba(16,22,28,.5);
+    display: flex; align-items: center; justify-content: center; padding: 22px; }
+  .mp-box { background: var(--surface); border: 1px solid var(--line); border-radius: 14px;
+    max-width: 640px; width: 100%; padding: 30px 30px 26px; box-shadow: 0 18px 50px rgba(16,22,28,.22); }
+  .mp-box h2 { margin: 0 0 8px; font-size: 1.42rem; letter-spacing: -.015em; color: var(--ink); }
+  .mp-sub { margin: 0 0 22px; font-size: .87rem; line-height: 1.6; color: var(--ink-2); }
+  .mp-opts { display: grid; grid-template-columns: 1fr 1fr; gap: 13px; }
+  .mp-opt { display: block; text-align: left; cursor: pointer; background: var(--surface);
+    border: 1px solid var(--line-2); border-radius: 11px; padding: 17px 18px 18px; }
+  .mp-opt:hover { border-color: var(--ink-3); }
+  .mp-opt:focus-visible { outline: 2px solid var(--burn); outline-offset: 2px; }
+  .mp-t { display: block; font-size: 1rem; font-weight: 600; color: var(--ink); margin-bottom: 6px; }
+  .mp-d { display: block; font-size: .81rem; line-height: 1.55; color: var(--ink-2); }
+  .modebtn { flex: 0 0 auto; font-family: var(--mono); font-size: .6rem; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--ink-2); background: var(--surface-2);
+    border: 1px solid var(--line-2); border-radius: 5px; padding: 5px 9px; cursor: pointer;
+    white-space: nowrap; }
+  .modebtn:hover { color: var(--ink); }
   .langsw { flex:0 0 auto; display:flex; gap:2px; padding-left:10px;
   border-left:1px solid var(--line); background:var(--surface) }
 .langsw button { border:1px solid var(--line-2); background:var(--surface); color:var(--ink-3);
@@ -504,6 +522,10 @@
     .tabsrow { padding: 0 12px; gap: 8px; }
     .tabs button[data-tab] { padding: 9px 11px; font-size: .61rem; }
     .langsw button { padding: 4px 6px; font-size: .6rem; }
+    .modebtn { padding: 4px 6px; font-size: .55rem; }
+    .mp-box { padding: 24px 20px 20px; }
+    .mp-box h2 { font-size: 1.22rem; }
+    .mp-opts { grid-template-columns: 1fr; }
     .cond-inner { padding: 10px 14px 11px; gap: 9px 16px; }
     .filters { padding: 11px 13px; gap: 10px 14px; margin-bottom: 14px; }
     .fslide { min-width: 0; flex: 1 1 100%; }
@@ -535,6 +557,23 @@
 </style>
 </head>
 <body>
+<div class="modepick" id="modepick" hidden>
+  <div class="mp-box" role="dialog" aria-modal="true" aria-labelledby="mp-h">
+    <h2 id="mp-h" data-t="mode.h">Which one are you today?</h2>
+    <p class="mp-sub" data-t="mode.sub">It only sets where you land and what comes first. Everything stays reachable, and you can switch whenever.</p>
+    <div class="mp-opts">
+      <button type="button" class="mp-opt" data-mode="buyer">
+        <span class="mp-t" data-t="mode.buyer">Looking to buy</span>
+        <span class="mp-d" data-t="mode.buyer.d">Start with all 136 cars ranked by what they actually cost to drive, then dig into the one you like.</span>
+      </button>
+      <button type="button" class="mp-opt" data-mode="owner">
+        <span class="mp-t" data-t="mode.owner">I own the car</span>
+        <span class="mp-d" data-t="mode.owner.d">Start with your own car: its real range, what it costs you a year, its service record and what the next owner should know.</span>
+      </button>
+    </div>
+  </div>
+</div>
+
 <header class="appbar">
   <div class="ab-inner">
     <div class="ab-brand"><span class="bolt">&#9679;</span><h1>Energy Speed</h1></div>
@@ -561,6 +600,7 @@
     <button type="button" role="tab" data-tab="history" aria-selected="false" aria-controls="p-history" data-t="tab.history">History</button>
     <button type="button" role="tab" data-tab="method" aria-selected="false" aria-controls="p-method" data-t="tab.method">Method</button>
   </nav>
+  <button type="button" class="modebtn" id="modebtn" data-t="mode.buyer.short">Buying</button>
   <span class="langsw" role="group" aria-label="Sprog / Language">
     <button type="button" data-lang="da" aria-pressed="true">DA</button>
     <button type="button" data-lang="en" aria-pressed="false">EN</button>
@@ -700,7 +740,7 @@
 
       <div class="tune-picks">
         <div class="pick">
-          <span class="pl" data-t="pick.buying">Buying</span>
+          <span class="pl" data-t="pick.buying">The car is</span>
           <div class="chips" id="g-cond">
             <button type="button" data-used="0" aria-pressed="true" data-t="chip.new">New</button>
             <button type="button" data-used="1" data-t="chip.used">Used</button>
@@ -1273,7 +1313,7 @@
   da: {
     "tab.compare":"Sammenlign","tab.car":"Din bil","tab.drive":"Kørsel","tab.costs":"Økonomi",
     "tab.history":"Historik","tab.method":"Metode",
-    "pick.driving":"Kørsel","pick.weather":"Vejr","pick.buying":"Køber","pick.age":"Alder",
+    "pick.driving":"Kørsel","pick.weather":"Vejr","pick.buying":"Bilen er","pick.age":"Alder",
     "pick.batteryuse":"Batteribrug","pick.peryear":"Kørt om året",
     "chip.town":"By","chip.country":"Landevej","chip.motorway":"Motorvej","chip.fast":"Hurtigt",
     "chip.summer":"Sommer","chip.spring":"Forår","chip.winter":"Vinter",
@@ -1327,6 +1367,12 @@
     "cost.peryear":"per år ved","cost.perkm":"kr per kilometer",
     "ck.dep":"Værditab","ck.ins":"Forsikring","ck.nrg":"Strøm","ck.svc":"Service og dæk",
     "svc.recordfor":"Journal for","svc.nothing":"Intet registreret endnu","svc.blocked":"Kunne ikke gemme — browseren blokerer lagring",
+    "mode.h":"Hvad er du i dag?",
+    "mode.sub":"Det bestemmer kun, hvor du lander, og hvad der kommer først. Alt er stadig tilgængeligt, og du kan skifte når som helst.",
+    "mode.buyer":"På udkig efter en bil","mode.buyer.short":"Køber",
+    "mode.buyer.d":"Start med alle 136 biler rangordnet efter, hvad de faktisk koster at køre i — og grav dig så ned i den, du kan lide.",
+    "mode.owner":"Jeg ejer bilen","mode.owner.short":"Ejer",
+    "mode.owner.d":"Start med din egen bil: reel rækkevidde, hvad den koster dig om året, dens servicehistorik og det, den næste ejer bør vide.",
     "sec.notes.h":"Værd at vide","sec.notes.note":"Det, en servicebog aldrig noterer, og sælgeren sjældent nævner — et batteri der holder op med at være ærligt efter et vist kilometertal, en raslen i kulden, en reservedel der er svær at skaffe. Skriv det ned til den, der ejer bilen efter dig; det følger med journalen.",
     "nf.label":"Hvad bør den næste ejer vide?",
     "nf.ph":"Batteriet er fint til omkring 70.000 km, derefter falder rækkevidden markant.",
@@ -1414,6 +1460,7 @@
     "cost.peryear":"per year at","cost.perkm":"€ per kilometre",
     "svc.recordfor":"Record for","svc.nothing":"Nothing recorded yet",
     "svc.blocked":"Could not save — this browser blocks storage",
+    "mode.buyer.short":"Buying","mode.owner.short":"Owner",
     "btn.addnote":"Add note","notes.delete":"Delete note",
     "notes.none":"No notes yet. Write down what you would have wanted to know before you bought it.",
     "svc.stamp":"stamp","svc.stamps":"stamps","svc.note":"note","svc.notes":"notes","svc.saved":"saved","svc.modelrecord":"model record",
@@ -1490,6 +1537,43 @@
   /* Deployed, the two languages are two pages, so the switch is a link. As a
      single file — an artifact, a local copy — there is nowhere to go, and the
      query parameter carries the choice instead. */
+  /* ---------- buyer or owner ----------
+     Two people use this page. One is choosing a car and wants the whole field;
+     the other has one already and wants its record. They were sharing a tab bar
+     and neither was served first. The choice only sets the landing tab and the
+     order of the tabs — nothing is taken away. */
+
+  var TAB_ORDER = {
+    buyer: ["compare", "car", "costs", "drive", "history", "method"],
+    owner: ["car", "history", "costs", "drive", "compare", "method"]
+  };
+
+  var MODE = (function () {
+    try { var m = localStorage.getItem("energyspeed.mode");
+          if (m === "buyer" || m === "owner") return m; } catch (e) {}
+    return null;
+  })();
+
+  function applyMode() {
+    var m = MODE || "buyer", nav = document.querySelector(".tabs"), i, btn;
+    var order = TAB_ORDER[m];
+    for (i = 0; i < order.length; i++) {
+      btn = nav.querySelector('button[data-tab="' + order[i] + '"]');
+      if (btn) nav.appendChild(btn);
+    }
+    var lbl = document.getElementById("modebtn");
+    if (lbl) lbl.innerHTML = t(m === "owner" ? "mode.owner.short" : "mode.buyer.short");
+  }
+
+  function setMode(m, andGo) {
+    if (m !== "buyer" && m !== "owner") return;
+    MODE = m;
+    try { localStorage.setItem("energyspeed.mode", m); } catch (e) {}
+    applyMode();
+    document.getElementById("modepick").hidden = true;
+    if (andGo) { showTab(TAB_ORDER[m][0]); window.scrollTo(0, 0); }
+  }
+
   function setLang(l) {
     if (l !== "da" && l !== "en" || l === LANG) return;
     try { localStorage.setItem("energyspeed.lang", l); } catch (e) {}
@@ -2849,10 +2933,36 @@
   applyLang();
   applyCurrency();
   applyNumbers();
+  applyMode();
+
+  Array.prototype.forEach.call(document.querySelectorAll("[data-mode]"), function (b) {
+    b.addEventListener("click", function () { setMode(b.getAttribute("data-mode"), true); });
+  });
+  document.getElementById("modebtn").addEventListener("click", function () {
+    var box = document.getElementById("modepick");
+    box.hidden = false;
+    var first = box.querySelector(".mp-opt");
+    if (first) first.focus();
+  });
+  document.addEventListener("keydown", function (ev) {
+    var box = document.getElementById("modepick");
+    if (ev.key === "Escape" && MODE && !box.hidden) box.hidden = true;
+  });
+  document.getElementById("modepick").addEventListener("click", function (ev) {
+    /* clicking the backdrop keeps whatever mode is already set */
+    if (ev.target === this && MODE) this.hidden = true;
+  });
   delegatePick("cards", setCar);
   delegatePick("awards", setCar);
 
-  try { showTab((location.hash || "#compare").slice(1)); } catch (e) { showTab("compare"); }
+  window.addEventListener("hashchange", function () {
+    var n = (location.hash || "").slice(1);
+    if (n && TABS.indexOf(n) >= 0) { showTab(n); window.scrollTo(0, 0); }
+  });
+
+  var landing = (location.hash || "").slice(1) || TAB_ORDER[MODE || "buyer"][0];
+  try { showTab(landing); } catch (e) { showTab("compare"); }
+  if (!MODE) document.getElementById("modepick").hidden = false;
   syncCarPickers();
   fillTune();
   loadLog();
