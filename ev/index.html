@@ -2253,12 +2253,21 @@
 
   /* model picker, grouped by type */
   var sel = document.getElementById("model");
-  /* the ceiling comes from the data, so adding a pricier car can never
-     quietly drop it out of "any price" again */
-  var PRICE_TOP = Math.ceil(Math.max.apply(null, CARS.map(function (c) { return c.price; })) / 50000) * 50000;
+  /* Both ends of the price filter come from the data. The ceiling means a pricier
+     car can never quietly drop out of "any price"; the floor is the cheapest car
+     there is, so dragging the slider all the way down leaves one car standing
+     rather than wiping the list to nothing. */
+  var PRICES = CARS.map(function (c) { return c.price; }), PRICE_STEP = 10000;
+  var PRICE_FLOOR = Math.min.apply(null, PRICES);
+  /* step-aligned off the floor, so the right-hand end of the slider is a value the
+     control can actually land on and "any price" comes back when you drag back up */
+  var PRICE_TOP = PRICE_FLOOR +
+    Math.ceil((Math.max.apply(null, PRICES) - PRICE_FLOOR) / PRICE_STEP) * PRICE_STEP;
   (function () {
     var mx = document.getElementById("mx");
-    mx.max = String(PRICE_TOP); mx.value = String(PRICE_TOP);
+    mx.min = String(PRICE_FLOOR);
+    mx.max = String(PRICE_TOP);
+    mx.value = String(PRICE_TOP);
     state.maxPrice = PRICE_TOP;
   })();
 
