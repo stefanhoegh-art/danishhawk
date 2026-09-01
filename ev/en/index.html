@@ -91,6 +91,9 @@
     background: none; border: none; border-bottom: 2px solid transparent; color: var(--ink-3);
     padding: 11px 14px; cursor: pointer; white-space: nowrap; transition: color .18s; }
   .tabs button[data-tab]:hover { color: var(--ink); }
+  .depnote { margin: 14px 0 0; padding-top: 13px; border-top: 1px solid var(--line);
+    font-size: .8rem; line-height: 1.6; color: var(--ink-2); }
+  .depnote b { color: var(--ink); font-weight: 600; }
   .langsw { flex:0 0 auto; display:flex; gap:2px; padding-left:10px;
   border-left:1px solid var(--line); background:var(--surface) }
 .langsw button { border:1px solid var(--line-2); background:var(--surface); color:var(--ink-3);
@@ -952,7 +955,7 @@
             <label for="sv"><span class="cl" data-t="ctl.service">Service &amp; tyres</span><span class="cv" id="sv-v">3,500 kr</span></label>
             <input type="range" id="sv" min="0" max="20000" step="500" value="3500">
           </div>
-          <p class="adv-note" data-t="adv.depnote">Depreciation is a flat share of the purchase price each year &mdash; the crude version of a curve, and the number most worth arguing with.</p>
+          <p class="adv-note" data-t="adv.depnote">Depreciation is set as a yearly rate, but it is not spread evenly: the model runs it through a curve where the first year costs about 1.7&times; the rate and the eighth about 0.7&times;. The rate itself is still yours to argue with.</p>
         </div>
       </div>
     </div>
@@ -982,6 +985,11 @@
         <div class="ckey" data-k="nrg"><div class="kh"><span class="sw"></span><span class="kn" data-t="ck.nrg">Electricity</span></div><div class="kv" id="ck-nrg">—</div></div>
         <div class="ckey" data-k="svc"><div class="kh"><span class="sw"></span><span class="kn" data-t="ck.svc">Service &amp; tyres</span></div><div class="kv" id="ck-svc">—</div></div>
       </div>
+
+      <p class="depnote">
+        <span id="dep-value"></span><br>
+        <span id="dep-front"></span>
+      </p>
 
       <div class="cost-charthost">
         <h3 data-t="chart.cost">Cost per kilometre, by how far you drive</h3>
@@ -1163,6 +1171,18 @@
         device that added them. Real accounts that carry a car's history between owners need that same
         server.
       </li>
+      <li data-t="m.depreciation">
+        <b>Depreciation is front-loaded, and it is the biggest number here.</b> A car does not
+        shed value evenly: the first year takes far more than the eighth. The slider sets an
+        underlying yearly rate, and the model runs it through a curve &mdash; about 1.7&times; the rate
+        in year one, tapering to about 0.7&times; by year eight. At the default 13% that leaves
+        roughly 78% of the new price after a year, 55% after three and 32% after eight, which is
+        about where published European EV residuals sit. Each year's loss is taken from what the
+        car is worth <em>now</em>, not from its new price, and is capped at that value, so it can
+        never exceed what there is left to lose. It is still a curve fitted to a rate rather than
+        a real forecast for one model, and a car with weak demand will fall faster than a slider
+        can know.
+      </li>
       <li data-t="m.prices">
         <b>Every price starts as a Danish list price.</b> The catalogue was built for the Danish market,
         so each figure is a Danish showroom price in kroner; on this English version they are converted
@@ -1290,6 +1310,9 @@
     "out.partial":"Du kører på {p}% af pakken, så alle rækkevidder her afspejler det.",
     "gen.warn":"Tallene beskriver {y}-modellen. En bil på {a} år er groft sagt en {b}, bygget før den opdatering, så batteri, effektivitet og ladefart kan være lavere.",
     "bd.compare":"Cirka <b>{k} elkedler</b> for fuldt tryk, eller det gennemsnitlige forbrug i <b>{h} danske hjem</b>.",
+    "dep.value.new":"Ny til {new}. Efter et års kørsel: {then}.",
+    "dep.value.used":"{new} som ny, {now} efter {age} år. Om et år: {then}.",
+    "dep.front":"Værditabet er størst i starten — de første tre år koster {a}% af nyprisen, de næste tre kun {b}%.",
     "btn.blocked":"Blokeret — kopiér i stedet",
     "err.notrecord":"Det er ikke en gyldig journal.","err.noentries":"Den fil indeholder ingen serviceposter.","err.empty":"Journalen er tom.",
     "shot.alt":"Side i servicebogen","shot.remove":"Fjern foto",
@@ -1352,6 +1375,9 @@
     "cat.Suspension":"Suspension","cat.Bodywork":"Bodywork","cat.Other":"Other",
     "btn.copy":"Copy","btn.copied":"Copied","btn.download":"Download file",
     "btn.paste":"Paste a record in","btn.loadpaste":"Load pasted record",
+    "dep.value.new":"New at {new}. After a year on the road: {then}.",
+    "dep.value.used":"{new} new, {now} after {age} years. A year from now: {then}.",
+    "dep.front":"Depreciation is front-loaded — the first three years cost {a}% of the new price, the next three only {b}%.",
     "btn.blocked":"Blocked — copy instead",
     "err.notrecord":"That is not a valid record.","err.noentries":"That file has no service entries in it.",
     "err.empty":"That record is empty.",
@@ -1703,10 +1729,31 @@
 
   /* A used car is worth the new price decayed by the depreciation rate, compounded.
      Everything money-related keys off this rather than the showroom price. */
+  /* Depreciation is front-loaded: a car sheds far more in its first year than in
+     its eighth. The slider sets the underlying rate; this bends it into the shape
+     a real used-price curve has. At the default 13% that leaves roughly 78% of the
+     new price after a year, 55% after three and 32% after eight, which is about
+     where published European EV residuals sit. */
+  var DEP_SHAPE = [1.70, 1.30, 1.10, 0.95, 0.85, 0.78, 0.72, 0.68];
+  function depShape(age) {
+    return DEP_SHAPE[Math.min(Math.max(age, 0), DEP_SHAPE.length - 1)];
+  }
+  /* share of the new price a car of this age still carries */
+  function retained(age) {
+    var v = 1, i;
+    for (i = 0; i < age; i++) v *= 1 - state.depRate / 100 * depShape(i);
+    return Math.max(0.04, v);
+  }
   function valueOf(car) {
     var price = eff(car).price;
     if (!state.used) return price;
-    return price * Math.pow(1 - state.depRate / 100, state.age);
+    return price * retained(state.age);
+  }
+  /* what the year ahead costs in lost value, at whatever age the car is now.
+     Never more than the car is worth — you cannot lose what is not there. */
+  function depLoss(car) {
+    var val = valueOf(car), age = state.used ? state.age : 0;
+    return Math.min(val, val * state.depRate / 100 * depShape(age));
   }
 
   function serviceCost() {
@@ -1720,7 +1767,7 @@
     var spec = eff(car);
     var energy = consume(spec, state.speed, state.temp).whkm / 1000 * state.kmYear * state.price;
     var val = valueOf(car);
-    var dep = val * state.depRate / 100;
+    var dep = depLoss(car);
     var ins = val * state.insRate / 100;
     void eff(car);
     var svc = serviceCost();
@@ -2193,6 +2240,19 @@
     document.getElementById("cs-ins").style.width = (a.ins / a.total * 100).toFixed(2) + "%";
     document.getElementById("cs-nrg").style.width = (a.energy / a.total * 100).toFixed(2) + "%";
     document.getElementById("cs-svc").style.width = (a.svc / a.total * 100).toFixed(2) + "%";
+
+    /* the yearly loss next to the value it comes out of, so the number has a floor
+       and a ceiling a reader can check against */
+    var newPrice = eff(car).price, nowVal = valueOf(car), nextVal = nowVal - depLoss(car);
+    document.getElementById("dep-value").innerHTML =
+      t(state.used ? "dep.value.used" : "dep.value.new")
+        .replace("{new}", money(newPrice))
+        .replace("{age}", state.age)
+        .replace("{now}", "<b>" + money(nowVal) + "</b>")
+        .replace("{then}", "<b>" + money(nextVal) + "</b>");
+    document.getElementById("dep-front").innerHTML = t("dep.front")
+      .replace("{a}", Math.round((1 - retained(3)) * 100))
+      .replace("{b}", Math.round((retained(3) - retained(6)) * 100));
     document.getElementById("ab-yr").textContent = moneyN(a.total);
   }
 
