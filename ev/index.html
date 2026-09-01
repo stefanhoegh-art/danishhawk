@@ -94,6 +94,28 @@
   .depnote { margin: 14px 0 0; padding-top: 13px; border-top: 1px solid var(--line);
     font-size: .8rem; line-height: 1.6; color: var(--ink-2); }
   .depnote b { color: var(--ink); font-weight: 600; }
+  .market { display: grid; gap: 1px; background: var(--line); border: 1px solid var(--line);
+    border-radius: 10px; overflow: hidden; }
+  .mrow { display: grid; grid-template-columns: 44px 1fr; gap: 4px; align-items: start;
+    text-align: left; background: var(--surface); border: 0; padding: 15px 17px 16px; cursor: pointer; }
+  .mrow:hover { background: var(--surface-2); }
+  .mrow:focus-visible { outline: 2px solid var(--burn); outline-offset: -2px; }
+  .mrank { font-family: var(--mono); font-size: 1.25rem; color: var(--ink-3); line-height: 1.1; }
+  .mbody { display: block; min-width: 0; }
+  .mname { display: block; font-size: .97rem; color: var(--ink-2); margin-bottom: 9px; }
+  .mname b { color: var(--ink); font-weight: 600; }
+  .mshare { font-family: var(--mono); font-size: .72rem; color: var(--ink-3); }
+  .mwhy { display: flex; flex-wrap: wrap; gap: 6px; }
+  .wchip { font-size: .74rem; line-height: 1.35; color: var(--ink-3); background: var(--surface-2);
+    border: 1px solid var(--line); border-radius: 5px; padding: 4px 8px; }
+  .wchip.on { color: var(--roll); border-color: color-mix(in srgb, var(--roll) 32%, var(--line));
+    background: color-mix(in srgb, var(--roll) 7%, var(--surface)); }
+  .mverdict { display: block; margin-top: 10px; font-size: .78rem; line-height: 1.5; }
+  .mverdict[data-v="y"] { color: var(--ink-2); }
+  .mverdict[data-v="p"] { color: var(--ink-2); }
+  .mverdict[data-v="n"] { color: var(--burn); }
+  .msrc { margin: 11px 2px 0; font-family: var(--mono); font-size: .63rem; letter-spacing: .05em;
+    line-height: 1.7; color: var(--ink-3); }
   .modepick { position: fixed; inset: 0; z-index: 60; background: rgba(16,22,28,.5);
     display: flex; align-items: center; justify-content: center; padding: 22px; }
   .mp-box { background: var(--surface); border: 1px solid var(--line); border-radius: 14px;
@@ -526,6 +548,8 @@
     .mp-box { padding: 24px 20px 20px; }
     .mp-box h2 { font-size: 1.22rem; }
     .mp-opts { grid-template-columns: 1fr; }
+    .mrow { grid-template-columns: 30px 1fr; padding: 13px 13px 14px; }
+    .mrank { font-size: 1.05rem; }
     .cond-inner { padding: 10px 14px 11px; gap: 9px 16px; }
     .filters { padding: 11px 13px; gap: 10px 14px; margin-bottom: 14px; }
     .fslide { min-width: 0; flex: 1 1 100%; }
@@ -704,6 +728,19 @@
       winter ranking. Pick one to load it into every other tab.
     </p>
     <div class="awards" id="awards"></div>
+  </section>
+
+  <!-- ============ WHAT SELLS ============ -->
+  <section>
+    <div class="sechead"><h2 data-t="sec.market.h">What sells, and why</h2></div>
+    <p class="secnote" data-t="sec.market.note">
+      A sales rank on its own tells you nothing you can act on. What is worth knowing is whether the
+      numbers explain it &mdash; and when they do not, that is the more interesting answer, because
+      then it is the dealer network, the leasing deal or plain habit doing the work. Every rank below
+      is worked out under the conditions you set at the top, so it moves when you do.
+    </p>
+    <div class="market" id="market"></div>
+    <p class="msrc" id="msrc"></p>
   </section>
 
   <p class="panel-lede tail" data-t="lede">
@@ -1367,6 +1404,18 @@
     "cost.peryear":"per år ved","cost.perkm":"kr per kilometer",
     "ck.dep":"Værditab","ck.ins":"Forsikring","ck.nrg":"Strøm","ck.svc":"Service og dæk",
     "svc.recordfor":"Journal for","svc.nothing":"Intet registreret endnu","svc.blocked":"Kunne ikke gemme — browseren blokerer lagring",
+    "sec.market.h":"Hvad der sælger, og hvorfor",
+    "sec.market.note":"En salgsplacering alene fortæller dig intet, du kan bruge. Det interessante er, om tallene forklarer den — og når de ikke gør, er dét det mere interessante svar, for så er det forhandlernettet, leasingaftalen eller ren vane, der gør arbejdet. Hver placering nedenfor er regnet ud under de forhold, du har sat foroven, så den flytter sig, når du gør.",
+    "why.cheaper":"Billigere end {p}% af {seg}-bilerne","why.pricey":"Dyrere end {p}% af {seg}-bilerne",
+    "why.cost":"Nr. {r} af {n} på kr/år","why.eco":"Nr. {r} af {n} på forbrug",
+    "why.range":"Nr. {r} af {n} på reel rækkevidde","why.charge":"Nr. {r} af {n} på ladeeffekt",
+    "why.rel":"Mærkepålidelighed {s} hos Consumer Reports","why.warranty":"{y} års nybilsgaranti",
+    "war.byd":"Batteri 8 år / 200.000 km","war.toyota":"Batteri kan forlænges til 10 år / 1 mio. km med årligt eftersyn",
+    "why.explained":"Tallene forklarer den.","why.partly":"Tallene forklarer den kun delvist.",
+    "why.unexplained":"Tallene forklarer den ikke. Så er det forhandlernet, leasingaftaler eller vane.",
+    "market.src":"Nyregistreringer {month}: {total} personbiler, heraf {ev} elbiler ({pc}%). Listen er indtastet i hånden fra offentliggjorte tal og dækker én måned. Danske salgslister opgøres pr. modelfamilie, så hver række står for én variant fra kataloget — ikke nødvendigvis den, der blev solgt mest af. Bundlisten offentliggøres ikke af nogen og findes derfor ikke her.",
+    "month.1":"januar","month.2":"februar","month.3":"marts","month.4":"april","month.5":"maj","month.6":"juni",
+    "month.7":"juli","month.8":"august","month.9":"september","month.10":"oktober","month.11":"november","month.12":"december",
     "mode.h":"Hvad er du i dag?",
     "mode.sub":"Det bestemmer kun, hvor du lander, og hvad der kommer først. Alt er stadig tilgængeligt, og du kan skifte når som helst.",
     "mode.buyer":"På udkig efter en bil","mode.buyer.short":"Køber",
@@ -1460,6 +1509,16 @@
     "cost.peryear":"per year at","cost.perkm":"€ per kilometre",
     "svc.recordfor":"Record for","svc.nothing":"Nothing recorded yet",
     "svc.blocked":"Could not save — this browser blocks storage",
+    "why.cheaper":"Cheaper than {p}% of {seg} cars","why.pricey":"Dearer than {p}% of {seg} cars",
+    "why.cost":"No. {r} of {n} on cost per year","why.eco":"No. {r} of {n} on consumption",
+    "why.range":"No. {r} of {n} on real range","why.charge":"No. {r} of {n} on charging power",
+    "why.rel":"Brand reliability {s} at Consumer Reports","why.warranty":"{y}-year vehicle warranty",
+    "war.byd":"Battery 8 years / 200,000 km","war.toyota":"Battery extendable to 10 years / 1m km with annual servicing",
+    "why.explained":"The numbers explain it.","why.partly":"The numbers only partly explain it.",
+    "why.unexplained":"The numbers do not explain it. That leaves the dealer network, the leasing deal, or habit.",
+    "market.src":"New registrations, {month}: {total} passenger cars, {ev} of them electric ({pc}%). The list is typed in by hand from published figures and covers one month, in Denmark. Danish sales lists are counted by model family, so each row stands for one variant from this catalogue — not necessarily the one that actually sold. Nobody publishes the bottom of the list, so it is not here.",
+    "month.1":"January","month.2":"February","month.3":"March","month.4":"April","month.5":"May","month.6":"June",
+    "month.7":"July","month.8":"August","month.9":"September","month.10":"October","month.11":"November","month.12":"December",
     "mode.buyer.short":"Buying","mode.owner.short":"Owner",
     "btn.addnote":"Add note","notes.delete":"Delete note",
     "notes.none":"No notes yet. Write down what you would have wanted to know before you bought it.",
@@ -1778,6 +1837,34 @@
   });
 
   function segName(seg) { return t("seg." + seg); }
+
+  /* The month's best sellers, typed in by hand from published registration
+     figures. Denmark's lists are by model family — "Elroq", "Model Y" — while
+     this catalogue holds variants, so each row names the variant it stands for
+     and the page says so rather than pretending the match is exact.
+     Nobody publishes the bottom of the list, so there is no bottom of the list. */
+  var BESTSELLERS = {
+    month: "2026-07",
+    total: 14562, ev: 11671,
+    rows: [
+      { marque:"Toyota", model:"bZ4X",               share:4.2 },
+      { marque:"Škoda",  model:"Elroq 85" },
+      { marque:"Tesla",  model:"Model Y Long Range" },
+      { marque:"VW",     model:"ID.4 Pro" },
+      { marque:"XPeng",  model:"G6 Long Range",      share:3.2 }
+    ]
+  };
+
+  /* Eight years or 160,000 km on the battery, to 70% capacity, is close to
+     universal, so only what beats it is listed. Vehicle warranties are listed
+     only where a source was found; the rest show nothing rather than a guess. */
+  var WARRANTY = {
+    "Kia":    { years:7, km:150000 },
+    "MG":     { years:7 },
+    "BYD":    { years:6, km:150000, batteryKey:"war.byd" },
+    "XPeng":  { years:5, km:120000 },
+    "Toyota": { batteryKey:"war.toyota" }
+  };
 
   /* alphabetical by marque, then model — the order a person scanning a list expects */
   function byName(a, b) {
@@ -2116,6 +2203,125 @@
       '</button>';
     }).join("");
 
+  }
+
+  /* ---------- why the best sellers sell ----------
+     A sales rank on its own says nothing useful. What is worth knowing is
+     whether the numbers explain it — and when they do not, that is the more
+     interesting answer, because then it is the dealer network, the leasing
+     deal or plain habit doing the work. Every rank below is computed under the
+     conditions the reader has set, so it moves when they do. */
+
+  function marketRanks() {
+    var all = CARS.map(function (c) {
+      var r = consume(c, state.speed, state.temp);
+      /* the car's own peak DC rate, not what today's charger allows: this is the
+         number on the spec sheet that a buyer actually chooses on */
+      return { c:c, whkm:r.whkm, range:r.range, dc:c.dc, cost:annual(c).total };
+    });
+    function rankBy(key, dir) {
+      var s = all.slice().sort(function (x, y) { return dir * (x[key] - y[key]); });
+      var m = {}, i;
+      for (i = 0; i < s.length; i++) m[s[i].c.i] = i + 1;
+      return m;
+    }
+    return {
+      n: all.length,
+      cost:  rankBy("cost", 1),
+      eco:   rankBy("whkm", 1),
+      range: rankBy("range", -1),
+      chg:   rankBy("dc", -1)
+    };
+  }
+
+  /* how many cars in the same class this one undercuts */
+  function priceBeats(car) {
+    var peers = CARS.filter(function (c) { return c.seg === car.seg; });
+    var under = peers.filter(function (c) { return c.price > car.price; }).length;
+    return peers.length > 1 ? Math.round(under / (peers.length - 1) * 100) : 0;
+  }
+
+  function reasons(car, R) {
+    var out = [], third = Math.ceil(R.n / 3), pb = priceBeats(car);
+
+    /* where it sits on price in its own class, always — a row with one chip
+       reads as broken, and price is the first thing anyone weighs */
+    if (pb >= 55) out.push({ s:true, txt: t("why.cheaper").replace("{p}", pb).replace("{seg}", segName(car.seg)) });
+    else out.push({ s:false, txt: t("why.pricey").replace("{p}", 100 - pb).replace("{seg}", segName(car.seg)) });
+
+    var rc = R.cost[car.i];
+    out.push({ s: rc <= third, txt: t("why.cost").replace("{r}", rc).replace("{n}", R.n) });
+
+    var re = R.eco[car.i];
+    if (re <= third) out.push({ s:true, txt: t("why.eco").replace("{r}", re).replace("{n}", R.n) });
+
+    var rr = R.range[car.i];
+    if (rr <= third) out.push({ s:true, txt: t("why.range").replace("{r}", rr).replace("{n}", R.n) });
+
+    var rg = R.chg[car.i];
+    if (rg <= third) out.push({ s:true, txt: t("why.charge").replace("{r}", rg).replace("{n}", R.n) });
+
+    var rl = relOf(car.marque);
+    if (rl.score != null) {
+      out.push({ s: rl.score >= 55, txt: t("why.rel").replace("{s}", rl.score) });
+    }
+
+    var w = WARRANTY[car.marque];
+    if (w) {
+      if (w.years) out.push({ s: w.years >= 6,
+        txt: t("why.warranty").replace("{y}", w.years) + (w.km ? " / " + kr(w.km) + " km" : "") });
+      if (w.batteryKey) out.push({ s:true, txt: t(w.batteryKey) });
+    }
+    return out;
+  }
+
+  /* Ranking all 136 cars on cost is the most expensive read-out on the page, and
+     it is a slow, contextual one — nobody watches it move under their thumb. It
+     draws once, then settles after the conditions stop changing. */
+  var marketTimer = null, marketDrawn = false;
+  function scheduleMarket() {
+    if (!marketDrawn) { marketDrawn = true; renderMarket(); return; }
+    if (marketTimer) clearTimeout(marketTimer);
+    marketTimer = setTimeout(function () { marketTimer = null; renderMarket(); }, 300);
+  }
+
+  function renderMarket() {
+    var host = document.getElementById("market");
+    if (!host) return;
+    var R = marketRanks();
+
+    var src = document.getElementById("msrc");
+    if (src) {
+      var d = BESTSELLERS.month.split("-");
+      src.innerHTML = t("market.src")
+        .replace("{month}", t("month." + (+d[1])) + " " + d[0])
+        .replace("{total}", kr(BESTSELLERS.total))
+        .replace("{ev}", kr(BESTSELLERS.ev))
+        .replace("{pc}", (BESTSELLERS.ev / BESTSELLERS.total * 100).toFixed(0));
+    }
+
+    host.innerHTML = BESTSELLERS.rows.map(function (row, n) {
+      var car = null, i;
+      for (i = 0; i < CARS.length; i++) {
+        if (CARS[i].marque === row.marque && CARS[i].model === row.model) { car = CARS[i]; break; }
+      }
+      if (!car) return "";
+      var rs = reasons(car, R), strong = rs.filter(function (x) { return x.s; }).length;
+      var verdict = strong >= 3 ? "why.explained" : strong >= 1 ? "why.partly" : "why.unexplained";
+
+      return '<button type="button" class="mrow" data-i="' + car.i + '">' +
+        '<span class="mrank">' + (n + 1) + '</span>' +
+        '<span class="mbody">' +
+          '<span class="mname"><b>' + car.marque + '</b> ' + car.model +
+            (row.share ? ' <span class="mshare">' + row.share.toFixed(1) + '%</span>' : '') + '</span>' +
+          '<span class="mwhy">' + rs.map(function (x) {
+            return '<span class="wchip' + (x.s ? " on" : "") + '">' + x.txt + '</span>';
+          }).join("") + '</span>' +
+          '<span class="mverdict" data-v="' + (strong >= 3 ? "y" : strong >= 1 ? "p" : "n") + '">' +
+            t(verdict) + '</span>' +
+        '</span>' +
+      '</button>';
+    }).join("");
   }
 
   /* ---------- the field ---------- */
@@ -2568,6 +2774,7 @@
 
     if (onCompare) {
       renderAwards();
+      scheduleMarket();
       renderCards();
     }
   }
@@ -2954,6 +3161,7 @@
   });
   delegatePick("cards", setCar);
   delegatePick("awards", setCar);
+  delegatePick("market", setCar);
 
   window.addEventListener("hashchange", function () {
     var n = (location.hash || "").slice(1);
