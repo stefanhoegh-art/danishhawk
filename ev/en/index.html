@@ -114,6 +114,7 @@
   .mverdict[data-v="y"] { color: var(--ink-2); }
   .mverdict[data-v="p"] { color: var(--ink-2); }
   .mverdict[data-v="n"] { color: var(--burn); }
+  .mblind { color: var(--ink-3); }
   .msrc { margin: 11px 2px 0; font-family: var(--mono); font-size: .63rem; letter-spacing: .05em;
     line-height: 1.7; color: var(--ink-3); }
   .modepick { position: fixed; inset: 0; z-index: 60; background: rgba(16,22,28,.5);
@@ -1411,9 +1412,12 @@
     "why.range":"Nr. {r} af {n} på reel rækkevidde","why.charge":"Nr. {r} af {n} på ladeeffekt",
     "why.rel":"Mærkepålidelighed {s} hos Consumer Reports","why.warranty":"{y} års nybilsgaranti",
     "war.byd":"Batteri 8 år / 200.000 km","war.toyota":"Batteri kan forlænges til 10 år / 1 mio. km med årligt eftersyn",
+    "why.holds":"Holder værdien: {p}% tabt på fire år mod {avg}% i snit",
+    "why.drops":"Værditab {p}% på fire år — mod {avg}% i snit",
     "why.explained":"Tallene forklarer den.","why.partly":"Tallene forklarer den kun delvist.",
-    "why.unexplained":"Tallene forklarer den ikke. Så er det forhandlernet, leasingaftaler eller vane.",
-    "market.src":"Nyregistreringer {month}: {total} personbiler, heraf {ev} elbiler ({pc}%). Listen er indtastet i hånden fra offentliggjorte tal og dækker én måned. Danske salgslister opgøres pr. modelfamilie, så hver række står for én variant fra kataloget — ikke nødvendigvis den, der blev solgt mest af. Bundlisten offentliggøres ikke af nogen og findes derfor ikke her.",
+    "why.unexplained":"Tallene her forklarer den ikke.",
+    "why.blind":"Ikke målt her: leasingydelse, forhandlernet, leveringstid, udstyrsniveau.",
+    "market.src":"Nyregistreringer {month}: {total} personbiler, heraf {ev} elbiler ({pc}%). Listen er indtastet i hånden fra offentliggjorte tal og dækker én måned. Danske salgslister opgøres pr. modelfamilie, så hver række står for én variant fra kataloget — ikke nødvendigvis den, der blev solgt mest af. Bundlisten offentliggøres ikke af nogen og findes derfor ikke her. Værditabstallene gælder årgang 2022 målt i 2026 — fire år, ikke tre — og findes kun for de få modeller, en kilde dækker; gennemsnittet for elbiler i samme vindue er 51%.",
     "month.1":"januar","month.2":"februar","month.3":"marts","month.4":"april","month.5":"maj","month.6":"juni",
     "month.7":"juli","month.8":"august","month.9":"september","month.10":"oktober","month.11":"november","month.12":"december",
     "mode.h":"Hvad er du i dag?",
@@ -1514,9 +1518,12 @@
     "why.range":"No. {r} of {n} on real range","why.charge":"No. {r} of {n} on charging power",
     "why.rel":"Brand reliability {s} at Consumer Reports","why.warranty":"{y}-year vehicle warranty",
     "war.byd":"Battery 8 years / 200,000 km","war.toyota":"Battery extendable to 10 years / 1m km with annual servicing",
+    "why.holds":"Holds its value: {p}% lost over four years against {avg}% average",
+    "why.drops":"Lost {p}% over four years — against {avg}% average",
     "why.explained":"The numbers explain it.","why.partly":"The numbers only partly explain it.",
-    "why.unexplained":"The numbers do not explain it. That leaves the dealer network, the leasing deal, or habit.",
-    "market.src":"New registrations, {month}: {total} passenger cars, {ev} of them electric ({pc}%). The list is typed in by hand from published figures and covers one month, in Denmark. Danish sales lists are counted by model family, so each row stands for one variant from this catalogue — not necessarily the one that actually sold. Nobody publishes the bottom of the list, so it is not here.",
+    "why.unexplained":"The numbers here do not explain it.",
+    "why.blind":"Not measured here: leasing terms, dealer network, delivery time, trim level.",
+    "market.src":"New registrations, {month}: {total} passenger cars, {ev} of them electric ({pc}%). The list is typed in by hand from published figures and covers one month, in Denmark. Danish sales lists are counted by model family, so each row stands for one variant from this catalogue — not necessarily the one that actually sold. Nobody publishes the bottom of the list, so it is not here. The residual figures are for 2022 cars measured in 2026 — four years, not three — and exist only for the handful of models a source covers; the average electric car lost 51% over the same window.",
     "month.1":"January","month.2":"February","month.3":"March","month.4":"April","month.5":"May","month.6":"June",
     "month.7":"July","month.8":"August","month.9":"September","month.10":"October","month.11":"November","month.12":"December",
     "mode.buyer.short":"Buying","mode.owner.short":"Owner",
@@ -1858,6 +1865,18 @@
   /* Eight years or 160,000 km on the battery, to 70% capacity, is close to
      universal, so only what beats it is listed. Vehicle warranties are listed
      only where a source was found; the rest show nothing rather than a guess. */
+  /* What a model actually lost, measured against what the average electric car
+     lost over the same window — 2022 model year to 2026, from published Danish
+     used-market figures. The catalogue's own depreciation model uses one rate
+     for every car, so this is the only place a model's real residual appears,
+     and it exists only for the handful of models a source covers. */
+  var RESIDUAL_AVG = 51;
+  var RESIDUALS = {
+    "VW ID.4 Pro": 54,
+    "Tesla Model Y Long Range": 53,
+    "Škoda Enyaq 85": 52
+  };
+
   var WARRANTY = {
     "Kia":    { years:7, km:150000 },
     "MG":     { years:7 },
@@ -2266,6 +2285,13 @@
       out.push({ s: rl.score >= 55, txt: t("why.rel").replace("{s}", rl.score) });
     }
 
+    var res = RESIDUALS[car.marque + " " + car.model];
+    if (res != null) {
+      out.push({ s: res < RESIDUAL_AVG,
+        txt: t(res < RESIDUAL_AVG ? "why.holds" : "why.drops")
+              .replace("{p}", res).replace("{avg}", RESIDUAL_AVG) });
+    }
+
     var w = WARRANTY[car.marque];
     if (w) {
       if (w.years) out.push({ s: w.years >= 6,
@@ -2318,7 +2344,7 @@
             return '<span class="wchip' + (x.s ? " on" : "") + '">' + x.txt + '</span>';
           }).join("") + '</span>' +
           '<span class="mverdict" data-v="' + (strong >= 3 ? "y" : strong >= 1 ? "p" : "n") + '">' +
-            t(verdict) + '</span>' +
+            t(verdict) + (strong >= 3 ? "" : ' <span class="mblind">' + t("why.blind") + '</span>') + '</span>' +
         '</span>' +
       '</button>';
     }).join("");
