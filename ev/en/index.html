@@ -1507,13 +1507,15 @@
   };
   var CU = CUR[LANG] || CUR.da;
 
+  var NF0 = new Intl.NumberFormat(CU.loc, { maximumFractionDigits: 0 });
+
   /* whole units, e.g. "564.900 kr" or "75,700 EUR" */
   function money(dkk) {
-    return Math.round(dkk * CU.rate).toLocaleString(CU.loc, { maximumFractionDigits: 0 }) + " " + CU.sym;
+    return NF0.format(Math.round(dkk * CU.rate)) + " " + CU.sym;
   }
   /* bare number, for places that print the unit themselves */
   function moneyN(dkk) {
-    return Math.round(dkk * CU.rate).toLocaleString(CU.loc, { maximumFractionDigits: 0 });
+    return NF0.format(Math.round(dkk * CU.rate));
   }
   /* small amounts that need decimals, e.g. a per-kilometre cost */
   function money2(dkk) {
@@ -1686,9 +1688,9 @@
     ["Smart","#3 Pro+",62,455,1810,0.62,150,299000,"suv",2023],
     ["KGM","Torres EVX",73.4,462,2100,0.78,120,299000,"suv",2024],
     ["Lotus","Eletre S",112,600,2595,0.72,350,1199000,"premium",2023]
-  ].map(function (r) {
+  ].map(function (r, i) {
     return { marque:r[0], model:r[1], battery:r[2], wltp:r[3], mass:r[4],
-             cda:r[5], dc:r[6], price:r[7], seg:r[8], year:r[9] };
+             cda:r[5], dc:r[6], price:r[7], seg:r[8], year:r[9], i:i };
   });
 
   function segName(seg) { return t("seg." + seg); }
@@ -1986,7 +1988,7 @@
 
   /* ---------- formatting ---------- */
 
-  var kr = function (n) { return n.toLocaleString(CU.loc, { maximumFractionDigits: 0 }); };
+  var kr = function (n) { return NF0.format(n); };
   var kshort = function (n) { return n >= 1000 ? Math.round(n / 1000) + "k" : String(n); };
 
   /* ---------- awards ---------- */
@@ -2022,14 +2024,14 @@
         return { c: c, v: a.score(c, consume(c, state.speed, state.temp)) };
       }).sort(function (x, y) { return a.best === "max" ? y.v - x.v : x.v - y.v; });
       var w = scored[0], up = scored[1];
-      return '<button type="button" class="award" data-model="' + w.c.marque + " " + w.c.model + '">' +
+      return '<button type="button" class="award" data-i="' + w.c.i + '">' +
         '<div class="at">' + t("aw." + a.key) + '</div>' +
         '<div class="aw"><span class="amk">' + w.c.marque + '</span><span class="amd">' + w.c.model + '</span></div>' +
         '<div class="av">' + a.fmt(w.v) + '</div>' +
         '<div class="ar">' + t("aw." + a.key + ".n") + '.<br>' + t("aw.runnerup") + ': ' + up.c.marque + ' ' + up.c.model + '.</div>' +
       '</button>';
     }).join("");
-    bindPick(".award");
+
   }
 
   /* ---------- the field ---------- */
@@ -2050,39 +2052,138 @@
     document.getElementById("fcount").textContent =
       list.length + " " + (list.length === 1 ? t("f.car") : t("f.cars"));
 
-    document.getElementById("cards").innerHTML = list.length ? list.map(function (c) {
-      var rl = relOf(c.marque);
-      return '<button type="button" class="card" data-model="' + c.marque + " " + c.model +
-        '" aria-pressed="' + (c === state.car) + '">' +
-        '<div><div class="chead"><span class="marque">' + c.marque + '</span>' +
-        '<span class="seg">' + segName(c.seg) + '</span></div>' +
-        '<div class="model">' + c.model + '</div></div>' +
-        '<div class="headline"><span class="n">' + c._c.kwhh.toFixed(1) + '</span>' +
-        '<span class="u">' + t("unit.kwhh") + ' ' + t("card.at") + ' ' + state.speed + ' ' + t("unit.kmh") + '</span></div>' +
-        '<div class="facts">' +
-          '<div class="fact"><div class="fl">' + t("card.realrange") + '</div><div class="fv">' + Math.round(c._c.range) + ' ' + t("unit.km") + '</div></div>' +
-          '<div class="fact"><div class="fl">' + t("card.costyear") + '</div><div class="fv">' + money(c._a.total) + '</div></div>' +
-          '<div class="fact"><div class="fl">' + t("card.battery") + '</div><div class="fv">' + c.battery + ' ' + t("unit.kwh") + '</div></div>' +
-          '<div class="fact"><div class="fl">' + t("card.charging") + '</div><div class="fv">' + Math.round(chargeKmh(c, c._c.whkm)) + ' ' + t("unit.kmh") + '</div></div>' +
-        '</div>' +
-        '<div class="price"><span class="rel" data-b="' + rl.band + '"><span class="rd"></span>' + rl.label + '</span></div>' +
-        '<div class="price"><span class="yr">' + c.year + '</span> &middot; ' + t("card.new") + ' ' + money(c.price) +
-          (state.used ? '<br><span class="exp">' + state.age + ' ' + t("card.yrold") + ' &middot; ' + money(valueOf(c)) + '</span>' : '') +
-        '</div>' +
-      '</button>';
-    }).join("") : '<p class="empty">' + t("empty") + '</p>';
-    bindPick(".card");
+    /* A card is built once and then written into. Throwing away 136 buttons and
+       re-parsing them on every frame of a slider drag was the single most
+       expensive thing this page did; only the numbers actually change. */
+    var host = document.getElementById("cards");
+    if (!list.length) {
+      host.innerHTML = '<p class="empty">' + t("empty") + '</p>';
+      cardEls = {}; cardOrder = ""; cardSet = ""; cardSortKey = null;
+      return;
+    }
+
+    var i, c, el, order = [];
+    for (i = 0; i < list.length; i++) order.push(list[i].i);
+    var sig = order.join(",");
+
+    /* which cars are listed, regardless of the order they sit in */
+    var set = order.slice().sort(function (a, b) { return a - b; }).join(",");
+
+    /* A deliberate act — a sort chip, a filter, a different car — re-orders at
+       once. Sorting by range or cost ALSO re-orders on every frame of a slider
+       drag, and reshuffling 136 cards under the reader's thumb is both expensive
+       and unreadable; there the values keep up live and the order settles once,
+       after the slider stops. */
+    var deliberate = (set !== cardSet) || (state.sort !== cardSortKey);
+    if (sig !== cardOrder && !deliberate) {
+      if (orderTimer) clearTimeout(orderTimer);
+      orderTimer = setTimeout(function () {
+        orderTimer = null; cardSortKey = null; renderCards();
+      }, 320);
+    } else if (sig !== cardOrder) {
+      /* Re-order by moving the nodes that are out of place, never by clearing the
+         list. Clearing detached every card, threw away what the observer knew
+         about which ones were on screen, and forced a full re-layout. */
+      var want = {}, node = host.firstChild;
+      for (i = 0; i < list.length; i++) {
+        c = list[i];
+        el = cardEls[c.i];
+        if (!el) { el = cardEls[c.i] = makeCard(c); watchCard(el); }
+        want[c.i] = true;
+        if (node === el) { node = node.nextSibling; }
+        else { host.insertBefore(el, node); }
+      }
+      /* whatever is left over fell out of the filter */
+      while (node) {
+        var next = node.nextSibling;
+        if (!node.getAttribute || !want[+node.getAttribute("data-i")]) host.removeChild(node);
+        node = next;
+      }
+      cardOrder = sig; cardSet = set; cardSortKey = state.sort;
+    }
+    for (i = 0; i < list.length; i++) {
+      el = cardEls[list[i].i];
+      if (!el) continue;
+      /* off-screen cards are marked and filled in when they scroll into view;
+         four of 136 are visible on a phone, and laying out the other 132 on
+         every frame bought nobody anything */
+      if (el.__vis === false) { el.__dirty = true; continue; }
+      updateCard(el, list[i]);
+    }
   }
 
-  function bindPick(sel) {
-    Array.prototype.forEach.call(document.querySelectorAll(sel), function (el) {
-      el.addEventListener("click", function () {
-        var m = el.getAttribute("data-model"), i;
-        for (i = 0; i < CARS.length; i++) {
-          if (CARS[i].marque + " " + CARS[i].model === m) setCar(CARS[i]);
+  var cardEls = {}, cardOrder = "", cardSet = "", cardSortKey = null, cardObs = null, orderTimer = null;
+
+  function watchCard(el) {
+    if (!window.IntersectionObserver) return;
+    if (!cardObs) {
+      cardObs = new IntersectionObserver(function (entries) {
+        for (var j = 0; j < entries.length; j++) {
+          var e = entries[j], node = e.target;
+          node.__vis = e.isIntersecting;
+          if (e.isIntersecting && node.__dirty) {
+            node.__dirty = false;
+            updateCard(node, CARS[+node.getAttribute("data-i")]);
+          }
         }
-        
-      });
+      }, { rootMargin: "700px 0px" });
+    }
+    cardObs.observe(el);
+  }
+
+  /* the parts of a card that never move: name, badge, battery, reliability */
+  function makeCard(c) {
+    var rl = relOf(c.marque), el = document.createElement("button");
+    el.type = "button";
+    el.className = "card";
+    el.setAttribute("data-i", c.i);
+    el.innerHTML =
+      '<div><div class="chead"><span class="marque">' + c.marque + '</span>' +
+      '<span class="seg">' + segName(c.seg) + '</span></div>' +
+      '<div class="model">' + c.model + '</div></div>' +
+      '<div class="headline"><span class="n c-kwhh"></span><span class="u c-at"></span></div>' +
+      '<div class="facts">' +
+        '<div class="fact"><div class="fl">' + t("card.realrange") + '</div><div class="fv c-range"></div></div>' +
+        '<div class="fact"><div class="fl">' + t("card.costyear") + '</div><div class="fv c-cost"></div></div>' +
+        '<div class="fact"><div class="fl">' + t("card.battery") + '</div><div class="fv">' + c.battery + ' ' + t("unit.kwh") + '</div></div>' +
+        '<div class="fact"><div class="fl">' + t("card.charging") + '</div><div class="fv c-chg"></div></div>' +
+      '</div>' +
+      '<div class="price"><span class="rel" data-b="' + rl.band + '"><span class="rd"></span>' + rl.label + '</span></div>' +
+      '<div class="price c-price"></div>';
+    return el;
+  }
+
+  /* everything that moves when the conditions do */
+  function updateCard(el, c) {
+    el.__dirty = false;
+    var q = el.__q || (el.__q = {
+      kwhh: el.querySelector(".c-kwhh"), at: el.querySelector(".c-at"),
+      range: el.querySelector(".c-range"), cost: el.querySelector(".c-cost"),
+      chg: el.querySelector(".c-chg"), price: el.querySelector(".c-price")
+    });
+    set(el, "aria-pressed", String(c === state.car));
+    put(q.kwhh, c._c.kwhh.toFixed(1));
+    put(q.at, t("unit.kwhh") + " " + t("card.at") + " " + state.speed + " " + t("unit.kmh"));
+    put(q.range, Math.round(c._c.range) + " " + t("unit.km"));
+    put(q.cost, money(c._a.total));
+    put(q.chg, Math.round(chargeKmh(c, c._c.whkm)) + " " + t("unit.kmh"));
+    var price = '<span class="yr">' + c.year + '</span> &middot; ' + t("card.new") + ' ' + money(c.price) +
+      (state.used ? '<br><span class="exp">' + state.age + ' ' + t("card.yrold") + ' &middot; ' + money(valueOf(c)) + '</span>' : '');
+    if (q.price.__h !== price) { q.price.innerHTML = price; q.price.__h = price; }
+  }
+
+  /* writing an unchanged value still costs style and layout, so check first */
+  function put(el, s) { if (el.textContent !== s) el.textContent = s; }
+  function set(el, k, v) { if (el.getAttribute(k) !== v) el.setAttribute(k, v); }
+
+  /* One listener on the container instead of one per card, bound once rather
+     than rebound on every render. */
+  function delegatePick(hostId, pick) {
+    var host = document.getElementById(hostId);
+    if (!host) return;
+    host.addEventListener("click", function (ev) {
+      var el = ev.target.closest ? ev.target.closest("[data-i]") : null;
+      if (el && host.contains(el)) pick(CARS[+el.getAttribute("data-i")]);
     });
   }
 
@@ -2348,7 +2449,12 @@
 
   function renderHeavy() {
     var car = state.car, c = eff(car);
+    /* A panel that is not on screen is marked instead of drawn. Dragging a slider
+       on Your car used to redraw the whole Compare tab behind it, every frame. */
+    var onDrive = shown("p-drive"), onCosts = shown("p-costs"), onCompare = shown("p-compare");
+    stale.drive = !onDrive; stale.costs = !onCosts; stale.compare = !onCompare;
 
+    if (onDrive) {
     drawChart({ svg:"c1", tip:"t1", xs:SPEEDS, width:420, color:"--burn",
       ys: SPEEDS.map(function (k) { return consume(c, k, state.temp).kwhh; }),
       xTicks:[30,60,90,120,150,180], xFmt:String, xUnit:t("unit.kmh"),
@@ -2362,7 +2468,9 @@
       yFmt:function (v) { return Math.round(v); },
       markIndex:function () { return SPEEDS.indexOf(state.speed); },
       tipFmt:function (x, y) { return x + " " + t("unit.kmh") + " · " + Math.round(y) + " " + t("unit.km"); } });
+    }
 
+    if (onCosts) {
     var whkm = consume(c, state.speed, state.temp).whkm;
     var fixed = car.price * (state.depRate + state.insRate) / 100 + serviceCost();
     var perKmEnergy = whkm / 1000 * state.price;
@@ -2372,9 +2480,24 @@
       yFmt:function (v) { return v.toFixed(1); },
       markIndex:function () { return KMS.indexOf(Math.round(state.kmYear / 1000) * 1000); },
       tipFmt:function (x, y) { return kshort(x) + " " + t("unit.kmyr") + " · " + y.toFixed(2) + " " + curSym() + "/km"; } });
+    }
 
-    renderAwards();
-    renderCards();
+    if (onCompare) {
+      renderAwards();
+      renderCards();
+    }
+  }
+
+  var stale = { drive:false, costs:false, compare:false };
+  function shown(id) {
+    var el = document.getElementById(id);
+    return !!el && !el.hidden;
+  }
+  /* whatever was skipped while hidden is drawn the moment its tab is opened */
+  function catchUp() {
+    if ((stale.drive && shown("p-drive")) ||
+        (stale.costs && shown("p-costs")) ||
+        (stale.compare && shown("p-compare"))) renderHeavy();
   }
 
   var queued = false;
@@ -2624,6 +2747,7 @@
       p.hidden = p.id !== "p-" + name;
     });
     try { history.replaceState(null, "", "#" + name); } catch (e) {}
+    catchUp();
   }
   Array.prototype.forEach.call(document.querySelectorAll(".tabs button[data-tab]"), function (t) {
     t.addEventListener("click", function () {
@@ -2725,6 +2849,8 @@
   applyLang();
   applyCurrency();
   applyNumbers();
+  delegatePick("cards", setCar);
+  delegatePick("awards", setCar);
 
   try { showTab((location.hash || "#compare").slice(1)); } catch (e) { showTab("compare"); }
   syncCarPickers();
