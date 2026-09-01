@@ -335,6 +335,19 @@
   .addbtn { font-family: var(--mono); font-size: .6rem; letter-spacing: .12em; text-transform: uppercase;
     padding: 9px 16px; border-radius: 3px; border: 1px solid var(--ink); background: var(--ink); color: var(--surface); cursor: pointer; white-space: nowrap; }
   .addbtn:focus-visible { outline: 2px solid var(--burn); outline-offset: 2px; }
+  .note-form { display: flex; gap: 14px; align-items: flex-end; padding: 16px 22px; border-bottom: 1px solid var(--line); }
+  .note-form .fld { flex: 1 1 auto; min-width: 0; }
+  .note-form label { display: block; font-family: var(--mono); font-size: .57rem; letter-spacing: .12em;
+    text-transform: uppercase; color: var(--ink-3); margin-bottom: 6px; }
+  .note-form textarea { width: 100%; box-sizing: border-box; resize: vertical; font: inherit;
+    font-size: .84rem; line-height: 1.5; color: var(--ink); background: transparent;
+    border: 1px solid var(--line-2); border-radius: 6px; padding: 9px 11px; }
+  .note-form textarea:focus { outline: none; border-color: var(--burn); }
+  .note-item { display: grid; grid-template-columns: 108px 1fr auto; gap: 12px; align-items: start;
+    padding: 13px 22px; border-bottom: 1px solid var(--line); }
+  .note-item:last-child { border-bottom: none; }
+  .note-item .sd { font-family: var(--mono); font-size: .78rem; color: var(--ink-2); }
+  .note-item .nt { color: var(--ink); line-height: 1.55; white-space: pre-wrap; }
   .svc-list { display: grid; }
   .svc-item { display: grid; grid-template-columns: 108px 96px 1fr auto auto; gap: 12px; align-items: center;
     padding: 12px 22px; border-bottom: 1px solid var(--line); font-size: .88rem; }
@@ -473,6 +486,9 @@
     .ckeys { grid-template-columns: repeat(2, 1fr); }
     .svc-form { grid-template-columns: 1fr 1fr; }
     .svc-item { grid-template-columns: 1fr 1fr; gap: 6px; }
+    .note-form { flex-direction: column; align-items: stretch; gap: 11px; }
+    .note-item { grid-template-columns: 1fr auto; gap: 7px; }
+    .note-item .nt { grid-column: 1 / -1; }
   }
   @media (max-width: 760px) {
     .wrap { padding: 0 16px 72px; }
@@ -1120,6 +1136,36 @@
       </div>
     </div>
   </section>
+
+  <section>
+    <div class="sechead"><h2 data-t="sec.notes.h">Worth knowing</h2></div>
+    <p class="secnote" data-t="sec.notes.note">
+      The things a service book never records and the seller rarely mentions &mdash; a battery that
+      stops being honest past a certain mileage, a rattle in the cold, a part that is hard to get.
+      Write them down for whoever owns the car next; they travel with the record.
+    </p>
+
+    <div class="panel svc">
+      <div class="note-form">
+        <div class="fld">
+          <label for="nf-text" data-t="nf.label">What should the next owner know?</label>
+          <textarea id="nf-text" rows="2" data-tph="nf.ph"
+            placeholder="The battery is fine to about 70,000 km, then range drops off sharply."></textarea>
+        </div>
+        <button type="button" class="addbtn" id="nf-add" data-t="btn.addnote">Add note</button>
+      </div>
+      <div class="svc-list" id="notes-list"></div>
+      <div class="svc-foot">
+        <p data-t="notes.foot">
+          <b>These are one owner's words, not a fact about the model.</b> Every note shows as
+          unverified for the same reason every service stamp does: nobody checked it. That is
+          still worth having &mdash; an owner who tells you where a car is weak is telling you
+          something a spec sheet cannot, and a listing that carries honest caveats is worth more
+          than one that carries none.
+        </p>
+      </div>
+    </div>
+  </section>
   </div>
 
   <div class="tabpanel" id="p-method" role="tabpanel" hidden>
@@ -1281,7 +1327,13 @@
     "cost.peryear":"per år ved","cost.perkm":"kr per kilometer",
     "ck.dep":"Værditab","ck.ins":"Forsikring","ck.nrg":"Strøm","ck.svc":"Service og dæk",
     "svc.recordfor":"Journal for","svc.nothing":"Intet registreret endnu","svc.blocked":"Kunne ikke gemme — browseren blokerer lagring",
-    "svc.stampsaved":"stempel gemt","svc.stampssaved":"stempler gemt","svc.modelrecord":"modeljournal","svc.nostamps":"Ingen stempler endnu. Tilføj et foroven, eller vedhæft et foto af servicebogen.",
+    "sec.notes.h":"Værd at vide","sec.notes.note":"Det, en servicebog aldrig noterer, og sælgeren sjældent nævner — et batteri der holder op med at være ærligt efter et vist kilometertal, en raslen i kulden, en reservedel der er svær at skaffe. Skriv det ned til den, der ejer bilen efter dig; det følger med journalen.",
+    "nf.label":"Hvad bør den næste ejer vide?",
+    "nf.ph":"Batteriet er fint til omkring 70.000 km, derefter falder rækkevidden markant.",
+    "btn.addnote":"Tilføj note","notes.delete":"Slet note",
+    "notes.none":"Ingen noter endnu. Skriv det, du selv ville have villet vide, før du købte bilen.",
+    "notes.foot":"<b>Det her er én ejers ord, ikke en kendsgerning om modellen.</b> Hver note står som ubekræftet af samme grund som hvert servicestempel: ingen har tjekket den. Den er stadig værd at have — en ejer, der fortæller dig, hvor bilen er svag, fortæller dig noget, et datablad ikke kan, og en annonce med ærlige forbehold er mere værd end en uden.",
+    "svc.stamp":"stempel","svc.stamps":"stempler","svc.note":"note","svc.notes":"noter","svc.saved":"gemt","svc.modelrecord":"modeljournal","svc.nostamps":"Ingen stempler endnu. Tilføj et foroven, eller vedhæft et foto af servicebogen.",
     "ident.reg":"Nummerplade","ident.vin":"Stelnummer — valgfrit",
     "ident.note":"Uden dem hører journalen til <b>modellen</b>. Tilføj en nummerplade eller et stelnummer, og den hører til <b>netop den bil</b> — hvilket er det, der gør en overdragelse værd at have. At udfylde resten <em>automatisk</em> ud fra nummerpladen er et serverjob, ikke noget denne side kan — se <b>Metode</b>.",
     "sf.date":"Dato","sf.odo":"Kilometerstand","sf.work":"Udført arbejde og værksted","sf.type":"Type","sf.receipt":"Regning",
@@ -1362,7 +1414,9 @@
     "cost.peryear":"per year at","cost.perkm":"€ per kilometre",
     "svc.recordfor":"Record for","svc.nothing":"Nothing recorded yet",
     "svc.blocked":"Could not save — this browser blocks storage",
-    "svc.stampsaved":"stamp saved","svc.stampssaved":"stamps saved","svc.modelrecord":"model record",
+    "btn.addnote":"Add note","notes.delete":"Delete note",
+    "notes.none":"No notes yet. Write down what you would have wanted to know before you bought it.",
+    "svc.stamp":"stamp","svc.stamps":"stamps","svc.note":"note","svc.notes":"notes","svc.saved":"saved","svc.modelrecord":"model record",
     "svc.nostamps":"No stamps yet. Add one above, or attach a photo of the service book.",
     "rcp.logged":"Receipts logged","rcp.logged.d":"years of history",
     "rcp.logged.none":"Add a stamp with its bill to build an average",
@@ -1701,7 +1755,7 @@
     chargeTo: 100, reserve: 0, health: 100,
     kmYear: 18000, depRate: 13, insRate: 1.4, service: 3500,
     used: false, age: 3,
-    useReceipts: false, log: [], shots: [], saved: true, plate: "", vin: ""
+    useReceipts: false, log: [], notes: [], shots: [], saved: true, plate: "", vin: ""
   };
 
   /* effective spec: stock everywhere, overridden only for the car you are tuning */
@@ -1797,14 +1851,16 @@
   function loadLog() {
     var store = loadStore(), rec = store[carKey(state.car)];
     state.log = (rec && rec.entries) ? rec.entries : [];
+    state.notes = (rec && rec.notes) ? rec.notes : [];
   }
   function persistLog() {
     var store = loadStore();
-    if (state.log.length) {
+    if (state.log.length || state.notes.length) {
       store[carKey(state.car)] = {
         car: state.car.marque + " " + state.car.model, year: state.car.year,
         plate: norm(state.plate), vin: norm(state.vin),
-        updated: new Date().toISOString().slice(0, 10), entries: state.log
+        updated: new Date().toISOString().slice(0, 10),
+        entries: state.log, notes: state.notes
       };
     } else { delete store[carKey(state.car)]; }
     state.saved = saveStore(store);
@@ -1816,7 +1872,7 @@
       car: state.car.marque + " " + state.car.model, modelYear: state.car.year,
       plate: norm(state.plate), vin: norm(state.vin),
       exported: new Date().toISOString().slice(0, 10),
-      entries: state.log
+      entries: state.log, notes: state.notes
     }, null, 2);
   }
 
@@ -2063,6 +2119,7 @@
     syncCarPickers();
     fillTune();
     renderLog();
+    renderNotes();
     render();
   }
 
@@ -2070,15 +2127,18 @@
 
   function renderLog() {
     var badge = document.getElementById("svc-saved");
-    if (state.log.length === 0) {
+    if (state.log.length === 0 && state.notes.length === 0) {
       badge.className = "svc-saved off";
       badge.textContent = t("svc.nothing");
     } else if (state.saved) {
       var who = norm(state.plate) ? " · " + state.plate.toUpperCase()
               : norm(state.vin) ? " · VIN " + norm(state.vin).slice(-6) : " · " + t("svc.modelrecord");
       badge.className = "svc-saved";
-      badge.textContent = state.log.length + " " +
-        t(state.log.length === 1 ? "svc.stampsaved" : "svc.stampssaved") + who;
+      /* the record is stamps and notes together, so the badge counts both */
+      var parts = [];
+      if (state.log.length)   parts.push(state.log.length + " " + t(state.log.length === 1 ? "svc.stamp" : "svc.stamps"));
+      if (state.notes.length) parts.push(state.notes.length + " " + t(state.notes.length === 1 ? "svc.note" : "svc.notes"));
+      badge.textContent = parts.join(" · ") + " " + t("svc.saved") + who;
     } else {
       badge.className = "svc-saved off";
       badge.textContent = t("svc.blocked");
@@ -2128,6 +2188,36 @@
         '<span class="ct" style="width:' + (maxAvg ? Math.max(3, avg / maxAvg * 100) : 3) + '%"></span>' +
         '<span class="cvv">' + money(avg) + '</span></div>';
     }).join("") : '';
+  }
+
+  function renderNotes() {
+    var list = document.getElementById("notes-list");
+    list.innerHTML = state.notes.length ? state.notes.slice().sort(function (a, b) {
+      return (b.date || "").localeCompare(a.date || "");
+    }).map(function (n) {
+      return '<div class="note-item">' +
+        '<span class="sd">' + (n.date || "—") + '</span>' +
+        '<span class="nt">' + esc(n.text) + '</span>' +
+        '<span><span class="badge">' + t("badge.unverified") + '</span> ' +
+        '<button class="del" data-id="' + n.id + '" aria-label="' + t("notes.delete") + '">✕</button></span>' +
+      '</div>';
+    }).join("") : '<div class="note-item" style="grid-template-columns:1fr;color:var(--ink-3)">' +
+      t("notes.none") + '</div>';
+
+    Array.prototype.forEach.call(list.querySelectorAll(".del"), function (b) {
+      b.addEventListener("click", function () {
+        var id = +b.getAttribute("data-id");
+        state.notes = state.notes.filter(function (x) { return x.id !== id; });
+        persistLog(); renderLog(); renderNotes();
+      });
+    });
+  }
+
+  /* notes are free text typed by an owner, so they are escaped, never trusted as markup */
+  function esc(s) {
+    return String(s).replace(/[&<>"]/g, function (c) {
+      return { "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;" }[c];
+    });
   }
 
   function renderShots() {
@@ -2408,6 +2498,18 @@
     scheduleHeavy();
   });
 
+  document.getElementById("nf-add").addEventListener("click", function () {
+    var el = document.getElementById("nf-text"), text = el.value.trim();
+    if (!text) { el.focus(); return; }
+    state.notes.push({ id: Date.now() + Math.random(),
+                       date: new Date().toISOString().slice(0, 10),
+                       text: text.slice(0, 600) });
+    el.value = "";
+    persistLog();
+    renderLog();
+    renderNotes();
+  });
+
   document.getElementById("use-receipts").addEventListener("change", function () {
     state.useReceipts = this.checked;
     renderInstruments();
@@ -2419,6 +2521,7 @@
       state[id === "sf-plate" ? "plate" : "vin"] = this.value;
       loadLog();
       renderLog();
+      renderNotes();
       renderInstruments();
       scheduleHeavy();
     });
@@ -2451,17 +2554,22 @@
   function adoptRecord(text) {
     var data;
     try { data = JSON.parse(text); } catch (e) { return t("err.notrecord"); }
-    if (!data || !Array.isArray(data.entries)) return t("err.noentries");
-    var clean = data.entries.filter(function (e) { return e && (e.date || e.what || e.cost); })
+    if (!data || (!Array.isArray(data.entries) && !Array.isArray(data.notes))) return t("err.noentries");
+    var clean = (data.entries || []).filter(function (e) { return e && (e.date || e.what || e.cost); })
       .map(function (e) {
         return { id: Date.now() + Math.random(), date: e.date || "", km: isFinite(+e.km) ? +e.km : null,
                  what: String(e.what || ""), cat: String(e.cat || "Other"), cost: isFinite(+e.cost) ? +e.cost : 0 };
       });
-    if (!clean.length) return t("err.empty");
+    var notes = (data.notes || []).filter(function (n) { return n && n.text; })
+      .map(function (n) {
+        return { id: Date.now() + Math.random(), date: n.date || "", text: String(n.text).slice(0, 600) };
+      });
+    if (!clean.length && !notes.length) return t("err.empty");
     if (data.plate) { state.plate = data.plate; document.getElementById("sf-plate").value = data.plate; }
     if (data.vin)   { state.vin = data.vin;     document.getElementById("sf-vin").value = data.vin; }
     state.log = clean;
-    persistLog(); renderLog(); renderInstruments(); scheduleHeavy();
+    state.notes = notes;
+    persistLog(); renderLog(); renderNotes(); renderInstruments(); scheduleHeavy();
     return null;
   }
 
@@ -2623,6 +2731,7 @@
   fillTune();
   loadLog();
   renderLog();
+  renderNotes();
   renderShots();
   render();
 })();
