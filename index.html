@@ -438,7 +438,7 @@
                aria-label="Diameter over tænder i millimeter"/>
         <div class="range-ends">
           <span data-da="1855 mm — som bygget" data-en="1855 mm — as built">1855 mm — som bygget</span>
-          <span>2000 mm</span>
+          <span data-da="2000 mm — maksimum" data-en="2000 mm — maximum">2000 mm — maksimum</span>
         </div>
       </div>
 
@@ -479,7 +479,7 @@
       </div>
 
       <dl class="readout">
-        <div class="rrow"><dt data-da="Over tænder" data-en="Across teeth">Over tænder</dt><dd id="oTip"></dd></div>
+        <div class="rrow"><dt data-da="Over tænder, tand til tand" data-en="Across teeth, tip to tip">Over tænder, tand til tand</dt><dd id="oTip"></dd></div>
         <div class="rrow"><dt data-da="Flade til flade" data-en="Flat to flat">Flade til flade</dt><dd id="oFlat"></dd></div>
         <div class="rrow"><dt data-da="Drejeskive" data-en="Turntable">Drejeskive</dt><dd id="oBoard"></dd></div>
         <div class="rrow"><dt data-da="Plads pr. kuvert" data-en="Space per place">Plads pr. kuvert</dt><dd id="oSeat"></dd></div>
@@ -542,7 +542,7 @@
     <dl>
       <div class="spec-row"><dt data-da="Type" data-en="Type">Type</dt><dd data-da="Rundt spisebord med drejeskive" data-en="Round dining table with turntable">Rundt spisebord med drejeskive</dd></div>
       <div class="spec-row"><dt data-da="Kuverter" data-en="Place settings">Kuverter</dt><dd>8</dd></div>
-      <div class="spec-row"><dt data-da="Diameter over tænder" data-en="Diameter across teeth">Diameter over tænder</dt><dd data-da="1855–2000 mm, efter mål" data-en="1855–2000 mm, made to measure">1855–2000 mm, efter mål</dd></div>
+      <div class="spec-row"><dt data-da="Diameter, tand til tand" data-en="Diameter, tip to tip">Diameter, tand til tand</dt><dd data-da="1855–2000 mm tand til tand, efter mål. 2000 mm er maksimum." data-en="1855–2000 mm tip to tip, made to measure. 2000 mm is the maximum.">1855–2000 mm tand til tand, efter mål. 2000 mm er maksimum.</dd></div>
       <div class="spec-row"><dt data-da="Drejeskive" data-en="Turntable">Drejeskive</dt><dd data-da="Leje 401,5 eller 601,5 mm" data-en="401.5 or 601.5 mm bearing">Leje 401,5 eller 601,5 mm</dd></div>
     </dl>
     <dl>
@@ -632,6 +632,12 @@
    drawn top is 2137.9 mm; flat to flat it is 1700.9 mm, a ratio of 0.7956. The
    flat-to-flat figure is the boundary's closest approach to the centre, which
    on a straight flat is the middle of the segment rather than a vertex.
+
+   Size is always quoted across the teeth, tip to tip, with 2000 mm the largest
+   that can be made. The DXF itself is drawn larger than that, so it is used as
+   a shape rather than as a size: the profile is normalised to its tooth-tip
+   circle and scaled to whatever diameter is ordered. Only the ratios above
+   carry over, which is why they are the only figures taken from the file.
 
    The centre board is the identical profile at 0.3692 scale, and its bearing
    sits 26.5 mm inside its flat-to-flat circle — which is how the 601.5 mm
