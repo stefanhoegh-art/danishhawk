@@ -84,10 +84,9 @@
 
     /* ---------- nav ---------- */
     nav { position: fixed; inset: 0 0 auto 0; z-index: 100; display: flex; align-items: center;
-          justify-content: space-between; padding: 18px 48px; background: rgba(245,242,237,.94);
+          justify-content: flex-end; padding: 18px 48px; background: rgba(245,242,237,.94);
           backdrop-filter: blur(8px); border-bottom: 1px solid transparent; transition: border-color .3s; }
     nav.scrolled { border-color: var(--line); }
-    .logo-img { height: 46px; width: auto; }
     .nav-right { display: flex; align-items: center; gap: 34px; }
     .nav-links { display: flex; gap: 30px; list-style: none; }
     .nav-links a { font-family: var(--mono); font-size: .66rem; letter-spacing: .13em;
@@ -306,14 +305,10 @@
 <body>
 
 <nav id="navbar">
-  <a href="#hero" aria-label="Danish Hawk">
-    <picture><source srcset="assets/danish-hawk-4cbe99bb.webp" type="image/webp"/>
-      <img class="logo-img" src="assets/danish-hawk-4cbe99bb.jpg" alt="Danish Hawk" width="400" height="400" fetchpriority="high" decoding="async"/></picture>
-  </a>
   <div class="nav-right">
     <ul class="nav-links">
-      <li><a href="#drejeskiven" data-da="Drejeskiven" data-en="The turntable">Drejeskiven</a></li>
       <li><a href="#konfigurer" data-da="Vælg størrelse" data-en="Choose size">Vælg størrelse</a></li>
+      <li><a href="#drejeskiven" data-da="Drejeskiven" data-en="The turntable">Drejeskiven</a></li>
       <li><a href="#spec" data-da="Specifikationer" data-en="Specification">Specifikationer</a></li>
       <li><a href="#bestil" data-da="Bestil" data-en="Order">Bestil</a></li>
     </ul>
@@ -381,37 +376,6 @@
 </div>
 
 <!-- ============ THE TURNTABLE ============ -->
-<section class="split" id="drejeskiven">
-  <div class="split-text reveal">
-    <div class="slabel" data-da="Drejeskiven" data-en="The turntable">Drejeskiven</div>
-    <h2 data-da="Midten <em>drejer.</em>" data-en="The centre <em>turns.</em>">Midten <em>drejer.</em></h2>
-    <p class="lede" data-da="Midterpladen er det samme tandhjul som bordpladen, skåret ned i skala og lagt på et kugleleje. Den drejer hele vejen rundt, så retterne kan sendes videre uden at nogen skal række over bordet." data-en="The centre board is the same cog as the tabletop, cut down in scale and set on a ball bearing. It turns the whole way round, so dishes can be passed on without anyone reaching across the table.">Midterpladen er det samme tandhjul som bordpladen, skåret ned i skala og lagt på et kugleleje. Den drejer hele vejen rundt, så retterne kan sendes videre uden at nogen skal række over bordet.</p>
-    <ul class="pointlist">
-      <li><span class="pn">01</span><div>
-        <h3 data-da="Otte flader, otte pladser" data-en="Eight flats, eight places">Otte flader, otte pladser</h3>
-        <p data-da="Tænderne står mellem kuverterne, ikke foran dem. Hver gæst sidder ud for en lige flade og har sit eget felt at sidde ved." data-en="The teeth sit between the places, not in front of them. Each guest sits at a straight flat with their own defined space.">Tænderne står mellem kuverterne, ikke foran dem. Hver gæst sidder ud for en lige flade og har sit eget felt at sidde ved.</p>
-      </div></li>
-      <li><span class="pn">02</span><div>
-        <h3 data-da="Ingen bordende" data-en="No head of the table">Ingen bordende</h3>
-        <p data-da="Bordet er rundt. Alle kan se hinanden, og ingen sidder for sig selv i en ende." data-en="The table is round. Everyone can see everyone, and nobody is stranded at an end.">Bordet er rundt. Alle kan se hinanden, og ingen sidder for sig selv i en ende.</p>
-      </div></li>
-      <li><span class="pn">03</span><div>
-        <h3 data-da="To størrelser drejeskive" data-en="Two turntable sizes">To størrelser drejeskive</h3>
-        <p data-da="Drejeskiven bygges på et leje i enten 401,5 mm eller 601,5 mm. Den store bærer et helt serveringsfad; den lille tager mindre af bordet." data-en="The turntable is built on either a 401.5 mm or a 601.5 mm bearing. The large one carries a full serving dish; the small one takes up less of the table.">Drejeskiven bygges på et leje i enten 401,5 mm eller 601,5 mm. Den store bærer et helt serveringsfad; den lille tager mindre af bordet.</p>
-      </div></li>
-      <li><span class="pn">04</span><div>
-        <h3 data-da="To bordplader" data-en="Two tabletops">To bordplader</h3>
-        <p data-da="21 mm MDF med egefiner, eller 26 mm massiv eg limet op af stave. Fineren giver en rolig, ubrudt flade; den massive plade viser samlingerne og lever med årstiderne. Begge fås i fire overflader." data-en="21 mm MDF with oak veneer, or 26 mm solid oak glued up from staves. The veneer gives a quiet, unbroken surface; the solid top shows its joints and moves with the seasons. Both come in four finishes.">21 mm MDF med egefiner, eller 26 mm massiv eg limet op af stave. Fineren giver en rolig, ubrudt flade; den massive plade viser samlingerne og lever med årstiderne. Begge fås i fire overflader.</p>
-      </div></li>
-    </ul>
-  </div>
-  <div class="split-img reveal">
-    <picture><source srcset="assets/tandhjulet-underframe-detail-df0e85d8.webp" type="image/webp"/>
-      <img src="assets/tandhjulet-underframe-detail-df0e85d8.jpg" alt="Kuglelejet under bordpladen, som drejeskiven kører på" width="1200" height="1600" loading="lazy" decoding="async"/></picture>
-  </div>
-</section>
-
-<!-- ============ CONFIGURATOR ============ -->
 <section id="konfigurer">
   <div class="cfg-head reveal">
     <div class="slabel" data-da="Vælg størrelse" data-en="Choose size">Vælg størrelse</div>
@@ -484,14 +448,14 @@
     <div class="cfg-controls">
       <div class="ctrl">
         <div class="ctrl-label">
-          <span data-da="Stolene trukket ud" data-en="Chairs pulled out">Stolene trukket ud</span>
+          <span data-da="Stolene skubbet ind" data-en="Chairs pushed in">Stolene skubbet ind</span>
           <span class="ctrl-val" id="valPull"></span>
         </div>
-        <input type="range" id="pull" min="0" max="600" step="10" value="0"
-               aria-label="Hvor langt stolene er trukket ud fra bordet, i millimeter"/>
+        <input type="range" id="pull" min="0" max="600" step="10" value="600"
+               aria-label="Hvor langt stolene er skubbet ind til bordet, i millimeter"/>
         <div class="range-ends">
-          <span data-da="0 mm — skubbet helt ind" data-en="0 mm — pushed right in">0 mm — skubbet helt ind</span>
-          <span data-da="600 mm — rejst sig" data-en="600 mm — got up">600 mm — rejst sig</span>
+          <span data-da="Rejst sig" data-en="Got up">Rejst sig</span>
+          <span data-da="Skubbet helt ind" data-en="Pushed right in">Skubbet helt ind</span>
         </div>
       </div>
 
@@ -610,6 +574,38 @@
     </div>
   </div>
 </section>
+
+<section class="split" id="drejeskiven">
+  <div class="split-text reveal">
+    <div class="slabel" data-da="Drejeskiven" data-en="The turntable">Drejeskiven</div>
+    <h2 data-da="Midten <em>drejer.</em>" data-en="The centre <em>turns.</em>">Midten <em>drejer.</em></h2>
+    <p class="lede" data-da="Midterpladen er det samme tandhjul som bordpladen, skåret ned i skala og lagt på et kugleleje. Den drejer hele vejen rundt, så retterne kan sendes videre uden at nogen skal række over bordet." data-en="The centre board is the same cog as the tabletop, cut down in scale and set on a ball bearing. It turns the whole way round, so dishes can be passed on without anyone reaching across the table.">Midterpladen er det samme tandhjul som bordpladen, skåret ned i skala og lagt på et kugleleje. Den drejer hele vejen rundt, så retterne kan sendes videre uden at nogen skal række over bordet.</p>
+    <ul class="pointlist">
+      <li><span class="pn">01</span><div>
+        <h3 data-da="Otte flader, otte pladser" data-en="Eight flats, eight places">Otte flader, otte pladser</h3>
+        <p data-da="Tænderne står mellem kuverterne, ikke foran dem. Hver gæst sidder ud for en lige flade og har sit eget felt at sidde ved." data-en="The teeth sit between the places, not in front of them. Each guest sits at a straight flat with their own defined space.">Tænderne står mellem kuverterne, ikke foran dem. Hver gæst sidder ud for en lige flade og har sit eget felt at sidde ved.</p>
+      </div></li>
+      <li><span class="pn">02</span><div>
+        <h3 data-da="Ingen bordende" data-en="No head of the table">Ingen bordende</h3>
+        <p data-da="Bordet er rundt. Alle kan se hinanden, og ingen sidder for sig selv i en ende." data-en="The table is round. Everyone can see everyone, and nobody is stranded at an end.">Bordet er rundt. Alle kan se hinanden, og ingen sidder for sig selv i en ende.</p>
+      </div></li>
+      <li><span class="pn">03</span><div>
+        <h3 data-da="To størrelser drejeskive" data-en="Two turntable sizes">To størrelser drejeskive</h3>
+        <p data-da="Drejeskiven bygges på et leje i enten 401,5 mm eller 601,5 mm. Den store bærer et helt serveringsfad; den lille tager mindre af bordet." data-en="The turntable is built on either a 401.5 mm or a 601.5 mm bearing. The large one carries a full serving dish; the small one takes up less of the table.">Drejeskiven bygges på et leje i enten 401,5 mm eller 601,5 mm. Den store bærer et helt serveringsfad; den lille tager mindre af bordet.</p>
+      </div></li>
+      <li><span class="pn">04</span><div>
+        <h3 data-da="To bordplader" data-en="Two tabletops">To bordplader</h3>
+        <p data-da="21 mm MDF med egefiner, eller 26 mm massiv eg limet op af stave. Fineren giver en rolig, ubrudt flade; den massive plade viser samlingerne og lever med årstiderne. Begge fås i fire overflader." data-en="21 mm MDF with oak veneer, or 26 mm solid oak glued up from staves. The veneer gives a quiet, unbroken surface; the solid top shows its joints and moves with the seasons. Both come in four finishes.">21 mm MDF med egefiner, eller 26 mm massiv eg limet op af stave. Fineren giver en rolig, ubrudt flade; den massive plade viser samlingerne og lever med årstiderne. Begge fås i fire overflader.</p>
+      </div></li>
+    </ul>
+  </div>
+  <div class="split-img reveal">
+    <picture><source srcset="assets/tandhjulet-underframe-detail-df0e85d8.webp" type="image/webp"/>
+      <img src="assets/tandhjulet-underframe-detail-df0e85d8.jpg" alt="Kuglelejet under bordpladen, som drejeskiven kører på" width="1200" height="1600" loading="lazy" decoding="async"/></picture>
+  </div>
+</section>
+
+<!-- ============ CONFIGURATOR ============ -->
 
 <!-- ============ UNDERFRAME ============ -->
 <section class="split flip" id="stellet">
@@ -1013,7 +1009,7 @@
     spoke.setAttribute('y2', -(bFlat / 2 - 20));
 
     var k = tip / 2 / PATH_R;                       // mm per normalised unit
-    var pulled = +pull.value;
+    var pulled = +pull.max - +pull.value;
     var seatR = seatFront(CHAIR_W, 0, k, pulled);          // a chair at a flat
     var kidR  = seatFront(HIGH_W, 180 / SEATS, k, pulled); // a high chair at a tooth
     chairs.setAttribute('d', seatRing(seatR, CHAIR_W, CHAIR_D, 0, ALL_SEATS));
@@ -1076,7 +1072,7 @@
             : 'Olie trænger ind i træet og lader det stå mat og åbent at røre ved. Den vil have en omgang olie en eller to gange om året, og ringe og mærker følger med — til gengæld kan de gnides væk enkeltvis, uden at resten af bordet skal røres.');
     document.getElementById('valPull').textContent = pulled === 0
       ? (en ? 'Pushed right in' : 'Skubbet helt ind')
-      : mm(pulled);
+      : (en ? mm(pulled) + ' out' : mm(pulled) + ' ude');
     document.getElementById('gloss').style.display = treatment === 'lak' ? '' : 'none';
     document.getElementById('gloss').setAttribute('transform', 'scale(' + k + ')');
     paintOak();
