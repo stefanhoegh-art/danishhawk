@@ -171,6 +171,7 @@
       background: var(--bg); border: 1px solid var(--ink); cursor: grab; }
     .range-ends { display: flex; justify-content: space-between; font-family: var(--mono);
                   font-size: .55rem; color: var(--mid); margin-top: 10px; letter-spacing: .08em; }
+    .ctrl-why { font-size: .74rem; color: var(--mid); line-height: 1.7; margin: 12px 0 0; }
     .choices { display: flex; gap: 8px; }
     .swatches { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
     .sw { border: 1px solid var(--line); background: none; padding: 0; cursor: pointer;
@@ -457,6 +458,20 @@
 
       <div class="ctrl">
         <div class="ctrl-label">
+          <span data-da="Drejeskive — diameter" data-en="Turntable — diameter">Drejeskive — diameter</span>
+          <span class="ctrl-val" id="valBoardDia"></span>
+        </div>
+        <input type="range" id="bdia" min="790" max="875" step="5" value="790"
+               aria-label="Drejeskivens diameter over tænder i millimeter"/>
+        <div class="range-ends">
+          <span id="bMin"></span>
+          <span id="bMax"></span>
+        </div>
+        <p class="ctrl-why" id="bWhy"></p>
+      </div>
+
+      <div class="ctrl">
+        <div class="ctrl-label">
           <span data-da="Bordplade — materiale" data-en="Tabletop — material">Bordplade — materiale</span>
           <span class="ctrl-val" id="valMat"></span>
         </div>
@@ -482,6 +497,7 @@
         <div class="rrow"><dt data-da="Over tænder, tand til tand" data-en="Across teeth, tip to tip">Over tænder, tand til tand</dt><dd id="oTip"></dd></div>
         <div class="rrow"><dt data-da="Flade til flade" data-en="Flat to flat">Flade til flade</dt><dd id="oFlat"></dd></div>
         <div class="rrow"><dt data-da="Drejeskive" data-en="Turntable">Drejeskive</dt><dd id="oBoard"></dd></div>
+        <div class="rrow"><dt data-da="Udhæng over lejet" data-en="Overhang past bearing">Udhæng over lejet</dt><dd id="oOver"></dd></div>
         <div class="rrow"><dt data-da="Plads pr. kuvert" data-en="Space per place">Plads pr. kuvert</dt><dd id="oSeat"></dd></div>
         <div class="rrow"><dt data-da="Bordplade" data-en="Tabletop area">Bordplade</dt><dd id="oArea"></dd></div>
         <div class="rrow"><dt data-da="Plads i rummet" data-en="Room needed">Plads i rummet</dt><dd id="oRoom"></dd></div>
@@ -494,7 +510,7 @@
         <p class="price-sub" data-da="Prisen dækker bordplade, drejeskive med leje, stel, overfladebehandling og montering. Levering kommer oveni. Endelig pris får du skriftligt, før der skæres." data-en="The price covers the tabletop, the turntable and its bearing, the underframe, the finish and assembly. Delivery is extra. You get a firm price in writing before anything is cut.">Prisen dækker bordplade, drejeskive med leje, stel, overfladebehandling og montering. Levering kommer oveni. Endelig pris får du skriftligt, før der skæres.</p>
       </div>
 
-      <p class="cfg-note" data-da="Målene her er beregnet ud fra produktionsfilen til det første bord. Plads pr. kuvert er buelængden langs flade-til-flade delt med otte. Plads i rummet regner med 900 mm bag hver stol til at sidde og komme forbi." data-en="These figures are calculated from the production file for the first table. Space per place is the arc along the flat-to-flat circle divided by eight. Room needed allows 900 mm behind each chair to sit down and pass by.">Målene her er beregnet ud fra produktionsfilen til det første bord. Plads pr. kuvert er buelængden langs flade-til-flade delt med otte. Plads i rummet regner med 900 mm bag hver stol til at sidde og komme forbi.</p>
+      <p class="cfg-note" data-da="Målene her er beregnet ud fra produktionsfilen til det første bord. Plads pr. kuvert er buelængden langs flade-til-flade delt med otte. Plads i rummet regner med 900 mm bag hver stol til at sidde og komme forbi. Drejeskiven kan ikke blive mindre end sit leje, og ikke så stor at den hverken bærer forsvarligt eller levner plads til kuverterne." data-en="These figures are calculated from the production file for the first table. Space per place is the arc along the flat-to-flat circle divided by eight. Room needed allows 900 mm behind each chair to sit down and pass by. The turntable cannot be smaller than its bearing, nor so large that it stops carrying safely or leaves the places no room.">Målene her er beregnet ud fra produktionsfilen til det første bord. Plads pr. kuvert er buelængden langs flade-til-flade delt med otte. Plads i rummet regner med 900 mm bag hver stol til at sidde og komme forbi. Drejeskiven kan ikke blive mindre end sit leje, og ikke så stor at den hverken bærer forsvarligt eller levner plads til kuverterne.</p>
 
       <a href="#bestil" class="btn-primary" style="margin-top:26px" data-da="Bestil dette mål" data-en="Order this size">Bestil dette mål</a>
     </div>
@@ -543,7 +559,7 @@
       <div class="spec-row"><dt data-da="Type" data-en="Type">Type</dt><dd data-da="Rundt spisebord med drejeskive" data-en="Round dining table with turntable">Rundt spisebord med drejeskive</dd></div>
       <div class="spec-row"><dt data-da="Kuverter" data-en="Place settings">Kuverter</dt><dd>8</dd></div>
       <div class="spec-row"><dt data-da="Diameter, tand til tand" data-en="Diameter, tip to tip">Diameter, tand til tand</dt><dd data-da="1855–2000 mm tand til tand, efter mål. 2000 mm er maksimum." data-en="1855–2000 mm tip to tip, made to measure. 2000 mm is the maximum.">1855–2000 mm tand til tand, efter mål. 2000 mm er maksimum.</dd></div>
-      <div class="spec-row"><dt data-da="Drejeskive" data-en="Turntable">Drejeskive</dt><dd data-da="Leje 401,5 eller 601,5 mm" data-en="401.5 or 601.5 mm bearing">Leje 401,5 eller 601,5 mm</dd></div>
+      <div class="spec-row"><dt data-da="Drejeskive" data-en="Turntable">Drejeskive</dt><dd data-da="Leje 401,5 eller 601,5 mm. Pladen Ø 540–990 mm efter leje og bordstørrelse." data-en="401.5 or 601.5 mm bearing. Board Ø 540–990 mm, depending on the bearing and the table size.">Leje 401,5 eller 601,5 mm. Pladen Ø 540–990 mm efter leje og bordstørrelse.</dd></div>
     </dl>
     <dl>
       <div class="spec-row"><dt data-da="Bordplade" data-en="Tabletop">Bordplade</dt><dd data-da="21 mm MDF m. egefiner, eller 26 mm massiv eg" data-en="21 mm MDF with oak veneer, or 26 mm solid oak">21 mm MDF m. egefiner, eller 26 mm massiv eg</dd></div>
@@ -651,6 +667,16 @@
 (function () {
   var FLAT_RATIO   = 0.7956;   // flat-to-flat diameter / tooth-tip diameter
   var BEARING_GAP  = 26.5;     // board flat-to-flat minus bearing diameter, mm
+  /* How far the board may reach past the bearing it turns on, as a share of
+     the bearing diameter, per side. Past this the board levers on the bearing
+     when someone leans on its edge. 12.5% of the bearing is a working figure,
+     not a calculated one — Stefan will know better once he has turned a big
+     one by hand. */
+  var MAX_OVERHANG = 0.125;
+  /* How much fixed table each place needs outside the turntable: a plate, a
+     glass and somewhere to put your hands. This is what stops the board from
+     eating the table. */
+  var PLACE_DEPTH  = 300;      // mm
   var SEATS        = 8;
   var CHAIR_W      = 460;      // mm
   var CHAIR_D      = 480;      // mm
@@ -695,19 +721,40 @@
   var spoke = document.getElementById('spoke');
   var chairs = document.getElementById('chairs');
   var dia   = document.getElementById('dia');
+  var bdia  = document.getElementById('bdia');
   var hint  = document.getElementById('cfgHint');
 
   var bearing = 601.5;
   var material = 'solid';
   var finish = 'moerk';
   var angle = 0;
+  // Until the board slider is touched it follows each bearing's smallest size,
+  // which is the one that was actually built.
+  var boardTouched = false;
   var oak = null;   // the texture module, loaded once
 
   var isEn = function () { return document.documentElement.lang === 'en'; };
   var locale = function () { return isEn() ? 'en-GB' : 'da-DK'; };
   var mm = function (n) { return Math.round(n).toLocaleString(locale()) + ' mm'; };
 
-  function boardTip(b) { return (b + BEARING_GAP) / FLAT_RATIO; }
+  /* The smallest board that still covers its bearing — this is the one drawn
+     in the DXF, so it is where each bearing starts. */
+  function boardMin(b) { return round5((b + BEARING_GAP) / FLAT_RATIO, 'up'); }
+
+  /* The largest board, whichever of the two limits bites first: how far it may
+     hang past the bearing, and how much fixed table the eight places need. */
+  function boardMax(b, tip) {
+    var byBearing = b * (1 + 2 * MAX_OVERHANG) / FLAT_RATIO;
+    var byTable   = tip * FLAT_RATIO - 2 * PLACE_DEPTH;
+    return round5(Math.min(byBearing, byTable), 'down');
+  }
+  function boardLimit(b, tip) {
+    return b * (1 + 2 * MAX_OVERHANG) / FLAT_RATIO <= tip * FLAT_RATIO - 2 * PLACE_DEPTH
+      ? 'bearing' : 'table';
+  }
+  function round5(n, dir) {
+    return (dir === 'up' ? Math.ceil(n / 5) : Math.floor(n / 5)) * 5;
+  }
 
   function drawChairs(flatR) {
     var d = '';
@@ -757,10 +804,30 @@
     document.getElementById('oakBoardImg').setAttribute('href', topURL);
   }
 
+  function updateBoardRange() {
+    var tip = +dia.value;
+    var lo = boardMin(bearing);
+    var hi = Math.max(lo, boardMax(bearing, tip));
+    bdia.min = lo;
+    bdia.max = hi;
+    bdia.value = boardTouched ? Math.min(hi, Math.max(lo, +bdia.value)) : lo;
+
+    var en = isEn();
+    document.getElementById('bMin').textContent = mm(lo) + (en ? ' — smallest' : ' — mindst');
+    document.getElementById('bMax').textContent = mm(hi) + (en ? ' — largest' : ' — størst');
+    document.getElementById('bWhy').textContent =
+      boardLimit(bearing, tip) === 'bearing'
+        ? (en ? 'The largest size is set by how far the board may reach past its bearing. The large bearing carries a larger board.'
+              : 'Størstemålet er sat af, hvor langt pladen må nå ud over lejet. Det store leje bærer en større plade.')
+        : (en ? 'The largest size is set by each place needing 300 mm of fixed table outside the turntable. A wider table allows a wider turntable.'
+              : 'Størstemålet er sat af, at hver kuvert skal have 300 mm fast bord uden om drejeskiven. Et bredere bord giver en bredere drejeskive.');
+  }
+
   function render() {
+    updateBoardRange();
     var tip = +dia.value;
     var flat = tip * FLAT_RATIO;
-    var bTip = boardTip(bearing);
+    var bTip = +bdia.value;
     var bFlat = bTip * FLAT_RATIO;
 
     top.setAttribute('transform', 'scale(' + (tip / 2) + ')');
@@ -794,10 +861,12 @@
     var seatArc = Math.PI * flat / SEATS;
     var area = Math.PI * Math.pow(flat / 2000, 2); // m², using the flat circle
     document.getElementById('valDia').textContent = mm(tip);
-    document.getElementById('valBoard').textContent = mm(bTip);
+    document.getElementById('valBoard').textContent = bearing.toLocaleString(locale()) + ' mm';
+    document.getElementById('valBoardDia').textContent = mm(bTip);
     document.getElementById('oTip').textContent = 'Ø ' + mm(tip);
     document.getElementById('oFlat').textContent = 'Ø ' + mm(flat);
     document.getElementById('oBoard').textContent = 'Ø ' + mm(bTip);
+    document.getElementById('oOver').textContent = mm((bFlat - bearing) / 2);
     document.getElementById('oSeat').textContent = mm(seatArc);
     document.getElementById('oArea').textContent =
       area.toFixed(2).replace('.', isEn() ? '.' : ',') + ' m²';
@@ -820,6 +889,7 @@
   }
 
   dia.addEventListener('input', render);
+  bdia.addEventListener('input', function () { boardTouched = true; render(); });
 
   ['mVeneer', 'mSolid'].forEach(function (id) {
     document.getElementById(id).addEventListener('click', function () {
