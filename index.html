@@ -327,7 +327,7 @@
   </div>
   <div class="fact">
     <div class="fact-n">8</div>
-    <div class="fact-l" data-da="Tænder — plads til en barnestol" data-en="Teeth — room for a high chair">Tænder — plads til en barnestol</div>
+    <div class="fact-l" data-da="Tænder — én plads pr. flade" data-en="Teeth — one place per flat">Tænder — én plads pr. flade</div>
   </div>
   <div class="fact">
     <div class="fact-n">360<small>°</small></div>
@@ -351,18 +351,14 @@
         <p data-da="Tænderne står mellem kuverterne, ikke foran dem. Hver gæst sidder ud for en lige flade og har sit eget felt at sidde ved." data-en="The teeth sit between the places, not in front of them. Each guest sits at a straight flat with their own defined space.">Tænderne står mellem kuverterne, ikke foran dem. Hver gæst sidder ud for en lige flade og har sit eget felt at sidde ved.</p>
       </div></li>
       <li><span class="pn">02</span><div>
-        <h3 data-da="Tænderne er små pladser" data-en="The teeth are small places">Tænderne er små pladser</h3>
-        <p data-da="Hver tand stikker knap 190 mm længere ud end fladerne og giver et lille hjørne for sig selv. Det er plads nok til en barnestol, når kuverten ved siden af er ledig — så et barn kan komme med til bords uden at bordet skal være større. Otte voksne og en barnestol på én gang går ikke op." data-en="Each tooth reaches almost 190 mm further out than the flats and gives a small corner of its own. That is room for a high chair whenever the place beside it is free — so a child can join the table without the table having to grow. Eight adults and a high chair at once will not fit.">Hver tand stikker knap 190 mm længere ud end fladerne og giver et lille hjørne for sig selv. Det er plads nok til en barnestol, når kuverten ved siden af er ledig — så et barn kan komme med til bords uden at bordet skal være større. Otte voksne og en barnestol på én gang går ikke op.</p>
-      </div></li>
-      <li><span class="pn">03</span><div>
         <h3 data-da="Ingen bordende" data-en="No head of the table">Ingen bordende</h3>
         <p data-da="Bordet er rundt. Alle kan se hinanden, og ingen sidder for sig selv i en ende." data-en="The table is round. Everyone can see everyone, and nobody is stranded at an end.">Bordet er rundt. Alle kan se hinanden, og ingen sidder for sig selv i en ende.</p>
       </div></li>
-      <li><span class="pn">04</span><div>
+      <li><span class="pn">03</span><div>
         <h3 data-da="To størrelser drejeskive" data-en="Two turntable sizes">To størrelser drejeskive</h3>
         <p data-da="Drejeskiven bygges på et leje i enten 401,5 mm eller 601,5 mm. Den store bærer et helt serveringsfad; den lille tager mindre af bordet." data-en="The turntable is built on either a 401.5 mm or a 601.5 mm bearing. The large one carries a full serving dish; the small one takes up less of the table.">Drejeskiven bygges på et leje i enten 401,5 mm eller 601,5 mm. Den store bærer et helt serveringsfad; den lille tager mindre af bordet.</p>
       </div></li>
-      <li><span class="pn">05</span><div>
+      <li><span class="pn">04</span><div>
         <h3 data-da="To bordplader" data-en="Two tabletops">To bordplader</h3>
         <p data-da="21 mm MDF med egefiner, eller 26 mm massiv eg limet op af stave. Fineren giver en rolig, ubrudt flade; den massive plade viser samlingerne og lever med årstiderne. Begge fås i fire overflader." data-en="21 mm MDF with oak veneer, or 26 mm solid oak glued up from staves. The veneer gives a quiet, unbroken surface; the solid top shows its joints and moves with the seasons. Both come in four finishes.">21 mm MDF med egefiner, eller 26 mm massiv eg limet op af stave. Fineren giver en rolig, ubrudt flade; den massive plade viser samlingerne og lever med årstiderne. Begge fås i fire overflader.</p>
       </div></li>
@@ -401,8 +397,7 @@
 
         <!-- chairs sit at the eight flats and never change size -->
         <g id="chairs" fill="#e6e0d4" stroke="#b0a693" stroke-width="7"></g>
-        <g id="kids" fill="none" stroke="#b0a693" stroke-width="7"
-           stroke-dasharray="34 22" style="display:none"></g>
+        <g id="kids" fill="#efe9dd" stroke="#b0a693" stroke-width="7"></g>
 
         <!-- tabletop -->
         <use id="top" href="#cog" fill="url(#oakTop)" stroke="#0f0e0b" stroke-width="0.009"/>
@@ -501,17 +496,14 @@
 
       <div class="ctrl">
         <div class="ctrl-label">
-          <span data-da="Barnestole ved tænderne" data-en="High chairs at the teeth">Barnestole ved tænderne</span>
+          <span data-da="Barnestol ved en tand" data-en="High chair at a tooth">Barnestol ved en tand</span>
+          <span class="ctrl-val" id="valKids"></span>
         </div>
         <div class="choices">
-          <button class="choice" id="kidsOff" type="button" aria-pressed="true">
-            <span data-da="Skjul" data-en="Hide">Skjul</span>
-            <small data-da="Otte voksne" data-en="Eight adults">Otte voksne</small></button>
-          <button class="choice" id="kidsOn" type="button" aria-pressed="false">
-            <span data-da="Vis" data-en="Show">Vis</span>
-            <small data-da="Otte tænder" data-en="Eight teeth">Otte tænder</small></button>
+          <button class="choice kn" id="k0" type="button" aria-pressed="true"  data-kids="0">0</button>
+          <button class="choice kn" id="k1" type="button" aria-pressed="false" data-kids="1">1</button>
+          <button class="choice kn" id="k2" type="button" aria-pressed="false" data-kids="2">2</button>
         </div>
-        <p class="ctrl-why" id="kWhy"></p>
       </div>
 
       <dl class="readout">
@@ -520,8 +512,6 @@
         <div class="rrow"><dt data-da="Drejeskive" data-en="Turntable">Drejeskive</dt><dd id="oBoard"></dd></div>
         <div class="rrow"><dt data-da="Udhæng over lejet" data-en="Overhang past bearing">Udhæng over lejet</dt><dd id="oOver"></dd></div>
         <div class="rrow"><dt data-da="Plads pr. kuvert" data-en="Space per place">Plads pr. kuvert</dt><dd id="oSeat"></dd></div>
-        <div class="rrow"><dt data-da="Tanden — bredde × dybde" data-en="A tooth — width × depth">Tanden — bredde × dybde</dt><dd id="oTooth"></dd></div>
-        <div class="rrow"><dt data-da="Fri plads ved tanden" data-en="Clear width at a tooth">Fri plads ved tanden</dt><dd id="oClear"></dd></div>
         <div class="rrow"><dt data-da="Bordplade" data-en="Tabletop area">Bordplade</dt><dd id="oArea"></dd></div>
         <div class="rrow"><dt data-da="Plads i rummet" data-en="Room needed">Plads i rummet</dt><dd id="oRoom"></dd></div>
         <div class="rrow"><dt data-da="Pladetykkelse" data-en="Top thickness">Pladetykkelse</dt><dd id="oThick"></dd></div>
@@ -693,7 +683,6 @@
 (function () {
   var FLAT_RATIO   = 0.7956;   // flat-to-flat diameter / tooth-tip diameter
   var PATH_R       = 0.98402;  // the cog path's own outermost radius; see above
-  var TOOTH_FLAT   = 0.13009;  // the flat across one tooth tip, same normalisation
   var BEARING_GAP  = 26.5;     // board flat-to-flat minus bearing diameter, mm
   /* How far the board may reach past the bearing it turns on, as a share of
      the bearing diameter, per side. Past this the board levers on the bearing
@@ -763,7 +752,7 @@
   // Until the board slider is touched it follows each bearing's smallest size,
   // which is the one that was actually built.
   var boardTouched = false;
-  var showKids = false;
+  var kidCount = 0;
   var oak = null;   // the texture module, loaded once
 
   var isEn = function () { return document.documentElement.lang === 'en'; };
@@ -789,14 +778,14 @@
     return (dir === 'up' ? Math.ceil(n / 5) : Math.floor(n / 5)) * 5;
   }
 
-  /* Eight seats on a ring. Offset by half a pitch to sit at the teeth instead
-     of at the flats. The chairs clear the tooth-tip circle rather than the
-     flats, because a chair pushed in at a flat would foul the teeth beside it —
-     which is also why a high chair at a tooth is on the same ring as the
-     adults, and has to share the gap between them. */
-  function seatRing(front, w, dep, offsetDeg) {
+  /* Seats on a ring. Offset by half a pitch to sit at the teeth instead of at
+     the flats, and pass a shorter list of positions to draw only some of them.
+     Every chair clears the tooth-tip circle rather than the flats, because a
+     chair pushed in at a flat would foul the teeth either side of it. */
+  function seatRing(front, w, dep, offsetDeg, seats) {
     var d = '';
-    for (var i = 0; i < SEATS; i++) {
+    for (var n = 0; n < seats.length; n++) {
+      var i = seats[n];
       var a = (i * 360 / SEATS + offsetDeg) * Math.PI / 180;
       var ca = Math.cos(a), sa = Math.sin(a);
       // A chair as a plain open rectangle, its near edge at `front`.
@@ -820,15 +809,15 @@
     return el;
   }
   chairs = onePath(chairs);
-  var kidsG = document.getElementById('kids');
-  var kids  = onePath(kidsG);
+  var kids  = onePath(document.getElementById('kids'));
 
-  /* How much clear width a child gets at a tooth, between the two adult chairs
-     either side of it. Both sit on the same ring, so this is just what is left
-     of the 45 degree pitch once a chair's width is taken out of it. */
-  function clearAtTooth(seatR) {
-    var half = Math.atan2(CHAIR_W / 2, seatR);
-    return 2 * seatR * Math.sin(Math.max(0, Math.PI / SEATS - half));
+  var ALL_SEATS = [0, 1, 2, 3, 4, 5, 6, 7];
+  /* Where the high chairs go: spread as far apart as they will spread, so two
+     land opposite each other rather than side by side. */
+  function kidSeats(n) {
+    var out = [];
+    for (var i = 0; i < n; i++) out.push(Math.round(i * SEATS / n));
+    return out;
   }
 
   function priceFor(tip) {
@@ -895,9 +884,8 @@
     spoke.setAttribute('y2', -(bFlat / 2 - 20));
 
     var seatR = tip / 2 + CHAIR_GAP;
-    chairs.setAttribute('d', seatRing(seatR, CHAIR_W, CHAIR_D, 0));
-    kids.setAttribute('d', seatRing(seatR, HIGH_W, HIGH_D, 180 / SEATS));
-    kidsG.style.display = showKids ? '' : 'none';
+    chairs.setAttribute('d', seatRing(seatR, CHAIR_W, CHAIR_D, 0, ALL_SEATS));
+    kids.setAttribute('d', seatRing(seatR, HIGH_W, HIGH_D, 180 / SEATS, kidSeats(kidCount)));
 
     var room = tip + 2 * (CHAIR_GAP + CHAIR_D + WALK_BY);
 
@@ -922,20 +910,10 @@
     document.getElementById('oOver').textContent = mm((bFlat - bearing) / 2);
     document.getElementById('oSeat').textContent = mm(seatArc);
 
-    /* The tooth: how much edge it gives a child, and how deep it reaches past
-       the flats either side of it. Both scale with the table. */
-    var k = tip / 2 / PATH_R;
-    document.getElementById('oTooth').textContent =
-      Math.round(TOOTH_FLAT * k) + ' × ' + mm((PATH_R - PATH_R * FLAT_RATIO) * k);
-    var clear = clearAtTooth(seatR);
-    document.getElementById('oClear').textContent = mm(clear);
-    document.getElementById('kWhy').textContent = clear >= HIGH_W
-      ? (isEn()
-          ? 'At this size a high chair fits at a tooth without anyone moving.'
-          : 'Ved dette mål er der plads til en barnestol ved en tand, uden at nogen rykker.')
-      : (isEn()
-          ? 'At this size a tooth leaves ' + Math.round(clear) + ' mm between the chairs either side, and a high chair is about ' + HIGH_W + ' mm wide. So a child goes at a tooth when a place beside it is free — eight adults and a high chair at once do not fit.'
-          : 'Ved dette mål er der ' + Math.round(clear) + ' mm mellem stolene ved hver tand, og en barnestol er omkring ' + HIGH_W + ' mm bred. Så et barn kan sidde ved en tand, når en plads ved siden af er ledig — otte voksne og en barnestol på samme tid går ikke op.');
+    document.getElementById('valKids').textContent =
+      kidCount === 0 ? (isEn() ? 'None' : 'Ingen')
+      : kidCount === 1 ? (isEn() ? '1 at a tooth' : '1 ved en tand')
+      : kidCount + (isEn() ? ' at the teeth' : ' ved tænderne');
     document.getElementById('oArea').textContent =
       area.toFixed(2).replace('.', isEn() ? '.' : ',') + ' m²';
     document.getElementById('oRoom').textContent = 'Ø ' + mm(room);
@@ -959,11 +937,12 @@
   dia.addEventListener('input', render);
   bdia.addEventListener('input', function () { boardTouched = true; render(); });
 
-  ['kidsOff', 'kidsOn'].forEach(function (id) {
-    document.getElementById(id).addEventListener('click', function () {
-      showKids = id === 'kidsOn';
-      document.getElementById('kidsOff').setAttribute('aria-pressed', String(!showKids));
-      document.getElementById('kidsOn').setAttribute('aria-pressed', String(showKids));
+  [].forEach.call(document.querySelectorAll('.kn'), function (btn) {
+    btn.addEventListener('click', function () {
+      kidCount = +btn.dataset.kids;
+      [].forEach.call(document.querySelectorAll('.kn'), function (el) {
+        el.setAttribute('aria-pressed', String(+el.dataset.kids === kidCount));
+      });
       render();
     });
   });
