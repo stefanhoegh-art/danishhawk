@@ -550,7 +550,7 @@
       <div class="spec-row"><dt data-da="Overflade" data-en="Finish">Overflade</dt><dd data-da="Natur, hvid, mørk eller røget" data-en="Natural, white, dark or smoked">Natur, hvid, mørk eller røget</dd></div>
       <div class="spec-row"><dt data-da="Stel" data-en="Underframe">Stel</dt><dd data-da="Stål — under udvikling" data-en="Steel — in development">Stål — under udvikling</dd></div>
       <div class="spec-row"><dt data-da="Fremstilling" data-en="Made">Fremstilling</dt><dd data-da="CNC-skåret, samlet i Danmark" data-en="CNC-cut, assembled in Denmark">CNC-skåret, samlet i Danmark</dd></div>
-      <div class="spec-row"><dt data-da="Pris" data-en="Price">Pris</dt><dd data-da="Fra 18.000 kr med finer, fra 30.000 kr i massiv eg — se prisen for dit mål" data-en="From 18,000 kr veneered, from 30,000 kr in solid oak — see the price for your size">Fra 18.000 kr med finer, fra 30.000 kr i massiv eg — se prisen for dit mål</dd></div>
+      <div class="spec-row"><dt data-da="Pris" data-en="Price">Pris</dt><dd data-da="Fra 17.500 kr med finer, fra 29.500 kr i massiv eg — se prisen for dit mål" data-en="From 17,500 kr veneered, from 29,500 kr in solid oak — see the price for your size">Fra 17.500 kr med finer, fra 29.500 kr i massiv eg — se prisen for dit mål</dd></div>
     </dl>
   </div>
 </section>
@@ -674,13 +674,17 @@
      Only the material scales, and it scales with the area of the top; the work
      does not, because cutting and assembling a larger table takes very nearly
      the same time. So the range runs 30.000–33.000 kr in solid oak and
-     18.000–19.000 kr veneered. */
-  var WORK_DKK     = 12000;    // design, CNC, bearing, underframe, finish, assembly
+     18.000–19.000 kr veneered.
+
+     The bearings cost 600 kr and 900 kr. The table Stefan priced has the large
+     one, so its 900 kr is already inside the 30.000 — which is why the work
+     figure below is 10.650 rather than 12.000, the rest being the bearing at
+     the same markup. Choosing the small bearing therefore takes 450 kr off,
+     which the rounding shows as 500. */
   var MATERIAL_MARKUP = 1.5;
+  var WORK_DKK     = 10650;    // design, CNC, underframe, finish, assembly
   var MATERIAL     = { solid: 12000, veneer: 4000 };   // cost to produce, at REF_DIA
-  // The two bearings are priced the same for now. The larger one does cost more
-  // to buy, so this is the line to change once that difference is known.
-  var BEARING_ADD  = { '401.5': 0, '601.5': 0 };
+  var BEARING      = { '401.5': 600, '601.5': 900 };   // cost to buy
   var THICKNESS    = { solid: 26, veneer: 21 };
 
   var svg   = document.getElementById('plan');
@@ -732,9 +736,8 @@
 
   function priceFor(tip) {
     var areaRatio = Math.pow(tip / REF_DIA, 2);
-    var raw = WORK_DKK
-      + MATERIAL[material] * areaRatio * MATERIAL_MARKUP
-      + BEARING_ADD[String(bearing)];
+    var parts = MATERIAL[material] * areaRatio + BEARING[String(bearing)];
+    var raw = WORK_DKK + parts * MATERIAL_MARKUP;
     return Math.round(raw / 500) * 500;      // quoted to the nearest 500 kr
   }
 
