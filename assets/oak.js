@@ -36,13 +36,15 @@ function fbm(x, y, seed, octaves) {
 }
 
 /* --- finishes ------------------------------------------------------------ */
-/* Each is the oiled/treated colour of European oak, sampled to sit sensibly
-   against the page's warm background rather than to be technically exact. */
+/* The colour only. Oil and lacquer are a separate choice, so the two are named
+   separately too and the page puts them together. Each is the treated colour of
+   European oak, sampled to sit sensibly against the page's warm background
+   rather than to be technically exact. */
 export const FINISHES = {
-  natur:  { da: 'Naturolieret',  en: 'Natural oiled', rgb: [201, 169, 120], plan: '#b99a6d' },
-  hvid:   { da: 'Hvidolieret',   en: 'White oiled',   rgb: [219, 210, 192], plan: '#cbc2ae' },
-  moerk:  { da: 'Mørkolieret',   en: 'Dark oiled',    rgb: [124,  92,  60], plan: '#6f5236' },
-  roeget: { da: 'Røget eg',      en: 'Smoked oak',    rgb: [ 78,  56,  38], plan: '#463222' },
+  natur:  { da: 'Natur', en: 'Natural', rgb: [201, 169, 120], plan: '#b99a6d' },
+  hvid:   { da: 'Hvid',  en: 'White',   rgb: [219, 210, 192], plan: '#cbc2ae' },
+  moerk:  { da: 'Mørk',  en: 'Dark',    rgb: [124,  92,  60], plan: '#6f5236' },
+  roeget: { da: 'Røget', en: 'Smoked',  rgb: [ 78,  56,  38], plan: '#463222' },
 };
 
 const clamp255 = (n) => (n < 0 ? 0 : n > 255 ? 255 : n);

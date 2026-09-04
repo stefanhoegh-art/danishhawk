@@ -89,12 +89,17 @@
     .nav-links a { font-family: var(--mono); font-size: .66rem; letter-spacing: .13em;
                    text-transform: uppercase; text-decoration: none; color: var(--mid); transition: color .2s; }
     .nav-links a:hover { color: var(--ink); }
-    .lang-switch { display: flex; align-items: center; gap: 4px; }
-    .lang-btn { font-family: var(--mono); font-size: .62rem; letter-spacing: .1em; text-transform: uppercase;
-                background: none; border: none; color: var(--mid); cursor: pointer; padding: 7px 5px; }
-    .lang-btn.active { color: var(--ink); border: 1px solid var(--ink); border-radius: 50%;
-                       width: 30px; height: 30px; display: grid; place-items: center; padding: 0; }
-    .lang-sep { font-family: var(--mono); font-size: .58rem; color: var(--line); }
+    /* Two flags rather than two words. The unpicked one sits back in greyscale
+       so the picked one reads without needing a border around it. */
+    .lang-switch { display: flex; align-items: center; gap: 10px; }
+    .lang-btn { background: none; border: none; padding: 4px; cursor: pointer; line-height: 0;
+                border-radius: 2px; opacity: .42; filter: grayscale(1);
+                transition: opacity .2s, filter .2s, box-shadow .2s; }
+    .lang-btn svg { display: block; width: 30px; height: 22px; border-radius: 1px;
+                    box-shadow: 0 0 0 1px rgba(15,14,11,.18); }
+    .lang-btn:hover { opacity: .8; filter: grayscale(.3); }
+    .lang-btn.active { opacity: 1; filter: none; }
+    .lang-btn.active svg { box-shadow: 0 0 0 1px rgba(15,14,11,.5); }
 
     /* ---------- shared ---------- */
     .slabel { font-family: var(--mono); font-size: .6rem; letter-spacing: .2em; text-transform: uppercase;
@@ -296,9 +301,27 @@
       <li><a href="#bestil" data-da="Bestil" data-en="Order">Bestil</a></li>
     </ul>
     <div class="lang-switch">
-      <button id="btn-da" class="lang-btn active" onclick="setLang('da')">DA</button>
-      <span class="lang-sep">/</span>
-      <button id="btn-en" class="lang-btn" onclick="setLang('en')">EN</button>
+      <button id="btn-da" class="lang-btn active" onclick="setLang('da')"
+              aria-label="Dansk" title="Dansk">
+        <svg viewBox="0 0 37 28" role="img" aria-hidden="true">
+          <rect width="37" height="28" fill="#c8102e"/>
+          <rect x="12" y="0" width="4" height="28" fill="#fff"/>
+          <rect x="0" y="12" width="37" height="4" fill="#fff"/>
+        </svg>
+      </button>
+      <button id="btn-en" class="lang-btn" onclick="setLang('en')"
+              aria-label="English" title="English">
+        <svg viewBox="0 0 60 36" role="img" aria-hidden="true">
+          <clipPath id="uk"><rect width="60" height="36"/></clipPath>
+          <g clip-path="url(#uk)">
+            <rect width="60" height="36" fill="#012169"/>
+            <path d="M0,0 60,36 M60,0 0,36" stroke="#fff" stroke-width="7.2"/>
+            <path d="M0,0 60,36 M60,0 0,36" stroke="#c8102e" stroke-width="2.4"/>
+            <path d="M30,0 V36 M0,18 H60" stroke="#fff" stroke-width="12"/>
+            <path d="M30,0 V36 M0,18 H60" stroke="#c8102e" stroke-width="7.2"/>
+          </g>
+        </svg>
+      </button>
     </div>
   </div>
 </nav>
@@ -391,6 +414,15 @@
                    patternTransform="rotate(64)">
             <image id="oakBoardImg" x="0" y="0" width="900" height="900" preserveAspectRatio="none"/>
           </pattern>
+          <!-- Lacquer reflects the room; oil does not. One soft band across the
+               top is enough to read as sheen without pretending to be a render. -->
+          <linearGradient id="sheen" x1="0" y1="0" x2="0.55" y2="1">
+            <stop offset="0"    stop-color="#fff" stop-opacity="0"/>
+            <stop offset="0.34" stop-color="#fff" stop-opacity="0.20"/>
+            <stop offset="0.47" stop-color="#fff" stop-opacity="0.30"/>
+            <stop offset="0.60" stop-color="#fff" stop-opacity="0.16"/>
+            <stop offset="1"    stop-color="#fff" stop-opacity="0"/>
+          </linearGradient>
           <!-- The one profile from the DXF: tip circle sits exactly at radius 1. -->
           <path id="cog" d="M-0.3005,0.9285L-0.1592,0.7872A0.0148,0.0148 0 0,0 -0.1488,0.7829L0.1488,0.7829A0.0148,0.0148 0 0,0 0.1592,0.7872L0.3005,0.9285A0.0148,0.0148 0 0,1 0.3166,0.9317L0.4349,0.8827A0.0148,0.0148 0 0,1 0.4441,0.869L0.4441,0.6692A0.0148,0.0148 0 0,0 0.4484,0.6588L0.6588,0.4484A0.0148,0.0148 0 0,0 0.6692,0.4441L0.869,0.4441A0.0148,0.0148 0 0,1 0.8827,0.4349L0.9317,0.3166A0.0148,0.0148 0 0,1 0.9285,0.3005L0.7872,0.1592A0.0148,0.0148 0 0,0 0.7829,0.1488L0.7829,-0.1488A0.0148,0.0148 0 0,0 0.7872,-0.1592L0.9285,-0.3005A0.0148,0.0148 0 0,1 0.9317,-0.3166L0.8827,-0.4349A0.0148,0.0148 0 0,1 0.869,-0.4441L0.6692,-0.4441A0.0148,0.0148 0 0,0 0.6588,-0.4484L0.4484,-0.6588A0.0148,0.0148 0 0,0 0.4441,-0.6692L0.4441,-0.869A0.0148,0.0148 0 0,1 0.4349,-0.8827L0.3166,-0.9317A0.0148,0.0148 0 0,1 0.3005,-0.9285L0.1592,-0.7872A0.0148,0.0148 0 0,0 0.1488,-0.7829L-0.1488,-0.7829A0.0148,0.0148 0 0,0 -0.1592,-0.7872L-0.3005,-0.9285A0.0148,0.0148 0 0,1 -0.3166,-0.9317L-0.4349,-0.8827A0.0148,0.0148 0 0,1 -0.4441,-0.869L-0.4441,-0.6692A0.0148,0.0148 0 0,0 -0.4484,-0.6588L-0.6588,-0.4484A0.0148,0.0148 0 0,0 -0.6692,-0.4441L-0.869,-0.4441A0.0148,0.0148 0 0,1 -0.8827,-0.4349L-0.9317,-0.3166A0.0148,0.0148 0 0,1 -0.9285,-0.3005L-0.7872,-0.1592A0.0148,0.0148 0 0,0 -0.7829,-0.1488L-0.7829,0.1488A0.0148,0.0148 0 0,0 -0.7872,0.1592L-0.9285,0.3005A0.0148,0.0148 0 0,1 -0.9317,0.3166L-0.8827,0.4349A0.0148,0.0148 0 0,1 -0.869,0.4441L-0.6692,0.4441A0.0148,0.0148 0 0,0 -0.6588,0.4484L-0.4484,0.6588A0.0148,0.0148 0 0,0 -0.4441,0.6692L-0.4441,0.869A0.0148,0.0148 0 0,1 -0.4349,0.8827L-0.3166,0.9317A0.0148,0.0148 0 0,1 -0.3005,0.9285L-0.3005,0.9285Z"/>
         </defs>
@@ -401,6 +433,7 @@
 
         <!-- tabletop -->
         <use id="top" href="#cog" fill="url(#oakTop)" stroke="#0f0e0b" stroke-width="0.009"/>
+        <use id="gloss" href="#cog" fill="url(#sheen)" stroke="none" style="display:none"/>
 
         <!-- turntable, draggable -->
         <g id="turn" style="cursor:grab">
@@ -488,10 +521,39 @@
 
       <div class="ctrl">
         <div class="ctrl-label">
-          <span data-da="Overflade" data-en="Finish">Overflade</span>
+          <span data-da="Behandling" data-en="Treatment">Behandling</span>
+          <span class="ctrl-val" id="valTreat"></span>
+        </div>
+        <div class="choices">
+          <button class="choice" id="tOlie" type="button" aria-pressed="true" data-treat="olie">
+            <span data-da="Olie" data-en="Oil">Olie</span>
+            <small data-da="Kan pletrepareres" data-en="Repairs in place">Kan pletrepareres</small></button>
+          <button class="choice" id="tLak" type="button" aria-pressed="false" data-treat="lak">
+            <span data-da="Lak" data-en="Lacquer">Lak</span>
+            <small data-da="Nærmest vedligeholdelsesfri" data-en="Next to no upkeep">Nærmest vedligeholdelsesfri</small></button>
+        </div>
+        <p class="ctrl-why" id="tWhy"></p>
+      </div>
+
+      <div class="ctrl">
+        <div class="ctrl-label">
+          <span data-da="Farve" data-en="Colour">Farve</span>
           <span class="ctrl-val" id="valFinish"></span>
         </div>
         <div class="swatches" id="swatches"></div>
+      </div>
+
+      <div class="ctrl">
+        <div class="ctrl-label">
+          <span data-da="Stolene trukket ud" data-en="Chairs pulled out">Stolene trukket ud</span>
+          <span class="ctrl-val" id="valPull"></span>
+        </div>
+        <input type="range" id="pull" min="0" max="600" step="10" value="0"
+               aria-label="Hvor langt stolene er trukket ud fra bordet, i millimeter"/>
+        <div class="range-ends">
+          <span data-da="0 mm — skubbet helt ind" data-en="0 mm — pushed right in">0 mm — skubbet helt ind</span>
+          <span data-da="600 mm — rejst sig" data-en="600 mm — got up">600 mm — rejst sig</span>
+        </div>
       </div>
 
       <div class="ctrl">
@@ -577,7 +639,7 @@
     </dl>
     <dl>
       <div class="spec-row"><dt data-da="Bordplade" data-en="Tabletop">Bordplade</dt><dd data-da="21 mm MDF m. egefiner, eller 26 mm massiv eg" data-en="21 mm MDF with oak veneer, or 26 mm solid oak">21 mm MDF m. egefiner, eller 26 mm massiv eg</dd></div>
-      <div class="spec-row"><dt data-da="Overflade" data-en="Finish">Overflade</dt><dd data-da="Natur, hvid, mørk eller røget" data-en="Natural, white, dark or smoked">Natur, hvid, mørk eller røget</dd></div>
+      <div class="spec-row"><dt data-da="Overflade" data-en="Finish">Overflade</dt><dd data-da="Olieret eller lakeret, i natur, hvid, mørk eller røget" data-en="Oiled or lacquered, in natural, white, dark or smoked">Olieret eller lakeret, i natur, hvid, mørk eller røget</dd></div>
       <div class="spec-row"><dt data-da="Stel" data-en="Underframe">Stel</dt><dd data-da="Stål — under udvikling" data-en="Steel — in development">Stål — under udvikling</dd></div>
       <div class="spec-row"><dt data-da="Fremstilling" data-en="Made">Fremstilling</dt><dd data-da="CNC-skåret, samlet i Danmark" data-en="CNC-cut, assembled in Denmark">CNC-skåret, samlet i Danmark</dd></div>
       <div class="spec-row"><dt data-da="Pris" data-en="Price">Pris</dt><dd data-da="Fra 17.500 kr med finer, fra 29.500 kr i massiv eg — se prisen for dit mål" data-en="From 17,500 kr veneered, from 29,500 kr in solid oak — see the price for your size">Fra 17.500 kr med finer, fra 29.500 kr i massiv eg — se prisen for dit mål</dd></div>
@@ -733,6 +795,11 @@
   var WORK_DKK     = 10650;    // design, CNC, underframe, finish, assembly
   var MATERIAL     = { solid: 12000, veneer: 4000 };   // cost to produce, at REF_DIA
   var BEARING      = { '401.5': 600, '601.5': 900 };   // cost to buy
+  /* Surface treatment, costed like any other material and scaled with the area
+     of the top, since that is what is being covered. Oil is the baseline the
+     30.000 kr was set on; the 1.000 kr for lacquer is my figure, not Stefan's,
+     and puts a lacquered table 1.500 kr above an oiled one. */
+  var TREATMENT    = { olie: 0, lak: 1000 };
   var THICKNESS    = { solid: 26, veneer: 21 };
 
   var svg   = document.getElementById('plan');
@@ -743,12 +810,14 @@
   var spoke = document.getElementById('spoke');
   var chairs = document.getElementById('chairs');
   var dia   = document.getElementById('dia');
+  var pull  = document.getElementById('pull');
   var bdia  = document.getElementById('bdia');
   var hint  = document.getElementById('cfgHint');
 
   var bearing = 601.5;
   var material = 'solid';
   var finish = 'moerk';
+  var treatment = 'olie';
   var angle = 0;
   // Until the board slider is touched it follows each bearing's smallest size,
   // which is the one that was actually built.
@@ -848,8 +917,8 @@
     return best;
   }
   /* Where the front edge of a seat of this width sits, in millimetres. */
-  function seatFront(w, phiDeg, k) {
-    return touchRadius(w / 2 / k, phiDeg) * k + CHAIR_GAP;
+  function seatFront(w, phiDeg, k, pulled) {
+    return touchRadius(w / 2 / k, phiDeg) * k + CHAIR_GAP + (pulled || 0);
   }
 
   var ALL_SEATS = [0, 1, 2, 3, 4, 5, 6, 7];
@@ -863,7 +932,8 @@
 
   function priceFor(tip) {
     var areaRatio = Math.pow(tip / REF_DIA, 2);
-    var parts = MATERIAL[material] * areaRatio + BEARING[String(bearing)];
+    var parts = (MATERIAL[material] + TREATMENT[treatment]) * areaRatio
+              + BEARING[String(bearing)];
     var raw = WORK_DKK + parts * MATERIAL_MARKUP;
     return Math.round(raw / 500) * 500;      // quoted to the nearest 500 kr
   }
@@ -925,12 +995,13 @@
     spoke.setAttribute('y2', -(bFlat / 2 - 20));
 
     var k = tip / 2 / PATH_R;                       // mm per normalised unit
-    var seatR = seatFront(CHAIR_W, 0, k);           // a chair at a flat
-    var kidR  = seatFront(HIGH_W, 180 / SEATS, k);  // a high chair at a tooth
+    var pulled = +pull.value;
+    var seatR = seatFront(CHAIR_W, 0, k, pulled);          // a chair at a flat
+    var kidR  = seatFront(HIGH_W, 180 / SEATS, k, pulled); // a high chair at a tooth
     chairs.setAttribute('d', seatRing(seatR, CHAIR_W, CHAIR_D, 0, ALL_SEATS));
     kids.setAttribute('d', seatRing(kidR, HIGH_W, HIGH_D, 180 / SEATS, kidSeats(kidCount)));
 
-    var room = 2 * (seatR + CHAIR_D + WALK_BY);
+    var room = 2 * (seatFront(CHAIR_W, 0, k) + CHAIR_D + WALK_BY);
 
     // dimension line across the tooth tips
     document.getElementById('dimLine').setAttribute('x1', -tip / 2);
@@ -977,10 +1048,24 @@
       var f = oak.FINISHES[finish];
       document.getElementById('valFinish').textContent = f ? f[lang] : '';
     }
+    var en = isEn();
+    document.getElementById('valTreat').textContent =
+      treatment === 'lak' ? (en ? 'Lacquered' : 'Lakeret') : (en ? 'Oiled' : 'Olieret');
+    document.getElementById('tWhy').textContent = treatment === 'lak'
+      ? (en ? 'Lacquer seals the surface, so it asks almost nothing of you and shrugs off a spilled glass. It also sits on top of the wood rather than in it: a deep scratch cannot be rubbed out, it has to be sanded back and redone.'
+            : 'Lak lukker overfladen, så den nærmest passer sig selv og tåler et væltet glas. Til gengæld ligger den oven på træet frem for i det: en dyb ridse kan ikke gnides væk, den skal slibes ned og lakeres om.')
+      : (en ? 'Oil sinks into the wood and leaves it matt and open to the touch. It wants re-oiling once or twice a year, and rings and marks are the price of that — but any of them can be rubbed out in place, without touching the rest of the table.'
+            : 'Olie trænger ind i træet og lader det stå mat og åbent at røre ved. Den vil have en omgang olie en eller to gange om året, og ringe og mærker følger med — til gengæld kan de gnides væk enkeltvis, uden at resten af bordet skal røres.');
+    document.getElementById('valPull').textContent = pulled === 0
+      ? (en ? 'Pushed right in' : 'Skubbet helt ind')
+      : mm(pulled);
+    document.getElementById('gloss').style.display = treatment === 'lak' ? '' : 'none';
+    document.getElementById('gloss').setAttribute('transform', 'scale(' + k + ')');
     paintOak();
   }
 
   dia.addEventListener('input', render);
+  pull.addEventListener('input', render);
   bdia.addEventListener('input', function () { boardTouched = true; render(); });
 
   [].forEach.call(document.querySelectorAll('.kn'), function (btn) {
@@ -989,6 +1074,15 @@
       [].forEach.call(document.querySelectorAll('.kn'), function (el) {
         el.setAttribute('aria-pressed', String(+el.dataset.kids === kidCount));
       });
+      render();
+    });
+  });
+
+  ['tOlie', 'tLak'].forEach(function (id) {
+    document.getElementById(id).addEventListener('click', function () {
+      treatment = this.dataset.treat;
+      document.getElementById('tOlie').setAttribute('aria-pressed', String(treatment === 'olie'));
+      document.getElementById('tLak').setAttribute('aria-pressed', String(treatment === 'lak'));
       render();
     });
   });
