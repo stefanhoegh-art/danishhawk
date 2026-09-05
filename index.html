@@ -455,7 +455,7 @@
                aria-label="Hvor langt stolene er skubbet ind mod bordet, i millimeter"/>
         <div class="range-ends">
           <span data-da="Rejst sig" data-en="Got up">Rejst sig</span>
-          <span data-da="Ind til tænderne" data-en="In to the teeth">Ind til tænderne</span>
+          <span data-da="Skubbet ind under pladen" data-en="Tucked under the top">Skubbet ind under pladen</span>
         </div>
         <p class="ctrl-why" id="pWhy"></p>
       </div>
@@ -569,7 +569,7 @@
         <p class="price-sub" data-da="Prisen dækker bordplade, drejeskive med leje, stel, overfladebehandling og montering. Levering kommer oveni. Endelig pris får du skriftligt, før der skæres." data-en="The price covers the tabletop, the turntable and its bearing, the underframe, the finish and assembly. Delivery is extra. You get a firm price in writing before anything is cut.">Prisen dækker bordplade, drejeskive med leje, stel, overfladebehandling og montering. Levering kommer oveni. Endelig pris får du skriftligt, før der skæres.</p>
       </div>
 
-      <p class="cfg-note" data-da="Målene her er beregnet ud fra produktionsfilen til det første bord. Plads pr. kuvert er buelængden langs flade-til-flade delt med otte. Stolene er tegnet skubbet ind til bordet, som når man sidder ved det. Plads i rummet regner med 900 mm bag hver stol til at rykke ud og komme forbi. Drejeskiven kan ikke blive mindre end sit leje, og ikke så stor at den hverken bærer forsvarligt eller levner plads til kuverterne." data-en="These figures are calculated from the production file for the first table. Space per place is the arc along the flat-to-flat circle divided by eight. The chairs are drawn pushed in to the table, as they sit when someone is at it. Room needed allows 900 mm behind each chair to push back and pass by. The turntable cannot be smaller than its bearing, nor so large that it stops carrying safely or leaves the places no room.">Målene her er beregnet ud fra produktionsfilen til det første bord. Plads pr. kuvert er buelængden langs flade-til-flade delt med otte. Stolene er tegnet skubbet ind til bordet, som når man sidder ved det. Plads i rummet regner med 900 mm bag hver stol til at rykke ud og komme forbi. Drejeskiven kan ikke blive mindre end sit leje, og ikke så stor at den hverken bærer forsvarligt eller levner plads til kuverterne.</p>
+      <p class="cfg-note" data-da="Målene her er beregnet ud fra produktionsfilen til det første bord. Plads pr. kuvert er buelængden langs flade-til-flade delt med otte. Stolene er tegnet skubbet ind under bordpladen, som de står når ingen sidder ved bordet. Sædet ligger 270 mm under pladens underside, så det glider ind under udhænget. Plads i rummet regner med 900 mm bag hver stol til at rykke ud og komme forbi. Drejeskiven kan ikke blive mindre end sit leje, og ikke så stor at den hverken bærer forsvarligt eller levner plads til kuverterne." data-en="These figures are calculated from the production file for the first table. Space per place is the arc along the flat-to-flat circle divided by eight. The chairs are drawn tucked under the top, as they stand when nobody is at the table. The seat sits 270 mm below the underside, so it passes under the overhang. Room needed allows 900 mm behind each chair to push back and pass by. The turntable cannot be smaller than its bearing, nor so large that it stops carrying safely or leaves the places no room.">Målene her er beregnet ud fra produktionsfilen til det første bord. Plads pr. kuvert er buelængden langs flade-til-flade delt med otte. Stolene er tegnet skubbet ind under bordpladen, som de står når ingen sidder ved bordet. Sædet ligger 270 mm under pladens underside, så det glider ind under udhænget. Plads i rummet regner med 900 mm bag hver stol til at rykke ud og komme forbi. Drejeskiven kan ikke blive mindre end sit leje, og ikke så stor at den hverken bærer forsvarligt eller levner plads til kuverterne.</p>
 
       <a href="#bestil" class="btn-primary" style="margin-top:26px" data-da="Bestil dette mål" data-en="Order this size">Bestil dette mål</a>
     </div>
@@ -775,7 +775,6 @@
   var SEATS        = 8;
   var CHAIR_W      = 460;      // mm
   var CHAIR_D      = 480;      // mm
-  var CHAIR_GAP    = 20;       // mm left between the chair front and the table
   var WALK_BY      = 900;      // mm behind a chair to sit down and pass
   /* A high chair is about as wide as a dining chair — a Tripp Trapp is 460 mm
      across. That is the figure the tooth has to beat. */
@@ -898,43 +897,16 @@
 
   /* Where a chair actually stops.
 
-     Pushing a chair in at a flat is not the same as pushing one in at a tooth:
-     the flat is set back 190 mm, so a chair there slides in until its front
-     corners meet the tooth flanks either side, well inside the tooth circle.
-     Parking every chair on one ring outside the teeth put the backrests a good
-     deal further out than they sit in use, which is the distance you notice in
-     a room.
+     Not against the tabletop: the seat is at 450 mm and the underside of the
+     top at 720, so a chair slides straight under the overhang. Nothing in the
+     plan stops it — the outline it appears to cross is 270 mm above it. What
+     stops it in a real room is the underframe, or the guest's own legs.
 
-     So the chair is pushed straight in until its front edge meets the outline,
-     and the outline is read off the cog path itself rather than approximated —
-     the flanks are curved, and where a corner lands on one is not obvious. */
-  var PROFILE = (function () {
-    var path = document.getElementById('cog'), L = path.getTotalLength(), pts = [];
-    for (var i = 0; i < 1440; i++) {
-      var q = path.getPointAtLength(L * i / 1440);
-      pts.push([q.x, q.y]);
-    }
-    return pts;
-  })();
-
-  /* halfW is in the same normalised units as the path; phi is the seat's angle,
-     0 at a flat and 22.5 at a tooth. */
-  function touchRadius(halfW, phiDeg) {
-    var t = -phiDeg * Math.PI / 180, c = Math.cos(t), sn = Math.sin(t), best = 0;
-    for (var i = 0; i < PROFILE.length; i++) {
-      var px = PROFILE[i][0], py = PROFILE[i][1];
-      var y = px * sn + py * c;
-      if (y > -halfW && y < halfW) {
-        var x = px * c - py * sn;
-        if (x > best) best = x;
-      }
-    }
-    return best;
-  }
-  /* Where the front edge of a seat of this width sits, in millimetres. */
-  function seatFront(w, phiDeg, k, pulled) {
-    return touchRadius(w / 2 / k, phiDeg) * k + CHAIR_GAP + (pulled || 0);
-  }
+     So a tucked chair is one whose seat front has gone TUCK past the edge, and
+     the edge is further out at a tooth than at a flat, which is why a high
+     chair at a tooth ends up standing further out than the adults. */
+  var TUCK = 150;              // how far the seat front sits under the top
+  function seatFront(edgeR, pulled) { return edgeR - TUCK + (pulled || 0); }
 
   var ALL_SEATS = [0, 1, 2, 3, 4, 5, 6, 7];
   /* Where the high chairs go: spread as far apart as they will spread, so two
@@ -1011,12 +983,12 @@
 
     var k = tip / 2 / PATH_R;                       // mm per normalised unit
     var pulled = +pull.max - +pull.value;
-    var seatR = seatFront(CHAIR_W, 0, k, pulled);          // a chair at a flat
-    var kidR  = seatFront(HIGH_W, 180 / SEATS, k, pulled); // a high chair at a tooth
+    var seatR = seatFront(flat / 2, pulled);   // a chair at a flat
+    var kidR  = seatFront(tip / 2, pulled);    // a high chair at a tooth, which reaches further out
     chairs.setAttribute('d', seatRing(seatR, CHAIR_W, CHAIR_D, 0, ALL_SEATS));
     kids.setAttribute('d', seatRing(kidR, HIGH_W, HIGH_D, 180 / SEATS, kidSeats(kidCount)));
 
-    var room = 2 * (seatFront(CHAIR_W, 0, k) + CHAIR_D + WALK_BY);
+    var room = 2 * (seatFront(flat / 2) + CHAIR_D + WALK_BY);
 
     // dimension line across the tooth tips
     document.getElementById('dimLine').setAttribute('x1', -tip / 2);
@@ -1075,15 +1047,14 @@
        meeting the teeth either side, not by the table edge — so it comes to rest
        with air in front of it. That is real, and worth saying rather than
        calling it "pushed right in". */
-    var stand = seatR - flat / 2;
     document.getElementById('valPull').textContent = pulled === 0
-      ? (en ? 'In to the teeth' : 'Ind til tænderne')
+      ? (en ? 'Tucked under' : 'Skubbet ind under')
       : (en ? mm(pulled) + ' out' : mm(pulled) + ' ude');
     document.getElementById('pWhy').textContent = pulled === 0
-      ? (en ? 'The chair stops ' + mm(stand) + ' short of the flat: its front corners meet the teeth either side before its front edge reaches the table. Tucking further under would mean a narrower chair.'
-            : 'Stolen standser ' + mm(stand) + ' fra fladen: dens forreste hjørner møder tænderne på hver side, før forkanten når bordet. Længere ind kræver en smallere stol.')
-      : (en ? mm(pulled + stand) + ' from the flat in front of the guest.'
-            : mm(pulled + stand) + ' fra fladen foran gæsten.');
+      ? (en ? 'The seat sits ' + mm(TUCK) + ' in under the top. Nothing stops it there — the seat is 270 mm below the underside, so it passes under the overhang; in a room it is the underframe that decides how far in a chair goes.'
+            : 'Sædet står ' + mm(TUCK) + ' inde under pladen. Der er ikke noget der standser den — sædet ligger 270 mm under undersiden, så den glider ind under udhænget; i et rum er det stellet der bestemmer hvor langt en stol kan komme ind.')
+      : (en ? 'Seat front ' + mm(pulled - TUCK) + ' outside the flat in front of the guest.'
+            : 'Sædets forkant ' + mm(pulled - TUCK) + ' uden for fladen foran gæsten.');
     document.getElementById('gloss').style.display = treatment === 'lak' ? '' : 'none';
     document.getElementById('gloss').setAttribute('transform', 'scale(' + k + ')');
     paintOak();
