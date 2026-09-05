@@ -452,11 +452,12 @@
           <span class="ctrl-val" id="valPull"></span>
         </div>
         <input type="range" id="pull" min="0" max="600" step="10" value="600"
-               aria-label="Hvor langt stolene er skubbet ind til bordet, i millimeter"/>
+               aria-label="Hvor langt stolene er skubbet ind mod bordet, i millimeter"/>
         <div class="range-ends">
           <span data-da="Rejst sig" data-en="Got up">Rejst sig</span>
-          <span data-da="Skubbet helt ind" data-en="Pushed right in">Skubbet helt ind</span>
+          <span data-da="Ind til tænderne" data-en="In to the teeth">Ind til tænderne</span>
         </div>
+        <p class="ctrl-why" id="pWhy"></p>
       </div>
 
       <div class="ctrl">
@@ -1070,9 +1071,19 @@
             : 'Lak lukker overfladen, så den nærmest passer sig selv og tåler et væltet glas. Til gengæld ligger den oven på træet frem for i det: en dyb ridse kan ikke gnides væk, den skal slibes ned og lakeres om.')
       : (en ? 'Oil sinks into the wood and leaves it matt and open to the touch. It wants re-oiling once or twice a year, and rings and marks are the price of that — but any of them can be rubbed out in place, without touching the rest of the table.'
             : 'Olie trænger ind i træet og lader det stå mat og åbent at røre ved. Den vil have en omgang olie en eller to gange om året, og ringe og mærker følger med — til gengæld kan de gnides væk enkeltvis, uden at resten af bordet skal røres.');
+    /* A chair pushed straight in at a flat is stopped by its own front corners
+       meeting the teeth either side, not by the table edge — so it comes to rest
+       with air in front of it. That is real, and worth saying rather than
+       calling it "pushed right in". */
+    var stand = seatR - flat / 2;
     document.getElementById('valPull').textContent = pulled === 0
-      ? (en ? 'Pushed right in' : 'Skubbet helt ind')
+      ? (en ? 'In to the teeth' : 'Ind til tænderne')
       : (en ? mm(pulled) + ' out' : mm(pulled) + ' ude');
+    document.getElementById('pWhy').textContent = pulled === 0
+      ? (en ? 'The chair stops ' + mm(stand) + ' short of the flat: its front corners meet the teeth either side before its front edge reaches the table. Tucking further under would mean a narrower chair.'
+            : 'Stolen standser ' + mm(stand) + ' fra fladen: dens forreste hjørner møder tænderne på hver side, før forkanten når bordet. Længere ind kræver en smallere stol.')
+      : (en ? mm(pulled + stand) + ' from the flat in front of the guest.'
+            : mm(pulled + stand) + ' fra fladen foran gæsten.');
     document.getElementById('gloss').style.display = treatment === 'lak' ? '' : 'none';
     document.getElementById('gloss').setAttribute('transform', 'scale(' + k + ')');
     paintOak();
