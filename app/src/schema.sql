@@ -73,6 +73,10 @@ CREATE TABLE IF NOT EXISTS products (
   materials_en    TEXT NOT NULL DEFAULT '',
   dimensions      TEXT NOT NULL DEFAULT '',
   bespoke         INTEGER NOT NULL DEFAULT 1, -- made to order
+  -- '' prices by base_price plus the option deltas. Any other value names a
+  -- module under src/pricing that works the price out from the configuration,
+  -- for pieces whose price is a formula rather than a list.
+  pricing         TEXT NOT NULL DEFAULT '',
   status          TEXT NOT NULL DEFAULT 'active', -- active | draft | archived
   position        INTEGER NOT NULL DEFAULT 0,
   created_at      TEXT NOT NULL DEFAULT (datetime('now')),

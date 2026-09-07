@@ -193,7 +193,8 @@ describe('orders', () => {
   test('the partner is credited commission on the ex-VAT value', () => {
     const partner = get(`SELECT * FROM partners WHERE slug = 'demo-studio'`);
     const order = createOrder({
-      cart: [{ sku: 'DH-TANDHJULET', quantity: 1, options: { seats: '6', wood: 'eg-moerk', base: 'birk' } }],
+      cart: [{ sku: 'DH-TANDHJULET', quantity: 1,
+               options: { diameter: 1855, material: 'solid', treatment: 'olie', bearing: '601.5', finish: 'moerk' } }],
       customer, partner, locale: 'da',
     });
     assert.equal(order.commission_rate, partner.commission_rate);
@@ -266,7 +267,8 @@ describe('orders', () => {
 
   test('a quote request skips the deposit entirely', () => {
     const order = createOrder({
-      cart: [{ sku: 'DH-TANDHJULET', quantity: 1, options: { seats: '10', wood: 'valnoed', base: 'stål' } }],
+      cart: [{ sku: 'DH-TANDHJULET', quantity: 1,
+               options: { diameter: 2000, material: 'solid', treatment: 'lak', bearing: '601.5', finish: 'roeget' } }],
       customer, partner: null, locale: 'da', kind: 'quote',
     });
     assert.equal(order.kind, 'quote');
@@ -311,4 +313,38 @@ describe('Stripe webhooks', () => {
     assert.equal(result.ok, false);
     assert.match(result.reason, /tolerance/);
   });
+});
+
+/* ---------------------------------------------------------------------------
+   The page quotes a price in the browser and the server quotes it again before
+   anyone is charged. These check that the two cannot drift apart, and that a
+   configuration the page could never produce is refused rather than priced.
+--------------------------------------------------------------------------- */
+test('Tandhjulet is priced by formula, matching the figures on the website', () => {
+  const product = requireProduct('DH-TANDHJULET');
+  const cases = [
+    [{ diameter: 1855, material: 'solid',  treatment: 'olie', bearing: '601.5', finish: 'moerk' }, 30000],
+    [{ diameter: 1855, material: 'veneer', treatment: 'olie', bearing: '601.5', finish: 'natur' }, 18000],
+    [{ diameter: 1855, material: 'solid',  treatment: 'lak',  bearing: '601.5', finish: 'moerk' }, 31500],
+    [{ diameter: 2000, material: 'solid',  treatment: 'olie', bearing: '601.5', finish: 'hvid'  }, 33000],
+    [{ diameter: 1855, material: 'solid',  treatment: 'olie', bearing: '401.5', finish: 'moerk' }, 29500],
+  ];
+  for (const [selection, kroner] of cases) {
+    const { unitPrice } = priceConfiguration(product, selection, 'da');
+    assert.equal(unitPrice, kroner * 100, `${JSON.stringify(selection)} skulle koste ${kroner} kr`);
+  }
+});
+
+test('a size or a finish that was never offered is refused, not priced', () => {
+  const product = requireProduct('DH-TANDHJULET');
+  const base = { material: 'solid', treatment: 'olie', bearing: '601.5', finish: 'moerk' };
+  for (const bad of [
+    { ...base, diameter: 1800 },     // under the smallest table
+    { ...base, diameter: 2400 },     // over the largest
+    { ...base, diameter: 1857 },     // not a whole 5 mm
+    { ...base, diameter: 1855, material: 'teak' },
+    { ...base, diameter: 1855, bearing: '800' },
+  ]) {
+    assert.throws(() => priceConfiguration(product, bad, 'da'), /.*/, JSON.stringify(bad));
+  }
 });

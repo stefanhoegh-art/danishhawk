@@ -117,50 +117,68 @@ const PRODUCTS = [
   },
   {
     sku: 'DH-TANDHJULET',
-    slug: 'tandhjulet-spisebord',
+    slug: 'tandhjulet',
     category: 'dining',
     name_da: 'Tandhjulet',
-    name_en: 'Tandhjulet Dining Table',
-    tagline_da: 'Spisebord — flerarmet plade på træformet base',
-    tagline_en: 'Dining table — multi-arm top on a tree-form base',
+    name_en: 'Tandhjulet',
+    tagline_da: 'Rundt spisebord i eg med drejeskive i midten',
+    tagline_en: 'Round oak dining table with a turntable at the centre',
     description_da:
-      'Flerarmet bordplade i mørktolieret eg med CNC-fræset birkebase i træform. Pladen tegnes i CAD omkring dit rum, så armene lander præcis der, hvor stolene skal stå. Plads til 6–8 personer. Fuldt skræddersyet.',
+      'Et rundt spisebord i eg, skåret som et tandhjul. Midterpladen er det samme tandhjul i mindre skala, lagt på et kugleleje der er fræset ned i bordpladen, så den drejer hele vejen rundt. Otte flader, otte kuverter, ingen bordende. Hvert bord skæres til målet.',
     description_en:
-      'Multi-arm tabletop in dark-oiled oak on a tree-form CNC birch base. The top is drawn in CAD around your room so the arms land exactly where the chairs go. Seats 6–8. Fully bespoke.',
-    materials_da: 'Mørktolieret eg, lamineret birkefinér-base',
-    materials_en: 'Dark-oiled oak, laminated birch ply base',
-    dimensions: 'Ø 160–220 cm, H 74 cm',
-    base_price: kr(25000),
+      'A round oak dining table cut in the shape of a cog. The centre board is the same cog at a smaller scale, on a ball bearing routed into the tabletop itself, so it turns the whole way round. Eight flats, eight places, no head of the table. Every table is cut to size.',
+    materials_da: '21 mm MDF med egefiner eller 26 mm massiv eg, laserskåret stelramme',
+    materials_en: '21 mm MDF with oak veneer or 26 mm solid oak, laser-cut steel underframe',
+    dimensions: 'Ø 1855–2000 mm tand til tand, H 746 mm',
+    /* The lowest configuration the formula can produce: 1855 mm, veneered,
+       oiled, small bearing. Every real price comes from src/pricing. */
+    base_price: kr(17500),
+    pricing: 'tandhjulet',
     lead_time_days: 56,
     deposit_pct: 0.5,
-    shipping_price: kr(2400),
-    images: ['/media/tandhjulet-dining-table.jpg'],
-    position: 3,
+    shipping_price: 0,                 // quoted after measuring the way in
+    images: ['/assets/tandhjulet-top-and-centre-0e4e9e71.jpg'],
+    position: 1,
+    /* The diameter is not in this list: it is a number between 1855 and 2000 in
+       steps of 5, checked by the pricing model rather than picked from a menu.
+       These four are the choices that are genuinely a menu. */
     options: [
       {
-        key: 'seats',
-        label_da: 'Størrelse',
-        label_en: 'Size',
+        key: 'material',
+        label_da: 'Bordplade',
+        label_en: 'Tabletop',
         values: [
-          { value: '6', label_da: 'Ø160 cm — 6 personer', label_en: 'Ø160 cm — seats 6', price_delta: 0 },
-          { value: '8', label_da: 'Ø190 cm — 8 personer', label_en: 'Ø190 cm — seats 8', price_delta: kr(4500) },
-          { value: '10', label_da: 'Ø220 cm — 10 personer', label_en: 'Ø220 cm — seats 10', price_delta: kr(9000) },
+          { value: 'veneer', label_da: '21 mm MDF med egefiner', label_en: '21 mm MDF with oak veneer', price_delta: 0 },
+          { value: 'solid',  label_da: '26 mm massiv eg',        label_en: '26 mm solid oak',           price_delta: 0 },
         ],
       },
-      WOOD_OPTION([
-        { value: 'eg-moerk', label_da: 'Mørktolieret eg (som vist)', label_en: 'Dark-oiled oak (as shown)', price_delta: 0 },
-        { value: 'eg-natur', label_da: 'Naturolieret eg', label_en: 'Natural-oiled oak', price_delta: 0 },
-        { value: 'valnoed', label_da: 'Amerikansk valnød', label_en: 'American walnut', price_delta: kr(5500) },
-        { value: 'ask', label_da: 'Massiv ask', label_en: 'Solid ash', price_delta: kr(-1500) },
-      ]),
       {
-        key: 'base',
-        label_da: 'Base',
-        label_en: 'Base',
+        key: 'treatment',
+        label_da: 'Behandling',
+        label_en: 'Treatment',
         values: [
-          { value: 'birk', label_da: 'Birkefinér, naturolie', label_en: 'Birch ply, natural oil', price_delta: 0 },
-          { value: 'sort', label_da: 'Sortmalet birk', label_en: 'Black-painted birch', price_delta: kr(1400) },
-          { value: 'stål', label_da: 'Pulverlakeret stål', label_en: 'Powder-coated steel', price_delta: kr(4200) },
+          { value: 'olie', label_da: 'Olieret — kan pletrepareres', label_en: 'Oiled — repairs in place', price_delta: 0 },
+          { value: 'lak',  label_da: 'Lakeret — nærmest vedligeholdelsesfri', label_en: 'Lacquered — next to no upkeep', price_delta: 0 },
+        ],
+      },
+      {
+        key: 'finish',
+        label_da: 'Farve',
+        label_en: 'Colour',
+        values: [
+          { value: 'natur',  label_da: 'Natur', label_en: 'Natural', price_delta: 0 },
+          { value: 'hvid',   label_da: 'Hvid',  label_en: 'White',   price_delta: 0 },
+          { value: 'moerk',  label_da: 'Mørk',  label_en: 'Dark',    price_delta: 0 },
+          { value: 'roeget', label_da: 'Røget', label_en: 'Smoked',  price_delta: 0 },
+        ],
+      },
+      {
+        key: 'bearing',
+        label_da: 'Drejeskive — leje',
+        label_en: 'Turntable — bearing',
+        values: [
+          { value: '401.5', label_da: '401,5 mm — lille', label_en: '401.5 mm — small', price_delta: 0 },
+          { value: '601.5', label_da: '601,5 mm — stor',  label_en: '601.5 mm — large', price_delta: 0 },
         ],
       },
     ],
@@ -249,11 +267,11 @@ function insertProduct(product) {
     `INSERT INTO products (
        sku, slug, category, name_da, name_en, tagline_da, tagline_en,
        description_da, description_en, base_price, lead_time_days, deposit_pct,
-       shipping_price, images, materials_da, materials_en, dimensions, bespoke, status, position
+       shipping_price, images, materials_da, materials_en, dimensions, bespoke, pricing, status, position
      ) VALUES (
        :sku, :slug, :category, :name_da, :name_en, :tagline_da, :tagline_en,
        :description_da, :description_en, :base_price, :lead_time_days, :deposit_pct,
-       :shipping_price, :images, :materials_da, :materials_en, :dimensions, :bespoke, 'active', :position
+       :shipping_price, :images, :materials_da, :materials_en, :dimensions, :bespoke, :pricing, 'active', :position
      )`,
     bindable({
       sku: product.sku,
@@ -269,6 +287,7 @@ function insertProduct(product) {
       lead_time_days: product.lead_time_days,
       deposit_pct: product.deposit_pct,
       shipping_price: product.shipping_price,
+      pricing: product.pricing ?? '',
       materials_da: product.materials_da,
       materials_en: product.materials_en,
       dimensions: product.dimensions,

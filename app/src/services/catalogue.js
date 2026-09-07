@@ -3,6 +3,7 @@ import { config } from '../config.js';
 import { convert, formatMoney } from '../lib/money.js';
 import { badRequest, notFound } from '../lib/http.js';
 import { jsonArray } from '../lib/validate.js';
+import { PRICING_MODELS } from '../pricing/index.js';
 
 export function loadProduct(idOrSku) {
   const key = String(idOrSku);
@@ -94,6 +95,14 @@ export function priceConfiguration(product, selection = {}, locale = 'da') {
   let unitPrice = product.base_price;
   const resolved = [];
 
+  /* A piece whose price is a formula works it out from the configuration, using
+     the same module the website quotes from. The option list still describes
+     what may be chosen; it just does not carry the money. */
+  const model = product.pricing ? PRICING_MODELS[product.pricing] : null;
+  if (product.pricing && !model) {
+    throw badRequest(`Unknown pricing model “${product.pricing}”`);
+  }
+
   for (const option of options) {
     const chosen = selection[option.key];
     if (chosen === undefined || chosen === null || chosen === '') {
@@ -118,6 +127,14 @@ export function priceConfiguration(product, selection = {}, locale = 'da') {
       raw: match.value,
       priceDelta: match.price_delta,
     });
+  }
+
+  if (model) {
+    try {
+      unitPrice = model.price(selection);
+    } catch (err) {
+      throw badRequest(err.message);
+    }
   }
 
   if (unitPrice <= 0) throw badRequest('Configured price is invalid');

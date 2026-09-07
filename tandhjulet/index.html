@@ -810,16 +810,12 @@
      figure below is 10.650 rather than 12.000, the rest being the bearing at
      the same markup. Choosing the small bearing therefore takes 450 kr off,
      which the rounding shows as 500. */
-  var MATERIAL_MARKUP = 1.5;
-  var WORK_DKK     = 10650;    // design, CNC, underframe, finish, assembly
-  var MATERIAL     = { solid: 12000, veneer: 4000 };   // cost to produce, at REF_DIA
-  var BEARING      = { '401.5': 600, '601.5': 900 };   // cost to buy
-  /* Surface treatment, costed like any other material and scaled with the area
-     of the top, since that is what is being covered. Oil is the baseline the
-     30.000 kr was set on; the 1.000 kr for lacquer is my figure, not Stefan's,
-     and puts a lacquered table 1.500 kr above an oiled one. */
-  var TREATMENT    = { olie: 0, lak: 1000 };
-  var THICKNESS    = { solid: 26, veneer: 21 };
+  /* The price and the thicknesses come from assets/tandhjulet-pricing.js, which
+     the server reads as well — a page that quotes one number while checkout
+     charges another is the one bug here that costs real money. Until it loads,
+     priceFor returns null and the price line stays quiet rather than guessing. */
+  var PRICING = null;
+  var THICKNESS = { solid: 26, veneer: 21 };
 
   var svg   = document.getElementById('plan');
   if (!svg) return;
@@ -952,11 +948,10 @@
   }
 
   function priceFor(tip) {
-    var areaRatio = Math.pow(tip / REF_DIA, 2);
-    var parts = (MATERIAL[material] + TREATMENT[treatment]) * areaRatio
-              + BEARING[String(bearing)];
-    var raw = WORK_DKK + parts * MATERIAL_MARKUP;
-    return Math.round(raw / 500) * 500;      // quoted to the nearest 500 kr
+    if (!PRICING) return null;
+    return PRICING.priceDKK({
+      diameter: tip, material: material, treatment: treatment, bearing: String(bearing)
+    });
   }
 
   /* Paint the procedural oak into the two SVG patterns. Generating a texture
@@ -1058,9 +1053,9 @@
     document.getElementById('oThick').textContent = THICKNESS[material] + ' mm';
 
     var lang = document.documentElement.lang === 'en' ? 'en' : 'da';
-    document.getElementById('oPrice').textContent =
-      (lang === 'en' ? 'from ' : 'fra ') +
-      priceFor(tip).toLocaleString(locale()) + ' kr';
+    var kr = priceFor(tip);
+    document.getElementById('oPrice').textContent = kr === null ? '—'
+      : (lang === 'en' ? 'from ' : 'fra ') + kr.toLocaleString(locale()) + ' kr';
 
     document.getElementById('valMat').textContent =
       (lang === 'en' ? (material === 'solid' ? 'Solid oak' : 'MDF, oak veneer')
@@ -1158,6 +1153,11 @@
       wrap.appendChild(b);
     });
   }
+
+  import('../assets/tandhjulet-pricing.js').then(function (mod) {
+    PRICING = mod;
+    render();
+  }).catch(function (err) { console.error('[pricing]', err); });
 
   import('../assets/oak.js').then(function (mod) {
     oak = mod;
