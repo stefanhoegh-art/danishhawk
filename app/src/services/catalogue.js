@@ -59,6 +59,7 @@ export function presentProduct(product, { locale = 'da', currency = config.baseC
   }));
 
   const basePrice = convert(product.base_price, currency);
+  const enquiryOnly = Boolean(product.enquiry_only);
 
   return {
     id: product.id,
@@ -75,10 +76,15 @@ export function presentProduct(product, { locale = 'da', currency = config.baseC
     leadTimeDays: product.lead_time_days,
     depositPct: product.deposit_pct,
     shippingPrice: convert(product.shipping_price, currency),
-    basePrice,
-    basePriceLabel: formatMoney(basePrice, currency, locale),
-    fromLabel:
-      locale === 'da'
+    /* A piece shown rather than sold carries no price out to the widget. Its
+       base_price is a starting point for writing a quote, not a figure anyone
+       should read as an offer. */
+    enquiryOnly,
+    basePrice: enquiryOnly ? null : basePrice,
+    basePriceLabel: enquiryOnly ? '' : formatMoney(basePrice, currency, locale),
+    fromLabel: enquiryOnly
+      ? (locale === 'da' ? 'Pris efter aftale' : 'Priced on enquiry')
+      : locale === 'da'
         ? `Fra ${formatMoney(basePrice, currency, locale)}`
         : `From ${formatMoney(basePrice, currency, locale)}`,
     currency,

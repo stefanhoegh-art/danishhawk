@@ -77,6 +77,10 @@ CREATE TABLE IF NOT EXISTS products (
   -- module under src/pricing that works the price out from the configuration,
   -- for pieces whose price is a formula rather than a list.
   pricing         TEXT NOT NULL DEFAULT '',
+  -- 1 = shown to say what can be made, not sold from a price. It can be
+  -- configured and enquired about, but never checked out: a piece without a
+  -- firm price must not be charged for.
+  enquiry_only    INTEGER NOT NULL DEFAULT 0,
   status          TEXT NOT NULL DEFAULT 'active', -- active | draft | archived
   position        INTEGER NOT NULL DEFAULT 0,
   created_at      TEXT NOT NULL DEFAULT (datetime('now')),

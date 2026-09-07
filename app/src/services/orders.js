@@ -51,6 +51,11 @@ export function buildOrder({ cart, customer, partner, locale, kind }) {
     });
   }
 
+  /* A piece that is shown rather than sold has no firm price, so nothing in the
+     basket may be charged for: the whole thing becomes a quote request. */
+  const enquiryOnly = lines.some((l) => l.product.enquiry_only);
+  const effectiveKind = enquiryOnly ? 'quote' : kind;
+
   const treatment = vatTreatment({ country: customer.country, vatNumber: customer.vatNumber });
   const totals = priceOrder({
     grossLines: lines.map((l) => l.lineTotal),
@@ -59,7 +64,7 @@ export function buildOrder({ cart, customer, partner, locale, kind }) {
   });
 
   // The deposit follows the piece with the largest deposit requirement in the basket.
-  const depositPct = kind === 'quote' ? 0 : Math.max(...lines.map((l) => l.product.deposit_pct), 0);
+  const depositPct = effectiveKind === 'quote' ? 0 : Math.max(...lines.map((l) => l.product.deposit_pct), 0);
   const depositAmount = depositFor(totals.total, depositPct);
 
   // A product-level commission rate overrides the partner's default.
@@ -68,7 +73,7 @@ export function buildOrder({ cart, customer, partner, locale, kind }) {
     : 0;
   const commissionAmount = partner ? commissionFor(totals.subtotalExVat, commissionRate) : 0;
 
-  return { lines, totals, treatment, depositAmount, commissionRate, commissionAmount };
+  return { lines, totals, treatment, depositAmount, commissionRate, commissionAmount, kind: effectiveKind };
 }
 
 export function createOrder({
@@ -82,6 +87,7 @@ export function createOrder({
 }) {
   const built = buildOrder({ cart, customer, partner, locale, kind });
   const { lines, totals, depositAmount, commissionRate, commissionAmount } = built;
+  kind = built.kind;
 
   const rate = CURRENCIES[displayCurrency]?.rate ?? 1;
   const orderNo = nextOrderNo();

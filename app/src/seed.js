@@ -33,6 +33,7 @@ const PRODUCTS = [
     shipping_price: kr(1200),
     images: ['/media/pau-rosa-console.jpg'],
     position: 1,
+    enquiry_only: true,   // shown to say what can be made; priced on enquiry
     options: [
       WOOD_OPTION([
         { value: 'pau-rosa', label_da: 'Pau Rosa (som vist)', label_en: 'Pau Rosa (as shown)', price_delta: 0 },
@@ -83,6 +84,7 @@ const PRODUCTS = [
     shipping_price: kr(1200),
     images: ['/media/hoegh-tv-table.jpg'],
     position: 2,
+    enquiry_only: true,   // shown to say what can be made; priced on enquiry
     options: [
       {
         key: 'lettering',
@@ -205,6 +207,7 @@ const PRODUCTS = [
     bespoke: 0,
     images: [],
     position: 4,
+    enquiry_only: true,   // shown to say what can be made; priced on enquiry
     options: [
       {
         key: 'files',
@@ -267,11 +270,11 @@ function insertProduct(product) {
     `INSERT INTO products (
        sku, slug, category, name_da, name_en, tagline_da, tagline_en,
        description_da, description_en, base_price, lead_time_days, deposit_pct,
-       shipping_price, images, materials_da, materials_en, dimensions, bespoke, pricing, status, position
+       shipping_price, images, materials_da, materials_en, dimensions, bespoke, pricing, enquiry_only, status, position
      ) VALUES (
        :sku, :slug, :category, :name_da, :name_en, :tagline_da, :tagline_en,
        :description_da, :description_en, :base_price, :lead_time_days, :deposit_pct,
-       :shipping_price, :images, :materials_da, :materials_en, :dimensions, :bespoke, :pricing, 'active', :position
+       :shipping_price, :images, :materials_da, :materials_en, :dimensions, :bespoke, :pricing, :enquiry_only, 'active', :position
      )`,
     bindable({
       sku: product.sku,
@@ -288,6 +291,7 @@ function insertProduct(product) {
       deposit_pct: product.deposit_pct,
       shipping_price: product.shipping_price,
       pricing: product.pricing ?? '',
+      enquiry_only: product.enquiry_only ? 1 : 0,
       materials_da: product.materials_da,
       materials_en: product.materials_en,
       dimensions: product.dimensions,

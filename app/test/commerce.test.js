@@ -156,13 +156,20 @@ describe('configuring a piece', () => {
   });
 
   test('the widget gets the piece in the requested language and currency', () => {
-    const product = requireProduct('DH-HOEGH-TV');
+    const product = requireProduct('DH-TANDHJULET');
     const da = presentProduct(product, { locale: 'da', currency: 'DKK' });
     const en = presentProduct(product, { locale: 'en', currency: 'GBP' });
-    assert.equal(da.name, 'HØGH TV-bord');
-    assert.equal(en.name, 'HØGH TV Table');
+    assert.equal(da.name, 'Tandhjulet');
     assert.match(da.fromLabel, /^Fra/);
     assert.match(en.fromLabel, /^From £/);
+  });
+
+  test('a piece that is shown says so in both languages, in place of a price', () => {
+    const product = requireProduct('DH-HOEGH-TV');
+    assert.equal(presentProduct(product, { locale: 'da' }).name, 'HØGH TV-bord');
+    assert.equal(presentProduct(product, { locale: 'en' }).name, 'HØGH TV Table');
+    assert.equal(presentProduct(product, { locale: 'da' }).fromLabel, 'Pris efter aftale');
+    assert.equal(presentProduct(product, { locale: 'en' }).fromLabel, 'Priced on enquiry');
   });
 });
 
@@ -347,4 +354,35 @@ test('a size or a finish that was never offered is refused, not priced', () => {
   ]) {
     assert.throws(() => priceConfiguration(product, bad, 'da'), /.*/, JSON.stringify(bad));
   }
+});
+
+test('a piece shown rather than sold is never charged for', () => {
+  const customer = {
+    name: 'Test Testesen', email: 'test@example.dk', phone: '', company: '', vatNumber: '',
+    address1: 'Testvej 1', address2: '', postalCode: '8000', city: 'Aarhus', country: 'DK', note: '',
+  };
+  const shown = requireProduct('DH-PAUROSA-CONSOLE');
+  assert.equal(Boolean(shown.enquiry_only), true);
+
+  const presented = presentProduct(shown, { locale: 'da' });
+  assert.equal(presented.basePrice, null, 'no figure goes out to the widget');
+  assert.equal(presented.fromLabel, 'Pris efter aftale');
+
+  // even asked for as an order, it comes back as a quote with nothing to pay
+  const order = createOrder({
+    cart: [{ sku: 'DH-PAUROSA-CONSOLE', quantity: 1,
+             options: { wood: 'pau-rosa', length: '120', finish: 'natur' } }],
+    customer, partner: null, locale: 'da', kind: 'order',
+  });
+  assert.equal(order.kind, 'quote');
+  assert.equal(order.status, 'quote_requested');
+  assert.equal(order.deposit_amount, 0);
+});
+
+test('Tandhjulet is sold, not merely shown', () => {
+  const t = requireProduct('DH-TANDHJULET');
+  assert.equal(Boolean(t.enquiry_only), false);
+  const presented = presentProduct(t, { locale: 'da' });
+  assert.equal(presented.basePrice, kr(17500), 'the cheapest the formula can make');
+  assert.match(presented.fromLabel, /^Fra /);
 });
