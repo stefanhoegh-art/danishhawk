@@ -22,6 +22,7 @@ const { get } = await import('../src/db.js');
 const { ensureSeed } = await import('../src/seed.js');
 const { priceConfiguration, requireProduct, presentProduct } = await import('../src/services/catalogue.js');
 const { createOrder, loadOrder, setOrderStatus, markPaid } = await import('../src/services/orders.js');
+const { priceDKK: tandhjuletPrice } = await import('../../assets/tandhjulet-pricing.js');
 
 before(() => ensureSeed());
 after(() => rmSync(dir, { recursive: true, force: true }));
@@ -377,6 +378,62 @@ test('a piece shown rather than sold is never charged for', () => {
   assert.equal(order.kind, 'quote');
   assert.equal(order.status, 'quote_requested');
   assert.equal(order.deposit_amount, 0);
+});
+
+test('the size is a slider, and the widget is told how far it goes', () => {
+  const presented = presentProduct(requireProduct('DH-TANDHJULET'), { locale: 'da' });
+  const diameter = presented.options.find((o) => o.key === 'diameter');
+  assert.ok(diameter, 'the diameter is offered');
+  assert.equal(diameter.type, 'range');
+  assert.equal(diameter.min, 1855);
+  assert.equal(diameter.max, 2000);
+  assert.equal(diameter.step, 5);
+  assert.equal(diameter.unit, 'mm');
+  assert.deepEqual(diameter.values, [], 'a slider has no menu behind it');
+  assert.equal(diameter.default, 1855, 'it opens at the price the card quotes');
+
+  // every other option is still a menu
+  for (const option of presented.options) {
+    if (option.key === 'diameter') continue;
+    assert.equal(option.type, 'choice', option.key);
+    assert.ok(option.values.length, option.key);
+  }
+});
+
+test('the size the slider sends is checked before it is priced', () => {
+  const product = requireProduct('DH-TANDHJULET');
+  const base = { material: 'solid', treatment: 'olie', bearing: '601.5', finish: 'moerk' };
+
+  // a size the slider can produce is priced and reads back with its unit
+  const { resolved } = priceConfiguration(product, { ...base, diameter: 1900 }, 'da');
+  const line = resolved.find((r) => r.key === 'diameter');
+  assert.equal(line.value, '1900 mm');
+  assert.equal(line.priceDelta, 0, 'the size is in the formula, not in a delta');
+
+  // a slider is not a menu: the size must still be one of the offered ones
+  for (const bad of [
+    { ...base, diameter: 1854 },
+    { ...base, diameter: 2005 },
+    { ...base, diameter: 1902 },
+    { ...base, diameter: 'stor' },
+  ]) {
+    assert.throws(() => priceConfiguration(product, bad, 'da'), /.*/, JSON.stringify(bad));
+  }
+
+  // and leaving it out is refused rather than guessed at
+  assert.throws(() => priceConfiguration(product, base, 'da'), /Diameter/);
+});
+
+test('sliding the table wider costs what the website says it does', () => {
+  const product = requireProduct('DH-TANDHJULET');
+  const base = { material: 'solid', treatment: 'olie', bearing: '601.5', finish: 'moerk' };
+  let last = 0;
+  for (let d = 1855; d <= 2000; d += 5) {
+    const { unitPrice } = priceConfiguration(product, { ...base, diameter: d }, 'da');
+    assert.equal(unitPrice, tandhjuletPrice({ ...base, diameter: d }) * 100, `${d} mm`);
+    assert.ok(unitPrice >= last, 'a bigger table never costs less');
+    last = unitPrice;
+  }
 });
 
 test('Tandhjulet is sold, not merely shown', () => {

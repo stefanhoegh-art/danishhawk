@@ -8,6 +8,25 @@ mkdirSync(dirname(config.dbFile), { recursive: true });
 export const db = new DatabaseSync(config.dbFile);
 db.exec(readFileSync(join(ROOT, 'src', 'schema.sql'), 'utf8'));
 
+/* CREATE TABLE IF NOT EXISTS does nothing to a table that already exists, so a
+   database made before a column was added would still be missing it. Adding the
+   column here keeps an existing shop working across an update; SQLite only
+   allows this for columns with a constant default, which is all of ours. */
+function addColumn(table, column, definition) {
+  const has = db
+    .prepare(`SELECT 1 FROM pragma_table_info(:table) WHERE name = :column`)
+    .get({ table, column });
+  if (!has) db.exec(`ALTER TABLE ${table} ADD COLUMN ${column} ${definition}`);
+}
+
+addColumn('products', 'pricing', `TEXT NOT NULL DEFAULT ''`);
+addColumn('products', 'enquiry_only', 'INTEGER NOT NULL DEFAULT 0');
+addColumn('product_options', 'type', `TEXT NOT NULL DEFAULT 'choice'`);
+addColumn('product_options', 'min_value', 'REAL NOT NULL DEFAULT 0');
+addColumn('product_options', 'max_value', 'REAL NOT NULL DEFAULT 0');
+addColumn('product_options', 'step_value', 'REAL NOT NULL DEFAULT 1');
+addColumn('product_options', 'unit', `TEXT NOT NULL DEFAULT ''`);
+
 /** Run a query and return every row. */
 export function all(sql, params = {}) {
   return db.prepare(sql).all(params);

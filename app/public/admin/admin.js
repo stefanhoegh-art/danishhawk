@@ -408,6 +408,8 @@ function productModal(product) {
 
   const editor = modal.querySelector('#optsEditor');
 
+  const NUMERIC = ['min_value', 'max_value', 'step_value'];
+
   function drawOptions() {
     editor.innerHTML = options.map((option, oi) => `
       <div class="opts-editor">
@@ -415,9 +417,21 @@ function productModal(product) {
           <div><label>Option (DA)</label><input data-o="${oi}" data-k="label_da" value="${esc(option.label_da || '')}"></div>
           <div><label>Option (EN)</label><input data-o="${oi}" data-k="label_en" value="${esc(option.label_en || '')}"></div>
           <div><label>Key</label><input data-o="${oi}" data-k="key" value="${esc(option.key || '')}"></div>
+          <div><label>Kind</label><select data-o="${oi}" data-k="type">
+            <option value="choice"${option.type === 'range' ? '' : ' selected'}>Menu</option>
+            <option value="range"${option.type === 'range' ? ' selected' : ''}>Slider</option>
+          </select></div>
           <button class="btn small danger" data-rmo="${oi}" type="button">✕</button>
         </div>
-        ${(option.values || []).map((value, vi) => `
+        ${option.type === 'range' ? `
+        <div class="row">
+          <div><label>From</label><input data-o="${oi}" data-k="min_value" type="number" step="any" value="${Number(option.min_value || 0)}"></div>
+          <div><label>To</label><input data-o="${oi}" data-k="max_value" type="number" step="any" value="${Number(option.max_value || 0)}"></div>
+          <div><label>Step</label><input data-o="${oi}" data-k="step_value" type="number" step="any" value="${Number(option.step_value || 1)}"></div>
+          <div><label>Unit</label><input data-o="${oi}" data-k="unit" value="${esc(option.unit || '')}"></div>
+        </div>
+        <div class="hint">A slider between those two numbers. The piece must price from a formula, not from choices.</div>`
+        : `${(option.values || []).map((value, vi) => `
           <div class="row">
             <div><input data-o="${oi}" data-v="${vi}" data-k="label_da" placeholder="Choice (DA)" value="${esc(value.label_da || '')}"></div>
             <div><input data-o="${oi}" data-v="${vi}" data-k="label_en" placeholder="Choice (EN)" value="${esc(value.label_en || '')}"></div>
@@ -425,15 +439,18 @@ function productModal(product) {
                  placeholder="± kr" value="${(value.price_delta || 0) / 100}"></div>
             <button class="btn small danger" data-rmv="${oi}.${vi}" type="button">✕</button>
           </div>`).join('')}
-        <button class="btn small" data-addv="${oi}" type="button">Add choice</button>
+        <button class="btn small" data-addv="${oi}" type="button">Add choice</button>`}
       </div>`).join('') || '<div class="hint">No options — buyers order the piece exactly as listed.</div>';
 
     on('[data-o]', 'input', (event) => {
       const { o, v, k } = event.target.dataset;
       const target = v === undefined ? options[o] : options[o].values[v];
-      target[k] = k === 'price_delta' ? Math.round(Number(event.target.value) * 100) : event.target.value;
+      if (k === 'price_delta') target[k] = Math.round(Number(event.target.value) * 100);
+      else if (NUMERIC.includes(k)) target[k] = Number(event.target.value);
+      else target[k] = event.target.value;
       if (k === 'label_en' && v !== undefined) target.value = slug(event.target.value);
       if (k === 'label_da' && v !== undefined && !target.value) target.value = slug(event.target.value);
+      if (k === 'type') drawOptions();   // a slider and a menu are edited differently
     }, editor);
 
     on('[data-rmo]', 'click', (event) => {
@@ -454,7 +471,7 @@ function productModal(product) {
   const slug = (s) => String(s).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 30);
 
   modal.querySelector('#addOption').addEventListener('click', () => {
-    options.push({ key: '', label_da: '', label_en: '', values: [] });
+    options.push({ key: '', label_da: '', label_en: '', type: 'choice', values: [] });
     drawOptions();
   });
   drawOptions();

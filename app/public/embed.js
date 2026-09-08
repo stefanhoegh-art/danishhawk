@@ -262,6 +262,19 @@
       'linear-gradient(135deg,var(--dh-mid) 50%,transparent 50%);',
       'background-position:calc(100% - 18px) 50%,calc(100% - 13px) 50%;',
       'background-size:5px 5px,5px 5px;background-repeat:no-repeat;padding-right:38px;}',
+      '.range-row{display:flex;align-items:center;gap:16px;}',
+      '.range{flex:1;width:auto;-webkit-appearance:none;appearance:none;background:var(--dh-line);',
+      'border:0;border-radius:0;padding:0;height:2px;cursor:pointer;}',
+      '.range::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;',
+      'background:var(--dh-accent);border:0;cursor:pointer;}',
+      '.range::-moz-range-thumb{width:22px;height:22px;border-radius:50%;background:var(--dh-accent);',
+      'border:0;cursor:pointer;}',
+      '.range:focus{outline:2px solid var(--dh-accent);outline-offset:8px;}',
+      '.range-val{font-family:var(--dh-mono);font-size:14px;color:var(--dh-ink);',
+      'font-variant-numeric:tabular-nums;white-space:nowrap;}',
+      '.range-ends{display:flex;justify-content:space-between;margin-top:8px;',
+      'font-size:10.5px;color:var(--dh-mid);opacity:.7;}',
+
       '.qty{display:inline-flex;border:1px solid var(--dh-line);}',
       '.qty button{width:40px;height:42px;display:grid;place-items:center;font-size:16px;}',
       '.qty button:hover{color:var(--dh-accent);}',
@@ -428,9 +441,11 @@
       api('/products/' + encodeURIComponent(sku))
         .then(function (data) {
           ctx.product = data.product;
-          // Preselect the first value of every option so a price shows immediately.
+          // Preselect every option so a price shows immediately: the first value
+          // of a menu, the smallest size of a slider.
           data.product.options.forEach(function (option) {
-            if (option.values.length) ctx.selection[option.key] = option.values[0].value;
+            if (option.type === 'range') ctx.selection[option.key] = option.default;
+            else if (option.values.length) ctx.selection[option.key] = option.values[0].value;
           });
           render();
           repriceSoon(0);
@@ -471,6 +486,14 @@
     function set(field, value) { ctx.customer[field] = value; }
 
     function render() {
+      /* Rebuilding the panel throws focus away. A slider being nudged with the
+         arrow keys, or a field being typed into, has to survive that, so
+         remember what was focused and hand focus to the element replacing it. */
+      var active = panel.getRootNode().activeElement;
+      var keep = active && active.getAttribute ? active.getAttribute('data-keep') : null;
+      var caret = null;
+      if (keep && active.type === 'text') { try { caret = active.selectionStart; } catch (e) {} }
+
       panel.innerHTML = '';
       panel.appendChild(bar());
       var scroll = el('div', { class: 'scroll' });
@@ -488,6 +511,15 @@
       if (ctx.step === 'review') scroll.appendChild(reviewView());
 
       panel.appendChild(dock());
+
+      var again = keep && panel.querySelector('[data-keep="' + keep + '"]');
+      if (again) {
+        again.focus();
+        if (caret !== null && again.setSelectionRange) {
+          try { again.setSelectionRange(caret, caret); } catch (e) {}
+        }
+        return;
+      }
       var firstInput = panel.querySelector('input,select,button.opt');
       if (firstInput && ctx.step === 'details') firstInput.focus();
     }
@@ -539,6 +571,9 @@
 
       product.options.forEach(function (option) {
         var field = el('div', { class: 'field' }, [el('span', { class: 'lab', text: option.label })]);
+
+        if (option.type === 'range') { frag.appendChild(rangeField(option, field)); return; }
+
         var opts = el('div', { class: 'opts' });
         option.values.forEach(function (value) {
           opts.appendChild(el('button', {
@@ -558,6 +593,37 @@
         field.appendChild(opts);
         frag.appendChild(field);
       });
+
+      /* A size the buyer slides to rather than picks from a menu. Dragging only
+         moves the readout: repricing rebuilds the panel, which mid-drag would
+         pull the slider out from under the pointer, so the price follows when
+         the slider is let go. */
+      function rangeField(option, field) {
+        var show = function (value) {
+          return option.unit ? value + ' ' + option.unit : String(value);
+        };
+        var readout = el('output', {
+          class: 'range-val',
+          text: show(ctx.selection[option.key]),
+        });
+        var slider = el('input', {
+          type: 'range', class: 'range', 'data-keep': 'opt-' + option.key,
+          min: option.min, max: option.max, step: option.step,
+          value: String(ctx.selection[option.key]),
+          'aria-label': option.label,
+          oninput: function (event) {
+            ctx.selection[option.key] = Number(event.target.value);
+            readout.textContent = show(event.target.value);
+          },
+          onchange: function () { track('configure', product.sku); repriceSoon(0); },
+        });
+        field.appendChild(el('div', { class: 'range-row' }, [slider, readout]));
+        field.appendChild(el('div', { class: 'range-ends' }, [
+          el('small', { text: show(option.min) }),
+          el('small', { text: show(option.max) }),
+        ]));
+        return field;
+      }
 
       var qty = el('div', { class: 'field' }, [
         el('span', { class: 'lab', text: t('quantity') }),
@@ -587,6 +653,7 @@
         attrs = attrs || {};
         var node = el('input', Object.assign({
           type: attrs.type || 'text',
+          'data-keep': 'cust-' + name,
           value: ctx.customer[name] || '',
           placeholder: label,
           'aria-label': label,

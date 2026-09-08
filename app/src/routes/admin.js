@@ -31,20 +31,48 @@ function requireAdmin(req) {
   return admin;
 }
 
+/** A range option's bounds are decimals, so they are not validate.int. */
+function real(value, field, fallback) {
+  if (value === undefined || value === '' || value === null) return fallback;
+  const n = Number(value);
+  if (!Number.isFinite(n)) throw badRequest(`${field} must be a number`, { field });
+  return n;
+}
+
 function saveOptions(productId, options) {
   run('DELETE FROM product_options WHERE product_id = :productId', { productId });
   if (!Array.isArray(options)) return;
   options.forEach((option, index) => {
     const key = validate.str(option.key || option.label_en || option.label_da, 'option key', { max: 40 });
+    /* Rewriting an option list must not quietly turn a slider back into an
+       empty menu: a range option carries its bounds through the save. */
+    const type = validate.oneOf(option.type, 'option type', ['choice', 'range'], 'choice');
+    const min = real(option.min_value, 'option minimum', 0);
+    const max = real(option.max_value, 'option maximum', 0);
+    const step = real(option.step_value, 'option step', 1);
+    if (type === 'range') {
+      if (!(max > min)) throw badRequest('A range option needs a maximum above its minimum', { field: key });
+      if (!(step > 0)) throw badRequest('A range option needs a step above zero', { field: key });
+    }
     const result = run(
-      `INSERT INTO product_options (product_id, key, label_da, label_en, required, position)
-       VALUES (:productId, :key, :labelDa, :labelEn, :required, :position)`,
+      `INSERT INTO product_options (
+         product_id, key, label_da, label_en, required,
+         type, min_value, max_value, step_value, unit, position
+       ) VALUES (
+         :productId, :key, :labelDa, :labelEn, :required,
+         :type, :min, :max, :step, :unit, :position
+       )`,
       bindable({
         productId,
         key: validate.slugify(key) || `option-${index + 1}`,
         labelDa: validate.str(option.label_da, 'option label (DA)', { max: 80 }),
         labelEn: validate.str(option.label_en || option.label_da, 'option label (EN)', { max: 80 }),
         required: option.required === false ? 0 : 1,
+        type,
+        min,
+        max,
+        step,
+        unit: validate.str(option.unit ?? '', 'option unit', { max: 12, required: false }),
         position: index,
       })
     );

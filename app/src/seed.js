@@ -1,6 +1,7 @@
 import { config } from './config.js';
 import { db, all, get, run, tx, bindable, setSetting } from './db.js';
 import { hashPassword, publicKey, portalKey } from './lib/crypto.js';
+import { MIN_DIA, MAX_DIA } from '../../assets/tandhjulet-pricing.js';
 
 const kr = (amount) => Math.round(amount * 100); // kroner -> øre
 
@@ -141,10 +142,20 @@ const PRODUCTS = [
     shipping_price: 0,                 // quoted after measuring the way in
     images: ['/assets/tandhjulet-top-and-centre-0e4e9e71.jpg'],
     position: 1,
-    /* The diameter is not in this list: it is a number between 1855 and 2000 in
-       steps of 5, checked by the pricing model rather than picked from a menu.
-       These four are the choices that are genuinely a menu. */
     options: [
+      /* The diameter is not a menu: it is any number between 1855 and 2000 mm in
+         steps of 5, so the buyer slides to the size the room takes. The bounds
+         come from the pricing module, which is also what checks them. */
+      {
+        key: 'diameter',
+        type: 'range',
+        label_da: 'Diameter — tand til tand',
+        label_en: 'Diameter — tooth to tooth',
+        min: MIN_DIA,
+        max: MAX_DIA,
+        step: 5,
+        unit: 'mm',
+      },
       {
         key: 'material',
         label_da: 'Bordplade',
@@ -304,12 +315,28 @@ function insertProduct(product) {
 
   (product.options || []).forEach((option, index) => {
     const optionResult = run(
-      `INSERT INTO product_options (product_id, key, label_da, label_en, required, position)
-       VALUES (:productId, :key, :label_da, :label_en, 1, :position)`,
-      bindable({ productId, key: option.key, label_da: option.label_da, label_en: option.label_en, position: index })
+      `INSERT INTO product_options (
+         product_id, key, label_da, label_en, required,
+         type, min_value, max_value, step_value, unit, position
+       ) VALUES (
+         :productId, :key, :label_da, :label_en, 1,
+         :type, :min_value, :max_value, :step_value, :unit, :position
+       )`,
+      bindable({
+        productId,
+        key: option.key,
+        label_da: option.label_da,
+        label_en: option.label_en,
+        type: option.type ?? 'choice',
+        min_value: option.min ?? 0,
+        max_value: option.max ?? 0,
+        step_value: option.step ?? 1,
+        unit: option.unit ?? '',
+        position: index,
+      })
     );
     const optionId = Number(optionResult.lastInsertRowid);
-    option.values.forEach((value, valueIndex) => {
+    (option.values || []).forEach((value, valueIndex) => {
       run(
         `INSERT INTO product_option_values (option_id, value, label_da, label_en, price_delta, position)
          VALUES (:optionId, :value, :label_da, :label_en, :price_delta, :position)`,

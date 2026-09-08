@@ -94,6 +94,15 @@ CREATE TABLE IF NOT EXISTS product_options (
   label_da   TEXT NOT NULL,
   label_en   TEXT NOT NULL,
   required   INTEGER NOT NULL DEFAULT 1,
+  -- 'choice' picks one of the rows in product_option_values.
+  -- 'range' is a number the buyer slides between min_value and max_value in
+  -- whole steps of step_value; it has no values rows, and only makes sense on
+  -- a product that prices from a formula.
+  type       TEXT NOT NULL DEFAULT 'choice',
+  min_value  REAL NOT NULL DEFAULT 0,
+  max_value  REAL NOT NULL DEFAULT 0,
+  step_value REAL NOT NULL DEFAULT 1,
+  unit       TEXT NOT NULL DEFAULT '',
   position   INTEGER NOT NULL DEFAULT 0
 );
 CREATE INDEX IF NOT EXISTS idx_options_product ON product_options(product_id);

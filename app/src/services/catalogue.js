@@ -43,6 +43,19 @@ export function presentProduct(product, { locale = 'da', currency = config.baseC
     key: option.key,
     label: pick(option, 'label', locale),
     required: Boolean(option.required),
+    /* A range option is a number the buyer slides to, not a list to pick from:
+       the widget renders it as a slider and starts it at the smallest size,
+       which is the configuration base_price quotes from. */
+    type: option.type === 'range' ? 'range' : 'choice',
+    ...(option.type === 'range'
+      ? {
+          min: option.min_value,
+          max: option.max_value,
+          step: option.step_value,
+          unit: option.unit,
+          default: option.min_value,
+        }
+      : {}),
     values: option.values.map((value) => ({
       value: value.value,
       label: pick(value, 'label', locale),
@@ -119,6 +132,17 @@ export function priceConfiguration(product, selection = {}, locale = 'da') {
       }
       continue;
     }
+    if (option.type === 'range') {
+      resolved.push({
+        key: option.key,
+        label: pick(option, 'label', locale),
+        value: rangeValue(option, chosen, pick(option, 'label', locale)),
+        raw: String(Number(chosen)),
+        priceDelta: 0,
+      });
+      continue;
+    }
+
     const match = option.values.find((v) => v.value === String(chosen));
     if (!match) {
       throw badRequest(`“${chosen}” is not available for ${pick(option, 'label', locale)}`, {
@@ -145,6 +169,30 @@ export function priceConfiguration(product, selection = {}, locale = 'da') {
 
   if (unitPrice <= 0) throw badRequest('Configured price is invalid');
   return { unitPrice, resolved };
+}
+
+/**
+ * Checks a slider value against the bounds the option was seeded with and
+ * returns it as a label. The pricing model checks the number again on its own
+ * terms; this is what stops a value that is out of range or off the step from
+ * ever reaching it.
+ */
+function rangeValue(option, chosen, label) {
+  const num = Number(chosen);
+  if (!Number.isFinite(num)) throw badRequest(`“${chosen}” is not a number for ${label}`, { field: option.key });
+  if (num < option.min_value || num > option.max_value) {
+    throw badRequest(`${label} must be between ${option.min_value} and ${option.max_value}${option.unit ? ` ${option.unit}` : ''}`, {
+      field: option.key,
+    });
+  }
+  const step = option.step_value > 0 ? option.step_value : 1;
+  const steps = Math.round((num - option.min_value) / step);
+  if (Math.abs(option.min_value + steps * step - num) > 1e-6) {
+    throw badRequest(`${label} is set in steps of ${step}${option.unit ? ` ${option.unit}` : ''}`, {
+      field: option.key,
+    });
+  }
+  return option.unit ? `${num} ${option.unit}` : String(num);
 }
 
 export function requireProduct(idOrSku) {
