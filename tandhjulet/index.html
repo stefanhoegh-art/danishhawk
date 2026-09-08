@@ -71,10 +71,14 @@
       --card: #eeebe5;
       --serif: "Cormorant Garamond", Georgia, serif;
       --mono: "DM Mono", ui-monospace, monospace;
+      --nav-h: 71px;          /* the fixed bar, measured; the drawing parks under it */
     }
-    html { scroll-behavior: smooth; }
+    /* Sideways scroll is clipped on the root, not on the body: overflow-x on
+       the body would make it a scroll container of its own and stop the
+       drawing in the configurator from sticking. */
+    html { scroll-behavior: smooth; overflow-x: hidden; }
     body { background: var(--bg); color: var(--ink); font-family: var(--serif);
-           font-weight: 400; font-size: 20px; line-height: 1.7; overflow-x: hidden;
+           font-weight: 400; font-size: 20px; line-height: 1.7; overflow-x: clip;
            -webkit-font-smoothing: antialiased; }
     /* Small serif text at 400 is still thin on a phone, so it steps up again. */
     .lede, .hero-sub, .pointlist p, .cfg-note, .ctrl-why, .price-sub, .notice p,
@@ -175,8 +179,13 @@
     #konfigurer { border-top: 1px solid var(--line); padding: 90px 80px; }
     .cfg-head { max-width: 60ch; margin-bottom: 48px; }
     .cfg { display: grid; grid-template-columns: 1.15fr .85fr; gap: 56px; align-items: start; }
-    .cfg-stage { background: var(--card); border: 1px solid var(--line); position: relative; }
-    .cfg-stage svg { width: 100%; height: auto; display: block; touch-action: none; }
+    /* Every control changes the drawing, so the drawing has to stay on screen
+       while you work down them: it sticks under the fixed bar and travels the
+       whole length of the controls. */
+    .cfg-stage { background: var(--card); border: 1px solid var(--line);
+                 position: sticky; top: calc(var(--nav-h) + 20px); z-index: 2; }
+    .cfg-stage svg { width: 100%; height: auto; display: block; touch-action: none;
+                     max-height: calc(100vh - var(--nav-h) - 52px); }
     .cfg-hint { position: absolute; left: 0; right: 0; top: 14px; text-align: center;
                 font-family: var(--mono); font-size: .63rem; letter-spacing: .14em; text-transform: uppercase;
                 color: var(--mid); pointer-events: none; transition: opacity .4s; }
@@ -283,6 +292,7 @@
 
     /* ---------- mobile ---------- */
     @media (max-width: 980px) {
+      :root { --nav-h: 59px; }
       nav { padding: 14px 18px; }
       .nav-links { display: none; }
       #hero { grid-template-columns: 1fr; min-height: auto; }
@@ -297,7 +307,12 @@
       .split-text, .split.flip .split-text { padding: 56px 22px; order: 1; }
       .split-img, .split.flip .split-img { order: 2; min-height: 320px; }
       #konfigurer, #spec { padding: 56px 22px; }
-      .cfg { grid-template-columns: 1fr; gap: 34px; }
+      /* A one-column grid pins a sticky item inside its own row, where it has
+         nowhere to travel. Plain blocks let it ride the whole way down. */
+      .cfg { display: block; }
+      .cfg-stage { top: var(--nav-h); margin-bottom: 30px;
+                   box-shadow: 0 16px 20px -18px rgba(15,14,11,.55); }
+      .cfg-stage svg { max-height: 37vh; }
       .spec-grid { grid-template-columns: 1fr; }
       .gal-grid { grid-template-columns: 1fr; }
       .ord-l { padding: 56px 22px; border-right: none; border-bottom: 1px solid var(--line); }
