@@ -16,6 +16,8 @@ export const PRICING_MODELS = {
         material:  selection.material,
         treatment: selection.treatment,
         bearing:   selection.bearing,
+        // 'same' is the menu's way of saying "follows the tabletop"
+        boardFinish: selection.boardFinish === 'same' ? '' : selection.boardFinish,
       }));
     },
     normalise: tandhjulet.normalise,

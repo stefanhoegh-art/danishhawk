@@ -36,7 +36,7 @@ export function priceDKK({ diameter, material, treatment, bearing }) {
  * it does not recognise, so a cart cannot carry a size or a finish that was
  * never offered.
  */
-export function normalise({ diameter, material, treatment, bearing, finish }) {
+export function normalise({ diameter, material, treatment, bearing, finish, boardFinish }) {
   const d = Number(diameter);
   if (!Number.isFinite(d)) throw new Error('Diameter mangler');
   if (d < MIN_DIA || d > MAX_DIA) {
@@ -55,6 +55,15 @@ export function normalise({ diameter, material, treatment, bearing, finish }) {
   if (finish !== undefined) {
     if (!FINISHES.includes(String(finish))) throw new Error(`Ukendt farve: ${finish}`);
     spec.finish = String(finish);
+  }
+  /* The turntable is finished separately, so it may carry its own colour. An
+     empty value means it follows the tabletop; it costs the same either way,
+     but it has to survive into the order so the right board gets built. */
+  if (boardFinish !== undefined && boardFinish !== null && boardFinish !== '') {
+    if (!FINISHES.includes(String(boardFinish))) {
+      throw new Error(`Ukendt farve på drejeskiven: ${boardFinish}`);
+    }
+    spec.boardFinish = String(boardFinish);
   }
   return spec;
 }

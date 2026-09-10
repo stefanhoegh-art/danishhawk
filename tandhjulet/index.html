@@ -312,6 +312,15 @@
     .ctrl-why { font-size: .9rem; color: var(--mid); line-height: 1.8; margin: 12px 0 0; }
     .choices { display: flex; gap: 8px; }
     .swatches { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+    .swatches.five { grid-template-columns: repeat(5, 1fr); }
+    /* Five tiles across a phone leaves each label too narrow to sit on one
+       line, and a wrapped label makes its tile taller than its neighbours. */
+    @media (max-width: 560px) { .swatches.five { grid-template-columns: repeat(3, 1fr); } }
+    /* The "same as the top" swatch is a state, not a colour, so it is drawn as
+       a rule rather than as another piece of wood. */
+    .sw.same canvas { position: relative; }
+    .sw.same .same-mark { display: grid; place-items: center; height: 54px;
+                          font-family: var(--mono); font-size: 1.3rem; color: var(--mid); opacity: .5; }
     .sw { border: 1px solid var(--line); background: none; padding: 0; cursor: pointer;
           transition: .2s; overflow: hidden; }
     .sw canvas { display: block; width: 100%; height: 54px; object-fit: cover; }
@@ -769,10 +778,19 @@
 
       <div class="ctrl">
         <div class="ctrl-label">
-          <span data-da="Farve" data-en="Colour">Farve</span>
+          <span data-da="Bordplade — farve" data-en="Tabletop — colour">Bordplade — farve</span>
           <span class="ctrl-val" id="valFinish"></span>
         </div>
         <div class="swatches" id="swatches"></div>
+      </div>
+
+      <div class="ctrl">
+        <div class="ctrl-label">
+          <span data-da="Drejeskive — farve" data-en="Turntable — colour">Drejeskive — farve</span>
+          <span class="ctrl-val" id="valBoardFinish"></span>
+        </div>
+        <div class="swatches five" id="boardSwatches"></div>
+        <p class="ctrl-why" data-da="Drejeskiven er sit eget stykke træ og behandles for sig, så den kan få en anden farve end pladen. En mørk midte i en lys plade — eller omvendt — gør det tydeligt, at midten drejer." data-en="The turntable is its own piece of wood and is finished separately, so it can take a different colour from the top. A dark centre in a light top — or the other way round — makes it obvious that the middle turns.">Drejeskiven er sit eget stykke træ og behandles for sig, så den kan få en anden farve end pladen. En mørk midte i en lys plade — eller omvendt — gør det tydeligt, at midten drejer.</p>
       </div>
 
       <div class="ctrl">
@@ -791,6 +809,7 @@
         <div class="rrow"><dt data-da="Over tænder, tand til tand" data-en="Across teeth, tip to tip">Over tænder, tand til tand</dt><dd id="oTip"></dd></div>
         <div class="rrow"><dt data-da="Flade til flade" data-en="Flat to flat">Flade til flade</dt><dd id="oFlat"></dd></div>
         <div class="rrow"><dt data-da="Drejeskive" data-en="Turntable">Drejeskive</dt><dd id="oBoard"></dd></div>
+        <div class="rrow"><dt data-da="Farver" data-en="Colours">Farver</dt><dd id="oColours"></dd></div>
         <div class="rrow"><dt data-da="Udhæng over lejet" data-en="Overhang past bearing">Udhæng over lejet</dt><dd id="oOver"></dd></div>
         <div class="rrow"><dt data-da="Plads pr. kuvert" data-en="Space per place">Plads pr. kuvert</dt><dd id="oSeat"></dd></div>
         <div class="rrow"><dt data-da="Ryglæn til bordkant" data-en="Backrest to table edge">Ryglæn til bordkant</dt><dd id="oBack"></dd></div>
@@ -1199,6 +1218,9 @@
   var bearing = 601.5;
   var material = 'solid';
   var finish = 'moerk';
+  /* The turntable is a separate piece of wood, finished on its own, so it can
+     carry its own colour. Empty means it follows the tabletop. */
+  var boardFinish = '';
   var treatment = 'olie';
   var angle = 0;
   // Until the board slider is touched it follows each bearing's smallest size,
@@ -1326,15 +1348,20 @@
   var paintedKey = '';
   function paintOak() {
     if (!oak) return;
-    var key = material + '|' + finish;
+    var bf = boardFinish || finish;
+    var key = material + '|' + finish + '|' + bf;
     if (key === paintedKey) return;
     paintedKey = key;
     var topURL = oak.oakCanvas({ finish: finish, material: material, size: 1024, staveW: 132 })
       .toDataURL('image/jpeg', 0.85);
     document.getElementById('oakTopImg').setAttribute('href', topURL);
-    // The centre board is cut from the same stock, so it gets the same texture
-    // at a tighter scale and a different angle.
-    document.getElementById('oakBoardImg').setAttribute('href', topURL);
+    /* The centre board is cut from the same stock and drawn at a tighter scale
+       and a different angle. It only shares the texture while it shares the
+       colour; given its own, it gets its own. */
+    var boardURL = bf === finish ? topURL
+      : oak.oakCanvas({ finish: bf, material: material, size: 1024, staveW: 132 })
+          .toDataURL('image/jpeg', 0.85);
+    document.getElementById('oakBoardImg').setAttribute('href', boardURL);
   }
 
   function updateBoardRange() {
@@ -1430,6 +1457,15 @@
     if (oak) {
       var f = oak.FINISHES[finish];
       document.getElementById('valFinish').textContent = f ? f[lang] : '';
+      var bf = oak.FINISHES[boardFinish || finish];
+      document.getElementById('valBoardFinish').textContent = boardFinish
+        ? (bf ? bf[lang] : '')
+        : (lang === 'en' ? 'As the top' : 'Som pladen');
+      /* One line that reads as the piece looks: top first, then the centre,
+         and a single colour when they share one. */
+      document.getElementById('oColours').textContent = !boardFinish || boardFinish === finish
+        ? (f ? f[lang] : '')
+        : (f ? f[lang] : '') + ' / ' + (bf ? bf[lang] : '');
     }
     var en = isEn();
     document.getElementById('valTreat').textContent =
@@ -1490,35 +1526,58 @@
   });
 
   /* Finish swatches are drawn with the same generator as the tabletop, so what
-     you pick is exactly what the drawing fills with. */
-  function buildSwatches() {
+     you pick is exactly what the drawing fills with. One builder serves both
+     rows; the turntable's row leads with a swatch meaning "same as the top". */
+  function buildSwatchRow(wrapId, selected, onPick, withSame) {
     if (!oak) return;
-    var wrap = document.getElementById('swatches');
+    var wrap = document.getElementById(wrapId);
     var lang = document.documentElement.lang === 'en' ? 'en' : 'da';
     wrap.innerHTML = '';
-    Object.keys(oak.FINISHES).forEach(function (key) {
-      var f = oak.FINISHES[key];
+
+    var swatch = function (value, labelText, previewFinish, isSame) {
       var b = document.createElement('button');
       b.type = 'button';
-      b.className = 'sw';
-      b.setAttribute('aria-pressed', String(key === finish));
-      b.setAttribute('aria-label', f[lang]);
-      var src = oak.oakCanvas({ finish: key, material: material, size: 256, staveW: 60 });
-      var c = document.createElement('canvas');
-      c.width = 160; c.height = 108;
-      c.getContext('2d').drawImage(src, 40, 20, 176, 120, 0, 0, 160, 108);
-      b.appendChild(c);
+      b.className = 'sw' + (isSame ? ' same' : '');
+      b.setAttribute('aria-pressed', String(value === selected));
+      b.setAttribute('aria-label', labelText);
+      if (isSame) {
+        var mark = document.createElement('div');
+        mark.className = 'same-mark';
+        mark.textContent = '=';
+        b.appendChild(mark);
+      } else {
+        var src = oak.oakCanvas({ finish: previewFinish, material: material, size: 256, staveW: 60 });
+        var c = document.createElement('canvas');
+        c.width = 160; c.height = 108;
+        c.getContext('2d').drawImage(src, 40, 20, 176, 120, 0, 0, 160, 108);
+        b.appendChild(c);
+      }
       var label = document.createElement('span');
-      label.textContent = f[lang];
+      label.textContent = labelText;
       b.appendChild(label);
       b.addEventListener('click', function () {
-        finish = key;
+        onPick(value);
         wrap.querySelectorAll('.sw').forEach(function (el) { el.setAttribute('aria-pressed', 'false'); });
         b.setAttribute('aria-pressed', 'true');
         render();
       });
       wrap.appendChild(b);
+    };
+
+    if (withSame) swatch('', lang === 'en' ? 'Same' : 'Som pladen', finish, true);
+    Object.keys(oak.FINISHES).forEach(function (key) {
+      swatch(key, oak.FINISHES[key][lang], key, false);
     });
+  }
+
+  function buildBoardRow() {
+    buildSwatchRow('boardSwatches', boardFinish, function (v) { boardFinish = v; }, true);
+  }
+  function buildSwatches() {
+    /* Picking a tabletop colour redraws the turntable row, because its first
+       swatch is a picture of whatever the tabletop is now. */
+    buildSwatchRow('swatches', finish, function (v) { finish = v; buildBoardRow(); }, false);
+    buildBoardRow();
   }
 
   import('../assets/tandhjulet-pricing.js').then(function (mod) {

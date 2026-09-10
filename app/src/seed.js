@@ -186,6 +186,22 @@ const PRODUCTS = [
         ],
       },
       {
+        /* The turntable is finished separately from the top, so it may carry
+           its own colour. Left alone it follows the tabletop, so this is one
+           of the few things nobody has to answer. */
+        key: 'boardFinish',
+        required: false,
+        label_da: 'Drejeskive — farve',
+        label_en: 'Turntable — colour',
+        values: [
+          { value: 'same',   label_da: 'Som bordpladen', label_en: 'As the tabletop', price_delta: 0 },
+          { value: 'natur',  label_da: 'Natur', label_en: 'Natural', price_delta: 0 },
+          { value: 'hvid',   label_da: 'Hvid',  label_en: 'White',   price_delta: 0 },
+          { value: 'moerk',  label_da: 'Mørk',  label_en: 'Dark',    price_delta: 0 },
+          { value: 'roeget', label_da: 'Røget', label_en: 'Smoked',  price_delta: 0 },
+        ],
+      },
+      {
         key: 'bearing',
         label_da: 'Drejeskive — leje',
         label_en: 'Turntable — bearing',
@@ -319,7 +335,7 @@ function insertProduct(product) {
          product_id, key, label_da, label_en, required,
          type, min_value, max_value, step_value, unit, position
        ) VALUES (
-         :productId, :key, :label_da, :label_en, 1,
+         :productId, :key, :label_da, :label_en, :required,
          :type, :min_value, :max_value, :step_value, :unit, :position
        )`,
       bindable({
@@ -327,6 +343,8 @@ function insertProduct(product) {
         key: option.key,
         label_da: option.label_da,
         label_en: option.label_en,
+        // an option with a sensible default does not have to be answered
+        required: option.required === false ? 0 : 1,
         type: option.type ?? 'choice',
         min_value: option.min ?? 0,
         max_value: option.max ?? 0,
