@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Klar til levering — Tandhjulet på lager | Danish Hawk</title>
+  <meta name="description" content="Færdige Tandhjul-spiseborde på lager, klar til levering med det samme. Fast pris, kort leveringstid og 14 dages fortrydelsesret."/>
+  <meta name="author" content="Danish Hawk — Stefan Høgh"/>
+  <meta name="robots" content="index, follow"/>
+  <link rel="canonical" href="https://danishhawk.com/lager/"/>
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32.png"/>
+  <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png"/>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #f5f2ed;
+      --ink: #0f0e0b;
+      --mid: #0f0e0b;
+      --line: #d8d2c8;
+      --accent: #c8a96e;
+      --card: #eeebe5;
+      --serif: "Cormorant Garamond", Georgia, serif;
+      --mono: "DM Mono", ui-monospace, monospace;
+      --nav-h: 71px;
+    }
+    html { scroll-behavior: smooth; overflow-x: hidden; }
+    body { background: var(--bg); color: var(--ink); font-family: var(--serif);
+           font-weight: 400; font-size: 20px; line-height: 1.7; overflow-x: clip;
+           -webkit-font-smoothing: antialiased; }
+    img { display: block; max-width: 100%; }
+
+    nav { position: fixed; inset: 0 0 auto 0; z-index: 100; display: flex; align-items: center;
+          justify-content: space-between; padding: 18px 48px; background: rgba(245,242,237,.94);
+          backdrop-filter: blur(8px); border-bottom: 1px solid transparent; transition: border-color .3s; }
+    nav.scrolled { border-color: var(--line); }
+    .home { font-family: var(--mono); font-size: .7rem; letter-spacing: .15em;
+            text-transform: uppercase; color: var(--ink); text-decoration: none;
+            border-bottom: 1px solid transparent; padding-bottom: 2px; }
+    .home:hover { border-bottom-color: var(--ink); }
+    .nav-links { display: flex; gap: 30px; list-style: none; }
+    .nav-links a { font-family: var(--mono); font-size: .7rem; letter-spacing: .13em;
+                   text-transform: uppercase; text-decoration: none; color: var(--mid); }
+    .nav-links a:hover { color: var(--ink); }
+
+    header, main, .compare-wrap { max-width: 1180px; margin: 0 auto; padding-left: 26px; padding-right: 26px; }
+    header { padding-top: calc(var(--nav-h) + 70px); padding-bottom: 10px; }
+
+    .slabel { font-family: var(--mono); font-size: .65rem; letter-spacing: .2em; text-transform: uppercase;
+              color: var(--accent); margin-bottom: 26px; display: flex; align-items: center; gap: 12px; }
+    .slabel::after { content: ''; width: 34px; height: 1px; background: var(--accent); }
+    h1 { font-size: clamp(2.6rem, 5.5vw, 4.4rem); font-weight: 300; line-height: 1.04;
+         letter-spacing: -.02em; margin-bottom: 26px; }
+    h1 em { font-style: italic; }
+    .lede { font-size: 1.15rem; font-weight: 500; line-height: 1.8; max-width: 58ch; }
+    p + p { margin-top: 18px; }
+
+    /* ---------- the stock list ---------- */
+    main { padding-top: 54px; padding-bottom: 30px; }
+    .stock { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
+    .item { border: 1px solid var(--line); background: var(--card); display: flex; flex-direction: column; }
+    .item-img { aspect-ratio: 4/3; background: var(--bg); border-bottom: 1px solid var(--line);
+                display: grid; place-items: center; overflow: hidden; }
+    .item-img img { width: 100%; height: 100%; object-fit: cover; }
+    .item-body { padding: 26px 28px 28px; display: flex; flex-direction: column; flex: 1; }
+
+    /* Whether a table is standing ready or already spoken for is the first thing
+       a buyer looks for, so it is the first thing on the card. */
+    .badge { font-family: var(--mono); font-size: .64rem; letter-spacing: .16em; text-transform: uppercase;
+             display: inline-flex; align-items: center; gap: 8px; margin-bottom: 16px; }
+    .badge::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+    .badge.ready { color: #3d6b47; }
+    .badge.gone  { color: var(--mid); opacity: .55; }
+
+    .item h2 { font-size: 1.7rem; font-weight: 300; line-height: 1.15; margin-bottom: 6px; }
+    .item .sub { font-size: 1.05rem; font-weight: 500; color: var(--mid); margin-bottom: 20px; }
+
+    dl.spec { border-top: 1px solid var(--line); margin-bottom: 22px; }
+    dl.spec > div { display: flex; justify-content: space-between; gap: 18px; padding: 11px 0;
+                    border-bottom: 1px solid var(--line); }
+    dl.spec dt { font-size: 1.05rem; font-weight: 500; }
+    dl.spec dd { font-family: var(--mono); font-size: 1.05rem; text-align: right; }
+
+    .price { margin-top: auto; }
+    .price-l { font-family: var(--mono); font-size: .64rem; letter-spacing: .16em;
+               text-transform: uppercase; color: var(--mid); opacity: .7; margin-bottom: 6px; }
+    .price-n { font-size: 2.1rem; line-height: 1; font-weight: 300; margin-bottom: 20px; }
+    .btn { display: inline-block; width: 100%; text-align: center; padding: 15px 22px;
+           background: var(--ink); color: var(--bg); text-decoration: none;
+           font-family: var(--mono); font-size: .68rem; letter-spacing: .16em; text-transform: uppercase;
+           transition: .2s; }
+    .btn:hover { background: var(--accent); color: var(--ink); }
+    .btn.off { background: none; color: var(--mid); border: 1px solid var(--line); pointer-events: none; opacity: .5; }
+
+    /* ---------- stock vs. made to measure ---------- */
+    .compare-wrap { padding-top: 70px; padding-bottom: 90px; }
+    .compare { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--ink); }
+    .compare > div { padding: 30px 32px; }
+    .compare > div:first-child { background: var(--card); border-right: 1px solid var(--line); }
+    .compare .head { font-family: var(--mono); font-size: .68rem; letter-spacing: .16em;
+                     text-transform: uppercase; color: var(--accent); margin-bottom: 14px; }
+    .compare h3 { font-size: 1.4rem; font-weight: 400; line-height: 1.3; margin-bottom: 16px; }
+    .compare ul { list-style: none; }
+    .compare li { position: relative; padding-left: 26px; margin-bottom: 11px;
+                  font-size: 1.05rem; font-weight: 500; line-height: 1.65; }
+    .compare li::before { content: '—'; position: absolute; left: 0; color: var(--accent); }
+    .compare .foot { margin-top: 20px; font-size: 1.05rem; }
+
+    a.inline { color: var(--ink); text-decoration-color: var(--accent); text-underline-offset: 4px; }
+    a.inline:hover { color: var(--accent); }
+
+    /* Anything Stefan still has to fill in before this page goes live. */
+    .udfyld { background: var(--accent); color: #fff; padding: 1px 8px; font-family: var(--mono);
+              font-size: .8rem; letter-spacing: .04em; white-space: nowrap; }
+    /* Removed once the page carries real tables. The negative margin is
+       deliberate-looking spacing, not a pull: the header follows it. */
+    .draft { max-width: 1180px; margin: calc(var(--nav-h) + 30px) auto 0; padding: 20px 26px;
+             font-family: var(--mono); font-size: 1rem; line-height: 1.7; letter-spacing: .03em;
+             color: #8a3f2b; border: 1px dashed #b3412e; }
+    .draft + header { padding-top: 46px; }
+
+    footer { border-top: 1px solid var(--line); padding: 34px 48px; }
+    .fbiz { font-size: 1.05rem; line-height: 1.9; margin-bottom: 18px; }
+    .flinks { display: flex; gap: 26px; list-style: none; flex-wrap: wrap; }
+    .flinks a { font-family: var(--mono); font-size: .62rem; letter-spacing: .12em;
+                text-transform: uppercase; color: var(--mid); text-decoration: none; }
+    .flinks a:hover { color: var(--ink); }
+
+    @media (max-width: 860px) {
+      nav { padding: 14px 18px; }
+      .nav-links { display: none; }
+      header { padding-top: calc(var(--nav-h) + 40px); }
+      header, main, .compare-wrap { padding-left: 22px; padding-right: 22px; }
+      .compare { grid-template-columns: 1fr; }
+      .compare > div:first-child { border-right: none; border-bottom: 1px solid var(--line); }
+      footer { padding: 30px 22px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav id="navbar">
+  <a class="home" href="/">Danish Hawk</a>
+  <ul class="nav-links">
+    <li><a href="/tandhjulet/">Tandhjulet</a></li>
+    <li><a href="/tandhjulet/#konfigurer">Vælg størrelse</a></li>
+    <li><a href="/handelsbetingelser/">Sådan køber du</a></li>
+  </ul>
+</nav>
+
+<div class="draft">
+  KLADDE — siden er ikke linket fra menuen endnu. Udfyld de gule felter med de borde,
+  der faktisk står på lager, og sæt et rigtigt foto ind på hvert kort — de tre viser
+  det samme billede nu. Fjern så denne boks, og sig til, så linker jeg siden ind.
+</div>
+
+<header>
+  <div class="slabel">Klar til levering</div>
+  <h1>Bordene der <em>allerede står klar.</em></h1>
+  <p class="lede">De her borde er bygget. De står færdige, de er ikke en tegning, og de kan
+     være hos dig om få dage i stedet for om et par måneder. Fordi de er almindelige varer
+     fra lager, har du også <strong>14 dages fortrydelsesret</strong> på dem — den får du
+     ikke på et bord, der skæres i dit eget mål.</p>
+</header>
+
+<main>
+  <div class="stock">
+
+    <!-- ============ BORD 1 ============ -->
+    <article class="item">
+      <div class="item-img">
+        <img src="../assets/tandhjulet-top-and-centre-0e4e9e71.jpg"
+             alt="Tandhjulet spisebord i eg med drejeskive i midten"/>
+      </div>
+      <div class="item-body">
+        <div class="badge ready">På lager — klar til levering</div>
+        <h2>Tandhjulet <span class="udfyld">UDFYLD: mål</span></h2>
+        <div class="sub"><span class="udfyld">UDFYLD: fx massiv eg, olieret, natur</span></div>
+        <dl class="spec">
+          <div><dt>Over tænder</dt><dd><span class="udfyld">UDFYLD</span> mm</dd></div>
+          <div><dt>Bordplade</dt><dd><span class="udfyld">UDFYLD</span></dd></div>
+          <div><dt>Overflade</dt><dd><span class="udfyld">UDFYLD</span></dd></div>
+          <div><dt>Drejeskive</dt><dd><span class="udfyld">UDFYLD</span> mm</dd></div>
+          <div><dt>Kuverter</dt><dd>8</dd></div>
+          <div><dt>Kan leveres</dt><dd><span class="udfyld">UDFYLD: fx om 5 dage</span></dd></div>
+        </dl>
+        <div class="price">
+          <div class="price-l">Pris inkl. moms — levering kommer oveni</div>
+          <div class="price-n"><span class="udfyld">UDFYLD</span> kr</div>
+          <a class="btn" href="/tandhjulet/#bestil">Reservér dette bord</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- ============ BORD 2 ============ -->
+    <article class="item">
+      <div class="item-img">
+        <img src="../assets/tandhjulet-top-and-centre-0e4e9e71.jpg"
+             alt="Tandhjulet spisebord i eg med drejeskive i midten"/>
+      </div>
+      <div class="item-body">
+        <div class="badge ready">På lager — klar til levering</div>
+        <h2>Tandhjulet <span class="udfyld">UDFYLD: mål</span></h2>
+        <div class="sub"><span class="udfyld">UDFYLD: fx MDF med egefiner, lakeret, hvid</span></div>
+        <dl class="spec">
+          <div><dt>Over tænder</dt><dd><span class="udfyld">UDFYLD</span> mm</dd></div>
+          <div><dt>Bordplade</dt><dd><span class="udfyld">UDFYLD</span></dd></div>
+          <div><dt>Overflade</dt><dd><span class="udfyld">UDFYLD</span></dd></div>
+          <div><dt>Drejeskive</dt><dd><span class="udfyld">UDFYLD</span> mm</dd></div>
+          <div><dt>Kuverter</dt><dd>8</dd></div>
+          <div><dt>Kan leveres</dt><dd><span class="udfyld">UDFYLD: fx om 5 dage</span></dd></div>
+        </dl>
+        <div class="price">
+          <div class="price-l">Pris inkl. moms — levering kommer oveni</div>
+          <div class="price-n"><span class="udfyld">UDFYLD</span> kr</div>
+          <a class="btn" href="/tandhjulet/#bestil">Reservér dette bord</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- ============ BORD 3 ============ -->
+    <article class="item">
+      <div class="item-img">
+        <img src="../assets/tandhjulet-top-and-centre-0e4e9e71.jpg"
+             alt="Tandhjulet spisebord i eg med drejeskive i midten"/>
+      </div>
+      <div class="item-body">
+        <div class="badge ready">På lager — klar til levering</div>
+        <h2>Tandhjulet <span class="udfyld">UDFYLD: mål</span></h2>
+        <div class="sub"><span class="udfyld">UDFYLD: træ, behandling, farve</span></div>
+        <dl class="spec">
+          <div><dt>Over tænder</dt><dd><span class="udfyld">UDFYLD</span> mm</dd></div>
+          <div><dt>Bordplade</dt><dd><span class="udfyld">UDFYLD</span></dd></div>
+          <div><dt>Overflade</dt><dd><span class="udfyld">UDFYLD</span></dd></div>
+          <div><dt>Drejeskive</dt><dd><span class="udfyld">UDFYLD</span> mm</dd></div>
+          <div><dt>Kuverter</dt><dd>8</dd></div>
+          <div><dt>Kan leveres</dt><dd><span class="udfyld">UDFYLD: fx om 5 dage</span></dd></div>
+        </dl>
+        <div class="price">
+          <div class="price-l">Pris inkl. moms — levering kommer oveni</div>
+          <div class="price-n"><span class="udfyld">UDFYLD</span> kr</div>
+          <a class="btn" href="/tandhjulet/#bestil">Reservér dette bord</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- Er et bord solgt, så skift badge og knap ud med disse to linjer i stedet:
+         <div class="badge gone">Solgt</div>
+         <span class="btn off">Solgt</span>
+         Bordet bliver stående på siden, indtil et nyt tager pladsen — en tom hylde
+         siger mere end en tom side.                                                 -->
+
+  </div>
+</main>
+
+<div class="compare-wrap">
+  <div class="compare">
+    <div>
+      <div class="head">Fra lager</div>
+      <h3>Hurtigt, og du kan fortryde.</h3>
+      <ul>
+        <li>Bordet findes allerede — du ser præcis det, du får</li>
+        <li>Levering på dage, ikke måneder</li>
+        <li>14 dages fortrydelsesret, fordi det er en almindelig vare</li>
+        <li>Målet er det, det er</li>
+      </ul>
+      <p class="foot">Vælg et af bordene ovenfor.</p>
+    </div>
+    <div>
+      <div class="head">Skåret i dit mål</div>
+      <h3>Præcis dit rum, men bindende.</h3>
+      <ul>
+        <li>Enhver diameter mellem 1855 og 2000 mm, i spring på 5 mm</li>
+        <li>Du vælger plade, overflade, farve og leje</li>
+        <li>Leveringstid på uger, fordi bordet først skal skæres</li>
+        <li><strong>Ingen fortrydelsesret</strong> — pladen skæres til dit mål og kan
+            ikke sælges til nogen anden</li>
+      </ul>
+      <p class="foot"><a class="inline" href="/tandhjulet/#konfigurer">Vælg dit mål i
+         konfiguratoren</a> og se prisen med det samme.</p>
+    </div>
+  </div>
+  <p style="margin-top:26px; font-size:1.05rem; font-weight:500;">
+    Reklamationsretten på to år efter købeloven gælder begge veje — også et bord skåret
+    i dit eget mål. Det hele står på
+    <a class="inline" href="/handelsbetingelser/">Sådan køber du</a>, og der står ikke
+    noget med småt.
+  </p>
+</div>
+
+<footer>
+  <div class="fbiz">
+    <span class="udfyld">UDFYLD: firmanavn</span> ·
+    CVR <span class="udfyld">UDFYLD: CVR</span> ·
+    <span class="udfyld">UDFYLD: adresse</span><br/>
+    <a class="inline" href="mailto:stefanhoegh@live.dk">stefanhoegh@live.dk</a> ·
+    <a class="inline" href="tel:+4542493954">+45 42 49 39 54</a>
+  </div>
+  <ul class="flinks">
+    <li><a href="/">Forsiden</a></li>
+    <li><a href="/tandhjulet/">Tandhjulet</a></li>
+    <li><a href="/handelsbetingelser/">Sådan køber du</a></li>
+    <li><a href="https://www.instagram.com/danish_hawk" target="_blank" rel="noopener">Instagram</a></li>
+  </ul>
+</footer>
+
+<script>
+  var navbar = document.getElementById('navbar');
+  addEventListener('scroll', function () { navbar.classList.toggle('scrolled', scrollY > 40); });
+</script>
+
+</body>
+</html>

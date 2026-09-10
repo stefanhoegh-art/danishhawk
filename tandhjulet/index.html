@@ -274,6 +274,30 @@
     .fi::placeholder, .fta::placeholder { color: var(--line); }
     #form-success { display: none; font-size: .9rem; color: var(--accent); }
 
+    /* ---------- how you buy ----------
+       Everything a buyer needs to know before spending 30.000 kr, at the same
+       size as the rest of the page. Nothing here is set smaller than the body
+       text: the moment a term needs shrinking to fit, it is the wrong term. */
+    #vilkaar { border-top: 1px solid var(--line); padding: 90px 80px; }
+    .vil-head { max-width: 60ch; margin-bottom: 48px; }
+    .vil-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px 56px; max-width: 1100px; }
+    .vil h3 { font-size: 1.25rem; font-weight: 400; margin-bottom: 12px; }
+    .vil p, .vil-split p { font-size: 1.1rem; font-weight: 500; color: var(--mid); line-height: 1.8; }
+    .vil-key { font-family: var(--mono); font-size: .68rem; letter-spacing: .18em;
+               text-transform: uppercase; color: var(--accent); margin-bottom: 14px; }
+    /* The withdrawal rule turns on which size you order, so it gets its own
+       block rather than a line inside a paragraph. */
+    .vil-split { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr;
+                 border: 1px solid var(--ink); }
+    .vil-split > div { padding: 26px 30px; }
+    .vil-split > div:first-child { background: var(--card); border-right: 1px solid var(--line); }
+    .vil-split .what { font-size: 1.3rem; font-weight: 500; line-height: 1.35; margin-bottom: 10px; }
+    .vil-more { grid-column: 1 / -1; margin-top: 6px; }
+    .vil-more a { font-family: var(--mono); font-size: .7rem; letter-spacing: .14em;
+                  text-transform: uppercase; color: var(--ink); text-decoration: none;
+                  border-bottom: 1px solid var(--accent); padding-bottom: 3px; }
+    .vil-more a:hover { color: var(--accent); }
+
     /* ---------- footer ---------- */
     footer { border-top: 1px solid var(--line); padding: 34px 80px; display: flex;
              align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
@@ -306,7 +330,9 @@
       .split, #bestil { grid-template-columns: 1fr; }
       .split-text, .split.flip .split-text { padding: 56px 22px; order: 1; }
       .split-img, .split.flip .split-img { order: 2; min-height: 320px; }
-      #konfigurer, #spec { padding: 56px 22px; }
+      #konfigurer, #spec, #vilkaar { padding: 56px 22px; }
+      .vil-grid, .vil-split { grid-template-columns: 1fr; }
+      .vil-split > div:first-child { border-right: none; border-bottom: 1px solid var(--line); }
       /* A one-column grid pins a sticky item inside its own row, where it has
          nowhere to travel. Plain blocks let it ride the whole way down. */
       .cfg { display: block; }
@@ -330,6 +356,7 @@
       <li><a href="#konfigurer" data-da="Vælg størrelse" data-en="Choose size">Vælg størrelse</a></li>
       <li><a href="#drejeskiven" data-da="Drejeskiven" data-en="The turntable">Drejeskiven</a></li>
       <li><a href="#spec" data-da="Specifikationer" data-en="Specification">Specifikationer</a></li>
+      <li><a href="#vilkaar" data-da="Sådan køber du" data-en="How you buy">Sådan køber du</a></li>
       <li><a href="#bestil" data-da="Bestil" data-en="Order">Bestil</a></li>
     </ul>
     <div class="lang-switch">
@@ -682,6 +709,58 @@
   </div>
 </section>
 
+<!-- ============ HOW YOU BUY ============ -->
+<section id="vilkaar">
+  <div class="vil-head reveal">
+    <div class="slabel" data-da="Sådan køber du" data-en="How you buy">Sådan køber du</div>
+    <h2 data-da="Intet står <em>med småt.</em>" data-en="Nothing is in <em>fine print.</em>">Intet står <em>med småt.</em></h2>
+    <p class="lede" data-da="Du skal bruge mange penge på et møbel fra en, du ikke kender endnu. Så her står alt det, du har krav på at vide, i samme størrelse som alt andet på siden." data-en="You are about to spend real money on furniture from someone you do not know yet. So everything you have a right to know is set out here, at the same size as everything else on the page.">Du skal bruge mange penge på et møbel fra en, du ikke kender endnu. Så her står alt det, du har krav på at vide, i samme størrelse som alt andet på siden.</p>
+  </div>
+
+  <div class="vil-grid reveal">
+    <div class="vil-split">
+      <div>
+        <div class="vil-key" data-da="Lagervare — klar til levering" data-en="In stock — ready to deliver">Lagervare — klar til levering</div>
+        <div class="what" data-da="14 dages fortrydelsesret." data-en="14 days to change your mind.">14 dages fortrydelsesret.</div>
+        <p data-da="Står bordet på lager, er det en almindelig vare. Fortryder du, sender du det retur inden 14 dage fra den dag, du modtog det — uden at give en grund. Du betaler returfragten, og den er reel for et bord på to meter; det præcise beløb står i din ordrebekræftelse, før du bestiller." data-en="A table that is in stock is an ordinary good. Change your mind and you send it back within 14 days of receiving it, no reason needed. You pay the return freight, and for a two-metre table that is a real cost; the exact figure is in your order confirmation, before you order.">Står bordet på lager, er det en almindelig vare. Fortryder du, sender du det retur inden 14 dage fra den dag, du modtog det — uden at give en grund. Du betaler returfragten, og den er reel for et bord på to meter; det præcise beløb står i din ordrebekræftelse, før du bestiller.</p>
+      </div>
+      <div>
+        <div class="vil-key" data-da="Skåret i dit eget mål" data-en="Cut to your own size">Skåret i dit eget mål</div>
+        <div class="what" data-da="Ingen fortrydelsesret." data-en="No right of withdrawal.">Ingen fortrydelsesret.</div>
+        <p data-da="Beder du om et mål, vi ikke har stående, skæres pladen til den diameter, du selv har opgivet til dit rum. Den kan ikke sælges til nogen anden, og derfor er den undtaget fra fortrydelsesretten. Du godkender målet skriftligt, før der bliver skåret — og du får denne besked igen, så ingen mister retten uden at vide det." data-en="Ask for a size we do not have standing, and the top is cut to the diameter you gave us for your room. It cannot be sold to anyone else, which is why it is exempt from the right of withdrawal. You approve the size in writing before anything is cut — and you are told this again then, so nobody loses the right without knowing.">Beder du om et mål, vi ikke har stående, skæres pladen til den diameter, du selv har opgivet til dit rum. Den kan ikke sælges til nogen anden, og derfor er den undtaget fra fortrydelsesretten. Du godkender målet skriftligt, før der bliver skåret — og du får denne besked igen, så ingen mister retten uden at vide det.</p>
+      </div>
+    </div>
+
+    <div class="vil">
+      <div class="vil-key" data-da="Reklamationsret" data-en="Right to complain">Reklamationsret</div>
+      <h3 data-da="To år — uanset hvilket mål." data-en="Two years — whichever size.">To år — uanset hvilket mål.</h3>
+      <p data-da="Er der en fejl, som var der ved leveringen, har du to års reklamationsret efter købeloven. Den gælder også et bord skåret i dit eget mål, og den kan ikke aftales væk. De første tolv måneder er det os, der skal bevise, at fejlen ikke var der." data-en="If there is a fault that was there on delivery, you have two years to complain under Danish sale of goods law. It covers a table cut to your own size too, and it cannot be signed away. For the first twelve months it is we who must prove the fault was not there.">Er der en fejl, som var der ved leveringen, har du to års reklamationsret efter købeloven. Den gælder også et bord skåret i dit eget mål, og den kan ikke aftales væk. De første tolv måneder er det os, der skal bevise, at fejlen ikke var der.</p>
+    </div>
+
+    <div class="vil">
+      <div class="vil-key" data-da="Betaling" data-en="Payment">Betaling</div>
+      <h3 data-da="Halvdelen ved bestilling, resten før levering." data-en="Half on order, the rest before delivery.">Halvdelen ved bestilling, resten før levering.</h3>
+      <p data-da="Depositummet betaler træet, lejet og stålet. Betal med kort, hvis du kan — så har du en indsigelsesret gennem din kortudsteder, hvis noget går galt. Det siger vi, selv om kortbetaling koster os et gebyr." data-en="The deposit pays for the timber, the bearing and the steel. Pay by card if you can — it gives you a right of recourse through your card issuer if anything goes wrong. We say so even though card payment costs us a fee.">Depositummet betaler træet, lejet og stålet. Betal med kort, hvis du kan — så har du en indsigelsesret gennem din kortudsteder, hvis noget går galt. Det siger vi, selv om kortbetaling koster os et gebyr.</p>
+    </div>
+
+    <div class="vil">
+      <div class="vil-key" data-da="Prisen" data-en="The price">Prisen</div>
+      <h3 data-da="Fast pris på skrift, før der skæres." data-en="A firm price in writing, before anything is cut.">Fast pris på skrift, før der skæres.</h3>
+      <p data-da="Alle priser er inklusive 25 % moms. Levering kommer oveni og oplyses som et fast beløb i dit tilbud — aldrig som en overraskelse bagefter. Prisen kan ikke stige undervejs, medmindre du selv beder om en ændring." data-en="All prices include 25% Danish VAT. Delivery is extra and is quoted as a fixed figure in your offer — never as a surprise afterwards. The price cannot rise along the way unless you ask for a change.">Alle priser er inklusive 25 % moms. Levering kommer oveni og oplyses som et fast beløb i dit tilbud — aldrig som en overraskelse bagefter. Prisen kan ikke stige undervejs, medmindre du selv beder om en ændring.</p>
+    </div>
+
+    <div class="vil">
+      <div class="vil-key" data-da="Levering" data-en="Delivery">Levering</div>
+      <h3 data-da="Vi måler vejen ind, før vi kører." data-en="We measure the way in before we drive.">Vi måler vejen ind, før vi kører.</h3>
+      <p data-da="En bordplade på op mod to meter skal planlægges ind ad døren. Vi aftaler mål på døre, trapper og sving på forhånd, og bordet samles på stedet. Bliver leveringen mere end fire uger forsinket, kan du hæve købet og få det hele tilbage." data-en="A top of up to two metres has to be planned through the door. We agree the measurements of doors, stairs and turns in advance, and the table is assembled on site. If delivery slips more than four weeks, you can cancel and get everything back.">En bordplade på op mod to meter skal planlægges ind ad døren. Vi aftaler mål på døre, trapper og sving på forhånd, og bordet samles på stedet. Bliver leveringen mere end fire uger forsinket, kan du hæve købet og få det hele tilbage.</p>
+    </div>
+
+    <div class="vil-more">
+      <a href="/handelsbetingelser/" data-da="Læs alle handelsbetingelserne" data-en="Read the full terms">Læs alle handelsbetingelserne</a>
+    </div>
+  </div>
+</section>
+
 <!-- ============ ORDER ============ -->
 <section id="bestil">
   <div class="ord-l reveal">
@@ -732,6 +811,7 @@
 <footer>
   <div class="fcopy">© 2026 Danish Hawk — DanishHawk.com</div>
   <ul class="flinks">
+    <li><a href="/handelsbetingelser/" data-da="Handelsbetingelser" data-en="Terms">Handelsbetingelser</a></li>
     <li><a href="#drejeskiven" data-da="Drejeskiven" data-en="The turntable">Drejeskiven</a></li>
     <li><a href="#konfigurer" data-da="Vælg størrelse" data-en="Choose size">Vælg størrelse</a></li>
     <li><a href="#bestil" data-da="Bestil" data-en="Order">Bestil</a></li>

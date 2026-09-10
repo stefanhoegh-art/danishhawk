@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sådan køber du — Handelsbetingelser | Danish Hawk</title>
+  <meta name="description" content="Alt hvad der gælder for din handel med Danish Hawk: pris, betaling, levering, fortrydelsesret, reklamationsret og klageadgang. Intet står med småt."/>
+  <meta name="author" content="Danish Hawk — Stefan Høgh"/>
+  <meta name="robots" content="index, follow"/>
+  <link rel="canonical" href="https://danishhawk.com/handelsbetingelser/"/>
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32.png"/>
+  <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png"/>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #f5f2ed;
+      --ink: #0f0e0b;
+      --mid: #0f0e0b;
+      --line: #d8d2c8;
+      --accent: #c8a96e;
+      --card: #eeebe5;
+      --serif: "Cormorant Garamond", Georgia, serif;
+      --mono: "DM Mono", ui-monospace, monospace;
+      --nav-h: 71px;
+    }
+    html { scroll-behavior: smooth; overflow-x: hidden; }
+    /* The whole point of this page is that nothing on it is smaller than
+       anything else. The body size here is the body size of the website. */
+    body { background: var(--bg); color: var(--ink); font-family: var(--serif);
+           font-weight: 400; font-size: 20px; line-height: 1.7; overflow-x: clip;
+           -webkit-font-smoothing: antialiased; }
+
+    nav { position: fixed; inset: 0 0 auto 0; z-index: 100; display: flex; align-items: center;
+          justify-content: space-between; padding: 18px 48px; background: rgba(245,242,237,.94);
+          backdrop-filter: blur(8px); border-bottom: 1px solid transparent; transition: border-color .3s; }
+    nav.scrolled { border-color: var(--line); }
+    .home { font-family: var(--mono); font-size: .7rem; letter-spacing: .15em;
+            text-transform: uppercase; color: var(--ink); text-decoration: none;
+            border-bottom: 1px solid transparent; padding-bottom: 2px; }
+    .home:hover { border-bottom-color: var(--ink); }
+    .nav-links { display: flex; gap: 30px; list-style: none; }
+    .nav-links a { font-family: var(--mono); font-size: .7rem; letter-spacing: .13em;
+                   text-transform: uppercase; text-decoration: none; color: var(--mid); }
+    .nav-links a:hover { color: var(--ink); }
+
+    main { max-width: 780px; margin: 0 auto; padding: calc(var(--nav-h) + 70px) 26px 90px; }
+
+    .slabel { font-family: var(--mono); font-size: .65rem; letter-spacing: .2em; text-transform: uppercase;
+              color: var(--accent); margin-bottom: 26px; display: flex; align-items: center; gap: 12px; }
+    .slabel::after { content: ''; width: 34px; height: 1px; background: var(--accent); }
+    h1 { font-size: clamp(2.6rem, 5.5vw, 4.2rem); font-weight: 300; line-height: 1.04;
+         letter-spacing: -.02em; margin-bottom: 26px; }
+    h1 em { font-style: italic; }
+    .lede { font-size: 1.15rem; font-weight: 500; line-height: 1.8; max-width: 56ch; }
+    p + p { margin-top: 18px; }
+
+    h2 { font-size: 1.75rem; font-weight: 300; line-height: 1.2; margin-bottom: 18px; }
+    section { margin-top: 58px; padding-top: 34px; border-top: 1px solid var(--line); }
+    section:first-of-type { border-top: none; }
+    .num { font-family: var(--mono); font-size: .68rem; letter-spacing: .18em;
+           color: var(--accent); display: block; margin-bottom: 12px; }
+
+    /* Scoped to the body copy: the dash is a bullet, not a nav decoration. */
+    main ul { list-style: none; margin-top: 18px; }
+    main li { padding-left: 26px; position: relative; margin-bottom: 12px; }
+    main li::before { content: '—'; position: absolute; left: 0; color: var(--accent); }
+    nav ul, footer ul { list-style: none; }
+
+    dl.facts { margin-top: 22px; border-top: 1px solid var(--line); }
+    dl.facts > div { display: flex; justify-content: space-between; gap: 24px; padding: 13px 0;
+                     border-bottom: 1px solid var(--line); }
+    dl.facts dt { font-weight: 500; }
+    dl.facts dd { font-family: var(--mono); font-size: 1.05rem; text-align: right; }
+
+    /* The two-row table that decides whether you can send the table back. It is
+       the most consequential thing on the page, so it is the loudest. */
+    .withdraw { margin-top: 26px; border: 1px solid var(--ink); }
+    .withdraw > div { padding: 24px 26px; }
+    .withdraw > div + div { border-top: 1px solid var(--line); }
+    .withdraw .yes { background: var(--card); }
+    .withdraw .head { font-family: var(--mono); font-size: .7rem; letter-spacing: .16em;
+                      text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+    .withdraw .what { font-size: 1.35rem; font-weight: 500; line-height: 1.35; margin-bottom: 10px; }
+
+    a { color: var(--ink); text-decoration-color: var(--accent); text-underline-offset: 4px; }
+    a:hover { color: var(--accent); }
+
+    /* Anything Stefan still has to fill in. Impossible to miss, impossible to
+       mistake for real text, and easy to grep for before this goes live. */
+    .udfyld { background: var(--accent); color: #fff; padding: 1px 8px; font-family: var(--mono);
+              font-size: .8rem; letter-spacing: .04em; white-space: nowrap; }
+
+    .en-note { margin-top: 30px; padding: 18px 22px; border: 1px solid var(--line);
+               font-size: 1.05rem; font-style: italic; }
+
+    .formular { margin-top: 26px; padding: 26px 28px; background: var(--card); border: 1px solid var(--line); }
+    .formular p { font-size: 1.05rem; }
+
+    footer { border-top: 1px solid var(--line); padding: 34px 48px; }
+    .fbiz { font-size: 1.05rem; line-height: 1.9; margin-bottom: 18px; }
+    .flinks { display: flex; gap: 26px; list-style: none; flex-wrap: wrap; }
+    .flinks a { font-family: var(--mono); font-size: .62rem; letter-spacing: .12em;
+                text-transform: uppercase; color: var(--mid); text-decoration: none; }
+    .flinks a:hover { color: var(--ink); }
+    .updated { font-family: var(--mono); font-size: .62rem; letter-spacing: .12em;
+               text-transform: uppercase; color: var(--mid); opacity: .7; margin-top: 20px; }
+
+    @media (max-width: 860px) {
+      nav { padding: 14px 18px; }
+      .nav-links { display: none; }
+      main { padding: calc(var(--nav-h) + 40px) 22px 70px; }
+      footer { padding: 30px 22px; }
+      dl.facts > div { flex-direction: column; gap: 4px; }
+      dl.facts dd { text-align: left; }
+    }
+  </style>
+</head>
+<body>
+
+<nav id="navbar">
+  <a class="home" href="/">Danish Hawk</a>
+  <ul class="nav-links">
+    <li><a href="/tandhjulet/">Tandhjulet</a></li>
+    <li><a href="/tandhjulet/#bestil">Bestil</a></li>
+  </ul>
+</nav>
+
+<main>
+  <div class="slabel">Handelsbetingelser</div>
+  <h1>Sådan køber du <em>et Tandhjul.</em></h1>
+  <p class="lede">Der står ikke noget med småt på denne side. Alt, hvad der gælder for din
+     handel, står her — i samme størrelse som alt andet, og på almindeligt dansk. Læs det
+     hellere før end efter.</p>
+
+  <div class="en-note">These terms are written in Danish, which is the language of the
+     agreement. Write to us in English and we will answer you in English, and we will
+     explain any of it you want explained before you order.</div>
+
+  <section>
+    <span class="num">01</span>
+    <h2>Hvem du handler med</h2>
+    <dl class="facts">
+      <div><dt>Virksomhed</dt><dd><span class="udfyld">UDFYLD: firmanavn</span></dd></div>
+      <div><dt>CVR-nummer</dt><dd><span class="udfyld">UDFYLD: CVR</span></dd></div>
+      <div><dt>Adresse</dt><dd><span class="udfyld">UDFYLD: adresse</span></dd></div>
+      <div><dt>E-mail</dt><dd><a href="mailto:stefanhoegh@live.dk">stefanhoegh@live.dk</a></dd></div>
+      <div><dt>Telefon</dt><dd><a href="tel:+4542493954">+45 42 49 39 54</a></dd></div>
+    </dl>
+    <p>Du handler med en lille dansk møbelvirksomhed. Der er ét menneske bag, og du kan
+       ringe til ham. Det er både forskellen på os og et vilkår: svartiden er ikke et
+       callcenters, men du taler altid med den, der har bygget dit bord.</p>
+  </section>
+
+  <section>
+    <span class="num">02</span>
+    <h2>Prisen</h2>
+    <p>Alle priser er i danske kroner og <strong>inklusive 25 % moms</strong>. Prisen på
+       hjemmesiden dækker bordplade, drejeskive med leje, understel, overfladebehandling
+       og samling.</p>
+    <p>Levering er <strong>ikke</strong> med i den pris. Den afhænger af, hvor du bor, og
+       hvordan bordet kan komme ind, og den bliver oplyst som et fast beløb i dit tilbud —
+       aldrig som en overraskelse bagefter.</p>
+    <p>Prisen på hjemmesiden er vejledende, indtil du har fået et skriftligt tilbud.
+       <strong>Du får altid en fast, samlet pris på skrift, før der bliver skåret i
+       noget</strong>, og den pris kan ikke stige undervejs, medmindre du selv beder om en
+       ændring.</p>
+  </section>
+
+  <section>
+    <span class="num">03</span>
+    <h2>Betaling</h2>
+    <dl class="facts">
+      <div><dt>Ved bestilling</dt><dd>50 % i depositum</dd></div>
+      <div><dt>Før levering</dt><dd>De sidste 50 %</dd></div>
+    </dl>
+    <p>Depositummet betaler træet, lejet og stålet. Det er derfor, det opkræves forud: et
+       bord i dit mål kan ikke sælges til en anden, hvis handlen falder fra hinanden
+       undervejs.</p>
+    <p><strong>Betal med kort, hvis du kan.</strong> Så har du en indsigelsesret gennem
+       din kortudsteder, hvis noget går galt — og det er en beskyttelse, du ikke får ved
+       bankoverførsel. Det siger vi, selv om det koster os et gebyr, fordi det er den
+       rigtige måde at købe et dyrt møbel fra en, du ikke kender endnu.</p>
+    <p>Bordet er vores ejendom, indtil det er betalt fuldt ud.</p>
+  </section>
+
+  <section>
+    <span class="num">04</span>
+    <h2>Leveringstid</h2>
+    <p>Regn med <span class="udfyld">UDFYLD: antal</span> uger fra din bestilling er
+       bekræftet, og depositummet er betalt. Du får en konkret dato i din ordrebekræftelse.</p>
+    <p>Skrider den dato — og det kan ske, når træ skal tørre eller en underleverandør
+       svigter — får du besked med det samme og en ny dato. <strong>Bliver bordet mere end
+       fire uger forsinket i forhold til den aftalte dato, kan du hæve købet og få alt
+       betalt tilbage</strong>, også depositummet.</p>
+  </section>
+
+  <section>
+    <span class="num">05</span>
+    <h2>Levering</h2>
+    <p>Bordpladen på 1855–2000 mm er stor og tung. Det skal planlægges, ikke improviseres.
+       Før levering aftaler vi, hvordan bordet kommer ind: mål på døre, trapper, elevator
+       og eventuelle skarpe sving.</p>
+    <ul>
+      <li>Vi leverer til <span class="udfyld">UDFYLD: område</span>. Uden for det aftaler
+          vi en pris i hvert enkelt tilfælde.</li>
+      <li>Prisen dækker levering til <span class="udfyld">UDFYLD: kantsten eller indenfor</span>
+          og samling af bordet på stedet.</li>
+      <li>Der skal være en voksen til stede, som kan hjælpe med at bære.</li>
+      <li>Kan bordet ikke komme ind ad de mål, du har oplyst, står du for de forgæves
+          omkostninger. Derfor spørger vi grundigt på forhånd.</li>
+    </ul>
+    <p>Risikoen for bordet går over til dig, når du har fået det leveret. Se det efter, mens
+       chaufføren stadig er der, og skriv det på fragtbrevet, hvis der er en skade.</p>
+  </section>
+
+  <section>
+    <span class="num">06</span>
+    <h2>Fortrydelsesret</h2>
+    <p>Det her er det vigtigste på siden, så det står tydeligt: <strong>om du kan fortryde,
+       afhænger af hvilket mål du bestiller.</strong></p>
+
+    <div class="withdraw">
+      <div class="yes">
+        <div class="head">Et bord fra lager</div>
+        <div class="what">Du har 14 dages fortrydelsesret.</div>
+        <p>De borde, der står færdige på lager, er almindelige varer. Du har fuld
+           fortrydelsesret i 14 dage fra den dag, du modtager bordet — uden at give en
+           grund. Hvad der er på lager lige nu, står på
+           <a href="/lager/">Klar til levering</a>.</p>
+      </div>
+      <div>
+        <div class="head">Et bord skåret i dit eget mål</div>
+        <div class="what">Der er ingen fortrydelsesret.</div>
+        <p>Beder du om et mål, vi ikke har stående, bliver pladen skåret til den diameter,
+           du selv har opgivet til dit rum. Det er en vare fremstillet efter dine
+           specifikationer, og den er undtaget fra fortrydelsesretten efter
+           forbrugeraftalelovens § 18, stk. 2, nr. 3.</p>
+        <p>Derfor får du målet skriftligt til godkendelse, før der bliver skåret. Du skal
+           aktivt sige ja til det — og du får samtidig denne oplysning igen, så ingen kan
+           komme til at bestille sig ud af sin fortrydelsesret uden at vide det.</p>
+      </div>
+    </div>
+
+    <p>Reklamationsretten i punkt 8 gælder <strong>uanset hvilket mål du vælger</strong>.
+       Er der en fejl ved bordet, er du dækket i to år — også på et bord skåret i dit eget
+       mål.</p>
+  </section>
+
+  <section>
+    <span class="num">07</span>
+    <h2>Sådan fortryder du</h2>
+    <p>Gælder for borde købt fra lager. Skriv til <a href="mailto:stefanhoegh@live.dk">stefanhoegh@live.dk</a>
+       inden 14 dage fra den dag, du modtog bordet. En mail er nok — du kan bruge formularen
+       nederst på siden, men du behøver ikke.</p>
+    <ul>
+      <li><strong>Du betaler returfragten.</strong> Et bord på op mod to meter kan ikke
+          sendes som en pakke. Regn med <span class="udfyld">UDFYLD: beløb</span> —
+          erfaringsmæssigt i størrelsesordenen 1.500–3.500 kr afhængigt af afstand. Det
+          præcise beløb står i din ordrebekræftelse, så du kender det, før du bestiller.</li>
+      <li>Du får hele købesummen tilbage, inklusive hvad du betalte for den oprindelige
+          levering, senest 14 dage efter vi har modtaget bordet retur.</li>
+      <li>Du må gerne pakke bordet ud og se på det — det skal du kunne. Men bruger du det
+          ud over det, kan vi modregne værdiforringelsen. Et bord med ringe efter
+          vinglas er ikke længere nyt.</li>
+      <li>Pak det, som det kom. Gem emballagen, indtil du er sikker.</li>
+    </ul>
+  </section>
+
+  <section>
+    <span class="num">08</span>
+    <h2>Reklamationsret — to år</h2>
+    <p>Du har <strong>to års reklamationsret</strong> efter købeloven. Den gælder alle
+       borde, uanset mål, og den kan ikke fraviges ved aftale. Er der en fejl, som var der
+       ved leveringen, får du bordet repareret, ombyttet eller pengene tilbage.</p>
+    <p>Reklamerer du inden for <strong>de første 12 måneder</strong>, er det os, der skal
+       bevise, at fejlen ikke var der ved leveringen. Derefter er det dig. Reklamér altid
+       inden for rimelig tid, efter du har opdaget noget — inden for to måneder er altid
+       rettidigt.</p>
+    <p><strong>Reklamationsret er ikke det samme som garanti.</strong> Vi giver ingen garanti
+       ud over den, loven giver dig — vi vil hellere skrive præcist, hvad du har krav på,
+       end love noget stort og udvande det i undtagelser.</p>
+  </section>
+
+  <section>
+    <span class="num">09</span>
+    <h2>Træ arbejder — hvad der er en fejl, og hvad der ikke er</h2>
+    <p>Massiv eg er et levende materiale. Det udvider sig om sommeren og trækker sig om
+       vinteren, og det er ikke en fejl — det er, hvad træ gør. Vi skriver det her, fordi
+       det er bedre at vide på forhånd end at skændes om bagefter.</p>
+    <ul>
+      <li><strong>Ikke en fejl:</strong> at farven ændrer sig med lyset over det første år.
+          At åretegning og knaster er forskellige fra bord til bord. At en samling i den
+          massive plade kan mærkes let med fingeren hen over året. Små bevægelser i
+          bredden mellem sommer og vinter.</li>
+      <li><strong>En fejl, som du skal reklamere over:</strong> at pladen slår sig, så den
+          ikke er plan. At en limfuge går op. At drejeskiven binder, skurrer eller ikke
+          kører rundt. At overfladen skaller eller krakelerer. At understellet er skævt
+          eller ikke bærer.</li>
+    </ul>
+    <p>Du hjælper bordet ved at holde det væk fra direkte sol og fra at stå oven på en
+       radiator, og ved at holde luftfugtigheden nogenlunde stabil. Du får en
+       plejevejledning med.</p>
+  </section>
+
+  <section>
+    <span class="num">10</span>
+    <h2>Hvis vi er uenige</h2>
+    <p>Ring først. De fleste ting kan løses samme dag, og vi vil hellere rette noget end
+       have ret.</p>
+    <p>Kommer vi ikke videre, kan du klage til <strong>Center for Klageløsning,
+       Nævnenes Hus, Toldboden 2, 8800 Viborg</strong> —
+       <a href="https://naevneneshus.dk" target="_blank" rel="noopener">naevneneshus.dk</a>.</p>
+    <ul>
+      <li>Det koster dig 100 kr at klage.</li>
+      <li>Varen skal have kostet mindst 1.220 kr og højst 100.000 kr (2026-satser). Et
+          Tandhjul ligger inden for de grænser.</li>
+      <li>Du skal have klaget til os først, uden at vi er nået til enighed.</li>
+    </ul>
+    <p>Bor du i et andet EU-land, kan du bruge EU-Kommissionens klageportal på
+       <a href="https://ec.europa.eu/odr" target="_blank" rel="noopener">ec.europa.eu/odr</a>.
+       Dansk ret gælder for handlen.</p>
+  </section>
+
+  <section>
+    <span class="num">11</span>
+    <h2>Dine oplysninger</h2>
+    <p>Vi bruger dit navn, din adresse, din mail og dit telefonnummer til at bygge og
+       levere dit bord, og til at kunne finde din ordre frem, hvis du reklamerer. Vi
+       videresælger ikke noget til nogen.</p>
+    <p>Bogføringsloven kræver, at vi gemmer regnskabsmateriale i fem år. Kontaktoplysninger
+       ud over det sletter vi, når din reklamationsret er udløbet. Skriv, hvis du vil se,
+       rette eller slette det, vi har om dig.</p>
+    <p>Forespørgselsformularen på hjemmesiden sendes gennem tjenesten Formspree, som
+       håndterer beskeden på vejen til vores indbakke.</p>
+  </section>
+
+  <section>
+    <span class="num">12</span>
+    <h2>Standardfortrydelsesformular</h2>
+    <p>Du behøver ikke bruge den — en almindelig mail er nok. Den står her, fordi loven
+       siger, den skal være til rådighed.</p>
+    <div class="formular">
+      <p>Til <span class="udfyld">UDFYLD: firmanavn</span>,
+         <span class="udfyld">UDFYLD: adresse</span>, stefanhoegh@live.dk:</p>
+      <p>Jeg meddeler herved, at jeg ønsker at gøre fortrydelsesretten gældende i
+         forbindelse med min købsaftale om følgende varer:</p>
+      <p>Bestilt den ___________ / modtaget den ___________</p>
+      <p>Forbrugerens navn: ______________________________</p>
+      <p>Forbrugerens adresse: ___________________________</p>
+      <p>Forbrugerens underskrift: _______________________ (kun hvis formularens indhold
+         meddeles på papir)</p>
+      <p>Dato: ___________</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="fbiz">
+    <span class="udfyld">UDFYLD: firmanavn</span> ·
+    CVR <span class="udfyld">UDFYLD: CVR</span> ·
+    <span class="udfyld">UDFYLD: adresse</span><br/>
+    <a href="mailto:stefanhoegh@live.dk">stefanhoegh@live.dk</a> ·
+    <a href="tel:+4542493954">+45 42 49 39 54</a>
+  </div>
+  <ul class="flinks">
+    <li><a href="/">Forsiden</a></li>
+    <li><a href="/tandhjulet/">Tandhjulet</a></li>
+    <li><a href="/tandhjulet/#bestil">Bestil</a></li>
+    <li><a href="https://www.instagram.com/danish_hawk" target="_blank" rel="noopener">Instagram</a></li>
+  </ul>
+  <div class="updated">Senest opdateret 10. september 2026</div>
+</footer>
+
+<script>
+  var navbar = document.getElementById('navbar');
+  addEventListener('scroll', function () { navbar.classList.toggle('scrolled', scrollY > 40); });
+</script>
+
+</body>
+</html>
