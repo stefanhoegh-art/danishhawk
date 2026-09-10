@@ -60,14 +60,16 @@
     a { color: inherit; }
 
     /* ---------- nav ---------- */
-    nav { position: fixed; inset: 0 0 auto 0; z-index: 100; display: flex; align-items: center;
+    /* Scoped to the bar itself: the doors below are a <nav> too, and they must
+       not inherit its padding, background or blur. */
+    #navbar { position: fixed; inset: 0 0 auto 0; z-index: 100; display: flex; align-items: center;
           justify-content: space-between; padding: 18px 48px; border-bottom: 1px solid transparent;
           background: rgba(245,242,237,.94); backdrop-filter: blur(8px);
           transition: border-color .3s, background .3s; }
-    nav.scrolled { border-color: var(--line); }
+    #navbar.scrolled { border-color: var(--line); }
     /* Over the dark hero the bar disappears and its type goes pale. */
-    nav:not(.scrolled) { background: transparent; backdrop-filter: none; }
-    nav:not(.scrolled) .home, nav:not(.scrolled) .nav-links a { color: var(--pale); }
+    #navbar:not(.scrolled) { background: transparent; backdrop-filter: none; }
+    #navbar:not(.scrolled) .home, #navbar:not(.scrolled) .nav-links a { color: var(--pale); }
     .home { font-family: var(--mono); font-size: .7rem; letter-spacing: .15em; text-transform: uppercase;
             color: var(--ink); text-decoration: none; }
     .nav-links { display: flex; gap: 30px; list-style: none; }
@@ -76,53 +78,68 @@
     .nav-links a:hover { color: var(--accent); }
 
     /* ---------- hero ----------
-       Four photographs of real work, cross-fading slowly under the type. Every
-       frame is a piece that exists; nothing here is a stock picture. */
-    #top { position: relative; min-height: 100svh; display: flex; align-items: flex-end;
-           background: var(--dark); overflow: hidden; }
-    .frames { position: absolute; inset: 0; }
-    .frame { position: absolute; inset: 0; background-size: cover; background-position: center;
-             opacity: 0; animation: cycle 32s ease-in-out infinite; }
-    .frame:nth-child(1) { animation-delay:  0s; }
-    .frame:nth-child(2) { animation-delay:  8s; }
-    .frame:nth-child(3) { animation-delay: 16s; }
-    .frame:nth-child(4) { animation-delay: 24s; }
-    @keyframes cycle {
-      0%    { opacity: 0; transform: scale(1.10); }
-      6%    { opacity: .55; }
-      25%   { opacity: .55; }
-      31%   { opacity: 0; }
-      100%  { opacity: 0; transform: scale(1.02); }
-    }
-    #top::after { content: ''; position: absolute; inset: 0; pointer-events: none;
-      background: linear-gradient(to top, rgba(10,9,6,.96) 0%, rgba(10,9,6,.68) 42%, rgba(10,9,6,.5) 100%); }
+       The front page's first job is letting someone pick which of the three
+       they came for, so the choice is the hero: a short statement, then three
+       doors filling the rest of the screen. */
+    #top { position: relative; min-height: 100svh; background: var(--dark);
+           display: flex; flex-direction: column; overflow: hidden; }
     .hero-mark { position: absolute; z-index: 1; pointer-events: none; inset: 0; top: 46%;
                  transform: translateY(-50%); height: min(74vh, 660px); opacity: .032;
                  background: var(--pale);
                  -webkit-mask: url(assets/danish-hawk-mark.png) center / contain no-repeat;
-                         mask: url(assets/danish-hawk-mark.png) center / contain no-repeat; }
-    .hero-copy { position: relative; z-index: 2; width: 100%;
-                 padding: 0 clamp(22px, 5vw, 80px) clamp(50px, 9vh, 110px); }
+                         mask: url(assets/danish-hawk-mark.png) center / contain no-repeat; z-index: 0; }
+
+    .intro { position: relative; z-index: 2; padding: calc(var(--nav-h) + clamp(30px, 6vh, 70px))
+             clamp(22px, 5vw, 80px) clamp(26px, 4.5vh, 54px); }
     .eyebrow { font-family: var(--mono); font-size: .66rem; letter-spacing: .3em; text-transform: uppercase;
-               color: var(--accent); margin-bottom: 22px; }
-    #top h1 { font-size: clamp(2.6rem, 6.4vw, 6.2rem); font-weight: 300; line-height: .98;
-              letter-spacing: -.03em; color: var(--pale); max-width: 18ch; }
+               color: var(--accent); margin-bottom: 20px; }
+    #top h1 { font-size: clamp(2.2rem, 5vw, 4.4rem); font-weight: 300; line-height: 1;
+              letter-spacing: -.03em; color: var(--pale); max-width: 22ch; }
     #top h1 em { font-style: italic; color: var(--accent); }
-    .hero-lede { font-size: clamp(1.05rem, 1.5vw, 1.3rem); color: rgba(239,233,221,.76); font-weight: 500;
-                 max-width: 52ch; margin-top: 26px; line-height: 1.75; }
-    .hero-cta { margin-top: 34px; display: flex; gap: 12px; flex-wrap: wrap; }
-    .hero-cta a { font-family: var(--mono); font-size: .68rem; letter-spacing: .16em; text-transform: uppercase;
-                  text-decoration: none; padding: 15px 28px; transition: .25s; }
-    .solid { background: var(--pale); color: var(--dark); }
-    .solid:hover { background: var(--accent); }
-    .ghost { color: var(--pale); border: 1px solid rgba(239,233,221,.34); }
-    .ghost:hover { border-color: var(--pale); }
-    .hero-copy > * { opacity: 0; animation: lift 1.2s cubic-bezier(.16,1,.3,1) forwards; }
-    .hero-copy .eyebrow  { animation-delay: .35s; }
-    .hero-copy h1        { animation-delay: .55s; }
-    .hero-lede           { animation-delay: .85s; }
-    .hero-cta            { animation-delay: 1.1s; }
-    @keyframes lift { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
+    .intro p { font-size: clamp(1rem, 1.3vw, 1.15rem); color: rgba(239,233,221,.7); font-weight: 500;
+               max-width: 62ch; margin-top: 18px; line-height: 1.7; }
+    .intro > * { opacity: 0; animation: lift 1s cubic-bezier(.16,1,.3,1) forwards; }
+    .intro .eyebrow { animation-delay: .25s; }
+    .intro h1       { animation-delay: .4s; }
+    .intro p        { animation-delay: .6s; }
+    @keyframes lift { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: none; } }
+
+    /* Three doors, each its own picture, each saying where it goes. */
+    .doors { position: relative; z-index: 2; flex: 1; display: grid;
+             grid-template-columns: repeat(3, 1fr); min-height: 46svh; }
+    .door { position: relative; display: flex; flex-direction: column; justify-content: flex-end;
+            overflow: hidden; text-decoration: none; isolation: isolate;
+            border-left: 1px solid rgba(239,233,221,.14);
+            opacity: 0; animation: lift 1.1s cubic-bezier(.16,1,.3,1) forwards; }
+    .door:first-child { border-left: none; }
+    .door:nth-child(1) { animation-delay: .75s; }
+    .door:nth-child(2) { animation-delay: .87s; }
+    .door:nth-child(3) { animation-delay: .99s; }
+    .door img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+                z-index: -2; transition: transform 1s cubic-bezier(.16,1,.3,1), filter .5s;
+                filter: saturate(.8) brightness(.6); }
+    /* A screenshot behind a headline is not texture — it is competing text. The
+       two software doors get blurred and pushed back until they read as a lit
+       screen rather than as something to be read. */
+    .door.screen img { filter: saturate(.5) brightness(.32) blur(7px); transform: scale(1.06); }
+    .door.screen:hover img { filter: saturate(.7) brightness(.44) blur(5px); }
+    .door::before { content: ''; position: absolute; inset: 0; z-index: -1; transition: opacity .45s;
+      background: linear-gradient(to top, rgba(10,9,6,.96) 0%, rgba(10,9,6,.86) 38%, rgba(10,9,6,.6) 100%); }
+    .door:hover img { transform: scale(1.06); filter: saturate(1) brightness(.72); }
+    .door:hover::before { opacity: .86; }
+    .door-body { padding: clamp(26px, 3vw, 44px) clamp(22px, 2.4vw, 38px) clamp(30px, 4vh, 48px); }
+    .door .kind { font-family: var(--mono); font-size: .6rem; letter-spacing: .2em; text-transform: uppercase;
+                  color: var(--accent); margin-bottom: 14px; }
+    .door h2 { font-size: clamp(1.8rem, 2.6vw, 2.9rem); font-weight: 300; line-height: 1.04;
+               letter-spacing: -.02em; color: var(--pale); margin-bottom: 12px; }
+    .door p { font-size: clamp(.98rem, 1.05vw, 1.08rem); font-weight: 500; line-height: 1.7;
+              color: rgba(239,233,221,.78); max-width: 34ch; }
+    .door .arrow { display: inline-flex; align-items: center; gap: 10px; margin-top: 20px;
+                   font-family: var(--mono); font-size: .64rem; letter-spacing: .16em;
+                   text-transform: uppercase; color: var(--pale); }
+    .door .arrow::after { content: '→'; transition: transform .3s; }
+    .door:hover .arrow::after { transform: translateX(6px); }
+    .door:focus-visible { outline: 2px solid var(--accent); outline-offset: -4px; }
 
     /* ---------- what the workshop does ---------- */
     .craft { display: grid; grid-template-columns: repeat(5, 1fr);
@@ -215,10 +232,10 @@
     .reveal { opacity: 0; transform: translateY(22px); transition: opacity .8s ease, transform .8s ease; }
     .reveal.visible { opacity: 1; transform: none; }
 
+    /* Someone who asked for less movement gets the doors, at once, standing still. */
     @media (prefers-reduced-motion: reduce) {
-      .frame { animation: none; opacity: .4; }
-      .frame:nth-child(n+2) { display: none; }
-      .hero-copy > *, .reveal { animation: none !important; opacity: 1 !important; transform: none !important; }
+      .intro > *, .door, .reveal { animation: none !important; opacity: 1 !important; transform: none !important; }
+      .door img { transition: none; }
     }
 
     @media (max-width: 980px) {
@@ -230,12 +247,17 @@
       .offer-grid { grid-template-columns: 1fr; }
     }
     @media (max-width: 860px) {
-      nav { padding: 14px 18px; }
+      #navbar { padding: 14px 18px; }
       .nav-links { display: none; }
-      /* A ch-based measure is wider than the screen at this size: the last word
-         of the headline was being clipped away by the hero's overflow. */
-      #top h1 { font-size: clamp(2.2rem, 9vw, 3.4rem); max-width: none; }
-      .hero-lede { font-size: 1.05rem; }
+      /* A ch-based measure is wider than the screen here, and the three doors
+         stack rather than sit side by side. */
+      #top h1 { font-size: clamp(2rem, 8.5vw, 3rem); max-width: none; }
+      #top { min-height: 0; }
+      .intro { padding-top: calc(var(--nav-h) + 34px); }
+      .intro p { font-size: 1.02rem; }
+      .doors { grid-template-columns: 1fr; min-height: 0; }
+      .door { border-left: none; border-top: 1px solid rgba(239,233,221,.14); min-height: 62vw; }
+      .door-body { padding: 30px 22px 32px; }
       .band, .band.flip { grid-template-columns: 1fr; }
       .band-text, .band.flip .band-text { order: 2; padding: 50px 22px 56px; }
       .band-img, .band.flip .band-img { order: 1; min-height: 300px; max-height: 62vh; }
@@ -259,25 +281,52 @@
 
 <!-- ============ HERO ============ -->
 <section id="top">
-  <div class="frames" aria-hidden="true">
-    <div class="frame" style="background-image:url(assets/walnut-live-edge-slabs-ac64fd8f.jpg)"></div>
-    <div class="frame" style="background-image:url(assets/tandhjulet-top-and-centre-0e4e9e71.jpg)"></div>
-    <div class="frame" style="background-image:url(assets/cnc-table-base-detail-6c208f5b.jpg)"></div>
-    <div class="frame" style="background-image:url(assets/hoegh-tv-bench-with-led-installed-35413df8.jpg)"></div>
-  </div>
   <div class="hero-mark" aria-hidden="true"></div>
 
-  <div class="hero-copy">
+  <div class="intro">
     <div class="eyebrow">Danish Hawk — tegnet og produceret i Danmark</div>
     <h1>Vi bygger det, <em>der mangler.</em></h1>
-    <p class="hero-lede">Et spisebord hvor ingen skal række over. En beregner der siger, hvad
-       en elbil faktisk koster at køre i. En app der lader naboer varsle hinanden. Tre ting
-       i tre felter — fællesnævneren er ikke materialet, men at det kunne gøres bedre.</p>
-    <div class="hero-cta">
-      <a class="solid" href="/tandhjulet/">Se Tandhjulet</a>
-      <a class="ghost" href="#arbejdet">Se arbejdet</a>
-    </div>
+    <p>Tre ting i tre felter. Fællesnævneren er ikke materialet, men at det kunne gøres bedre.
+       Vælg den, du er kommet efter.</p>
   </div>
+
+  <nav class="doors" aria-label="Vælg produkt">
+    <a class="door" href="/tandhjulet/">
+      <img src="assets/tandhjulet-top-and-centre-0e4e9e71.jpg" alt="" width="1200" height="1600"
+           fetchpriority="high" decoding="async"/>
+      <div class="door-body">
+        <div class="kind">Møbel — spisebord</div>
+        <h2>Tandhjulet</h2>
+        <p>Rundt spisebord i eg, skåret som et tandhjul, med en drejeskive i midten. Otte
+           pladser, ingen bordende. Træk i skyderen og se bordet i dit mål — og prisen.</p>
+        <span class="arrow">Se bordet</span>
+      </div>
+    </a>
+
+    <a class="door screen" href="/NaboLarm/">
+      <img src="assets/shot-nabolarm-c7d4c541.jpg" alt="" width="780" height="1560"
+           loading="lazy" decoding="async"/>
+      <div class="door-body">
+        <div class="kind">App — nabovarsling</div>
+        <h2>NaboLarm</h2>
+        <p>Naboer i samme område kan advare hinanden om støj, utryghed og hændelser — helt
+           anonymt. Ingen kender din identitet, kun at du er en bekræftet nabo.</p>
+        <span class="arrow">Åbn NaboLarm</span>
+      </div>
+    </a>
+
+    <a class="door screen" href="/ev/">
+      <img src="assets/shot-energy-speed-012b0383.jpg" alt="" width="1600" height="1000"
+           loading="lazy" decoding="async"/>
+      <div class="door-body">
+        <div class="kind">Værktøj — elbilsberegner</div>
+        <h2>Energy Speed</h2>
+        <p>136 elbiler rangeret efter hvad de faktisk koster at køre i: reel rækkevidde,
+           forbrug, ladefart og pris om året. Køb og leasing regnet hver for sig.</p>
+        <span class="arrow">Åbn beregneren</span>
+      </div>
+    </a>
+  </nav>
 </section>
 
 <!-- ============ WHAT THE WORKSHOP DOES ============ -->
