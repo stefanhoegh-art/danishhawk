@@ -72,6 +72,11 @@
       --serif: "Cormorant Garamond", Georgia, serif;
       --mono: "DM Mono", ui-monospace, monospace;
       --nav-h: 71px;          /* the fixed bar, measured; the drawing parks under it */
+      /* The hero inverts the page rather than leaving its palette: the same ink
+         used as ground, so the oak has something to glow against. */
+      --dark:   #14120e;
+      --dark-2: #1d1a14;
+      --pale:   #efe9dd;
     }
     /* Sideways scroll is clipped on the root, not on the body: overflow-x on
        the body would make it a scroll container of its own and stop the
@@ -91,6 +96,13 @@
           justify-content: space-between; padding: 18px 48px; background: rgba(245,242,237,.94);
           backdrop-filter: blur(8px); border-bottom: 1px solid transparent; transition: border-color .3s; }
     nav.scrolled { border-color: var(--line); }
+    /* Over the dark hero the bar is invisible and its text is pale; the moment
+       the page scrolls onto the light ground it becomes itself again. */
+    nav:not(.scrolled) { background: transparent; backdrop-filter: none; }
+    nav:not(.scrolled) .home,
+    nav:not(.scrolled) .nav-links a { color: var(--pale); }
+    nav:not(.scrolled) .lang-btn svg { box-shadow: 0 0 0 1px rgba(239,233,221,.35); }
+    nav:not(.scrolled) .lang-btn.active svg { box-shadow: 0 0 0 1px rgba(239,233,221,.8); }
     .nav-right { display: flex; align-items: center; gap: 34px; }
     .nav-links { display: flex; gap: 30px; list-style: none; }
     .nav-links a { font-family: var(--mono); font-size: .7rem; letter-spacing: .13em;
@@ -131,25 +143,119 @@
     .btn-ghost:hover { border-color: var(--ink); color: var(--ink); }
 
     /* ---------- hero ---------- */
-    #hero { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; padding-top: 82px;
-            position: relative; overflow: hidden; }
-    /* The mark, blown up and sunk into the background. It is a mask rather than
-       an image, so it takes the page's own ink colour and cannot bring a white
-       card in with it. */
+    /* The table cuts itself out of the dark before anything else happens.
+       Every stage below is a step in how it is actually made, and the outline
+       that traces itself is the path the cutter follows. */
+
+    #hero { position: relative; min-height: 100svh; background: var(--dark);
+            display: grid; place-items: center; overflow: hidden; }
+    /* A warm pool of light behind the table, so the ground is not a flat black
+       rectangle but a room with a lamp over the table. */
+    #hero::before { content: ''; position: absolute; inset: 0; pointer-events: none;
+      background: radial-gradient(ellipse 70% 55% at 50% 42%, rgba(200,169,110,.16), transparent 70%); }
+    #hero::after { content: ''; position: absolute; inset: 0; pointer-events: none;
+      background: radial-gradient(ellipse 120% 90% at 50% 50%, transparent 45%, rgba(0,0,0,.55) 100%); }
+
+    .h-stage { position: relative; width: min(76vw, 82svh); aspect-ratio: 1;
+             transform: translateY(-6%); }
+    .h-stage svg { width: 100%; height: 100%; display: block; overflow: visible; }
+
+    /* Text sits in the lower left, over a scrim that guarantees it reads
+       whatever the drawing is doing behind it. */
+    .h-copy { position: absolute; z-index: 3; left: 0; bottom: 0; width: 100%;
+            padding: 0 clamp(22px, 5vw, 80px) clamp(34px, 6vh, 76px);
+            pointer-events: none; }
+    .h-copy > * { max-width: 30ch; }
+    .h-copy .h-eyebrow { max-width: none; white-space: nowrap; }
+    #hero .h-scrim { position: absolute; inset: auto 0 0 0; height: 62%; z-index: 2;
+            pointer-events: none;
+            background: linear-gradient(to top, rgba(10,9,6,.92) 0%, rgba(10,9,6,.72) 34%, transparent 100%); }
+    .h-eyebrow { font-family: var(--mono); font-size: .66rem; letter-spacing: .3em; text-transform: uppercase;
+               color: var(--accent); margin-bottom: 18px; }
+    .h-copy h1 { font-size: clamp(2.5rem, 5.4vw, 4.8rem); font-weight: 300; line-height: 1;
+               letter-spacing: -.025em; color: var(--pale); }
+    .h-copy h1 em { font-style: italic; color: var(--accent); }
+    .h-copy p { font-size: clamp(1rem, 1.4vw, 1.15rem); color: rgba(239,233,221,.74); font-weight: 500;
+              max-width: 42ch; margin: 18px 0 0; line-height: 1.7; }
+    .h-cta { margin-top: 28px; display: flex; gap: 12px; flex-wrap: wrap; pointer-events: auto;
+           max-width: none; }
+    .h-cta a { font-family: var(--mono); font-size: .68rem; letter-spacing: .16em; text-transform: uppercase;
+             text-decoration: none; padding: 14px 26px; transition: .25s; }
+    .h-cta .h-solid { background: var(--pale); color: var(--dark); }
+    .h-cta .h-solid:hover { background: var(--accent); }
+    .h-cta .h-ghost { color: var(--pale); border: 1px solid rgba(239,233,221,.32); }
+    .h-cta .h-ghost:hover { border-color: var(--pale); }
+
+    /* --- the build, staged ------------------------------------------------
+       Every delay below is a step in how the table is actually made: the path
+       is cut, the material is there, it gains thickness, the bearing is routed,
+       the board goes in, the chairs come to it. */
+    /* stroke-width and the dashes are in the path's own units, which the scale
+       multiplies along with the geometry — both are set from JS against it. */
+    .h-cut { fill: none; stroke: var(--pale); stroke-linejoin: round;
+           animation: trace 3.4s cubic-bezier(.42,0,.22,1) forwards; }
+    @keyframes trace { to { stroke-dashoffset: 0; } }
+
+    /* The material rises into the cut outline from below — the flowing build-up. */
+    #h-riseRect { transform: translateY(3600px); animation: rise 2.6s cubic-bezier(.22,1,.3,1) 2.3s forwards; }
+    @keyframes rise { to { transform: translateY(0); } }
+
+    .h-edge   { opacity: 0; animation: fade 1.1s ease 4.0s forwards; }
+    .h-sheen  { opacity: 0; animation: fade 1.6s ease 4.4s forwards; }
+    .h-shadow { opacity: 0; animation: fade 1.4s ease 3.9s forwards; }
+    .h-recess { opacity: 0; animation: fade .9s ease 4.7s forwards; }
+    @keyframes fade { to { opacity: 1; } }
+
+    /* The board is set down: it comes in slightly large and settles, and its
+       shadow tightens under it as it lands. */
+    #h-board { opacity: 0; transform-box: fill-box; transform-origin: center;
+             transform: scale(1.07);
+             animation: settle 1.3s cubic-bezier(.16,1,.3,1) 5.0s forwards; }
+    @keyframes settle { to { opacity: 1; transform: scale(1); } }
+    #h-boardShadow { opacity: 0; animation: boardShadow 1.3s cubic-bezier(.16,1,.3,1) 5.0s forwards; }
+    @keyframes boardShadow { from { opacity: 0; } to { opacity: .34; } }
+
+    /* Once it has landed it never stops: one turn a minute, the way it would
+       actually be nudged round at a table. */
+    /* Measured, not assumed: with the default transform-box, 50% 50% lands 132
+       units off the table's centre and the board orbits instead of turning.
+       fill-box puts the origin on the board's own middle, which is what a
+       turntable does. */
+    #h-turn { animation: spin 84s linear 7.0s infinite;
+            transform-box: fill-box; transform-origin: center; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .h-chair { opacity: 0; animation: pushIn 1.2s cubic-bezier(.16,1,.3,1) forwards; }
+    @keyframes pushIn { to { opacity: 1; transform: translate(0,0); } }
+
+    .h-dim      { opacity: 0; animation: fade 1s ease 6.6s forwards; }
+    .h-dim-line { stroke-dasharray: 1855; stroke-dashoffset: 1855;
+                animation: trace 1.2s cubic-bezier(.22,1,.3,1) 6.6s forwards; }
+
+    .h-copy > *  { opacity: 0; animation: lift 1.2s cubic-bezier(.16,1,.3,1) forwards; }
+    .h-eyebrow   { animation-delay: .5s; }
+    .h-copy h1   { animation-delay: .75s; }
+    .h-copy p    { animation-delay: 1.1s; }
+    .h-cta       { animation-delay: 1.4s; }
+    @keyframes lift { from { opacity: 0; transform: translateY(26px); } to { opacity: 1; transform: none; } }
+
+    /* Someone who has asked for less movement gets the finished table, at once. */
+    @media (prefers-reduced-motion: reduce) {
+      .h-cut, #h-riseRect, .h-edge, .h-sheen, .h-shadow, .h-recess, #h-board, #h-boardShadow,
+      .h-chair, .h-dim, .h-dim-line, .h-copy > * {
+        animation: none !important; opacity: 1 !important; transform: none !important;
+        stroke-dashoffset: 0 !important;
+      }
+      #h-boardShadow { opacity: .34 !important; }
+    }
+
+    /* The mark, sunk into the dark ground rather than the light one. */
     .hero-mark { position: absolute; z-index: 0; pointer-events: none;
-                 left: 0; width: 50%; top: 50%; transform: translateY(-50%);
+                 left: 0; right: 0; width: 100%; top: 50%; transform: translateY(-50%);
                  height: min(90vh, 840px);
-                 background: var(--ink); opacity: .062;
+                 background: var(--pale); opacity: .028;
                  -webkit-mask: url(../assets/danish-hawk-mark.png) center / contain no-repeat;
-                         mask: url(../assets/danish-hawk-mark.png) center / contain no-repeat; }
-    .hero-left { display: flex; flex-direction: column; justify-content: center; padding: 70px 48px 70px 80px;
-                 position: relative; z-index: 1; }
-    .hero-tag { font-family: var(--mono); font-size: .67rem; letter-spacing: .2em; text-transform: uppercase;
-                color: var(--accent); margin-bottom: 26px; }
-    .hero-sub { font-size: 1.08rem; color: var(--mid); max-width: 42ch; line-height: 1.8; margin: 24px 0 40px; }
-    .btn-row { display: flex; gap: 12px; flex-wrap: wrap; }
-    .hero-right { overflow: hidden; }
-    .hero-right img { width: 100%; height: 100%; object-fit: cover; }
+                         mask: url(../assets/danish-hawk-mark.png) center / contain no-repeat; z-index: 0; }
 
     /* ---------- key facts strip ---------- */
     .facts { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--line);
@@ -320,10 +426,22 @@
       nav { padding: 14px 18px; }
       .nav-links { display: none; }
       #hero { grid-template-columns: 1fr; min-height: auto; }
-      .hero-mark { width: 100%; height: min(56vh, 440px); top: 32%;
-                   transform: translateY(-50%); opacity: .055; }
-      .hero-left { padding: 48px 22px 36px; }
-      .hero-right { height: 320px; }
+      .hero-mark { height: min(52vh, 420px); top: 34%;
+                   transform: translateY(-50%); opacity: .035; }
+
+      /* On a phone the table moves into the top half and the text owns the
+         bottom half, instead of the two sharing the middle. */
+      .h-stage { width: 116vw; transform: translateY(-19%); }
+      #hero { place-items: start center; padding-top: 8vh; }
+      #hero .h-scrim { height: 54%;
+        background: linear-gradient(to top, rgba(10,9,6,.97) 0%, rgba(10,9,6,.93) 46%, transparent 100%); }
+      .h-copy > * { max-width: none; }
+      .h-copy h1 { font-size: clamp(2.3rem, 10vw, 3.2rem); }
+      .h-copy .h-eyebrow { white-space: normal; }
+      .h-cta { flex-direction: column; align-items: stretch; }
+      .h-cta a { text-align: center; }
+      /* The measurement would land in the middle of the paragraph. */
+      .h-dim, #h-dimText { display: none; }
       .facts { grid-template-columns: 1fr 1fr; }
       .fact:nth-child(2n) { border-right: none; }
       .fact:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
@@ -388,18 +506,89 @@
 <!-- ============ HERO ============ -->
 <section id="hero">
   <div class="hero-mark" aria-hidden="true"></div>
-  <div class="hero-left">
-    <div class="hero-tag" data-da="Danish Hawk — Første udgave" data-en="Danish Hawk — First edition">Danish Hawk — Første udgave</div>
-    <h1 data-da="Tandhjulet." data-en="Tandhjulet.">Tandhjulet.</h1>
-    <p class="hero-sub" data-da="Et rundt spisebord i eg, skåret som et tandhjul. Midten er en drejeskive, så fadet kommer hen til gæsten i stedet for omvendt. Første udgave har plads til otte. Vælg mål, plade og overflade — hvert bord skæres til dig." data-en="A round oak dining table cut in the shape of a cog. The centre turns, so the dish comes to the guest instead of the other way round. The first edition seats eight. Choose the size, the top and the finish — every table is cut for you.">Et rundt spisebord i eg, skåret som et tandhjul. Midten er en drejeskive, så fadet kommer hen til gæsten i stedet for omvendt. Første udgave har plads til otte. Vælg mål, plade og overflade — hvert bord skæres til dig.</p>
-    <div class="btn-row">
-      <a href="#konfigurer" class="btn-primary" data-da="Vælg din størrelse" data-en="Choose your size">Vælg din størrelse</a>
-      <a href="#bestil" class="btn-ghost" data-da="Få et tilbud" data-en="Request a quote">Få et tilbud</a>
-    </div>
+
+  <div class="h-stage">
+    <svg id="h-plan" viewBox="-1760 -1760 3520 3520" role="img"
+         aria-label="Tandhjulet tegner sig selv op: bordpladen skæres, materialet fyldes i, drejeskiven sættes i, og otte stole skubbes ind.">
+      <defs>
+        <path id="h-cog" d="M-0.3005,0.9285L-0.1592,0.7872A0.0148,0.0148 0 0,0 -0.1488,0.7829L0.1488,0.7829A0.0148,0.0148 0 0,0 0.1592,0.7872L0.3005,0.9285A0.0148,0.0148 0 0,1 0.3166,0.9317L0.4349,0.8827A0.0148,0.0148 0 0,1 0.4441,0.869L0.4441,0.6692A0.0148,0.0148 0 0,0 0.4484,0.6588L0.6588,0.4484A0.0148,0.0148 0 0,0 0.6692,0.4441L0.869,0.4441A0.0148,0.0148 0 0,1 0.8827,0.4349L0.9317,0.3166A0.0148,0.0148 0 0,1 0.9285,0.3005L0.7872,0.1592A0.0148,0.0148 0 0,0 0.7829,0.1488L0.7829,-0.1488A0.0148,0.0148 0 0,0 0.7872,-0.1592L0.9285,-0.3005A0.0148,0.0148 0 0,1 0.9317,-0.3166L0.8827,-0.4349A0.0148,0.0148 0 0,1 0.869,-0.4441L0.6692,-0.4441A0.0148,0.0148 0 0,0 0.6588,-0.4484L0.4484,-0.6588A0.0148,0.0148 0 0,0 0.4441,-0.6692L0.4441,-0.869A0.0148,0.0148 0 0,1 0.4349,-0.8827L0.3166,-0.9317A0.0148,0.0148 0 0,1 0.3005,-0.9285L0.1592,-0.7872A0.0148,0.0148 0 0,0 0.1488,-0.7829L-0.1488,-0.7829A0.0148,0.0148 0 0,0 -0.1592,-0.7872L-0.3005,-0.9285A0.0148,0.0148 0 0,1 -0.3166,-0.9317L-0.4349,-0.8827A0.0148,0.0148 0 0,1 -0.4441,-0.869L-0.4441,-0.6692A0.0148,0.0148 0 0,0 -0.4484,-0.6588L-0.6588,-0.4484A0.0148,0.0148 0 0,0 -0.6692,-0.4441L-0.869,-0.4441A0.0148,0.0148 0 0,1 -0.8827,-0.4349L-0.9317,-0.3166A0.0148,0.0148 0 0,1 -0.9285,-0.3005L-0.7872,-0.1592A0.0148,0.0148 0 0,0 -0.7829,-0.1488L-0.7829,0.1488A0.0148,0.0148 0 0,0 -0.7872,0.1592L-0.9285,0.3005A0.0148,0.0148 0 0,1 -0.9317,0.3166L-0.8827,0.4349A0.0148,0.0148 0 0,1 -0.869,0.4441L-0.6692,0.4441A0.0148,0.0148 0 0,0 -0.6588,0.4484L-0.4484,0.6588A0.0148,0.0148 0 0,0 -0.4441,0.6692L-0.4441,0.869A0.0148,0.0148 0 0,1 -0.4349,0.8827L-0.3166,0.9317A0.0148,0.0148 0 0,1 -0.3005,0.9285L-0.3005,0.9285Z"/>
+        <pattern id="h-oakTop" patternUnits="userSpaceOnUse" x="-1100" y="-1100" width="2200" height="2200">
+          <image id="h-oakTopImg" x="0" y="0" width="2200" height="2200" preserveAspectRatio="none"/>
+        </pattern>
+        <pattern id="h-oakBoard" patternUnits="userSpaceOnUse" x="-450" y="-450" width="900" height="900"
+                 patternTransform="rotate(64)">
+          <image id="h-oakBoardImg" x="0" y="0" width="900" height="900" preserveAspectRatio="none"/>
+        </pattern>
+        <!-- The light in the room, falling across the top. -->
+        <linearGradient id="h-sheenGrad" x1="0.1" y1="0" x2="0.7" y2="1">
+          <stop offset="0"   stop-color="#fff" stop-opacity="0"/>
+          <stop offset=".32" stop-color="#fff" stop-opacity=".17"/>
+          <stop offset=".46" stop-color="#fff" stop-opacity=".26"/>
+          <stop offset=".62" stop-color="#fff" stop-opacity=".10"/>
+          <stop offset="1"   stop-color="#fff" stop-opacity="0"/>
+        </linearGradient>
+        <filter id="h-soft" x="-30%" y="-30%" width="160%" height="160%">
+          <feGaussianBlur stdDeviation="46"/>
+        </filter>
+        <filter id="h-tight" x="-30%" y="-30%" width="160%" height="160%">
+          <feGaussianBlur stdDeviation="13"/>
+        </filter>
+        <!-- The material rising into the cut line. -->
+        <clipPath id="h-riseClip" clipPathUnits="userSpaceOnUse">
+          <rect id="h-riseRect" x="-1800" y="-1800" width="3600" height="3600"/>
+        </clipPath>
+      </defs>
+
+      <!-- the table standing on a floor -->
+      <g class="h-shadow"><use href="#h-cog" id="h-floorShadow" fill="#000" opacity=".62" filter="url(#h-soft)"/></g>
+
+      <g id="h-chairs" fill="#221e18" stroke="#7a7062" stroke-width="7"></g>
+
+      <!-- 26 mm of plate, read as a dark edge under the top -->
+      <g class="h-edge"><use href="#h-cog" id="h-edgeUse" fill="#0a0906"/></g>
+
+      <g clip-path="url(#h-riseClip)">
+        <use href="#h-cog" id="h-topBase" fill="#6f5236"/>
+        <use href="#h-cog" id="h-topUse" fill="url(#h-oakTop)"/>
+        <use href="#h-cog" id="h-sheenUse" class="h-sheen" fill="url(#h-sheenGrad)"/>
+      </g>
+
+      <!-- the bearing, routed into the top itself -->
+      <circle id="h-recess" class="h-recess" cx="0" cy="0" r="0" fill="none"
+              stroke="#000" stroke-opacity=".45" stroke-width="7"/>
+
+      <use href="#h-cog" id="h-cut" class="h-cut"/>
+
+      <ellipse id="h-boardShadow" cx="0" cy="26" rx="0" ry="0" fill="#000" filter="url(#h-tight)"/>
+      <g id="h-board">
+        <g id="h-turn">
+          <use href="#h-cog" id="h-boardUse" fill="url(#h-oakBoard)"/>
+          <use href="#h-cog" id="h-boardSheen" fill="url(#h-sheenGrad)" opacity=".22"/>
+          <line id="h-spoke" x1="0" y1="0" x2="0" y2="0" stroke="#0f0e0b" stroke-width="5" opacity=".22"/>
+        </g>
+        <circle cx="0" cy="0" r="9" fill="#0f0e0b" opacity=".45"/>
+      </g>
+
+      <g class="h-dim" stroke="#efe9dd" stroke-opacity=".5" stroke-width="4">
+        <line id="h-dimLine" class="h-h-dim-line" x1="0" y1="1330" x2="0" y2="1330"/>
+        <line id="h-tickL" x1="0" y1="1300" x2="0" y2="1360"/>
+        <line id="h-tickR" x1="0" y1="1300" x2="0" y2="1360"/>
+      </g>
+      <text id="h-dimText" class="h-dim" x="0" y="1428" text-anchor="middle" fill="#efe9dd" fill-opacity=".62"
+            font-family="DM Mono, monospace" font-size="52" letter-spacing="3"></text>
+    </svg>
   </div>
-  <div class="hero-right">
-    <picture><source srcset="../assets/tandhjulet-top-and-centre-0e4e9e71.webp" type="image/webp"/>
-      <img src="../assets/tandhjulet-top-and-centre-0e4e9e71.jpg" alt="Tandhjulet — spisebord i mørkbehandlet eg med drejeskive i midten" width="1200" height="1600" fetchpriority="high" decoding="async"/></picture>
+
+  <div class="h-scrim"></div>
+
+  <div class="h-copy">
+    <div class="h-eyebrow" data-da="Danish Hawk — Tandhjulet" data-en="Danish Hawk — Tandhjulet">Danish Hawk — Tandhjulet</div>
+    <h1 data-da="Ingen rækker <em>over bordet.</em>" data-en="Nobody reaches <em>across the table.</em>">Ingen rækker <em>over bordet.</em></h1>
+    <p data-da="Tandhjulet er et rundt spisebord i eg, skåret som et tandhjul. Midten drejer, så fadet kommer hen til gæsten. Otte pladser, ingen bordende." data-en="Tandhjulet is a round oak dining table cut in the shape of a cog. The centre turns, so the dish comes to the guest. Eight places, no head of the table.">Tandhjulet er et rundt spisebord i eg, skåret som et tandhjul. Midten drejer, så fadet kommer hen til gæsten. Otte pladser, ingen bordende.</p>
+    <div class="h-cta">
+      <a class="h-solid" href="#konfigurer" data-da="Vælg din størrelse" data-en="Choose your size">Vælg din størrelse</a>
+      <a class="h-ghost" href="#bestil" data-da="Få et tilbud" data-en="Get a quote">Få et tilbud</a>
+    </div>
   </div>
 </section>
 
@@ -818,6 +1007,89 @@
     <li><a href="https://www.instagram.com/danish_hawk" target="_blank" rel="noopener">Instagram</a></li>
   </ul>
 </footer>
+
+<script type="module">
+
+  import { oakDataURL } from '../assets/oak.js';
+
+  /* Straight from the production file: the tip circle sits at this radius in
+     path units once the corners are filleted, so the drawing is to scale. */
+  const PATH_R     = 0.98402;
+  const FLAT_RATIO = 0.7956;
+  const TIP        = 1855;      // mm across the teeth
+  const BEARING    = 601.5;     // mm
+  const BOARD      = 790;       // mm across the teeth of the turntable
+  const SEATS      = 8;
+  const CHAIR_W    = 460, CHAIR_D = 480;
+
+  const $ = (id) => document.getElementById(id);
+  const scale = (tipDia) => tipDia / 2 / PATH_R;
+
+  /* The top, its edge, its shadow and the cut line are all the same path at the
+     same scale; the edge and the shadow are only offset down the page. */
+  const s = scale(TIP);
+  $('h-topUse').setAttribute('transform', `scale(${s})`);
+  $('h-topBase').setAttribute('transform', `scale(${s})`);
+  $('h-sheenUse').setAttribute('transform', `scale(${s})`);
+  $('h-cut').setAttribute('transform', `scale(${s})`);
+  $('h-edgeUse').setAttribute('transform', `translate(0,17) scale(${s})`);
+  $('h-floorShadow').setAttribute('transform', `translate(26,64) scale(${s * 0.99})`);
+
+  const sb = scale(BOARD);
+  $('h-boardUse').setAttribute('transform', `scale(${sb})`);
+  $('h-boardSheen').setAttribute('transform', `scale(${sb})`);
+  $('h-spoke').setAttribute('y2', String(-BOARD * FLAT_RATIO / 2 + 40));
+  $('h-boardShadow').setAttribute('rx', String(BOARD * FLAT_RATIO / 2));
+  $('h-boardShadow').setAttribute('ry', String(BOARD * FLAT_RATIO / 2));
+
+  $('h-recess').setAttribute('r', String(BEARING / 2));
+
+  /* The pattern lives in the parent's user space, so the top's own scale has to
+     be cancelled or the grain would grow with the table. */
+  $('h-oakTop').setAttribute('patternTransform', `scale(${1 / s})`);
+  $('h-oakBoard').setAttribute('patternTransform', `rotate(64) scale(${1 / sb})`);
+
+  const half = TIP / 2;
+  $('h-dimLine').setAttribute('x1', String(-half));
+  $('h-dimLine').setAttribute('x2', String(half));
+  $('h-tickL').setAttribute('x1', String(-half)); $('h-tickL').setAttribute('x2', String(-half));
+  $('h-tickR').setAttribute('x1', String(half));  $('h-tickR').setAttribute('x2', String(half));
+  $('h-dimText').textContent = 'Ø ' + TIP.toLocaleString('da-DK') + ' mm';
+
+  /* Eight chairs at the eight flats, each drawn where it comes to rest and then
+     offset outwards, so the animation carries it in to the table. */
+  const chairs = $('h-chairs');
+  const front = TIP * FLAT_RATIO / 2 - 40;   // just tucked under the edge, still visible
+  for (let i = 0; i < SEATS; i++) {
+    const a = i * 360 / SEATS;
+    const rad = a * Math.PI / 180, ca = Math.cos(rad), sa = Math.sin(rad);
+    const rot = (x, y) => `${(x * ca - y * sa).toFixed(1)},${(x * sa + y * ca).toFixed(1)}`;
+    const quad = (pts) => 'M' + pts.map((q) => rot(q[0], q[1])).join('L') + 'Z';
+    const seatD = CHAIR_D - 60, hw = CHAIR_W / 2;
+    const d = quad([[front, -hw], [front + seatD, -hw], [front + seatD, hw], [front, hw]])
+            + quad([[front + seatD, -hw - 20], [front + CHAIR_D, -hw - 20],
+                    [front + CHAIR_D, hw + 20], [front + seatD, hw + 20]]);
+    const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    path.setAttribute('d', d);
+    path.setAttribute('class', 'h-chair');
+    // pushed out along its own radius to start, and brought in on a stagger
+    path.style.transform = `translate(${(ca * 340).toFixed(1)}px, ${(sa * 340).toFixed(1)}px)`;
+    path.style.animationDelay = (5.7 + i * 0.11).toFixed(2) + 's';
+    chairs.appendChild(path);
+  }
+
+  /* The trace has to know how long the path is before it can draw itself. */
+  const cut = $('h-cut');
+  const len = document.getElementById('h-cog').getTotalLength();   // in path units
+  cut.style.strokeDasharray = len;
+  cut.style.strokeDashoffset = len;
+  cut.style.strokeWidth = 11 / s;   // ~11 mm of drawing, whatever the table size
+
+  const top = oakDataURL({ finish: 'moerk', material: 'solid', size: 768, staveW: 120 });
+  $('h-oakTopImg').setAttribute('href', top);
+  $('h-oakBoardImg').setAttribute('href',
+    oakDataURL({ finish: 'moerk', material: 'solid', size: 512, staveW: 110 }));
+</script>
 
 <script>
   /* nav + reveal */
