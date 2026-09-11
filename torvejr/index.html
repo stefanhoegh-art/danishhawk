@@ -1,0 +1,1722 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tørvejr — bænk med vendbare sæder | Danish Hawk</title>
+  <meta name="description" content="Tørvejr er en havebænk, hvor sædet kan vendes, så den tørre side altid er den, du sidder på. Hvælvet plade i massiv eg, aksel og leje i rustfrit stål, ingen fjedre og ingen låse."/>
+  <meta name="author" content="Danish Hawk — Stefan Høgh"/>
+  <meta name="robots" content="index, follow"/>
+  <link rel="canonical" href="https://danishhawk.com/torvejr/"/>
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32.png"/>
+  <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png"/>
+
+  <meta property="og:title" content="Tørvejr — bænk med vendbare sæder"/>
+  <meta property="og:description" content="En havebænk, hvor den tørre side ligger nedad. Løft 20 mm, vend sædet, sid ned."/>
+  <meta property="og:url" content="https://danishhawk.com/torvejr/"/>
+  <meta property="og:type" content="product"/>
+  <meta property="og:locale" content="da_DK"/>
+  <meta property="og:locale:alternate" content="en_GB"/>
+  <link rel="alternate" hreflang="da" href="https://danishhawk.com/torvejr/"/>
+  <link rel="alternate" hreflang="en" href="https://danishhawk.com/torvejr/?lang=en"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="Tørvejr — bænk med vendbare sæder"/>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Tørvejr",
+    "category": "Garden bench",
+    "description": "Havebænk med vendbart sæde. Sædepladen er hvælvet på begge flader og drejer 180° i sine egne lejer, så den side, der har vendt nedad og er tør, bliver den man sidder på.",
+    "material": "Eg, robinie eller lærk, rustfrit stål A4",
+    "brand": { "@type": "Brand", "name": "Danish Hawk" },
+    "manufacturer": {
+      "@type": "Organization",
+      "name": "Danish Hawk",
+      "url": "https://danishhawk.com/torvejr/",
+      "email": "stefanhoegh@live.dk",
+      "telephone": "+4542493954",
+      "address": { "@type": "PostalAddress", "addressCountry": "DK" }
+    },
+    "offers": {
+      "@type": "Offer",
+      "availability": "https://schema.org/PreOrder",
+      "priceCurrency": "DKK",
+      "priceSpecification": {
+        "@type": "PriceSpecification",
+        "description": "Pris efter mål og træsort. Oplyses ved forespørgsel."
+      },
+      "url": "https://danishhawk.com/torvejr/#bestil"
+    }
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #f5f2ed;
+      --ink: #0f0e0b;
+      --mid: #0f0e0b;
+      --line: #d8d2c8;
+      --accent: #c8a96e;
+      --card: #eeebe5;
+      --serif: "Cormorant Garamond", Georgia, serif;
+      --mono: "DM Mono", ui-monospace, monospace;
+      --nav-h: 71px;
+      --dark:   #14120e;
+      --pale:   #efe9dd;
+      /* Water has one colour on this page, and it is the only cold colour on
+         the whole site. That is the point: everything else is timber. */
+      --wet:    #5d7b8a;
+    }
+    html { scroll-behavior: smooth; overflow-x: hidden; }
+    /* Jumping to a section must not park its heading under the fixed bar. */
+    section[id], div[id] { scroll-margin-top: calc(var(--nav-h) + 10px); }
+    body { background: var(--bg); color: var(--ink); font-family: var(--serif);
+           font-weight: 400; font-size: 20px; line-height: 1.7; overflow-x: clip;
+           -webkit-font-smoothing: antialiased; }
+    .lede, .hero-sub, .pointlist p, .cfg-note, .ctrl-why, .notice p, .trio p,
+    .rrow dt, .spec-row dt, .drw-cap { font-weight: 500; }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; }
+
+    /* ---------- nav ---------- */
+    nav { position: fixed; inset: 0 0 auto 0; z-index: 100; display: flex; align-items: center;
+          justify-content: space-between; padding: 18px 48px; background: rgba(245,242,237,.94);
+          backdrop-filter: blur(8px); border-bottom: 1px solid transparent; transition: border-color .3s; }
+    nav.scrolled { border-color: var(--line); }
+    nav:not(.scrolled) { background: transparent; backdrop-filter: none; }
+    nav:not(.scrolled) .home,
+    nav:not(.scrolled) .nav-links a { color: var(--pale); }
+    nav:not(.scrolled) .lang-btn svg { box-shadow: 0 0 0 1px rgba(239,233,221,.35); }
+    nav:not(.scrolled) .lang-btn.active svg { box-shadow: 0 0 0 1px rgba(239,233,221,.8); }
+    .nav-right { display: flex; align-items: center; gap: 34px; }
+    .nav-links { display: flex; gap: 30px; list-style: none; }
+    .nav-links a { font-family: var(--mono); font-size: .7rem; letter-spacing: .13em;
+                   text-transform: uppercase; text-decoration: none; color: var(--mid); transition: color .2s; }
+    .nav-links a:hover { color: var(--ink); }
+    .home { font-family: var(--mono); font-size: .7rem; letter-spacing: .15em;
+            text-transform: uppercase; color: var(--ink); text-decoration: none;
+            border-bottom: 1px solid transparent; padding-bottom: 2px; }
+    .home:hover { border-bottom-color: var(--ink); }
+    .lang-switch { display: flex; align-items: center; gap: 10px; }
+    .lang-btn { background: none; border: none; padding: 4px; cursor: pointer; line-height: 0;
+                border-radius: 2px; opacity: .42; filter: grayscale(1);
+                transition: opacity .2s, filter .2s, box-shadow .2s; }
+    .lang-btn svg { display: block; width: 30px; height: 22px; border-radius: 1px;
+                    box-shadow: 0 0 0 1px rgba(15,14,11,.18); }
+    .lang-btn:hover { opacity: .8; filter: grayscale(.3); }
+    .lang-btn.active { opacity: 1; filter: none; }
+    .lang-btn.active svg { box-shadow: 0 0 0 1px rgba(15,14,11,.5); }
+
+    /* ---------- shared ---------- */
+    .slabel { font-family: var(--mono); font-size: .65rem; letter-spacing: .2em; text-transform: uppercase;
+              color: var(--accent); margin-bottom: 30px; display: flex; align-items: center; gap: 12px; }
+    .slabel::after { content: ''; width: 34px; height: 1px; background: var(--accent); }
+    h1 { font-size: clamp(2.9rem, 6vw, 5.4rem); font-weight: 300; line-height: 1.02; letter-spacing: -.02em; }
+    h2 { font-size: clamp(1.9rem, 3vw, 2.9rem); font-weight: 300; line-height: 1.14; margin-bottom: 22px; }
+    h2 em, h1 em { font-style: italic; color: var(--mid); }
+    h3 { font-size: 1.2rem; font-weight: 400; margin-bottom: 10px; }
+    .lede { font-size: 1.1rem; color: var(--mid); line-height: 1.8; max-width: 54ch; }
+    p + p { margin-top: 16px; }
+    .btn-primary, .btn-ghost { display: inline-block; padding: 14px 32px; font-family: var(--mono);
+      font-size: .66rem; letter-spacing: .15em; text-transform: uppercase; text-decoration: none;
+      border: 1px solid var(--ink); cursor: pointer; transition: .25s; }
+    .btn-primary { background: var(--ink); color: var(--bg); }
+    .btn-primary:hover { background: var(--accent); color: var(--ink); border-color: var(--accent); }
+    .btn-ghost { background: none; color: var(--mid); border-color: var(--line); }
+    .btn-ghost:hover { border-color: var(--ink); color: var(--ink); }
+
+    /* ---------- hero ---------- */
+    #hero { position: relative; min-height: 100svh; background: var(--dark);
+            display: grid; place-items: center; overflow: hidden; }
+    #hero::before { content: ''; position: absolute; inset: 0; pointer-events: none;
+      background: radial-gradient(ellipse 70% 55% at 50% 40%, rgba(200,169,110,.15), transparent 70%); }
+    #hero::after { content: ''; position: absolute; inset: 0; pointer-events: none;
+      background: radial-gradient(ellipse 120% 90% at 50% 50%, transparent 45%, rgba(0,0,0,.55) 100%); }
+    .hero-mark { position: absolute; z-index: 0; pointer-events: none;
+                 left: 0; right: 0; width: 100%; top: 50%; transform: translateY(-50%);
+                 height: min(90vh, 840px); background: var(--pale); opacity: .028;
+                 -webkit-mask: url(../assets/danish-hawk-mark.png) center / contain no-repeat;
+                         mask: url(../assets/danish-hawk-mark.png) center / contain no-repeat; }
+    .h-stage { position: relative; width: min(90vw, 1020px); aspect-ratio: 1.34; transform: translateY(-12%); }
+    .h-stage svg { width: 100%; height: 100%; display: block; overflow: visible; }
+    .h-copy { position: absolute; z-index: 3; left: 0; bottom: 0; width: 100%;
+              padding: 0 clamp(22px, 5vw, 80px) clamp(34px, 6vh, 76px); pointer-events: none; }
+    .h-copy > * { max-width: 30ch; }
+    .h-copy .h-eyebrow { max-width: none; white-space: nowrap; }
+    #hero .h-scrim { position: absolute; inset: auto 0 0 0; height: 62%; z-index: 2; pointer-events: none;
+      background: linear-gradient(to top, rgba(10,9,6,.92) 0%, rgba(10,9,6,.72) 34%, transparent 100%); }
+    .h-eyebrow { font-family: var(--mono); font-size: .66rem; letter-spacing: .3em; text-transform: uppercase;
+                 color: var(--accent); margin-bottom: 18px; }
+    .h-copy h1 { font-size: clamp(2.5rem, 5.4vw, 4.8rem); font-weight: 300; line-height: 1;
+                 letter-spacing: -.025em; color: var(--pale); }
+    .h-copy h1 em { font-style: italic; color: var(--accent); }
+    .h-copy p { font-size: clamp(1rem, 1.4vw, 1.15rem); color: rgba(239,233,221,.74); font-weight: 500;
+                max-width: 44ch; margin: 18px 0 0; line-height: 1.7; }
+    .h-cta { margin-top: 28px; display: flex; gap: 12px; flex-wrap: wrap; pointer-events: auto; max-width: none; }
+    .h-cta a { font-family: var(--mono); font-size: .68rem; letter-spacing: .16em; text-transform: uppercase;
+               text-decoration: none; padding: 14px 26px; transition: .25s; }
+    .h-cta .h-solid { background: var(--pale); color: var(--dark); }
+    .h-cta .h-solid:hover { background: var(--accent); }
+    .h-cta .h-ghost { color: var(--pale); border: 1px solid rgba(239,233,221,.32); }
+    .h-cta .h-ghost:hover { border-color: var(--pale); }
+    .h-copy > * { opacity: 0; animation: lift 1.2s cubic-bezier(.16,1,.3,1) forwards; }
+    .h-eyebrow { animation-delay: .4s; } .h-copy h1 { animation-delay: .65s; }
+    .h-copy p { animation-delay: 1s; }   .h-cta { animation-delay: 1.3s; }
+    @keyframes lift { from { opacity: 0; transform: translateY(26px); } to { opacity: 1; transform: none; } }
+
+    /* ---------- key facts strip ---------- */
+    .facts { display: grid; grid-template-columns: repeat(4, 1fr); border-bottom: 1px solid var(--line); }
+    .fact { padding: 26px 30px; border-right: 1px solid var(--line); }
+    .fact:last-child { border-right: none; }
+    .fact-n { font-size: 1.9rem; line-height: 1; }
+    .fact-n small { font-size: .8rem; color: var(--mid); }
+    .fact-l { font-family: var(--mono); font-size: .65rem; letter-spacing: .16em; text-transform: uppercase;
+              color: var(--mid); margin-top: 8px; }
+
+    /* ---------- split sections ---------- */
+    .split { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--line); align-items: center; }
+    .split-text { padding: 90px 56px 90px 80px; }
+    .split-drw { padding: 60px 64px; border-left: 1px solid var(--line); align-self: stretch;
+                 display: flex; flex-direction: column; justify-content: center; background: var(--card); }
+    .split.flip .split-text { order: 2; padding: 90px 80px 90px 56px; }
+    .split.flip .split-drw { order: 1; border-left: none; border-right: 1px solid var(--line); }
+    .pointlist { list-style: none; margin-top: 30px; }
+    .pointlist li { padding: 18px 0; border-top: 1px solid var(--line); display: grid;
+                    grid-template-columns: 28px 1fr; gap: 14px; }
+    .pointlist .pn { font-family: var(--mono); font-size: .6rem; letter-spacing: .1em; color: var(--accent);
+                     padding-top: 5px; }
+    .pointlist p { font-size: 1rem; color: var(--mid); line-height: 1.8; }
+
+    /* ---------- drawings ----------
+       Every drawing on this page is to scale and in millimetres, because there
+       is no photograph to fall back on: the bench is drawn, not built yet. */
+    .drw svg { width: 100%; height: auto; display: block; overflow: visible; }
+    .drw-cap { font-family: var(--mono); font-size: .62rem; letter-spacing: .13em; text-transform: uppercase;
+               color: var(--mid); margin-top: 22px; line-height: 1.9; }
+    .dim { font-family: var(--mono); font-size: 13px; letter-spacing: .5px; }
+    /* Drawing text is sized in the drawing's own units, so a sheet drawn at
+       1:20 needs a bigger number than one drawn at 1:2. */
+    #saettet .dim { font-size: 36px; }
+    #c-plan .dim { font-size: 34px; letter-spacing: 1px; }
+    #lejet .dim { font-size: 9px; }
+    #vend .dim { font-size: 10px; }
+
+    /* ---------- the flip ---------- */
+    #vend { border-top: 1px solid var(--line); padding: 90px 80px; }
+    .flip-head { max-width: 60ch; margin-bottom: 48px; }
+    .flip-wrap { display: grid; grid-template-columns: 1.2fr .8fr; gap: 56px; align-items: start; }
+    .flip-stage { background: var(--card); border: 1px solid var(--line); position: relative; }
+    .flip-stage svg { width: 100%; height: auto; display: block; touch-action: none;
+                      max-height: calc(100vh - var(--nav-h) - 52px); cursor: grab; }
+    .flip-stage.dragging svg { cursor: grabbing; }
+    .flip-hint { position: absolute; left: 0; right: 0; top: 14px; text-align: center;
+                 font-family: var(--mono); font-size: .63rem; letter-spacing: .14em; text-transform: uppercase;
+                 color: var(--mid); pointer-events: none; transition: opacity .4s; }
+    .flip-hint.gone { opacity: 0; }
+    .btnrow { display: flex; gap: 10px; flex-wrap: wrap; }
+    .state { border-top: 1px solid var(--line); margin-top: 32px; }
+    .srow { display: grid; grid-template-columns: 92px 1fr; gap: 16px; padding: 14px 0;
+            border-bottom: 1px solid var(--line); align-items: baseline; }
+    .srow dt { font-family: var(--mono); font-size: .63rem; letter-spacing: .16em; text-transform: uppercase;
+               color: var(--mid); }
+    .srow dd { font-size: 1rem; }
+    .srow .tag { font-family: var(--mono); font-size: .62rem; letter-spacing: .1em; text-transform: uppercase;
+                 padding: 3px 8px; border: 1px solid var(--line); margin-left: 8px; white-space: nowrap; }
+    .srow .tag.w { color: var(--wet); border-color: var(--wet); }
+    .srow .tag.d { color: var(--accent); border-color: var(--accent); }
+    .steps { list-style: none; margin-top: 26px; }
+    .steps li { display: grid; grid-template-columns: 74px 1fr; gap: 14px; padding: 11px 0;
+                font-size: .98rem; color: var(--mid); border-bottom: 1px solid var(--line); }
+    .steps b { font-family: var(--mono); font-size: .63rem; letter-spacing: .12em; text-transform: uppercase;
+               color: var(--accent); font-weight: 400; padding-top: 4px; }
+
+    /* ---------- configurator ---------- */
+    #maal { border-top: 1px solid var(--line); padding: 90px 80px; }
+    .cfg-head { max-width: 60ch; margin-bottom: 48px; }
+    .cfg { display: grid; grid-template-columns: 1.15fr .85fr; gap: 56px; align-items: start; }
+    .cfg-stage { background: var(--card); border: 1px solid var(--line);
+                 position: sticky; top: calc(var(--nav-h) + 20px); z-index: 2; }
+    .cfg-stage svg { width: 100%; height: auto; display: block;
+                     max-height: calc(100vh - var(--nav-h) - 52px); }
+    .ctrl { margin-bottom: 34px; }
+    .ctrl-label { display: flex; justify-content: space-between; align-items: baseline;
+                  font-family: var(--mono); font-size: .69rem; letter-spacing: .16em; text-transform: uppercase;
+                  color: var(--mid); margin-bottom: 14px; }
+    .ctrl-val { font-size: .9rem; letter-spacing: .04em; color: var(--ink); }
+    input[type=range] { -webkit-appearance: none; appearance: none; width: 100%; height: 1px;
+                        background: var(--line); outline: none; }
+    input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 22px; height: 22px;
+      border-radius: 50%; background: var(--bg); border: 1px solid var(--ink); cursor: grab; }
+    input[type=range]::-moz-range-thumb { width: 20px; height: 20px; border-radius: 50%;
+      background: var(--bg); border: 1px solid var(--ink); cursor: grab; }
+    .range-ends { display: flex; justify-content: space-between; font-family: var(--mono);
+                  font-size: .65rem; color: var(--mid); margin-top: 10px; letter-spacing: .08em; }
+    .ctrl-why { font-size: .9rem; color: var(--mid); line-height: 1.8; margin: 12px 0 0; }
+    .choices { display: flex; gap: 8px; }
+    .choice { flex: 1; padding: 13px 10px; border: 1px solid var(--line); background: var(--bg);
+              font-family: var(--mono); font-size: .6rem; letter-spacing: .1em; text-transform: uppercase;
+              color: var(--mid); cursor: pointer; transition: .2s; text-align: center; }
+    .choice:hover { border-color: var(--accent); }
+    .choice[aria-pressed=true] { background: var(--ink); border-color: var(--ink); color: var(--bg); }
+    .choice small { display: block; font-size: .58rem; opacity: .78; margin-top: 3px; letter-spacing: .04em; }
+    .swatches { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+    .sw { border: 1px solid var(--line); background: none; padding: 0; cursor: pointer;
+          transition: .2s; overflow: hidden; }
+    .sw canvas { display: block; width: 100%; height: 54px; object-fit: cover; }
+    .sw span { display: block; font-family: var(--mono); font-size: .61rem; letter-spacing: .06em;
+               text-transform: uppercase; color: var(--mid); padding: 7px 4px; text-align: center;
+               border-top: 1px solid var(--line); }
+    .sw:hover { border-color: var(--accent); }
+    .sw[aria-pressed=true] { border-color: var(--ink); box-shadow: inset 0 0 0 2px var(--ink); }
+    .sw[aria-pressed=true] span { color: var(--ink); }
+    .readout { border-top: 1px solid var(--line); margin-top: 8px; }
+    .rrow { display: flex; justify-content: space-between; gap: 16px; padding: 12px 0;
+            border-bottom: 1px solid var(--line); font-size: .88rem; }
+    .rrow dt { color: var(--mid); font-size: .93rem; }
+    .rrow dd { font-family: var(--mono); font-size: .85rem; letter-spacing: .03em; text-align: right; }
+    .cfg-note { font-size: .92rem; color: var(--mid); line-height: 1.8; margin-top: 24px;
+                padding-top: 20px; border-top: 1px solid var(--line); }
+
+    /* ---------- notice ---------- */
+    .notice { border: 1px solid var(--accent); background: rgba(200,169,110,.09);
+              padding: 24px 28px; margin-top: 32px; }
+    .notice-t { font-family: var(--mono); font-size: .67rem; letter-spacing: .18em; text-transform: uppercase;
+                color: var(--accent); margin-bottom: 10px; }
+    .notice p { font-size: 1rem; color: var(--mid); line-height: 1.8; }
+
+    /* ---------- trio band ---------- */
+    #detaljer { border-top: 1px solid var(--line); padding: 90px 80px; }
+    .trio { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px 56px; margin-top: 44px; }
+    .trio h3 { font-size: 1.25rem; font-weight: 400; margin-bottom: 12px; }
+    .trio p { font-size: 1.05rem; color: var(--mid); line-height: 1.8; }
+    .trio-key { font-family: var(--mono); font-size: .66rem; letter-spacing: .18em; text-transform: uppercase;
+                color: var(--accent); margin-bottom: 14px; }
+
+    /* ---------- specs ---------- */
+    #spec { border-top: 1px solid var(--line); padding: 90px 80px; }
+    .spec-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0 56px; margin-top: 40px; }
+    .spec-row { display: flex; justify-content: space-between; gap: 20px; padding: 15px 0;
+                border-bottom: 1px solid var(--line); }
+    .spec-row dt { font-size: 1rem; color: var(--mid); }
+    .spec-row dd { font-family: var(--mono); font-size: .83rem; letter-spacing: .03em; text-align: right; }
+
+    /* ---------- order ---------- */
+    #bestil { border-top: 1px solid var(--line); display: grid; grid-template-columns: 1fr 1fr; }
+    .ord-l { padding: 90px 56px 90px 80px; border-right: 1px solid var(--line); }
+    .cinfo { display: flex; flex-direction: column; gap: 20px; margin-top: 40px; }
+    .citem-label { font-family: var(--mono); font-size: .6rem; letter-spacing: .18em; text-transform: uppercase;
+                   color: var(--accent); margin-bottom: 3px; }
+    .citem-val { font-size: .95rem; color: var(--ink); text-decoration: none; }
+    .ord-r { padding: 90px 80px 90px 56px; display: flex; flex-direction: column; gap: 20px; }
+    .fg { display: flex; flex-direction: column; gap: 7px; }
+    .fl { font-family: var(--mono); font-size: .62rem; letter-spacing: .15em; text-transform: uppercase; color: var(--mid); }
+    .fi, .fta { background: transparent; border: none; border-bottom: 1px solid var(--line);
+                padding: 11px 0; font-family: var(--serif); font-size: 1rem; color: var(--ink);
+                outline: none; width: 100%; transition: border-color .2s; }
+    .fi:focus, .fta:focus { border-color: var(--ink); }
+    .fta { resize: vertical; min-height: 86px; }
+    .fi::placeholder, .fta::placeholder { color: var(--line); }
+    #form-success { display: none; font-size: .9rem; color: var(--accent); }
+
+    /* ---------- footer ---------- */
+    footer { border-top: 1px solid var(--line); padding: 34px 80px; display: flex;
+             align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+    .fcopy, .flinks a { font-family: var(--mono); font-size: .56rem; letter-spacing: .12em;
+                        text-transform: uppercase; color: var(--mid); text-decoration: none; }
+    .flinks { display: flex; gap: 26px; list-style: none; }
+    .flinks a:hover { color: var(--ink); }
+
+    /* ---------- reveal ---------- */
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity .8s ease, transform .8s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
+      .h-copy > * { animation: none !important; opacity: 1 !important; transform: none !important; }
+      html { scroll-behavior: auto; }
+    }
+
+    /* ---------- mobile ---------- */
+    @media (max-width: 980px) {
+      :root { --nav-h: 59px; }
+      nav { padding: 14px 18px; }
+      .nav-links { display: none; }
+      #hero { place-items: start center; padding-top: 8vh; min-height: auto; }
+      .h-stage { width: 118vw; aspect-ratio: 1.2; transform: translateY(-2%); }
+      #hero .h-scrim { height: 54%;
+        background: linear-gradient(to top, rgba(10,9,6,.97) 0%, rgba(10,9,6,.93) 46%, transparent 100%); }
+      .h-copy > * { max-width: none; }
+      .h-copy h1 { font-size: clamp(2.3rem, 10vw, 3.2rem); }
+      .h-copy .h-eyebrow { white-space: normal; }
+      .h-cta { flex-direction: column; align-items: stretch; }
+      .h-cta a { text-align: center; }
+      .facts { grid-template-columns: 1fr 1fr; }
+      .fact:nth-child(2n) { border-right: none; }
+      .fact:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
+      .split, #bestil { grid-template-columns: 1fr; }
+      .split-text, .split.flip .split-text { padding: 56px 22px; order: 1; }
+      .split-drw, .split.flip .split-drw { padding: 40px 22px; order: 2;
+                   border-left: none; border-right: none; border-top: 1px solid var(--line); }
+      #vend, #maal, #spec, #detaljer, #vilkaar { padding: 56px 22px; }
+      .trio { grid-template-columns: 1fr; }
+      .spec-grid { grid-template-columns: 1fr; }
+      /* A one-column grid pins a sticky item inside its own row, where it has
+         nowhere to travel. Plain blocks let it ride the whole way down. */
+      .cfg, .flip-wrap { display: block; }
+      .cfg-stage { top: var(--nav-h); margin-bottom: 30px;
+                   box-shadow: 0 16px 20px -18px rgba(15,14,11,.55); }
+      .cfg-stage svg { max-height: 37vh; }
+      .flip-stage { margin-bottom: 30px; }
+      .flip-stage svg { max-height: 44vh; }
+      .ord-l { padding: 56px 22px; border-right: none; border-bottom: 1px solid var(--line); }
+      .ord-r { padding: 56px 22px; }
+      footer { padding: 26px 22px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav id="navbar">
+  <a class="home" href="/">Danish Hawk</a>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="#princippet" data-da="Princippet" data-en="The principle">Princippet</a></li>
+      <li><a href="#vend" data-da="Vend sædet" data-en="Turn the seat">Vend sædet</a></li>
+      <li><a href="#maal" data-da="Mål" data-en="Sizes">Mål</a></li>
+      <li><a href="#spec" data-da="Specifikationer" data-en="Specification">Specifikationer</a></li>
+      <li><a href="#bestil" data-da="Bestil" data-en="Order">Bestil</a></li>
+    </ul>
+    <div class="lang-switch">
+      <button id="btn-da" class="lang-btn active" onclick="setLang('da')"
+              aria-label="Dansk" title="Dansk">
+        <svg viewBox="0 0 37 28" role="img" aria-hidden="true">
+          <rect width="37" height="28" fill="#c8102e"/>
+          <rect x="12" y="0" width="4" height="28" fill="#fff"/>
+          <rect x="0" y="12" width="37" height="4" fill="#fff"/>
+        </svg>
+      </button>
+      <button id="btn-en" class="lang-btn" onclick="setLang('en')"
+              aria-label="English" title="English">
+        <svg viewBox="0 0 60 36" role="img" aria-hidden="true">
+          <clipPath id="uk"><rect width="60" height="36"/></clipPath>
+          <g clip-path="url(#uk)">
+            <rect width="60" height="36" fill="#012169"/>
+            <path d="M0,0 60,36 M60,0 0,36" stroke="#fff" stroke-width="7.2"/>
+            <path d="M0,0 60,36 M60,0 0,36" stroke="#c8102e" stroke-width="2.4"/>
+            <path d="M30,0 V36 M0,18 H60" stroke="#fff" stroke-width="12"/>
+            <path d="M30,0 V36 M0,18 H60" stroke="#c8102e" stroke-width="7.2"/>
+          </g>
+        </svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- ============ HERO ============
+     The whole idea in one loop, at 1:1 in millimetres: it rains on the side
+     facing the sky, the seat is lifted clear of its cradle, rolled over, and
+     the water goes on the ground instead of on you. -->
+<section id="hero">
+  <div class="hero-mark" aria-hidden="true"></div>
+
+  <div class="h-stage">
+    <svg id="h-flip" viewBox="-230 -232 460 342" role="img"
+         aria-label="Snit gennem sædepladen: det regner på oversiden, pladen løftes 8 mm fri af lejets flade, vendes 180 grader, og vandet falder af, så den tørre side kommer op.">
+      <defs>
+        <clipPath id="h-clip" clipPathUnits="userSpaceOnUse">
+          <path d="M -139 -11 Q 0 -31 139 -11 A 11 11 0 0 1 139 11 Q 0 31 -139 11 A 11 11 0 0 1 -139 -11 Z"/>
+        </clipPath>
+        <linearGradient id="h-sheen" x1="0" y1="0" x2=".3" y2="1">
+          <stop offset="0" stop-color="#fff" stop-opacity=".22"/>
+          <stop offset=".55" stop-color="#fff" stop-opacity=".04"/>
+          <stop offset="1" stop-color="#000" stop-opacity=".16"/>
+        </linearGradient>
+      </defs>
+
+      <!-- rain, falling behind the plank so it reads as landing on it -->
+      <g id="h-rain" stroke="#9fc0cf" stroke-opacity=".0" stroke-width="2" stroke-linecap="round"></g>
+
+      <!-- The upright and its bearing stand beyond the end of the board, so
+           from here they are behind the section: a ghost, not a line drawing. -->
+      <g id="h-frame">
+        <rect x="-47" y="-18" width="94" height="122" fill="#efe9dd" fill-opacity=".05"/>
+        <path d="M -210 104 L 210 104" stroke="#efe9dd" stroke-opacity=".12" stroke-width="1.6"/>
+      </g>
+
+      <g id="h-plank">
+        <path id="h-body" d="M -139 -11 Q 0 -31 139 -11 A 11 11 0 0 1 139 11 Q 0 31 -139 11 A 11 11 0 0 1 -139 -11 Z"
+              fill="#6f5236" stroke="#0a0906" stroke-width="1.2"/>
+        <g clip-path="url(#h-clip)" id="h-rings" fill="none" stroke="#40301e" stroke-opacity=".5" stroke-width="1.5"></g>
+        <path id="h-body-sheen" d="M -139 -11 Q 0 -31 139 -11 A 11 11 0 0 1 139 11 Q 0 31 -139 11 A 11 11 0 0 1 -139 -11 Z"
+              fill="url(#h-sheen)"/>
+        <!-- the drip grooves: 6 x 3 mm, 25 mm in from the edge, both faces -->
+        <g fill="none" stroke="#2b2015" stroke-opacity=".55" stroke-width="1.3">
+          <path d="M -128 -12.9 L -125 -9.9 L -122 -12.9"/>
+          <path d="M 122 -12.9 L 125 -9.9 L 128 -12.9"/>
+          <path d="M -128 12.9 L -125 9.9 L -122 12.9"/>
+          <path d="M 122 12.9 L 125 9.9 L 128 12.9"/>
+        </g>
+        <!-- The axle: Ø40 with two flats 24 mm apart. The flats are the lock. -->
+        <path d="M -16 -12 L 16 -12 A 20 20 0 0 1 16 12 L -16 12 A 20 20 0 0 1 -16 -12 Z"
+              fill="none" stroke="#efe9dd" stroke-opacity=".34" stroke-width="1.4" stroke-dasharray="6 4"/>
+        <g id="h-wetA"></g>
+        <g id="h-wetB"></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="h-scrim"></div>
+
+  <div class="h-copy">
+    <div class="h-eyebrow" data-da="Danish Hawk — Tørvejr" data-en="Danish Hawk — Tørvejr">Danish Hawk — Tørvejr</div>
+    <h1 data-da="Den tørre side <em>ligger nedad.</em>" data-en="The dry side <em>is the one underneath.</em>">Den tørre side <em>ligger nedad.</em></h1>
+    <p data-da="En havebænk, hvor sædet kan vendes. Regn rammer kun det, der vender opad — så den side, du skal sidde på, har ligget nedad og er tør. Løft 8 mm, vend, slip. Ingen fjeder, ingen lås, ingen klud."
+       data-en="A garden bench whose seat turns over. Rain only lands on what faces the sky — so the side you sit on has been facing down, and it is dry. Lift it 8 mm, roll it over, let go. No spring, no catch, no cloth.">En havebænk, hvor sædet kan vendes. Regn rammer kun det, der vender opad — så den side, du skal sidde på, har ligget nedad og er tør. Løft 8 mm, vend, slip. Ingen fjeder, ingen lås, ingen klud.</p>
+    <div class="h-cta">
+      <a class="h-solid" href="#vend" data-da="Vend sædet selv" data-en="Turn the seat yourself">Vend sædet selv</a>
+      <a class="h-ghost" href="#maal" data-da="Se målene" data-en="See the sizes">Se målene</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FACTS ============ -->
+<div class="facts">
+  <div class="fact">
+    <div class="fact-n">2</div>
+    <div class="fact-l" data-da="Sider at sidde på" data-en="Sides to sit on">Sider at sidde på</div>
+  </div>
+  <div class="fact">
+    <div class="fact-n">8 <small>mm</small></div>
+    <div class="fact-l" data-da="Løft, og sædet er frit" data-en="Lift, and the seat is free">Løft, og sædet er frit</div>
+  </div>
+  <div class="fact">
+    <div class="fact-n">180°</div>
+    <div class="fact-l" data-da="Så er den tørre side oppe" data-en="And the dry side is up">Så er den tørre side oppe</div>
+  </div>
+  <div class="fact">
+    <div class="fact-n">0</div>
+    <div class="fact-l" data-da="Fjedre, låse og greb" data-en="Springs, catches and handles">Fjedre, låse og greb</div>
+  </div>
+</div>
+
+<!-- ============ THE PRINCIPLE ============ -->
+<section class="split" id="princippet">
+  <div class="split-text reveal">
+    <div class="slabel" data-da="Princippet" data-en="The principle">Princippet</div>
+    <h2 data-da="Regn falder <em>kun nedad.</em>" data-en="Rain only falls <em>one way.</em>">Regn falder <em>kun nedad.</em></h2>
+    <p class="lede" data-da="Derfor er der altid en side af et sæde, vandet ikke har været på. Hele bænken er tegnet omkring den ene kendsgerning: den side skal kunne komme op, og den skal kunne blive tør dernede."
+       data-en="So there is always one side of a seat the water has not reached. The whole bench is drawn around that single fact: that side has to be able to come up, and it has to be able to stay dry while it waits.">Derfor er der altid en side af et sæde, vandet ikke har været på. Hele bænken er tegnet omkring den ene kendsgerning: den side skal kunne komme op, og den skal kunne blive tør dernede.</p>
+    <ul class="pointlist">
+      <li><span class="pn">01</span>
+        <p data-da="Sædet er <b>én massiv plade</b> — ingen lameller, ingen slidser. Et mellemrum ville lede vandet ned på præcis den flade, der skal holdes tør. Det er derfor, almindelige bænkesæt ikke kan vendes: de er lavet af lister med luft imellem."
+           data-en="The seat is <b>one solid board</b> — no slats, no gaps. A gap would lead the water straight down onto the face that is supposed to stay dry. That is why an ordinary bench set cannot be turned over: it is made of battens with air between them.">Sædet er <b>én massiv plade</b> — ingen lameller, ingen slidser. Et mellemrum ville lede vandet ned på præcis den flade, der skal holdes tør. Det er derfor, almindelige bænkesæt ikke kan vendes: de er lavet af lister med luft imellem.</p></li>
+      <li><span class="pn">02</span>
+        <p data-da="<b>Begge flader er hvælvede</b> — 10 mm fra midten ud til kanten, på hver side. Pladen er det samme sæde, hvad enten den ligger den ene eller den anden vej, og den skiller vandet af begge veje."
+           data-en="<b>Both faces are crowned</b> — 10 mm from the middle out to the edge, on each side. The board is the same seat whichever way up it lies, and it sheds water either way.">Begge flader er hvælvede — 10 mm fra midten ud til kanten, på hver side. Pladen er det samme sæde, hvad enten den ligger den ene eller den anden vej, og den skiller vandet af begge veje.</p></li>
+      <li><span class="pn">03</span>
+        <p data-da="<b>Undersiden tørrer, fordi den har luft.</b> Pladen bæres af to aksler ude i enderne; hele resten er fri i begge sider. Der er intet lukket hulrum i bænken, intet sted, hvor fugt kan stå stille."
+           data-en="<b>The underside dries because it has air.</b> The board is carried on two axles out at its ends; everything between them is open on both sides. There is no closed cavity anywhere in the bench, nowhere for damp to stand still.">Undersiden tørrer, fordi den har luft. Pladen bæres af to aksler ude i enderne; hele resten er fri i begge sider. Der er intet lukket hulrum i bænken, intet sted, hvor fugt kan stå stille.</p></li>
+      <li><span class="pn">04</span>
+        <p data-da="<b>Dug lægger sig også kun opad.</b> Den opstår, fordi en flade stråler varme væk mod himlen — og det gør en flade, der vender nedad, ikke. Bænken er derfor også tør en klar morgen — ikke kun efter regn."
+           data-en="<b>Dew only settles upwards too.</b> It forms because a surface radiates its heat away to the sky, and a surface facing the ground does not. So the bench is dry on a clear morning as well — not only after rain.">Dug lægger sig også kun opad. Den opstår, fordi en flade stråler varme væk mod himlen — og det gør en flade, der vender nedad, ikke. Bænken er derfor også tør en klar morgen — ikke kun efter regn.</p></li>
+    </ul>
+  </div>
+  <div class="split-drw drw reveal">
+    <svg viewBox="-215 -105 430 210" role="img"
+         aria-label="Snittegning af sædepladen med mål: 300 mm bred, 42 mm i midten, 22 mm ved kanten, hvælvet 10 mm pr. side, halvrund kant R11 og drypriller 6 x 3 mm.">
+      <!-- the section, at scale, with its measurements on it -->
+      <g fill="none" stroke="#0f0e0b" stroke-width="1.1">
+        <path d="M -139 -11 Q 0 -31 139 -11 A 11 11 0 0 1 139 11 Q 0 31 -139 11 A 11 11 0 0 1 -139 -11 Z"
+              fill="#e3dbcb"/>
+      </g>
+      <g fill="none" stroke="#0f0e0b" stroke-opacity=".55" stroke-width="1">
+        <path d="M -128 -12.9 L -125 -9.9 L -122 -12.9"/>
+        <path d="M 122 -12.9 L 125 -9.9 L 128 -12.9"/>
+        <path d="M -128 12.9 L -125 9.9 L -122 12.9"/>
+        <path d="M 122 12.9 L 125 9.9 L 128 12.9"/>
+      </g>
+      <!-- centre line -->
+      <path d="M 0 -54 L 0 54" stroke="#0f0e0b" stroke-opacity=".4" stroke-width=".8" stroke-dasharray="10 4 2 4"/>
+      <!-- the crown, called out as a rise over the half width -->
+      <g stroke="#c8a96e" stroke-width="1">
+        <path d="M -150 -21 L 150 -21" stroke-dasharray="4 4" stroke-opacity=".8"/>
+        <path d="M -150 -11 L -150 -21 M 150 -11 L 150 -21" stroke-opacity=".8"/>
+      </g>
+      <text class="dim" x="146" y="-26" text-anchor="end" fill="#a8853f"
+            data-da="hvælv 10 mm pr. side" data-en="crown 10 mm per face">hvælv 10 mm pr. side</text>
+      <!-- overall width -->
+      <g stroke="#0f0e0b" stroke-opacity=".6" stroke-width=".9">
+        <path d="M -150 62 L 150 62"/>
+        <path d="M -150 55 L -150 69 M 150 55 L 150 69"/>
+      </g>
+      <text class="dim" x="0" y="84" text-anchor="middle" fill="#0f0e0b" fill-opacity=".7">300</text>
+      <!-- thickness at the centre and at the edge -->
+      <g stroke="#0f0e0b" stroke-opacity=".6" stroke-width=".9">
+        <path d="M -196 -21 L -196 21"/>
+        <path d="M -203 -21 L -189 -21 M -203 21 L -189 21"/>
+        <path d="M -150 -11 L -196 -11 M -150 11 L -196 11" stroke-opacity=".3" stroke-dasharray="4 4"/>
+      </g>
+      <text class="dim" x="-186" y="-30" text-anchor="middle" fill="#0f0e0b" fill-opacity=".7">42</text>
+      <text class="dim" x="172" y="4" text-anchor="middle" fill="#0f0e0b" fill-opacity=".7">R11</text>
+      <path d="M 150 0 L 166 -6" stroke="#0f0e0b" stroke-opacity=".5" stroke-width=".8"/>
+      <text class="dim" x="-146" y="48" fill="#0f0e0b" fill-opacity=".7"
+            data-da="dryprille 6 × 3" data-en="drip groove 6 × 3">dryprille 6 × 3</text>
+      <path d="M -125 15 L -134 42" stroke="#0f0e0b" stroke-opacity=".5" stroke-width=".8"/>
+    </svg>
+    <div class="drw-cap"
+         data-da="Snit gennem sædepladen — 1:5. Massiv eg, 300 × 42 mm, hvælvet 10 mm pr. flade, halvrund kant i R11."
+         data-en="Section through the seat board — 1:5. Solid oak, 300 × 42 mm, crowned 10 mm per face, half-round R11 edge.">Snit gennem sædepladen — 1:5. Massiv eg, 300 × 42 mm, hvælvet 10 mm pr. flade, halvrund kant i R11.</div>
+  </div>
+</section>
+
+<!-- ============ THE FLIP, IN YOUR HANDS ============ -->
+<section id="vend">
+  <div class="flip-head reveal">
+    <div class="slabel" data-da="Vend sædet" data-en="Turn the seat">Vend sædet</div>
+    <h2 data-da="Lad det regne. <em>Vend så sædet.</em>" data-en="Let it rain. <em>Then turn the seat.</em>">Lad det regne. <em>Vend så sædet.</em></h2>
+    <p class="lede" data-da="Tegningen er et snit gennem sædepladen, i millimeter og i skala. Akslen og lejet ligger bag snittet, ude for enden af pladen, og er derfor streget op med punkteret linje. Træk i pladen, eller brug knapperne."
+       data-en="The drawing is a section through the seat board, in millimetres and to scale. The axle and its bearing sit behind the section, out beyond the end of the board, so they are drawn in dashed line. Drag the board, or use the buttons.">Tegningen er et snit gennem sædepladen, i millimeter og i skala. Akslen og lejet ligger bag snittet, ude for enden af pladen, og er derfor streget op med punkteret linje. Træk i pladen, eller brug knapperne.</p>
+  </div>
+
+  <div class="flip-wrap">
+    <div class="flip-stage reveal" id="f-stage">
+      <svg id="f-flip" viewBox="-200 -150 400 300" role="img"
+           aria-label="Interaktivt snit: regn lander på den opadvendte flade, pladen løftes 8 mm, så akslens flader slipper lejet, drejer 180 grader, og vandet falder af.">
+        <defs>
+          <clipPath id="f-clip" clipPathUnits="userSpaceOnUse">
+            <path d="M -139 -11 Q 0 -31 139 -11 A 11 11 0 0 1 139 11 Q 0 31 -139 11 A 11 11 0 0 1 -139 -11 Z"/>
+          </clipPath>
+          <linearGradient id="f-sheen" x1="0" y1="0" x2=".3" y2="1">
+            <stop offset="0" stop-color="#fff" stop-opacity=".3"/>
+            <stop offset=".55" stop-color="#fff" stop-opacity=".05"/>
+            <stop offset="1" stop-color="#000" stop-opacity=".12"/>
+          </linearGradient>
+        </defs>
+
+        <g id="f-rain" stroke="#5d7b8a" stroke-opacity="0" stroke-width="2.2" stroke-linecap="round"></g>
+
+        <!-- ground, so it is clear where the water ends up -->
+        <path d="M -195 140 L 195 140" stroke="#0f0e0b" stroke-opacity=".25" stroke-width="1.2"/>
+        <g id="f-splash" stroke="#5d7b8a" stroke-opacity="0" stroke-width="1.6" stroke-linecap="round"></g>
+
+        <!-- The upright and the bearing stand beyond the end of the board, so
+             from this section they are behind it: a ghost with the bore in it. -->
+        <g>
+          <rect x="-47" y="-52" width="94" height="192" fill="#0f0e0b" fill-opacity=".04"/>
+          <rect x="-50" y="-52" width="100" height="24" fill="#0f0e0b" fill-opacity=".07"/>
+          <g fill="none" stroke="#0f0e0b" stroke-opacity=".26" stroke-width="1.2" stroke-dasharray="7 5">
+            <rect x="-47" y="-52" width="94" height="192"/>
+          </g>
+        </g>
+
+        <!-- how far it has to come up, marked where it happens -->
+        <g id="f-liftdim" stroke="#c8a96e" stroke-width="1" opacity="0">
+          <path d="M -176 4.4 L -176 12.4"/>
+          <path d="M -184 4.4 L -168 4.4 M -184 12.4 L -168 12.4"/>
+          <path d="M -176 12.4 L -20 12.4" stroke-opacity=".3" stroke-dasharray="4 4"/>
+        </g>
+        <text class="dim" id="f-lifttxt" x="-176" y="34" text-anchor="middle"
+              fill="#a8853f" opacity="0">8</text>
+
+        <g id="f-plank" style="cursor:grab">
+          <path d="M -139 -11 Q 0 -31 139 -11 A 11 11 0 0 1 139 11 Q 0 31 -139 11 A 11 11 0 0 1 -139 -11 Z"
+                fill="#c6a877" stroke="#0f0e0b" stroke-width="1.1"/>
+          <g clip-path="url(#f-clip)" id="f-rings" fill="none" stroke="#8a6c42" stroke-opacity=".55" stroke-width="1.4"></g>
+          <path d="M -139 -11 Q 0 -31 139 -11 A 11 11 0 0 1 139 11 Q 0 31 -139 11 A 11 11 0 0 1 -139 -11 Z"
+                fill="url(#f-sheen)"/>
+          <g fill="none" stroke="#0f0e0b" stroke-opacity=".55" stroke-width="1.1">
+            <path d="M -128 -12.9 L -125 -9.9 L -122 -12.9"/>
+            <path d="M 122 -12.9 L 125 -9.9 L 128 -12.9"/>
+            <path d="M -128 12.9 L -125 9.9 L -122 12.9"/>
+            <path d="M 122 12.9 L 125 9.9 L 128 12.9"/>
+          </g>
+          <path d="M -16 -12 L 16 -12 A 20 20 0 0 1 16 12 L -16 12 A 20 20 0 0 1 -16 -12 Z"
+                fill="none" stroke="#0f0e0b" stroke-opacity=".45" stroke-width="1.2" stroke-dasharray="6 4"/>
+          <g id="f-wetA"></g>
+          <g id="f-wetB"></g>
+          <text class="dim" id="f-labA" x="-104" y="-24" text-anchor="middle" fill="#0f0e0b" fill-opacity=".55">A</text>
+          <text class="dim" id="f-labB" x="-104" y="30" text-anchor="middle" fill="#0f0e0b" fill-opacity=".55">B</text>
+        </g>
+
+        <!-- The bore and its flat lie behind the cut, so they are hidden lines:
+             dashed, and drawn over the board rather than under it. -->
+        <circle cx="0" cy="0" r="20.4" fill="none" stroke="#0f0e0b" stroke-opacity=".45"
+                stroke-width="1.1" stroke-dasharray="6 4"/>
+        <path d="M -16 12.4 L 16 12.4" stroke="#0f0e0b" stroke-opacity=".7" stroke-width="2"/>
+        <path d="M 21 -8 L 92 -62" stroke="#0f0e0b" stroke-opacity=".4" stroke-width=".9"/>
+        <text class="dim" x="96" y="-64" fill="#0f0e0b" fill-opacity=".55"
+              data-da="leje Ø40" data-en="Ø40 bearing">leje Ø40</text>
+      </svg>
+      <div class="flip-hint" id="f-hint" data-da="Træk i pladen for at vende den" data-en="Drag the board to turn it">Træk i pladen for at vende den</div>
+    </div>
+
+    <div class="reveal">
+      <div class="btnrow">
+        <button class="btn-ghost" type="button" id="f-rainbtn" data-da="Lad det regne" data-en="Let it rain">Lad det regne</button>
+        <button class="btn-primary" type="button" id="f-flipbtn" data-da="Vend sædet" data-en="Turn the seat">Vend sædet</button>
+      </div>
+
+      <dl class="state">
+        <div class="srow">
+          <dt data-da="Opad" data-en="Facing up">Opad</dt>
+          <dd id="f-up"></dd>
+        </div>
+        <div class="srow">
+          <dt data-da="Nedad" data-en="Facing down">Nedad</dt>
+          <dd id="f-down"></dd>
+        </div>
+      </dl>
+
+      <ol class="steps">
+        <li><b data-da="1 — Løft" data-en="1 — Lift">1 — Løft</b>
+          <span data-da="8 mm. Akslen er rund, men har to flader, og de sidder på lejets flade. Otte millimeter, og de er fri af hinanden. Det er hele oplåsningen."
+                data-en="8 mm. The axle is round but has two flats, and they sit on a flat in the bearing. Eight millimetres, and they are clear of each other. That is the whole unlocking.">8 mm. Akslen er rund, men har to flader, og de sidder på lejets flade. Otte millimeter, og de er fri af hinanden. Det er hele oplåsningen.</span></li>
+        <li><b data-da="2 — Vend" data-en="2 — Roll">2 — Vend</b>
+          <span data-da="180° om pladens egen midterakse. Akslen bliver liggende i lejet hele vejen rundt, så du skal kun dreje pladen — ikke bære den."
+                data-en="180° about the board's own centre axis. The axle stays in its bearing the whole way round, so you only have to turn the board — not carry it.">180° om pladens egen midterakse. Akslen bliver liggende i lejet hele vejen rundt, så du skal kun dreje pladen — ikke bære den.</span></li>
+        <li><b data-da="3 — Slip" data-en="3 — Let go">3 — Slip</b>
+          <span data-da="Pladen falder de 8 mm, fladerne finder lejet, og sædet står fast. Tyngdekraften er låsen. Der er ingen anden."
+                data-en="The board drops the 8 mm, the flats find the bearing, and the seat is fixed. Gravity is the lock. There is no other.">Pladen falder de 8 mm, fladerne finder lejet, og sædet står fast. Tyngdekraften er låsen. Der er ingen anden.</span></li>
+      </ol>
+
+      <p class="cfg-note" data-da="Den våde flade bliver ikke tør i det sekund, den vender nedad — den har luft på begge kanter og hele sin længde, og den er tør igen længe før næste byge. Det er derfor, bænken ikke har ét lukket hjørne."
+         data-en="The wet face is not dry the second it turns over — it has air along both edges and its whole length, and it is dry again long before the next shower. That is why the bench has not one closed corner.">Den våde flade bliver ikke tør i det sekund, den vender nedad — den har luft på begge kanter og hele sin længde, og den er tør igen længe før næste byge. Det er derfor, bænken ikke har ét lukket hjørne.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ THE BEARING ============ -->
+<section class="split flip" id="lejet">
+  <div class="split-text reveal">
+    <div class="slabel" data-da="Lejet" data-en="The bearing">Lejet</div>
+    <h2 data-da="Låsen er <em>en flade.</em>" data-en="The lock is <em>a flat.</em>">Låsen er <em>en flade.</em></h2>
+    <p class="lede" data-da="Et sæde, der kan vendes, skal stå fuldstændig fast, når det ikke bliver vendt. Man kan løse det med en fjeder, en pal eller en møtrik. Her er det løst med, at akslen ikke er helt rund."
+       data-en="A seat that can be turned has to be completely fixed when it is not being turned. You can solve that with a spring, a pawl or a nut. Here it is solved by the axle not being quite round.">Et sæde, der kan vendes, skal stå fuldstændig fast, når det ikke bliver vendt. Man kan løse det med en fjeder, en pal eller en møtrik. Her er det løst med, at akslen ikke er helt rund.</p>
+    <ul class="pointlist">
+      <li><span class="pn">01</span>
+        <p data-da="Akslen er <b>Ø40 mm med to flader med 24 mm imellem</b>. Den ligger i et leje, der har den samme flade i bunden. Flade mod flade kan ikke dreje — og pladen kan ikke vippe, uanset hvor på den du sætter dig."
+           data-en="The axle is <b>Ø40 mm with two flats, 24 mm across</b>. It sits in a bearing with the same flat in its floor. Flat against flat cannot turn — and the board cannot tip, wherever on it you sit.">Akslen er Ø40 mm med to flader med 24 mm imellem. Den ligger i et leje, der har den samme flade i bunden. Flade mod flade kan ikke dreje — og pladen kan ikke vippe, uanset hvor på den du sætter dig.</p></li>
+      <li><span class="pn">02</span>
+        <p data-da="<b>Otte millimeter op, og fladerne er fri af hinanden.</b> Så er akslen rund igen, og pladen drejer. Den bliver liggende i lejet hele vejen rundt — du løfter den ikke ud, du ruller den om."
+           data-en="<b>Eight millimetres up, and the flats are clear of each other.</b> Then the axle is round again and the board turns. It stays in its bearing all the way round — you are not lifting it out, you are rolling it over.">Otte millimeter op, og fladerne er fri af hinanden. Så er akslen rund igen, og pladen drejer. Den bliver liggende i lejet hele vejen rundt — du løfter den ikke ud, du ruller den om.</p></li>
+      <li><span class="pn">03</span>
+        <p data-da="Over akslen sidder et <b>boltet dæksel</b> med 12 mm luft. Otte millimeter skal der til for at vende sædet — tyve for at løfte akslen fri af lejet og pladen af bænken. De to tal ligger langt nok fra hinanden til, at bænken ikke kan blæse fra hinanden, og at sædet ikke kan bæres væk. Fire bolte, og pladen kan alligevel tages helt ud."
+           data-en="Above the axle sits a <b>bolted cap</b> with 12 mm of clearance. Eight millimetres are needed to turn the seat — twenty to lift the axle clear of its bearing and the board off the bench. The two figures sit far enough apart that the bench cannot blow apart and the seat cannot be carried off. Four bolts, and the board still comes right out.">Over akslen sidder et boltet dæksel med 12 mm luft. Otte millimeter skal der til for at vende sædet — tyve for at løfte akslen fri af lejet og pladen af bænken. De to tal ligger langt nok fra hinanden til, at bænken ikke kan blæse fra hinanden, og at sædet ikke kan bæres væk. Fire bolte, og pladen kan alligevel tages helt ud.</p></li>
+      <li><span class="pn">04</span>
+        <p data-da="<b>Lejet har afløb.</b> En bøsning i POM, et hus i 6 mm rustfrit A4 og et Ø5 hul i bunden. Det er ikke en lomme, der samler vand, og der er slør nok til, at en frostnat ikke låser sædet fast."
+           data-en="<b>The bearing drains.</b> A POM bush, a housing in 6 mm A4 stainless, and a Ø5 hole in the bottom. It is not a pocket that collects water, and there is enough clearance that a night of frost does not lock the seat.">Lejet har afløb. En bøsning i POM, et hus i 6 mm rustfrit A4 og et Ø5 hul i bunden. Det er ikke en lomme, der samler vand, og der er slør nok til, at en frostnat ikke låser sædet fast.</p></li>
+    </ul>
+  </div>
+
+  <div class="split-drw drw reveal">
+    <svg viewBox="-124 -62 248 182" role="img"
+         aria-label="Detaljetegning af lejet, set fra bænkens ende: aksel Ø40 med to flader hviler på fladen i bøsningen, bøsning i POM, hus i rustfrit stål, boltet dæksel med 12 mm luft over akslen, og afløbshul i bunden.">
+      <!-- 3 — the timber upright, standing just beyond the end of the board -->
+      <rect x="-47" y="-32" width="94" height="131.6" fill="#0f0e0b" fill-opacity=".05"
+            stroke="#0f0e0b" stroke-opacity=".3" stroke-width="1"/>
+      <!-- 3 — the housing, let into its top -->
+      <rect x="-50" y="-32" width="100" height="89.6" fill="#b9b3a7" fill-opacity=".55"
+            stroke="#0f0e0b" stroke-opacity=".55" stroke-width="1"/>
+      <!-- 2 — the bush: 4 mm of POM, and the flat in its floor is the lock -->
+      <path d="M -24.4 -32 L -24.4 0 A 24.4 24.4 0 0 0 24.4 0 L 24.4 -32 Z"
+            fill="#e0d8c8" stroke="#0f0e0b" stroke-opacity=".5" stroke-width="1"/>
+      <path d="M -20.4 -32 L -20.4 0 A 20.4 20.4 0 0 0 20.4 0 L 20.4 -32 Z"
+            fill="#eeebe5" stroke="#0f0e0b" stroke-opacity=".45" stroke-width=".9"/>
+      <path d="M -16.2 12 L 16.2 12 L 16.2 19 L -16.2 19 Z" fill="#e0d8c8"
+            stroke="none"/>
+      <path d="M -16.2 12 L 16.2 12" stroke="#0f0e0b" stroke-opacity=".7" stroke-width="1.6"/>
+
+      <!-- 1 — the axle, seated: its flat lying on the bearing's flat -->
+      <path d="M -16 -12 L 16 -12 A 20 20 0 0 1 16 12 L -16 12 A 20 20 0 0 1 -16 -12 Z"
+            fill="#c8a96e" fill-opacity=".4" stroke="#0f0e0b" stroke-width="1.2"/>
+      <!-- the same axle, lifted the 8 mm and part way round -->
+      <g transform="translate(0,-8) rotate(58)">
+        <path d="M -16 -12 L 16 -12 A 20 20 0 0 1 16 12 L -16 12 A 20 20 0 0 1 -16 -12 Z"
+              fill="none" stroke="#c8a96e" stroke-width="1.2" stroke-dasharray="5 4"/>
+      </g>
+
+      <!-- 4 — the cap, and the clearance it leaves -->
+      <rect x="-50" y="-44" width="100" height="12" fill="#b9b3a7" fill-opacity=".55"
+            stroke="#0f0e0b" stroke-opacity=".55" stroke-width="1"/>
+      <g fill="none" stroke="#0f0e0b" stroke-opacity=".45" stroke-width="1">
+        <circle cx="-34" cy="-38" r="3.6"/><circle cx="34" cy="-38" r="3.6"/>
+      </g>
+      <g stroke="#c8a96e" stroke-width="1" fill="none">
+        <path d="M 0 -20 L 62 -20" stroke-opacity=".45" stroke-dasharray="4 4"/>
+        <path d="M 0 -32 L 62 -32" stroke-opacity=".45" stroke-dasharray="4 4"/>
+        <path d="M 56 -20 L 56 -32"/>
+        <path d="M 52 -20 L 60 -20 M 52 -32 L 60 -32"/>
+      </g>
+      <text class="dim" x="64" y="-23" fill="#a8853f">12</text>
+
+      <!-- 5 — the drain, bored out through the front of the housing: from here
+           it is a hidden hole, so it is drawn dashed -->
+      <circle cx="0" cy="15.5" r="2.5" fill="none" stroke="#0f0e0b" stroke-opacity=".55"
+              stroke-width=".9" stroke-dasharray="3 2.4"/>
+
+      <!-- the seat board it all sits inside, broken off left and right -->
+      <g fill="none" stroke="#0f0e0b" stroke-opacity=".26" stroke-width="1" stroke-dasharray="8 5">
+        <path d="M -105 -15.3 Q 0 -31 105 -15.3"/>
+        <path d="M -105 15.3 Q 0 31 105 15.3"/>
+      </g>
+      <g fill="none" stroke="#0f0e0b" stroke-opacity=".26" stroke-width="1">
+        <path d="M 105 -15.3 L 109 -8 L 101 -2 L 109 4 L 105 15.3"/>
+        <path d="M -105 -15.3 L -109 -8 L -101 -2 L -109 4 L -105 15.3"/>
+      </g>
+
+      <!-- the parts, numbered rather than named: at this scale a word is
+           bigger than the part it points at -->
+      <g class="dim" style="font-size:9px" text-anchor="middle" fill="#0f0e0b" fill-opacity=".75">
+        <g fill="none" stroke="#0f0e0b" stroke-opacity=".4" stroke-width=".8">
+          <path d="M 64 -4 L 20 -2"/>
+          <path d="M -64 34 L -22 13"/>
+          <path d="M -64 -34 L -50 -26"/>
+          <path d="M 64 -50 L 50 -41"/>
+          <path d="M 22 44 L 5 18"/>
+        </g>
+        <g fill="#eeebe5" stroke="#0f0e0b" stroke-opacity=".5" stroke-width=".8">
+          <circle cx="72" cy="-4" r="8"/><circle cx="-72" cy="34" r="8"/>
+          <circle cx="-72" cy="-34" r="8"/><circle cx="72" cy="-50" r="8"/>
+          <circle cx="30" cy="44" r="8"/>
+        </g>
+        <text x="72" y="-1" fill="#0f0e0b" fill-opacity=".75">1</text>
+        <text x="-72" y="37" fill="#0f0e0b" fill-opacity=".75">2</text>
+        <text x="-72" y="-31" fill="#0f0e0b" fill-opacity=".75">3</text>
+        <text x="72" y="-47" fill="#0f0e0b" fill-opacity=".75">4</text>
+        <text x="30" y="47" fill="#0f0e0b" fill-opacity=".75">5</text>
+      </g>
+    </svg>
+    <div class="drw-cap"
+         data-da="Lejet, set fra bænkens ende — 1:2. Fuld streg: sædet står fast. Punkteret: løftet 8 mm og på vej rundt.<br/>1 aksel Ø40 med to flader med 24 mm imellem · 2 bøsning i POM, 4 mm · 3 hus i 6 mm A4 i opstanderen · 4 dæksel med 12 mm luft, 2 × M8 · 5 afløb Ø5, boret ud gennem forsiden"
+         data-en="The bearing, seen from the end of the bench — 1:2. Solid: the seat is fixed. Dashed: lifted 8 mm and on its way round.<br/>1 axle Ø40 with two flats, 24 mm · 2 bush in POM, 4 mm · 3 housing in 6 mm A4 in the upright · 4 cap with 12 mm clearance, 2 × M8 · 5 drain Ø5, bored out through the front">Lejet, set fra bænkens ende — 1:2. Fuld streg: sædet står fast. Punkteret: løftet 8 mm og på vej rundt.<br/>1 aksel Ø40 med to flader med 24 mm imellem · 2 bøsning i POM, 4 mm · 3 hus i 6 mm A4 i opstanderen · 4 dæksel med 12 mm luft, 2 × M8 · 5 afløb Ø5, boret ud gennem forsiden</div>
+  </div>
+</section>
+
+<!-- ============ DETAILS ============ -->
+<section id="detaljer">
+  <div class="cfg-head reveal">
+    <div class="slabel" data-da="Detaljerne" data-en="The details">Detaljerne</div>
+    <h2 data-da="Det, der plejer <em>at rådne først.</em>" data-en="The parts that usually <em>rot first.</em>">Det, der plejer <em>at rådne først.</em></h2>
+    <p class="lede" data-da="Et bænkesæt går sjældent i stykker på midten. Det går i endetræet, i bunden af benene og under beslagene — der hvor vandet kan stå stille. Tre steder, tre svar."
+       data-en="A bench set rarely fails in the middle. It fails in the end grain, at the bottom of the legs and under the fittings — wherever water can stand still. Three places, three answers.">Et bænkesæt går sjældent i stykker på midten. Det går i endetræet, i bunden af benene og under beslagene — der hvor vandet kan stå stille. Tre steder, tre svar.</p>
+  </div>
+  <div class="trio reveal">
+    <div>
+      <div class="trio-key" data-da="Enderne" data-en="The ends">Enderne</div>
+      <h3 data-da="En sko, ikke en hætte." data-en="A shoe, not a cap.">En sko, ikke en hætte.</h3>
+      <p data-da="Akslen er svejset på en plade i 5 mm A4, som sidder for enden af sædet og holdes 3 mm ude fra endetræet på rustfri afstandsbøsninger. Endetræet er dermed i skygge, men har luft — det er forskellen på en sko og en hætte. En hætte, der slutter tæt, er netop det, der får en ende til at rådne. Skruerne går i sædets kanter, i langtræ, gennem slidsede huller, så pladen kan arbejde de 4–5 mm, den bevæger sig hen over året."
+         data-en="The axle is welded to a 5 mm A4 plate that sits at the end of the seat, held 3 mm off the end grain on stainless spacers. The end grain is shaded but has air — that is the difference between a shoe and a cap. A cap that seals is exactly what makes an end rot. The screws go into the edges of the seat, into side grain, through slotted holes, so the board can move the 4–5 mm it moves over the year.">Akslen er svejset på en plade i 5 mm A4, som sidder for enden af sædet og holdes 3 mm ude fra endetræet på rustfri afstandsbøsninger. Endetræet er dermed i skygge, men har luft — det er forskellen på en sko og en hætte. En hætte, der slutter tæt, er netop det, der får en ende til at rådne. Skruerne går i sædets kanter, i langtræ, gennem slidsede huller, så pladen kan arbejde de 4–5 mm, den bevæger sig hen over året.</p>
+    </div>
+    <div>
+      <div class="trio-key" data-da="Fødderne" data-en="The feet">Fødderne</div>
+      <h3 data-da="Træet står ikke på fliserne." data-en="The timber does not stand on the paving.">Træet står ikke på fliserne.</h3>
+      <p data-da="Hvert ben ender i en fodplade i 5 mm A4, så benets endetræ står 5 mm over flisen og ikke i vandet, der ligger på den. Det er det samme sted, et almindeligt bænkesæt begynder at gå: nedefra, hvor man ikke ser det, fordi endetræet suger som et sugerør. Og den gør, at bænken kan trækkes hen over fliserne uden at flosse i kanten."
+         data-en="Every leg ends in a 5 mm A4 foot plate, so the leg's end grain stands 5 mm above the slab and not in the water lying on it. That is where an ordinary bench set starts to go: from below, out of sight, because end grain draws water like a straw. The plate is also what lets the bench be dragged without fraying at the corner.">Hvert ben ender i en fodplade i 5 mm A4, så benets endetræ står 5 mm over flisen og ikke i vandet, der ligger på den. Det er det samme sted, et almindeligt bænkesæt begynder at gå: nedefra, hvor man ikke ser det, fordi endetræet suger som et sugerør. Og den gør, at bænken kan trækkes hen over fliserne uden at flosse i kanten.</p>
+    </div>
+    <div>
+      <div class="trio-key" data-da="Vedligehold" data-en="Upkeep">Vedligehold</div>
+      <h3 data-da="Begge sider er oversiden." data-en="Both sides are the top.">Begge sider er oversiden.</h3>
+      <p data-da="Sædet har to flader, der bliver siddet på lige meget, så de bliver også slebet og behandlet ens. Derfor olie og ikke maling: olie kan gives igen på begge sider, og en olieret flade, der gråner, gråner ens. Skal pladen have en tur, løsner du fire bolte og tager den med ind på et bord — det er nemmere at olie en plade, der ligger løst, end en bænk, man ligger under."
+         data-en="The seat has two faces that get sat on equally, so they are sanded and finished equally. Hence oil and not paint: oil can be given again on both sides, and an oiled face that greys, greys evenly. When the board needs a round, you undo four bolts and take it indoors onto a table — it is easier to oil a loose board than a bench you have to lie under.">Sædet har to flader, der bliver siddet på lige meget, så de bliver også slebet og behandlet ens. Derfor olie og ikke maling: olie kan gives igen på begge sider, og en olieret flade, der gråner, gråner ens. Skal pladen have en tur, løsner du fire bolte og tager den med ind på et bord — det er nemmere at olie en plade, der ligger løst, end en bænk, man ligger under.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SIZES ============ -->
+<section id="maal">
+  <div class="cfg-head reveal">
+    <div class="slabel" data-da="Målene" data-en="The sizes">Målene</div>
+    <h2 data-da="Se bænken <em>i dit mål.</em>" data-en="See the bench <em>in your size.</em>">Se bænken <em>i dit mål.</em></h2>
+    <p class="lede" data-da="Længden er dit valg, men den har en grænse, og grænsen er ikke styrken — den er nedbøjningen. En plade, du kan vende med to hænder, kan ikke også være to meter lang og stiv. Træk i skyderen og se, hvornår sædet deler sig."
+       data-en="The length is yours to choose, but it has a limit, and the limit is not strength — it is deflection. A board you can turn with two hands cannot also be two metres long and stiff. Pull the slider and see where the seat splits in two.">Længden er dit valg, men den har en grænse, og grænsen er ikke styrken — den er nedbøjningen. En plade, du kan vende med to hænder, kan ikke også være to meter lang og stiv. Træk i skyderen og se, hvornår sædet deler sig.</p>
+  </div>
+
+  <div class="cfg">
+    <div class="cfg-stage reveal">
+      <svg id="c-plan" viewBox="-1110 -560 2220 1280" role="img"
+           aria-label="Tegning af bænken set fra siden og ovenfra, i skala, med mål der følger den valgte længde.">
+        <defs>
+          <pattern id="c-oak" patternUnits="userSpaceOnUse" x="-1200" y="120" width="2400" height="640">
+            <image id="c-oakImg" x="0" y="0" width="2400" height="640" preserveAspectRatio="none"/>
+          </pattern>
+        </defs>
+        <g id="c-body"></g>
+      </svg>
+    </div>
+
+    <div class="reveal">
+      <div class="ctrl">
+        <div class="ctrl-label">
+          <span data-da="Sædets længde" data-en="Length of the seat">Sædets længde</span>
+          <span class="ctrl-val" id="valLen">1600 mm</span>
+        </div>
+        <input type="range" id="len" min="1400" max="2200" step="50" value="1600"
+               aria-label="Sædets længde i millimeter"/>
+        <div class="range-ends">
+          <span data-da="1400 mm" data-en="1400 mm">1400 mm</span>
+          <span data-da="2200 mm" data-en="2200 mm">2200 mm</span>
+        </div>
+        <p class="ctrl-why" id="lenWhy"></p>
+      </div>
+
+      <div class="ctrl">
+        <div class="ctrl-label">
+          <span data-da="Træsort" data-en="Timber">Træsort</span>
+          <span class="ctrl-val" id="valWood"></span>
+        </div>
+        <div class="choices">
+          <button class="choice" type="button" id="w-eg" aria-pressed="true" data-wood="eg">Eg<small data-da="Klasse 2" data-en="Class 2">Klasse 2</small></button>
+          <button class="choice" type="button" id="w-robinie" aria-pressed="false" data-wood="robinie">Robinie<small data-da="Klasse 1–2" data-en="Class 1–2">Klasse 1–2</small></button>
+          <button class="choice" type="button" id="w-laerk" aria-pressed="false" data-wood="laerk">Lærk<small data-da="Klasse 3" data-en="Class 3">Klasse 3</small></button>
+        </div>
+        <p class="ctrl-why" id="woodWhy"></p>
+      </div>
+
+      <div class="ctrl">
+        <div class="ctrl-label">
+          <span data-da="Overflade" data-en="Finish">Overflade</span>
+          <span class="ctrl-val" id="valFin"></span>
+        </div>
+        <div class="swatches" id="swatches"></div>
+      </div>
+
+      <dl class="readout">
+        <div class="rrow"><dt data-da="Sædeplader" data-en="Seat boards">Sædeplader</dt><dd id="rPlanks"></dd></div>
+        <div class="rrow"><dt data-da="Vægt pr. plade" data-en="Weight per board">Vægt pr. plade</dt><dd id="rWeight"></dd></div>
+        <div class="rrow"><dt data-da="Nedbøjning ved 100 kg" data-en="Deflection under 100 kg">Nedbøjning ved 100 kg</dt><dd id="rSag"></dd></div>
+        <div class="rrow"><dt data-da="Siddepladser" data-en="Places to sit">Siddepladser</dt><dd id="rSeats"></dd></div>
+        <div class="rrow"><dt data-da="Bænken i alt" data-en="Bench overall">Bænken i alt</dt><dd id="rOverall"></dd></div>
+        <div class="rrow"><dt data-da="Vægt i alt" data-en="Total weight">Vægt i alt</dt><dd id="rTotal"></dd></div>
+      </dl>
+
+      <p class="cfg-note" data-da="Nedbøjningen er regnet med 100 kg midt på én plade, med pladens egentlige tværsnit — den er hvælvet, så den er stivere end 22 mm og slappere end 42 mm. Tallet er en beregning, ikke en måling: den første bænk er ikke skåret endnu."
+         data-en="The deflection is calculated with 100 kg at the middle of one board, using the board's real section — it is crowned, so it is stiffer than 22 mm and softer than 42 mm. The figure is a calculation, not a measurement: the first bench has not been cut yet.">Nedbøjningen er regnet med 100 kg midt på én plade, med pladens egentlige tværsnit — den er hvælvet, så den er stivere end 22 mm og slappere end 42 mm. Tallet er en beregning, ikke en måling: den første bænk er ikke skåret endnu.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ THE SET ============ -->
+<section class="split" id="saettet">
+  <div class="split-text reveal">
+    <div class="slabel" data-da="Sættet" data-en="The set">Sættet</div>
+    <h2 data-da="Bordet <em>kan det samme.</em>" data-en="The table <em>can do the same.</em>">Bordet <em>kan det samme.</em></h2>
+    <p class="lede" data-da="På et bænkesæt er bordpladen lige så våd som sæderne, og det er den, du sætter kaffen på. Den er bygget af de samme plader — tre af dem, 916 mm i alt — og hver af dem vender i sit eget leje."
+       data-en="On a bench set the tabletop is just as wet as the seats, and the tabletop is what you put the coffee on. It is built from the same boards — three of them, 916 mm overall — and each one turns in its own bearing.">På et bænkesæt er bordpladen lige så våd som sæderne, og det er den, du sætter kaffen på. Den er bygget af de samme plader — tre af dem, 916 mm i alt — og hver af dem vender i sit eget leje.</p>
+    <p data-da="I bordpladen må der godt være luft mellem pladerne, og der er 8 mm. En bordplade skal af med vandet nedad, ikke holde en flade tør nedenunder, så mellemrummet er en fordel: bordpladen løber tom med det samme, og krummer og grus følger med."
+       data-en="In a tabletop there may be air between the boards, and there is 8 mm. A tabletop has to get rid of water downwards, not keep a face dry underneath, so the gap is an advantage: the top empties at once, and crumbs and grit go with it.">I bordpladen må der godt være luft mellem pladerne, og der er 8 mm. En bordplade skal af med vandet nedad, ikke holde en flade tør nedenunder, så mellemrummet er en fordel: bordpladen løber tom med det samme, og krummer og grus følger med.</p>
+    <p data-da="Sæderne sidder 142 mm uden for bordkanten. Det vand, der løber gennem bordpladen, falder derfor ned mellem bord og bænk og ikke ned på den side af sædet, der skal være tør. Hele sættet er tørt på under et halvt minut: fem plader, fem vendinger."
+       data-en="The seats sit 142 mm outside the edge of the table. So the water that runs through the tabletop falls between table and bench, not onto the side of the seat that has to stay dry. The whole set is dry in under half a minute: five boards, five turns.">Sæderne sidder 142 mm uden for bordkanten. Det vand, der løber gennem bordpladen, falder derfor ned mellem bord og bænk og ikke ned på den side af sædet, der skal være tør. Hele sættet er tørt på under et halvt minut: fem plader, fem vendinger.</p>
+  </div>
+  <div class="split-drw drw reveal">
+    <svg viewBox="-1090 -880 2180 990" role="img"
+         aria-label="Sættet set fra enden: tre bordplader i 740 mm højde med 8 mm luft imellem, og to sæder i 450 mm højde, placeret 142 mm uden for bordkanten, så vandet falder ned mellem bord og bænk.">
+      <!-- the frames, ghosted: this drawing is about where the water goes -->
+      <g fill="none" stroke="#0f0e0b" stroke-opacity=".28" stroke-width="4" stroke-dasharray="16 11">
+        <path d="M -200 -708 L -330 0 M 200 -708 L 330 0 M -258 -390 L 258 -390"/>
+        <path d="M -750 -418 L -640 0 M -750 -418 L -860 0 M 750 -418 L 640 0 M 750 -418 L 860 0"/>
+      </g>
+      <path d="M -1050 0 L 1050 0" stroke="#0f0e0b" stroke-opacity=".35" stroke-width="4"/>
+
+      <g fill="#e3dbcb" stroke="#0f0e0b" stroke-width="3.4">
+        <path transform="translate(-308,-719)" d="M -139 -11 Q 0 -31 139 -11 A 11 11 0 0 1 139 11 Q 0 31 -139 11 A 11 11 0 0 1 -139 -11 Z"/>
+        <path transform="translate(0,-719)" d="M -139 -11 Q 0 -31 139 -11 A 11 11 0 0 1 139 11 Q 0 31 -139 11 A 11 11 0 0 1 -139 -11 Z"/>
+        <path transform="translate(308,-719)" d="M -139 -11 Q 0 -31 139 -11 A 11 11 0 0 1 139 11 Q 0 31 -139 11 A 11 11 0 0 1 -139 -11 Z"/>
+        <path transform="translate(-750,-429)" d="M -139 -11 Q 0 -31 139 -11 A 11 11 0 0 1 139 11 Q 0 31 -139 11 A 11 11 0 0 1 -139 -11 Z"/>
+        <path transform="translate(750,-429)" d="M -139 -11 Q 0 -31 139 -11 A 11 11 0 0 1 139 11 Q 0 31 -139 11 A 11 11 0 0 1 -139 -11 Z"/>
+      </g>
+
+      <!-- where the water goes: through the 8 mm gaps, and off the outer edges,
+           down between the table and the bench rather than onto the seat -->
+      <g stroke="#5d7b8a" stroke-width="3.6" stroke-linecap="round" stroke-opacity=".8"
+         stroke-dasharray="14 22" fill="none">
+        <path d="M -154 -700 L -154 -80"/>
+        <path d="M 154 -700 L 154 -80"/>
+        <path d="M -458 -712 L -520 -80"/>
+        <path d="M 458 -712 L 520 -80"/>
+      </g>
+      <g fill="#5d7b8a" fill-opacity=".8">
+        <path d="M -154 -66 q -11 16 0 24 q 11 -8 0 -24 Z"/>
+        <path d="M 154 -66 q -11 16 0 24 q 11 -8 0 -24 Z"/>
+        <path d="M -524 -66 q -11 16 0 24 q 11 -8 0 -24 Z"/>
+        <path d="M 524 -66 q -11 16 0 24 q 11 -8 0 -24 Z"/>
+      </g>
+
+      <!-- the four measurements that make the set work -->
+      <g stroke="#0f0e0b" stroke-opacity=".45" stroke-width="2.6" fill="none">
+        <path d="M -458 -800 L 458 -800"/>
+        <path d="M -458 -782 L -458 -818 M 458 -782 L 458 -818"/>
+        <path d="M 458 -340 L 600 -340"/>
+        <path d="M 458 -322 L 458 -358 M 600 -322 L 600 -358"/>
+        <path d="M -1000 0 L -1000 -740"/>
+        <path d="M -1018 0 L -982 0 M -1018 -740 L -982 -740"/>
+        <path d="M 1000 0 L 1000 -450"/>
+        <path d="M 1018 0 L 982 0 M 1018 -450 L 982 -450"/>
+        <path d="M -458 -740 L -1000 -740" stroke-opacity=".2" stroke-dasharray="12 10"/>
+        <path d="M 611 -450 L 1000 -450" stroke-opacity=".2" stroke-dasharray="12 10"/>
+      </g>
+      <text class="dim" x="0" y="-830" text-anchor="middle" fill="#0f0e0b" fill-opacity=".65">916</text>
+      <text class="dim" x="529" y="-372" text-anchor="middle" fill="#0f0e0b" fill-opacity=".65">142</text>
+      <text class="dim" x="-1022" y="-360" text-anchor="end" fill="#0f0e0b" fill-opacity=".65">740</text>
+      <text class="dim" x="1022" y="-212" fill="#0f0e0b" fill-opacity=".65">450</text>
+    </svg>
+    <div class="drw-cap"
+         data-da="Sættet set fra enden — 1:20. Fem ens plader: tre i bordet, to i bænkene. Den stiplede blå linje er vandets vej."
+         data-en="The set seen from the end — 1:20. Five identical boards: three in the table, two in the benches. The dashed blue line is the water's way out.">Sættet set fra enden — 1:20. Fem ens plader: tre i bordet, to i bænkene. Den stiplede blå linje er vandets vej.</div>
+  </div>
+</section>
+
+<!-- ============ SPECIFICATION ============ -->
+<section id="spec">
+  <div class="reveal">
+    <div class="slabel" data-da="Specifikationer" data-en="Specification">Specifikationer</div>
+    <h2 data-da="Tørvejr — <em>som den er tegnet.</em>" data-en="Tørvejr — <em>as drawn.</em>">Tørvejr — <em>som den er tegnet.</em></h2>
+  </div>
+  <div class="spec-grid reveal">
+    <dl>
+      <div class="spec-row"><dt data-da="Type" data-en="Type">Type</dt><dd data-da="Havebænk med vendbart sæde" data-en="Garden bench, reversible seat">Havebænk med vendbart sæde</dd></div>
+      <div class="spec-row"><dt data-da="Sædeplade" data-en="Seat board">Sædeplade</dt><dd data-da="Massiv eg, robinie eller lærk — 300 × 42/22 mm" data-en="Solid oak, robinia or larch — 300 × 42/22 mm">Massiv eg, robinie eller lærk — 300 × 42/22 mm</dd></div>
+      <div class="spec-row"><dt data-da="Hvælv og kant" data-en="Crown and edge">Hvælv og kant</dt><dd data-da="10 mm pr. flade, halvrund kant R11, dryprille 6 × 3 mm" data-en="10 mm per face, half-round R11 edge, 6 × 3 mm drip groove">10 mm pr. flade, halvrund kant R11, dryprille 6 × 3 mm</dd></div>
+      <div class="spec-row"><dt data-da="Længde" data-en="Length">Længde</dt><dd data-da="1400–2200 mm efter mål; over 1750 mm to plader" data-en="1400–2200 mm to measure; over 1750 mm, two boards">1400–2200 mm efter mål; over 1750 mm to plader</dd></div>
+      <div class="spec-row"><dt data-da="Sædehøjde" data-en="Seat height">Sædehøjde</dt><dd data-da="450 mm; drejeakse 429 mm" data-en="450 mm; axis of rotation 429 mm">450 mm; drejeakse 429 mm</dd></div>
+      <div class="spec-row"><dt data-da="Stel" data-en="Frame">Stel</dt><dd data-da="Eg 45 × 95, to spredte enderammer, 560 mm fodaftryk" data-en="Oak 45 × 95, two splayed end frames, 560 mm footprint">Eg 45 × 95, to spredte enderammer, 560 mm fodaftryk</dd></div>
+      <div class="spec-row"><dt data-da="Vægt" data-en="Weight">Vægt</dt><dd data-da="Plade ca. 10 kg (1600 mm, eg); bænk ca. 31 kg" data-en="Board approx. 10 kg (1600 mm, oak); bench approx. 31 kg">Plade ca. 10 kg (1600 mm, eg); bænk ca. 31 kg</dd></div>
+    </dl>
+    <dl>
+      <div class="spec-row"><dt data-da="Aksel" data-en="Axle">Aksel</dt><dd data-da="Ø40 mm A4 med to flader med 24 mm imellem" data-en="Ø40 mm A4 with two flats, 24 mm across">Ø40 mm A4 med to flader med 24 mm imellem</dd></div>
+      <div class="spec-row"><dt data-da="Leje" data-en="Bearing">Leje</dt><dd data-da="POM-bøsning i hus af 6 mm A4, boltet dæksel, afløb Ø5" data-en="POM bush in 6 mm A4 housing, bolted cap, Ø5 drain">POM-bøsning i hus af 6 mm A4, boltet dæksel, afløb Ø5</dd></div>
+      <div class="spec-row"><dt data-da="Løft for at vende" data-en="Lift to turn">Løft for at vende</dt><dd data-da="8 mm at vende, 20 mm at tage pladen af; dækslet giver 12" data-en="8 mm to turn, 20 mm to remove the board; the cap allows 12">8 mm at vende, 20 mm at tage pladen af; dækslet giver 12</dd></div>
+      <div class="spec-row"><dt data-da="Beslag" data-en="Fittings">Beslag</dt><dd data-da="A4 (AISI 316) hele vejen, også skruerne" data-en="A4 (AISI 316) throughout, screws included">A4 (AISI 316) hele vejen, også skruerne</dd></div>
+      <div class="spec-row"><dt data-da="Nedbøjning" data-en="Deflection">Nedbøjning</dt><dd data-da="Ca. 6 mm ved 100 kg midt på 1600 mm — beregnet" data-en="Approx. 6 mm under 100 kg at mid-span, 1600 mm — calculated">Ca. 6 mm ved 100 kg midt på 1600 mm — beregnet</dd></div>
+      <div class="spec-row"><dt data-da="Fremstilling" data-en="Made">Fremstilling</dt><dd data-da="CNC-fræset i to opspændinger — én flade ad gangen, samme program" data-en="CNC-cut in two set-ups — one face at a time, the same programme">CNC-fræset i to opspændinger — én flade ad gangen, samme program</dd></div>
+      <div class="spec-row"><dt data-da="Overflade" data-en="Finish">Overflade</dt><dd data-da="Olie på begge flader, fire farver — eller ubehandlet" data-en="Oil on both faces, four colours — or untreated">Olie på begge flader, fire farver — eller ubehandlet</dd></div>
+    </dl>
+  </div>
+  <div class="notice reveal">
+    <div class="notice-t" data-da="Status — tegnet, ikke bygget" data-en="Status — drawn, not built">Status — tegnet, ikke bygget</div>
+    <p data-da="Tørvejr er tegnet op og regnet igennem, men der står ingen færdig bænk endnu. Derfor er der ingen fotografier på denne side, kun tegninger i skala, og derfor står der heller ingen pris: hvert mål her kommer fra tegningen, og prisen kommer, når jeg har skåret den første. Sig til, hvis det skal være din."
+       data-en="Tørvejr is drawn up and calculated through, but no finished bench stands yet. That is why there are no photographs on this page, only drawings to scale — and why there is no price either: every measurement here comes from the drawing, and the price comes once I have cut the first one. Say the word if it should be yours.">Tørvejr er tegnet op og regnet igennem, men der står ingen færdig bænk endnu. Derfor er der ingen fotografier på denne side, kun tegninger i skala, og derfor står der heller ingen pris: hvert mål her kommer fra tegningen, og prisen kommer, når jeg har skåret den første. Sig til, hvis det skal være din.</p>
+  </div>
+</section>
+
+<!-- ============ ORDER ============ -->
+<section id="bestil">
+  <div class="ord-l reveal">
+    <div class="slabel" data-da="Bestil" data-en="Order">Bestil</div>
+    <h2 data-da="Sig målet, <em>og få tegningen.</em>" data-en="Say the size, <em>and get the drawing.</em>">Sig målet, <em>og få tegningen.</em></h2>
+    <p class="lede" data-da="Skriv hvor lang bænken skal være, og om der skal et bord til. Så tegner jeg sættet op til dig og sender en pris og en leveringstid, før der bliver skåret noget. Der er ét menneske bag, og du kan ringe til ham."
+       data-en="Tell me how long the bench should be, and whether a table goes with it. I will draw the set up for you and send a price and a lead time before anything is cut. There is one person behind this, and you can call him.">Skriv hvor lang bænken skal være, og om der skal et bord til. Så tegner jeg sættet op til dig og sender en pris og en leveringstid, før der bliver skåret noget. Der er ét menneske bag, og du kan ringe til ham.</p>
+    <div class="cinfo">
+      <div>
+        <div class="citem-label" data-da="Skriv til" data-en="Email">Skriv til</div>
+        <a class="citem-val" href="mailto:stefanhoegh@live.dk">stefanhoegh@live.dk</a>
+      </div>
+      <div>
+        <div class="citem-label" data-da="Ring til" data-en="Phone">Ring til</div>
+        <a class="citem-val" href="tel:+4542493954">+45 42 49 39 54</a>
+      </div>
+      <div>
+        <div class="citem-label">Instagram</div>
+        <a class="citem-val" href="https://www.instagram.com/danish_hawk" target="_blank" rel="noopener">@danish_hawk</a>
+      </div>
+      <div>
+        <div class="citem-label" data-da="Det med småt" data-en="The fine print">Det med småt</div>
+        <a class="citem-val" href="/handelsbetingelser/" data-da="Handelsbetingelser" data-en="Terms of trade">Handelsbetingelser</a>
+      </div>
+    </div>
+  </div>
+
+  <form class="ord-r reveal" id="contact-form" action="https://formspree.io/f/xvzlajaw" method="POST">
+    <input type="hidden" name="_subject" value="Tørvejr — forespørgsel fra danishhawk.com"/>
+    <div class="fg">
+      <label class="fl" for="f-name" data-da="Navn" data-en="Name">Navn</label>
+      <input class="fi" id="f-name" name="name" type="text" required placeholder="Fulde navn"/>
+    </div>
+    <div class="fg">
+      <label class="fl" for="f-email" data-da="E-mail" data-en="Email">E-mail</label>
+      <input class="fi" id="f-email" name="email" type="email" required placeholder="din@email.dk"/>
+    </div>
+    <div class="fg">
+      <label class="fl" for="f-size" data-da="Ønsket mål" data-en="Size wanted">Ønsket mål</label>
+      <input class="fi" id="f-size" name="size" type="text" placeholder="1600 mm sæde, eg, olieret mørk"/>
+    </div>
+    <div class="fg">
+      <label class="fl" for="f-msg" data-da="Bænk eller helt sæt?" data-en="Bench, or the whole set?">Bænk eller helt sæt?</label>
+      <textarea class="fta" id="f-msg" name="message" placeholder="Hvor skal den stå, og skal der bord og to bænke til?"></textarea>
+    </div>
+    <input type="text" name="_gotcha" tabindex="-1" autocomplete="off"
+           style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0" aria-hidden="true"/>
+    <button class="btn-primary" type="submit" style="align-self:flex-start;margin-top:8px"
+            data-da="Send forespørgsel" data-en="Send enquiry">Send forespørgsel</button>
+    <p id="form-success" data-da="Tak! Jeg vender tilbage hurtigst muligt." data-en="Thank you! I will be in touch as soon as I can.">Tak! Jeg vender tilbage hurtigst muligt.</p>
+  </form>
+</section>
+
+<footer>
+  <div class="fcopy">© 2026 Danish Hawk — DanishHawk.com</div>
+  <ul class="flinks">
+    <li><a href="/" data-da="Forsiden" data-en="Home">Forsiden</a></li>
+    <li><a href="#princippet" data-da="Princippet" data-en="The principle">Princippet</a></li>
+    <li><a href="#vend" data-da="Vend sædet" data-en="Turn the seat">Vend sædet</a></li>
+    <li><a href="#maal" data-da="Mål" data-en="Sizes">Mål</a></li>
+    <li><a href="/handelsbetingelser/" data-da="Handelsbetingelser" data-en="Terms">Handelsbetingelser</a></li>
+  </ul>
+</footer>
+
+<script type="module">
+/* ===================================================================
+   The section through the seat board, and what happens to it.
+
+   Everything below is in millimetres, in the same coordinates as the
+   drawing: the origin is the axis the board turns about, x runs across
+   the board's width and y downwards. The board's two faces are the
+   whole idea, so they are named: A is up when the board is at 0°, B is
+   up at 180°, and each of them is dry, wet or drying.
+   =================================================================== */
+
+const W = 300, R = 11, XP = 139, CROWN = 10;   /* the section, as drawn */
+const LIFT = 8;                                 /* mm to clear the flats */
+const H0 = R + CROWN;                           /* 21 mm, half the centre */
+
+/* Half the thickness at x — the parabola both faces are cut to. */
+const faceY = (x) => R + CROWN * (1 - (x / XP) * (x / XP));
+
+const FACE_TOP = 'M -139 -11 Q 0 -31 139 -11';
+const FACE_BOT = 'M -139 11 Q 0 31 139 11';
+
+const $ = (id) => document.getElementById(id);
+const SVGNS = 'http://www.w3.org/2000/svg';
+const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* The two faces are named on the page as well as in the drawing, so the
+   words live here, next to the states they describe. */
+const LANGTXT = {
+  da: { A: 'Side A', B: 'Side B', dry: 'tør', wet: 'våd', damp: 'tørrer' },
+  en: { A: 'Face A', B: 'Face B', dry: 'dry', wet: 'wet', damp: 'drying' }
+};
+let lang = 'da';
+
+/* --- the end grain -------------------------------------------------
+   A rotation of 180° on a section that is symmetric about both axes is
+   invisible unless something on the board is not symmetric. The growth
+   rings are that something: they arc away from a pith that sits outside
+   the board, so you can see which face is up. */
+function ringsMarkup() {
+  const px = -300, py = 170;
+  let d = '', r = 150;
+  for (let i = 0; i < 18; i++) {
+    d += `<circle cx="${px}" cy="${py}" r="${r.toFixed(1)}"/>`;
+    r += 15 + 7 * Math.sin(i * 1.7);
+  }
+  /* the ray fleck that gives oak away */
+  d += '<path d="M -96 -14 L -78 12 M 34 -18 L 52 14 M 108 -12 L 118 6"/>';
+  return d;
+}
+
+/* --- water ---------------------------------------------------------
+   Beads sitting on a face, drawn from the face's own curve so they sit
+   on the timber and not near it. */
+const DROPS = [[-119, 5], [-86, 7], [-49, 4.5], [-14, 8], [24, 5], [57, 6.5], [95, 4], [122, 5]];
+function dropsMarkup(sign) {
+  return DROPS.map(([x, r]) => {
+    const y = sign * faceY(x);
+    return `<path d="M ${x - r} ${y.toFixed(1)} Q ${x - r * 0.7} ${(y + sign * 2.1 * r).toFixed(1)}
+            ${x} ${(y + sign * 2.0 * r).toFixed(1)} Q ${x + r * 0.7} ${(y + sign * 2.1 * r).toFixed(1)}
+            ${x + r} ${y.toFixed(1)} Z"/>`;
+  }).join('');
+}
+
+/* One drawing, two places: the hero plays it, the section lets you do it. */
+function makeFlip(p, opts) {
+  const plank = $(p + '-plank'), rings = $(p + '-rings'),
+        wetA = $(p + '-wetA'), wetB = $(p + '-wetB'), rainG = $(p + '-rain');
+  const labs = [$(p + '-labA'), $(p + '-labB')];
+  if (!plank) return null;
+
+  rings.innerHTML = ringsMarkup();
+
+  const state = { angle: 0, lift: 0, faces: ['dry', 'dry'], rain: 0 };
+
+  /* A is the face that is up at 0°, so it lives on the negative side. */
+  function paintFace(g, i) {
+    const sign = i === 0 ? -1 : 1;
+    const st = state.faces[i];
+    if (st === 'dry') { g.innerHTML = ''; return; }
+    const face = sign < 0 ? FACE_TOP : FACE_BOT;
+    const sheen = st === 'wet' ? opts.wetStrong : opts.wetSoft;
+    g.innerHTML =
+      `<path d="${face}" fill="none" stroke="${opts.wet}" stroke-opacity="${sheen}" stroke-width="3.4"/>` +
+      (st === 'wet'
+        ? `<g fill="${opts.wet}" fill-opacity=".72" stroke="${opts.wet}" stroke-opacity=".5"
+              stroke-width=".8">${dropsMarkup(sign)}</g>`
+        : '');
+  }
+
+  function pose() {
+    plank.setAttribute('transform', `translate(0,${-state.lift}) rotate(${state.angle})`);
+    /* A letter that names a face should travel with that face and still be
+       the right way up, so it turns back by as much as the board turns. */
+    for (const l of labs) {
+      if (!l) continue;
+      l.setAttribute('transform',
+        `rotate(${-state.angle} ${l.getAttribute('x')} ${l.getAttribute('y')})`);
+    }
+  }
+
+  /* A wet face that has turned past horizontal has poured its water out,
+     whether it got there by the button or by being dragged. Checking it here
+     rather than inside the animation means both routes behave the same. */
+  function checkShed() {
+    for (let i = 0; i < 2; i++) {
+      const down = i === 0 ? state.angle > 90 : state.angle < 90;
+      if (state.faces[i] === 'wet' && down) {
+        state.faces[i] = 'damp';
+        shed();
+        setTimeout(() => {
+          const stillDown = i === 0 ? state.angle > 90 : state.angle < 90;
+          if (state.faces[i] === 'damp' && stillDown) { state.faces[i] = 'dry'; paint(); }
+        }, 2600);
+      }
+    }
+  }
+
+  function paint() {
+    checkShed();
+    paintFace(wetA, 0); paintFace(wetB, 1); pose();
+    if (opts.onState) opts.onState(state);
+  }
+
+  /* --- rain ------------------------------------------------------- */
+  const drops = [];
+  for (let i = 0; i < 14; i++) {
+    const l = document.createElementNS(SVGNS, 'line');
+    rainG.appendChild(l);
+    drops.push({ el: l, x: -250 + Math.random() * 500, y: -300 - Math.random() * 400,
+                 v: 9 + Math.random() * 4 });
+  }
+  function rainFrame() {
+    rainG.setAttribute('stroke-opacity', (state.rain * 0.85).toFixed(2));
+    for (const d of drops) {
+      d.y += d.v * state.rain;
+      /* A drop stops at the face it lands on — which is the whole point. */
+      const lim = Math.abs(d.x) < 152 ? -H0 - 6 : opts.floor - 4;
+      if (d.y > lim) { d.y = -320 - Math.random() * 260; d.x = -250 + Math.random() * 500; }
+      d.el.setAttribute('x1', d.x.toFixed(0)); d.el.setAttribute('x2', (d.x + 3).toFixed(0));
+      d.el.setAttribute('y1', d.y.toFixed(0)); d.el.setAttribute('y2', (d.y + opts.dropLen).toFixed(0));
+    }
+  }
+
+  /* --- the water leaving ------------------------------------------
+     Turning the board over does not hide the water, it drops it. */
+  const falling = [];
+  function shed() {
+    const g = opts.splash ? $(opts.splash) : rainG;
+    if (!g) return;
+    for (const [x, r] of DROPS) {
+      const el = document.createElementNS(SVGNS, 'circle');
+      el.setAttribute('r', (r * 0.8).toFixed(1));
+      el.setAttribute('fill', opts.wet);
+      el.setAttribute('fill-opacity', '.7');
+      g.appendChild(el);
+      falling.push({ el, x: x * 0.9, y: 20, v: 2 + Math.random() * 3, g });
+    }
+  }
+  function fallFrame() {
+    for (let i = falling.length - 1; i >= 0; i--) {
+      const f = falling[i];
+      f.v += 0.9; f.y += f.v;
+      f.el.setAttribute('cx', f.x.toFixed(0)); f.el.setAttribute('cy', f.y.toFixed(0));
+      if (f.y > opts.floor) { f.el.remove(); falling.splice(i, 1); }
+    }
+  }
+
+  /* --- the turn ----------------------------------------------------
+     Lift first, then roll, then let go: the drawing does it in that
+     order because that is the order your hands do it in. */
+  let anim = null;
+  const easeInOut = (t) => t < .5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+
+  function flip(dur, target) {
+    if (anim) return;
+    const from = state.angle;
+    const to = target === undefined ? (from >= 90 ? 0 : 180) : target;
+    if (to === from) return;
+    const t0 = performance.now();
+    anim = (now) => {
+      const t = Math.min(1, (now - t0) / dur);
+      state.lift = t < .16 ? LIFT * (t / .16)
+                 : t > .84 ? LIFT * (1 - (t - .84) / .16)
+                 : LIFT;
+      const rt = Math.min(1, Math.max(0, (t - .16) / .68));
+      state.angle = from + (to - from) * easeInOut(rt);
+      if (opts.liftDim) opts.liftDim(Math.min(1, state.lift / LIFT));
+      paint();
+      if (t >= 1) {
+        state.angle = to; state.lift = 0; anim = null; paint();
+        if (opts.liftDim) opts.liftDim(0);
+      }
+    };
+  }
+
+  let rainAnim = null;
+  function letItRain(ms) {
+    const t0 = performance.now();
+    const wetAt = t0 + ms * 0.42;
+    let done = false;
+    rainAnim = (now) => {
+      const t = (now - t0) / ms;
+      state.rain = t < .18 ? t / .18 : t > .82 ? Math.max(0, (1 - t) / .18) : 1;
+      if (!done && now > wetAt) {
+        done = true;
+        /* whichever face is up when the water arrives */
+        state.faces[state.angle >= 90 ? 1 : 0] = 'wet';
+        paint();
+      }
+      if (t >= 1) { state.rain = 0; rainAnim = null; rainFrame(); }
+    };
+  }
+
+  function frame(now) {
+    if (anim) anim(now);
+    if (rainAnim) rainAnim(now);
+    if (state.rain > 0) rainFrame();
+    if (falling.length) fallFrame();
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+
+  paint();
+  return {
+    state, flip, letItRain, paint,
+    setAngle(a) { state.angle = a; paint(); },
+    setFace(i, v) { state.faces[i] = v; paint(); },
+    busy: () => !!anim,
+    setLift(v) { state.lift = v; pose(); }
+  };
+}
+
+/* --- the hero, playing it by itself -------------------------------- */
+const hero = makeFlip('h', {
+  wet: '#9fc0cf', wetStrong: '.85', wetSoft: '.4', floor: 104, dropLen: 20
+});
+if (hero) {
+  if (reduced) {
+    /* Someone who asked for less movement gets the answer, not the story:
+       the dry side up, the wet one turned away underneath. */
+    hero.setAngle(180); hero.setFace(0, 'damp');
+  } else {
+    const loop = () => {
+      hero.letItRain(2600);
+      setTimeout(() => hero.flip(1700), 3200);
+      setTimeout(loop, 8200);
+    };
+    setTimeout(loop, 1400);
+  }
+}
+
+/* --- the one you can do yourself ----------------------------------- */
+const stage = $('f-stage');
+const liftDim = $('f-liftdim'), liftTxt = $('f-lifttxt');
+const flipper = makeFlip('f', {
+  wet: '#5d7b8a', wetStrong: '.9', wetSoft: '.42', floor: 140, splash: 'f-splash', dropLen: 26,
+  liftDim: (v) => {
+    if (!liftDim) return;
+    liftDim.setAttribute('opacity', v.toFixed(2));
+    liftTxt.setAttribute('opacity', v.toFixed(2));
+  },
+  onState: (st) => renderState(st)
+});
+
+function renderState(st) {
+  const up = $('f-up'), dn = $('f-down');
+  if (!up) return;
+  const t = LANGTXT[lang];
+  const iUp = st.angle >= 90 ? 1 : 0, iDn = 1 - iUp;
+  const name = (i) => (i === 0 ? t.A : t.B);
+  const cls = (s) => (s === 'dry' ? 'd' : 'w');
+  up.innerHTML = `${name(iUp)} <span class="tag ${cls(st.faces[iUp])}">${t[st.faces[iUp]]}</span>`;
+  dn.innerHTML = `${name(iDn)} <span class="tag ${cls(st.faces[iDn])}">${t[st.faces[iDn]]}</span>`;
+}
+
+if (flipper) {
+  $('f-flipbtn').addEventListener('click', () => { if (!flipper.busy()) flipper.flip(1600); });
+  $('f-rainbtn').addEventListener('click', () => flipper.letItRain(2400));
+  renderState(flipper.state);
+
+  /* Dragging it round: the lift comes up as soon as it leaves the flats,
+     because that is what has to happen before it can turn at all. */
+  const svg = $('f-flip');
+  let drag = null;
+  const hint = $('f-hint');
+  svg.addEventListener('pointerdown', (e) => {
+    if (flipper.busy()) return;
+    drag = { x: e.clientX, a0: flipper.state.angle, w: svg.getBoundingClientRect().width };
+    svg.setPointerCapture(e.pointerId);
+    stage.classList.add('dragging');
+    if (hint) hint.classList.add('gone');
+  });
+  svg.addEventListener('pointermove', (e) => {
+    if (!drag) return;
+    const a = drag.a0 + (e.clientX - drag.x) / drag.w * 300;
+    flipper.state.angle = Math.max(-20, Math.min(200, a));
+    const off = Math.min(Math.abs(flipper.state.angle), Math.abs(180 - flipper.state.angle));
+    flipper.setLift(off > 3 ? LIFT : LIFT * off / 3);
+    flipper.paint();
+  });
+  const end = () => {
+    if (!drag) return;
+    drag = null;
+    stage.classList.remove('dragging');
+    const a = flipper.state.angle;
+    const to = a > 90 ? 180 : 0;          /* it snaps to the nearer side */
+    if (Math.abs(to - a) < 0.5) { flipper.setLift(0); flipper.paint(); return; }
+    flipper.flip(Math.max(420, 900 * Math.abs(to - a) / 180), to);
+  };
+  svg.addEventListener('pointerup', end);
+  svg.addEventListener('pointercancel', end);
+}
+
+/* ===================================================================
+   The bench in your size.
+
+   The section is fixed — it is the same board whatever length you pick —
+   so the only things that move are the length, what the board weighs and
+   how much it sags. The sag is what sets the limit, and it is cubic in
+   the span: that is why the seat divides at 1750 mm rather than simply
+   getting longer.
+   =================================================================== */
+
+const A_SEC = 8349;         /* mm², the crowned section, integrated */
+const I_SEC = 1.106e6;      /* mm⁴, about the axis it is bent on */
+const AXIS = 429, UP_T = 45, UP_W = 95, GAP = 5, BREAK = 110, POST_TOP = 481;
+
+const TIMBER = {
+  eg: { da: 'Eg', en: 'Oak', rho: 730, E: 12000,
+        why: { da: 'Egekerne er holdbarhedsklasse 2 og det, et bænkesæt burde være lavet af. Ubehandlet gråner den sølvgråt, og den gør det ens på begge flader, fordi begge flader kommer op.',
+               en: 'Oak heartwood is durability class 2 and what a bench set ought to be made of. Left untreated it greys to silver, and it does so evenly on both faces, because both faces come up.' } },
+  robinie: { da: 'Robinie', en: 'Robinia', rho: 770, E: 13600,
+        why: { da: 'Robinie er det holdbareste træ, der kan skaffes i Danmark — klasse 1–2 — og det stiveste af de tre, så pladen bøjer mindst. Til gengæld er det det tungeste at vende og det, der er sværest at få i lange, lige længder.',
+               en: 'Robinia is the most durable timber available in Denmark — class 1–2 — and the stiffest of the three, so the board sags least. It is also the heaviest to turn and the hardest to get in long, straight lengths.' } },
+  laerk: { da: 'Lærk', en: 'Larch', rho: 590, E: 12000,
+        why: { da: 'Lærk er klasse 3 og altså den mindst holdbare her, men også den klart letteste: en plade, der er godt et kilo lettere at vende. Den vælger man, hvis bænken skal være nem at bruge frem for at stå i tredive år.',
+               en: 'Larch is class 3, so the least durable of the three, but clearly the lightest: a board a good kilo easier to turn. You pick it if the bench should be easy to use rather than stand for thirty years.' } }
+};
+
+const cfg = { len: 1600, wood: 'eg', fin: 'moerk' };
+let oak = null;
+
+function derive() {
+  const Ls = cfg.len;
+  const planks = Ls <= 1750 ? 1 : 2;
+  const span = planks === 1 ? Ls : Math.round((Ls - BREAK) / 2);
+  const t = TIMBER[cfg.wood];
+  const board = A_SEC * span * t.rho / 1e9;                     /* kg */
+  const sag = 1000 * Math.pow(span, 3) / (48 * t.E * I_SEC);    /* mm at 100 kg */
+  const seats = planks === 1
+    ? Math.max(2, Math.round(Ls / 520))
+    : 2 * Math.max(1, Math.round(span / 520));
+  /* the frame, in cubic metres, so the total weight is honest */
+  const fv = 2 * (.045 * .095 * .481) + 4 * (.045 * .095 * .52)
+           + (.045 * .095 * (Ls / 1000 - .10)) + 2 * (.045 * .095 * .56)
+           + (planks === 2 ? .090 * .095 * .481 : 0);
+  const steel = 3.2 + (planks === 2 ? 1.6 : 0);
+  return { Ls, planks, span, board, sag, seats, t,
+           total: fv * t.rho + planks * board + steel,
+           overall: Ls + 2 * (GAP + UP_T) };
+}
+
+const nf = (n, d) => n.toLocaleString(lang === 'en' ? 'en-GB' : 'da-DK',
+  { minimumFractionDigits: d, maximumFractionDigits: d });
+
+function dimH(x1, x2, y, label) {
+  return `<g stroke="#0f0e0b" stroke-opacity=".5" stroke-width="2.4" fill="none">
+      <path d="M ${x1} ${y} L ${x2} ${y}"/>
+      <path d="M ${x1} ${y - 15} L ${x1} ${y + 15} M ${x2} ${y - 15} L ${x2} ${y + 15}"/>
+    </g>
+    <text class="dim" x="${(x1 + x2) / 2}" y="${y - 18}" text-anchor="middle" font-size="34"
+          fill="#0f0e0b" fill-opacity=".7">${label}</text>`;
+}
+function dimV(y1, y2, x, label) {
+  return `<g stroke="#0f0e0b" stroke-opacity=".5" stroke-width="2.4" fill="none">
+      <path d="M ${x} ${y1} L ${x} ${y2}"/>
+      <path d="M ${x - 15} ${y1} L ${x + 15} ${y1} M ${x - 15} ${y2} L ${x + 15} ${y2}"/>
+    </g>
+    <text class="dim" x="${x - 16}" y="${(y1 + y2) / 2 + 12}" text-anchor="end" font-size="34"
+          fill="#0f0e0b" fill-opacity=".7">${label}</text>`;
+}
+
+/* Where the seat boards start and end, in one place, so the elevation and
+   the plan can never disagree about it. */
+function boards(d) {
+  const h = d.Ls / 2;
+  return d.planks === 1
+    ? [[-h, h]]
+    : [[-h, -BREAK / 2], [BREAK / 2, h]];
+}
+
+function drawBench() {
+  const d = derive();
+  const svg = $('c-plan'), body = $('c-body');
+  if (!svg) return;
+  const h = d.Ls / 2, oh = d.overall / 2;
+  const steel = '#b9b3a7';
+  const plan = oak ? 'url(#c-oak)' : '#8a6c42';
+  const edge = oak ? oak.FINISHES[cfg.fin].plan : '#6f5236';
+  const DY = 380;                     /* where the plan view sits */
+  let g = '';
+
+  /* ---- elevation ---- */
+  g += `<path d="M ${-oh - 130} 0 L ${oh + 130} 0" stroke="#0f0e0b" stroke-opacity=".35" stroke-width="3"/>`;
+  for (const s of [-1, 1]) {
+    const x0 = Math.min(s * (h + GAP), s * (h + GAP + UP_T));
+    g += `<rect x="${x0}" y="${-POST_TOP}" width="${UP_T}" height="${POST_TOP}"
+            fill="#0f0e0b" fill-opacity=".07" stroke="#0f0e0b" stroke-opacity=".5" stroke-width="2"/>`;
+    g += `<rect x="${x0 - 3}" y="${-POST_TOP}" width="${UP_T + 6}" height="26" fill="${steel}"
+            stroke="#0f0e0b" stroke-opacity=".5" stroke-width="2"/>`;
+    g += `<rect x="${x0 - 6}" y="-7" width="${UP_T + 12}" height="7" fill="${steel}"
+            stroke="#0f0e0b" stroke-opacity=".5" stroke-width="2"/>`;
+  }
+  if (d.planks === 2) {
+    g += `<rect x="-45" y="${-POST_TOP}" width="90" height="${POST_TOP}"
+            fill="#0f0e0b" fill-opacity=".07" stroke="#0f0e0b" stroke-opacity=".5" stroke-width="2"/>`;
+    g += `<rect x="-48" y="${-POST_TOP}" width="96" height="26" fill="${steel}"
+            stroke="#0f0e0b" stroke-opacity=".5" stroke-width="2"/>`;
+    g += `<rect x="-51" y="-7" width="102" height="7" fill="${steel}"
+            stroke="#0f0e0b" stroke-opacity=".5" stroke-width="2"/>`;
+  }
+  g += `<rect x="${-h - GAP}" y="-260" width="${d.Ls + 2 * GAP}" height="45"
+          fill="#0f0e0b" fill-opacity=".07" stroke="#0f0e0b" stroke-opacity=".5" stroke-width="2"/>`;
+  for (const [a, b] of boards(d)) {
+    /* seen from the long side, the board shows its edge: 22 mm, not 42 */
+    g += `<rect x="${a}" y="${-AXIS - 11}" width="${b - a}" height="22" rx="11"
+            fill="${edge}" stroke="#0f0e0b" stroke-opacity=".7" stroke-width="2"/>`;
+    for (const e of [a, b]) {
+      g += `<rect x="${e < 0 ? e - 6 : e}" y="${-AXIS - 21}" width="6" height="42" fill="${steel}"
+              stroke="#0f0e0b" stroke-opacity=".5" stroke-width="1.6"/>`;
+    }
+  }
+  g += `<path d="M ${-oh} ${-AXIS} L ${oh} ${-AXIS}" stroke="#c8a96e" stroke-width="2"
+          stroke-dasharray="26 10 4 10"/>`;
+
+  /* ---- plan ---- */
+  g += `<rect x="${-oh}" y="${DY - 280}" width="${d.overall}" height="560" fill="none"
+          stroke="#0f0e0b" stroke-opacity=".3" stroke-width="2.4" stroke-dasharray="18 12"/>`;
+  for (const [a, b] of boards(d)) {
+    g += `<rect x="${a}" y="${DY - 150}" width="${b - a}" height="300" fill="${plan}"
+            stroke="#0f0e0b" stroke-opacity=".7" stroke-width="2"/>`;
+  }
+  for (const s of [-1, 1]) {
+    const x0 = Math.min(s * (h + GAP), s * (h + GAP + UP_T));
+    g += `<rect x="${x0}" y="${DY - UP_W / 2}" width="${UP_T}" height="${UP_W}"
+            fill="#0f0e0b" fill-opacity=".1" stroke="#0f0e0b" stroke-opacity=".5" stroke-width="2"/>`;
+    /* the two feet each end frame splays out to — this is the 560 */
+    for (const q of [-1, 1]) {
+      g += `<rect x="${x0 - 25}" y="${DY + q * 232 - 22}" width="95" height="45"
+              fill="${steel}" stroke="#0f0e0b" stroke-opacity=".45" stroke-width="2"/>`;
+    }
+  }
+  if (d.planks === 2) {
+    g += `<rect x="-45" y="${DY - UP_W / 2}" width="90" height="${UP_W}"
+            fill="#0f0e0b" fill-opacity=".1" stroke="#0f0e0b" stroke-opacity=".5" stroke-width="2"/>`;
+    for (const q of [-1, 1]) {
+      g += `<rect x="-47" y="${DY + q * 232 - 22}" width="95" height="45"
+              fill="${steel}" stroke="#0f0e0b" stroke-opacity=".45" stroke-width="2"/>`;
+    }
+  }
+  /* the places, marked where a person actually lands */
+  const marks = [];
+  for (const [a, b] of boards(d)) {
+    const n = d.seats / boards(d).length;
+    for (let i = 0; i < n; i++) marks.push(a + (b - a) * (i + .5) / n);
+  }
+  for (const m of marks) {
+    g += `<ellipse cx="${m.toFixed(0)}" cy="${DY}" rx="150" ry="110" fill="none"
+            stroke="#c8a96e" stroke-width="2.2" stroke-dasharray="12 10"/>`;
+  }
+
+  /* ---- what it measures ---- */
+  g += dimH(-oh, oh, DY + 350, String(d.overall));
+  g += dimH(-h, h, -POST_TOP - 60, String(d.Ls));
+  g += dimV(0, -450, -oh - 90, '450');
+  g += dimV(DY - 150, DY + 150, oh + 110, '300');
+  g += dimV(DY - 280, DY + 280, -oh - 90, '560');
+  if (d.planks === 2) g += dimH(-BREAK / 2, BREAK / 2, DY - 210, String(BREAK));
+
+  body.innerHTML = g;
+  svg.setAttribute('viewBox', `${-oh - 250} ${-POST_TOP - 120} ${d.overall + 500} ${POST_TOP + 900}`);
+}
+
+function refreshConfig() {
+  const d = derive();
+  const t = lang === 'en' ? 'en' : 'da';
+  $('valLen').textContent = d.Ls + ' mm';
+  $('valWood').textContent = d.t[t];
+  $('woodWhy').textContent = d.t.why[t];
+  if (oak) $('valFin').textContent = oak.FINISHES[cfg.fin][t];
+
+  $('rPlanks').textContent = d.planks === 1
+    ? (t === 'en' ? '1 board, ' : '1 plade, ') + d.span + ' mm'
+    : (t === 'en' ? '2 boards, ' : '2 plader, ') + d.span + ' mm';
+  $('rWeight').textContent = nf(d.board, 1) + ' kg';
+  $('rSag').textContent = nf(d.sag, 1) + ' mm';
+  $('rSeats').textContent = String(d.seats);
+  $('rOverall').textContent = d.overall + ' × 560 × 450 mm';
+  $('rTotal').textContent = (t === 'en' ? 'approx. ' : 'ca. ') + nf(d.total, 0) + ' kg';
+
+  $('lenWhy').textContent = d.planks === 1
+    ? (t === 'en'
+        ? `One board of ${d.span} mm. Turning it means lifting ${nf(d.board, 1)} kg by eight millimetres.`
+        : `Én plade på ${d.span} mm. At vende den er at løfte ${nf(d.board, 1)} kg otte millimeter.`)
+    : (t === 'en'
+        ? `Two boards of ${d.span} mm with ${BREAK} mm between them. The gap lands between two places, and the middle upright is what you take hold of when you get up.`
+        : `To plader på ${d.span} mm med ${BREAK} mm imellem. Mellemrummet lander mellem to pladser, og den midterste opstander er det, du tager ved, når du rejser dig.`);
+
+  const woodBtns = document.querySelectorAll('[data-wood]');
+  woodBtns.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.wood === cfg.wood)));
+}
+
+function render() { refreshConfig(); drawBench(); }
+
+$('len').addEventListener('input', (e) => { cfg.len = +e.target.value; render(); });
+document.querySelectorAll('[data-wood]').forEach((b) => {
+  b.addEventListener('click', () => { cfg.wood = b.dataset.wood; render(); });
+});
+
+/* The swatches are drawn with the same generator that fills the plan, so
+   what you pick is what the drawing shows. */
+function buildSwatches() {
+  if (!oak) return;
+  const wrap = $('swatches');
+  const t = lang === 'en' ? 'en' : 'da';
+  wrap.innerHTML = '';
+  Object.keys(oak.FINISHES).forEach((key) => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'sw';
+    b.setAttribute('aria-pressed', String(key === cfg.fin));
+    b.setAttribute('aria-label', oak.FINISHES[key][t]);
+    const src = oak.oakCanvas({ finish: key, material: 'solid', size: 256, staveW: 220 });
+    const c = document.createElement('canvas');
+    c.width = 160; c.height = 108;
+    c.getContext('2d').drawImage(src, 40, 20, 176, 120, 0, 0, 160, 108);
+    b.appendChild(c);
+    const label = document.createElement('span');
+    label.textContent = oak.FINISHES[key][t];
+    b.appendChild(label);
+    b.addEventListener('click', () => {
+      cfg.fin = key;
+      wrap.querySelectorAll('.sw').forEach((el) => el.setAttribute('aria-pressed', 'false'));
+      b.setAttribute('aria-pressed', 'true');
+      paintOak();
+      render();
+    });
+    wrap.appendChild(b);
+  });
+}
+
+function paintOak() {
+  if (!oak) return;
+  /* One board, not a glued-up top, so the staves are set wider than the
+     board and no joint lines appear across it. */
+  $('c-oakImg').setAttribute('href',
+    oak.oakDataURL({ finish: cfg.fin, material: 'solid', size: 1024, staveW: 1600 }));
+}
+
+render();
+
+import('../assets/oak.js').then((mod) => {
+  oak = mod;
+  paintOak();
+  buildSwatches();
+  render();
+}).catch((err) => {
+  /* Without the texture the drawing still works; it just falls back to a
+     flat colour rather than showing the grain. */
+  console.error('[oak]', err);
+  const img = $('c-oakImg'); if (img) img.remove();
+  $('valFin').textContent = '—';
+});
+
+/* ===================== language, and the form ====================== */
+function setLang(l) {
+  lang = l;
+  document.querySelectorAll('[data-da],[data-en]').forEach((el) => {
+    const val = el.getAttribute('data-' + l);
+    if (val) el.innerHTML = val;
+  });
+  const ph = {
+    da: ['Fulde navn', 'din@email.dk', '1600 mm sæde, eg, olieret mørk',
+         'Hvor skal den stå, og skal der bord og to bænke til?'],
+    en: ['Full name', 'your@email.com', '1600 mm seat, oak, oiled dark',
+         'Where will it stand, and do you want a table and two benches?']
+  };
+  document.querySelectorAll('.fi, .fta').forEach((el) => {
+    ph.da.forEach((da, i) => {
+      if (el.placeholder === da || el.placeholder === ph.en[i]) el.placeholder = ph[l][i];
+    });
+  });
+  const bd = $('btn-da'), be = $('btn-en');
+  if (bd) bd.className = l === 'da' ? 'lang-btn active' : 'lang-btn';
+  if (be) be.className = l === 'en' ? 'lang-btn active' : 'lang-btn';
+  document.title = l === 'en'
+    ? 'Tørvejr — a bench with reversible seats | Danish Hawk'
+    : 'Tørvejr — bænk med vendbare sæder | Danish Hawk';
+  document.documentElement.lang = l;
+  /* The readouts and the drawing labels are built in JS, so they need
+     redrawing rather than replacing. */
+  if (flipper) renderState(flipper.state);
+  buildSwatches();
+  render();
+}
+window.setLang = setLang;
+(function () {
+  const q = (new URLSearchParams(location.search).get('lang') || '').toLowerCase();
+  if (q === 'en' || q === 'da') return setLang(q);
+  setLang((navigator.language || 'da').toLowerCase().indexOf('da') === 0 ? 'da' : 'en');
+})();
+
+const cf = $('contact-form');
+if (cf) cf.addEventListener('submit', async function (e) {
+  e.preventDefault();
+  const btn = this.querySelector('button[type=submit]');
+  const ok = $('form-success');
+  const label = btn.textContent;
+  btn.disabled = true;
+  btn.textContent = lang === 'en' ? 'Sending…' : 'Sender…';
+  try {
+    const res = await fetch(this.action, {
+      method: 'POST', body: new FormData(this), headers: { Accept: 'application/json' }
+    });
+    if (!res.ok) throw new Error('bad status ' + res.status);
+    this.reset();
+    ok.style.display = 'block';
+    btn.textContent = lang === 'en' ? 'Sent' : 'Sendt';
+  } catch (err) {
+    console.error('[form]', err);
+    btn.disabled = false;
+    btn.textContent = label;
+    ok.style.display = 'block';
+    ok.textContent = lang === 'en'
+      ? 'It would not send — write to stefanhoegh@live.dk instead.'
+      : 'Den kunne ikke sendes — skriv i stedet til stefanhoegh@live.dk.';
+  }
+});
+
+/* ===================== the page itself ============================= */
+const navbar = $('navbar');
+addEventListener('scroll', () => navbar.classList.toggle('scrolled', scrollY > 40));
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) setTimeout(() => e.target.classList.add('visible'), i * 70);
+  });
+}, { threshold: .08 });
+document.querySelectorAll('.reveal').forEach((el) => obs.observe(el));
+</script>
+
+</body>
+</html>
