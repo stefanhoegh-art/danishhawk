@@ -187,6 +187,8 @@
              letter-spacing: -.02em; margin-bottom: 20px; }
     h2.big em { font-style: italic; }
     .lede { font-size: 1.1rem; font-weight: 500; color: var(--mid); line-height: 1.8; }
+    /* Twelve equal cells: divisible by the four columns here and the two on a
+       phone, so the last row is always full. */
     .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3px; }
     .cell { position: relative; overflow: hidden; aspect-ratio: 4/5; background: var(--card); }
     .cell img { width: 100%; height: 100%; object-fit: cover; transition: transform .8s ease; }
@@ -197,7 +199,7 @@
                        background: linear-gradient(to top, rgba(10,9,6,.85), transparent);
                        opacity: 0; transition: opacity .3s; }
     .cell:hover figcaption { opacity: 1; }
-    .cell.tall { grid-row: span 2; aspect-ratio: 4/10.15; }
+
 
     /* ---------- made to order ---------- */
     .offer { padding: clamp(70px, 9vw, 120px) clamp(26px, 5vw, 80px); }
@@ -243,7 +245,6 @@
       .craft div:nth-child(2n) { border-right: none; }
       .craft div { border-bottom: 1px solid var(--line); }
       .grid { grid-template-columns: 1fr 1fr; }
-      .cell.tall { grid-row: span 1; aspect-ratio: 4/5; }
       .offer-grid { grid-template-columns: 1fr; }
     }
     @media (max-width: 860px) {
@@ -410,11 +411,12 @@
     <h2 class="big">Det er skåret, <em>ikke bestilt hjem.</em></h2>
     <p class="lede">Hvert stykke her er tegnet op fra bunden og produceret i Danmark. Nogle er
        solgt, nogle er prototyper, og nogle blev lavet for at finde ud af, om det overhovedet
-       kunne lade sig gøre. De står her, fordi de viser hvad der kan.</p>
+       kunne lade sig gøre. Ét af dem er afgangsprojektet fra snedkeruddannelsen. De står
+       her, fordi de viser hvad der kan.</p>
   </div>
 
   <div class="grid reveal">
-    <figure class="cell tall">
+    <figure class="cell">
       <img src="assets/pau-rosa-console-table-2ae8a7b0.jpg" width="1200" height="1600"
            alt="Vægmonteret konsolbord i Pau Rosa" loading="lazy" decoding="async"/>
       <figcaption>Konsolbord i Pau Rosa — vægmonteret, skjult ophæng</figcaption>
@@ -429,7 +431,7 @@
            alt="Sofabord i valnød med naturkant, hvor den lyse splint er ask" loading="lazy" decoding="async"/>
       <figcaption>Sofabord i valnød — den lyse splint er ask</figcaption>
     </figure>
-    <figure class="cell tall">
+    <figure class="cell">
       <img src="assets/cocobolo-live-edge-slabs-77e5ea9e.jpg" width="1000" height="1333"
            alt="Cocobolo-planker med naturkant, klar til opskæring" loading="lazy" decoding="async"/>
       <figcaption>Cocobolo med naturkant — råmaterialet</figcaption>
@@ -455,14 +457,26 @@
       <figcaption>Stellet under Tandhjulet</figcaption>
     </figure>
     <figure class="cell">
-      <img src="assets/cnc-table-base-detail-6c208f5b.jpg" width="1200" height="1600"
-           alt="Detalje af et udskåret bordstel i stål" loading="lazy" decoding="async"/>
-      <figcaption>Bordstel — udskåret</figcaption>
+      <img src="assets/walnut-ash-live-edge-top-6283f6a7.jpg" width="1080" height="968"
+           alt="Bordplade i valnød med ask lagt ind i den bugtede linje, hvor splinten sidder"
+           loading="lazy" decoding="async"/>
+      <figcaption>Afgangsprojekt — ask lagt ind, hvor splinten sidder</figcaption>
     </figure>
     <figure class="cell">
       <img src="assets/cnc-cut-wooden-spatula-prototype-15d3f004.jpg" width="900" height="1200"
            alt="Prototype på træspatel skåret på CNC" loading="lazy" decoding="async"/>
       <figcaption>Spatel — prototype</figcaption>
+    </figure>
+    <figure class="cell">
+      <img src="assets/cnc-table-base-detail-6c208f5b.jpg" width="1200" height="1600"
+           alt="Udskåret bordstel i stål under et bord" loading="lazy" decoding="async"/>
+      <figcaption>Stel — udskåret i plade</figcaption>
+    </figure>
+    <figure class="cell">
+      <img src="assets/walnut-ash-top-in-progress-d3ae926e.jpg" width="1080" height="1000"
+           alt="Bordpladen i valnød og ask under arbejde, ubehandlet"
+           loading="lazy" decoding="async"/>
+      <figcaption>Den samme plade, før olien</figcaption>
     </figure>
   </div>
 </section>
@@ -497,9 +511,10 @@
 <!-- ============ CLOSE ============ -->
 <section class="close" id="kontakt">
   <h2>Der er ét menneske bag, <em>og du kan ringe til ham.</em></h2>
-  <p>Danish Hawk er én person, og den breder vingerne. Jeg tegner møblerne og får dem
-     produceret hos danske producenter — så du taler altid med den, der har tegnet dit
-     møbel, og ikke med et callcenter.</p>
+  <p>Danish Hawk er én person, og den breder vingerne. Jeg er uddannet snedker fra
+     Herningsholm Erhvervsskole, tegner møblerne selv og får dem produceret hos danske
+     producenter — så du taler altid med den, der har tegnet dit møbel, og ikke med et
+     callcenter.</p>
   <dl class="close-links">
     <div><dt>Skriv til</dt><dd><a href="mailto:stefanhoegh@live.dk">stefanhoegh@live.dk</a></dd></div>
     <div><dt>Ring til</dt><dd><a href="tel:+4542493954">+45 42 49 39 54</a></dd></div>
