@@ -104,6 +104,16 @@
     .intro p        { animation-delay: .6s; }
     @keyframes lift { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: none; } }
 
+    /* Names the three doors before anyone has to scroll to discover them —
+       the hero alone can fill a phone screen, and "there are three of these"
+       is the one thing this page needs to say fastest. */
+    .scroll-cue { display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+                  font-family: var(--mono); font-size: .62rem; letter-spacing: .12em; text-transform: uppercase;
+                  color: rgba(239,233,221,.5); margin-top: 34px; animation-delay: .75s; }
+    .scroll-cue span:nth-child(even) { color: var(--accent); opacity: .7; }
+    .scroll-cue svg { color: var(--accent); animation: bob 1.6s ease-in-out infinite; }
+    @keyframes bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(4px); } }
+
     /* Three doors, each its own picture, each saying where it goes. */
     .doors { position: relative; z-index: 2; flex: 1; display: grid;
              grid-template-columns: repeat(3, 1fr); min-height: 46svh; }
@@ -238,6 +248,7 @@
     @media (prefers-reduced-motion: reduce) {
       .intro > *, .door, .reveal { animation: none !important; opacity: 1 !important; transform: none !important; }
       .door img { transition: none; }
+      .scroll-cue svg { animation: none !important; }
     }
 
     @media (max-width: 980px) {
@@ -289,6 +300,10 @@
     <h1>Vi bygger det, <em>der mangler.</em></h1>
     <p>Tre ting i tre felter. Fællesnævneren er ikke materialet, men at det kunne gøres bedre.
        Vælg den, du er kommet efter.</p>
+    <div class="scroll-cue" aria-hidden="true">
+      <span>Tandhjulet</span><span>·</span><span>NaboLarm</span><span>·</span><span>Energy Speed</span>
+      <svg width="11" height="7" viewBox="0 0 11 7" fill="none"><path d="M1 1l4.5 4.5L10 1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
   </div>
 
   <nav class="doors" aria-label="Vælg produkt">
