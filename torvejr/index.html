@@ -3,16 +3,16 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Tørvejr — bænk med vendbare sæder | Danish Hawk</title>
-  <meta name="description" content="Tørvejr er en havebænk, hvor sædet kan vendes, så den tørre side altid er den, du sidder på. Hvælvet plade i massiv eg, aksel og leje i rustfrit stål, ingen fjedre og ingen låse."/>
+  <title>Tørvejr — bord-bænkesæt med vendbare plader | Danish Hawk</title>
+  <meta name="description" content="Tørvejr er et bord-bænkesæt i ét stykke, hvor alle fem plader kan vendes, så den tørre side altid er den, du sidder på. Fem ens plader, to støbte dele, tegnet til serieproduktion."/>
   <meta name="author" content="Danish Hawk — Stefan Høgh"/>
   <meta name="robots" content="index, follow"/>
   <link rel="canonical" href="https://danishhawk.com/torvejr/"/>
   <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32.png"/>
   <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png"/>
 
-  <meta property="og:title" content="Tørvejr — bænk med vendbare sæder"/>
-  <meta property="og:description" content="En havebænk, hvor den tørre side ligger nedad. Løft 20 mm, vend sædet, sid ned."/>
+  <meta property="og:title" content="Tørvejr — bord-bænkesæt med vendbare plader"/>
+  <meta property="og:description" content="Et bord-bænkesæt, hvor den tørre side ligger nedad. Fem ens plader, der vendes på otte millimeter."/>
   <meta property="og:url" content="https://danishhawk.com/torvejr/"/>
   <meta property="og:type" content="product"/>
   <meta property="og:locale" content="da_DK"/>
@@ -20,16 +20,16 @@
   <link rel="alternate" hreflang="da" href="https://danishhawk.com/torvejr/"/>
   <link rel="alternate" hreflang="en" href="https://danishhawk.com/torvejr/?lang=en"/>
   <meta name="twitter:card" content="summary_large_image"/>
-  <meta name="twitter:title" content="Tørvejr — bænk med vendbare sæder"/>
+  <meta name="twitter:title" content="Tørvejr — bord-bænkesæt med vendbare plader"/>
 
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "Product",
     "name": "Tørvejr",
-    "category": "Garden bench",
-    "description": "Havebænk med vendbart sæde. Sædepladen er hvælvet på begge flader og drejer 180° i sine egne lejer, så den side, der har vendt nedad og er tør, bliver den man sidder på.",
-    "material": "Eg, robinie eller lærk, rustfrit stål A4",
+    "category": "Picnic table set",
+    "description": "Bord-bænkesæt i ét stykke med vendbare plader. Alle fem plader — tre i bordet, to i bænkene — er hvælvede på begge flader og drejer 180° i deres egne lejer, så den side, der har vendt nedad og er tør, bliver den man sidder på. Tegnet til serieproduktion: én pladeprofil, to støbte dele.",
+    "material": "Eg, robinie eller lærk, glasfyldt PA66, rustfrit stål A4",
     "brand": { "@type": "Brand", "name": "Danish Hawk" },
     "manufacturer": {
       "@type": "Organization",
@@ -45,7 +45,7 @@
       "priceCurrency": "DKK",
       "priceSpecification": {
         "@type": "PriceSpecification",
-        "description": "Pris efter mål og træsort. Oplyses ved forespørgsel."
+        "description": "Pris efter mål, træsort og antal. Oplyses ved forespørgsel."
       },
       "url": "https://danishhawk.com/torvejr/#bestil"
     }
@@ -299,6 +299,36 @@
     .trio-key { font-family: var(--mono); font-size: .66rem; letter-spacing: .18em; text-transform: uppercase;
                 color: var(--accent); margin-bottom: 14px; }
 
+    /* ---------- bill of materials ----------
+       A stocklist is the one place on a product page where a table is the
+       right answer: four facts per part, and the reader compares down the
+       columns rather than reading across. */
+    #produktion { border-top: 1px solid var(--line); padding: 90px 80px; }
+    .bom { margin-top: 64px; border-top: 1px solid var(--line); padding-top: 44px; }
+    .bom-head { max-width: 62ch; margin-bottom: 30px; }
+    .bom-t { font-family: var(--mono); font-size: .67rem; letter-spacing: .18em;
+             text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+    .bom-head p { font-size: 1.05rem; color: var(--mid); font-weight: 500; }
+    .bomwrap { overflow-x: auto; }
+    /* On a phone the stocklist is wider than the screen, so say so rather than
+       leaving a column quietly cut off at the edge. */
+    .bom-hint { display: none; }
+    .bomtab { width: 100%; min-width: 620px; border-collapse: collapse; }
+    .bomtab th { font-family: var(--mono); font-size: .62rem; letter-spacing: .16em;
+                 text-transform: uppercase; color: var(--mid); text-align: left; font-weight: 400;
+                 padding: 0 20px 12px 0; border-bottom: 1px solid var(--ink); }
+    .bomtab td { padding: 13px 20px 13px 0; border-bottom: 1px solid var(--line);
+                 font-size: .98rem; vertical-align: baseline; }
+    .bomtab td:nth-child(2) { font-family: var(--mono); font-size: .82rem; letter-spacing: .03em; }
+    .bomtab th:nth-child(3), .bomtab td:nth-child(3) { text-align: right; padding-right: 34px;
+                 font-family: var(--mono); font-size: .84rem; font-variant-numeric: tabular-nums; }
+    .bomtab td:last-child { color: var(--mid); font-size: .92rem; }
+    /* The five identical boards are the whole argument, so that row carries it. */
+    .bomtab tbody tr:first-child td { font-weight: 500; border-bottom-color: var(--ink); }
+    .steps-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px;
+                  margin-top: 64px; border-top: 1px solid var(--line); padding-top: 44px; }
+    .steps-grid h3 { font-size: 1.25rem; font-weight: 400; margin-bottom: 6px; }
+
     /* ---------- specs ---------- */
     #spec { border-top: 1px solid var(--line); padding: 90px 80px; }
     .spec-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0 56px; margin-top: 40px; }
@@ -363,7 +393,11 @@
       .split-text, .split.flip .split-text { padding: 56px 22px; order: 1; }
       .split-drw, .split.flip .split-drw { padding: 40px 22px; order: 2;
                    border-left: none; border-right: none; border-top: 1px solid var(--line); }
-      #vend, #maal, #spec, #detaljer, #vilkaar { padding: 56px 22px; }
+      #vend, #maal, #spec, #detaljer, #produktion, #vilkaar { padding: 56px 22px; }
+      .steps-grid { grid-template-columns: 1fr; gap: 40px; }
+      .bom-hint { display: block; font-family: var(--mono); font-size: .6rem;
+                  letter-spacing: .14em; text-transform: uppercase; color: var(--mid);
+                  margin-top: 14px; }
       .trio { grid-template-columns: 1fr; }
       .spec-grid { grid-template-columns: 1fr; }
       /* A one-column grid pins a sticky item inside its own row, where it has
@@ -388,8 +422,9 @@
     <ul class="nav-links">
       <li><a href="#princippet" data-da="Princippet" data-en="The principle">Princippet</a></li>
       <li><a href="#vend" data-da="Vend sædet" data-en="Turn the seat">Vend sædet</a></li>
+      <li><a href="#saettet" data-da="Sættet" data-en="The set">Sættet</a></li>
       <li><a href="#maal" data-da="Mål" data-en="Sizes">Mål</a></li>
-      <li><a href="#spec" data-da="Specifikationer" data-en="Specification">Specifikationer</a></li>
+      <li><a href="#produktion" data-da="Produktion" data-en="Production">Produktion</a></li>
       <li><a href="#bestil" data-da="Bestil" data-en="Order">Bestil</a></li>
     </ul>
     <div class="lang-switch">
@@ -476,11 +511,11 @@
   <div class="h-copy">
     <div class="h-eyebrow" data-da="Danish Hawk — Tørvejr" data-en="Danish Hawk — Tørvejr">Danish Hawk — Tørvejr</div>
     <h1 data-da="Den tørre side <em>ligger nedad.</em>" data-en="The dry side <em>is the one underneath.</em>">Den tørre side <em>ligger nedad.</em></h1>
-    <p data-da="En havebænk, hvor sædet kan vendes. Regn rammer kun det, der vender opad — så den side, du skal sidde på, har ligget nedad og er tør. Løft 8 mm, vend, slip. Ingen fjeder, ingen lås, ingen klud."
-       data-en="A garden bench whose seat turns over. Rain only lands on what faces the sky — so the side you sit on has been facing down, and it is dry. Lift it 8 mm, roll it over, let go. No spring, no catch, no cloth.">En havebænk, hvor sædet kan vendes. Regn rammer kun det, der vender opad — så den side, du skal sidde på, har ligget nedad og er tør. Løft 8 mm, vend, slip. Ingen fjeder, ingen lås, ingen klud.</p>
+    <p data-da="Et bord-bænkesæt i ét stykke, hvor alle fem plader kan vendes — tre i bordet, to i bænkene. Regn rammer kun det, der vender opad, så den side, du sætter dig på, har ligget nedad og er tør. Løft 8 mm, vend, slip. Hele sættet er tørt på et halvt minut."
+       data-en="A picnic set in one piece whose five boards all turn over — three in the table, two in the benches. Rain only lands on what faces the sky, so the side you sit down on has been facing down, and it is dry. Lift it 8 mm, roll it over, let go. The whole set is dry in half a minute.">Et bord-bænkesæt i ét stykke, hvor alle fem plader kan vendes — tre i bordet, to i bænkene. Regn rammer kun det, der vender opad, så den side, du sætter dig på, har ligget nedad og er tør. Løft 8 mm, vend, slip. Hele sættet er tørt på et halvt minut.</p>
     <div class="h-cta">
       <a class="h-solid" href="#vend" data-da="Vend sædet selv" data-en="Turn the seat yourself">Vend sædet selv</a>
-      <a class="h-ghost" href="#maal" data-da="Se målene" data-en="See the sizes">Se målene</a>
+      <a class="h-ghost" href="#saettet" data-da="Se sættet" data-en="See the set">Se sættet</a>
     </div>
   </div>
 </section>
@@ -488,20 +523,20 @@
 <!-- ============ FACTS ============ -->
 <div class="facts">
   <div class="fact">
-    <div class="fact-n">2</div>
-    <div class="fact-l" data-da="Sider at sidde på" data-en="Sides to sit on">Sider at sidde på</div>
+    <div class="fact-n">5</div>
+    <div class="fact-l" data-da="Ens plader i sættet" data-en="Identical boards in the set">Ens plader i sættet</div>
+  </div>
+  <div class="fact">
+    <div class="fact-n">10</div>
+    <div class="fact-l" data-da="Sider at sidde og spise på" data-en="Sides to sit and eat on">Sider at sidde og spise på</div>
   </div>
   <div class="fact">
     <div class="fact-n">8 <small>mm</small></div>
-    <div class="fact-l" data-da="Løft, og sædet er frit" data-en="Lift, and the seat is free">Løft, og sædet er frit</div>
+    <div class="fact-l" data-da="Løft, og pladen er fri" data-en="Lift, and the board is free">Løft, og pladen er fri</div>
   </div>
   <div class="fact">
-    <div class="fact-n">180°</div>
-    <div class="fact-l" data-da="Så er den tørre side oppe" data-en="And the dry side is up">Så er den tørre side oppe</div>
-  </div>
-  <div class="fact">
-    <div class="fact-n">0</div>
-    <div class="fact-l" data-da="Fjedre, låse og greb" data-en="Springs, catches and handles">Fjedre, låse og greb</div>
+    <div class="fact-n">2</div>
+    <div class="fact-l" data-da="Støbte dele i mekanikken" data-en="Moulded parts in the mechanism">Støbte dele i mekanikken</div>
   </div>
 </div>
 
@@ -514,8 +549,8 @@
        data-en="So there is always one side of a seat the water has not reached. The whole bench is drawn around that single fact: that side has to be able to come up, and it has to be able to stay dry while it waits.">Derfor er der altid en side af et sæde, vandet ikke har været på. Hele bænken er tegnet omkring den ene kendsgerning: den side skal kunne komme op, og den skal kunne blive tør dernede.</p>
     <ul class="pointlist">
       <li><span class="pn">01</span>
-        <p data-da="Sædet er <b>én massiv plade</b> — ingen lameller, ingen slidser. Et mellemrum ville lede vandet ned på præcis den flade, der skal holdes tør. Det er derfor, almindelige bænkesæt ikke kan vendes: de er lavet af lister med luft imellem."
-           data-en="The seat is <b>one solid board</b> — no slats, no gaps. A gap would lead the water straight down onto the face that is supposed to stay dry. That is why an ordinary bench set cannot be turned over: it is made of battens with air between them.">Sædet er <b>én massiv plade</b> — ingen lameller, ingen slidser. Et mellemrum ville lede vandet ned på præcis den flade, der skal holdes tør. Det er derfor, almindelige bænkesæt ikke kan vendes: de er lavet af lister med luft imellem.</p></li>
+        <p data-da="Pladen er <b>én bred flade</b>, ikke fire lister. Et mellemrum mellem lister ville lede vandet ned på præcis den side, der skal holdes tør — og det er derfor et almindeligt bænkesæt ikke kan vendes: det er bygget af lister med luft imellem, så vandet er lige så meget nedenunder som ovenpå."
+           data-en="The board is <b>one wide face</b>, not four battens. A gap between battens would lead the water straight down onto the side that has to stay dry — and that is why an ordinary bench set cannot be turned over: it is built from battens with air between them, so the water is as much underneath as on top.">Pladen er <b>én bred flade</b>, ikke fire lister. Et mellemrum mellem lister ville lede vandet ned på præcis den side, der skal holdes tør — og det er derfor et almindeligt bænkesæt ikke kan vendes: det er bygget af lister med luft imellem, så vandet er lige så meget nedenunder som ovenpå.</p></li>
       <li><span class="pn">02</span>
         <p data-da="<b>Begge flader er hvælvede</b> — 10 mm fra midten ud til kanten, på hver side. Pladen er det samme sæde, hvad enten den ligger den ene eller den anden vej, og den skiller vandet af begge veje."
            data-en="<b>Both faces are crowned</b> — 10 mm from the middle out to the edge, on each side. The board is the same seat whichever way up it lies, and it sheds water either way.">Begge flader er hvælvede — 10 mm fra midten ud til kanten, på hver side. Pladen er det samme sæde, hvad enten den ligger den ene eller den anden vej, og den skiller vandet af begge veje.</p></li>
@@ -601,17 +636,21 @@
 
         <g id="f-rain" stroke="#5d7b8a" stroke-opacity="0" stroke-width="2.2" stroke-linecap="round"></g>
 
-        <!-- ground, so it is clear where the water ends up -->
-        <path d="M -195 140 L 195 140" stroke="#0f0e0b" stroke-opacity=".25" stroke-width="1.2"/>
+        <!-- The board's drip line falls at ±150, clear of the 70 mm rail: what
+             runs off the seat does not land on the frame. -->
+        <g stroke="#0f0e0b" stroke-opacity=".18" stroke-width="1" stroke-dasharray="5 6">
+          <path d="M -150 22 L -150 150 M 150 22 L 150 150"/>
+        </g>
         <g id="f-splash" stroke="#5d7b8a" stroke-opacity="0" stroke-width="1.6" stroke-linecap="round"></g>
 
         <!-- The upright and the bearing stand beyond the end of the board, so
              from this section they are behind it: a ghost with the bore in it. -->
         <g>
-          <rect x="-47" y="-52" width="94" height="192" fill="#0f0e0b" fill-opacity=".04"/>
-          <rect x="-50" y="-52" width="100" height="24" fill="#0f0e0b" fill-opacity=".07"/>
-          <g fill="none" stroke="#0f0e0b" stroke-opacity=".26" stroke-width="1.2" stroke-dasharray="7 5">
-            <rect x="-47" y="-52" width="94" height="192"/>
+          <rect x="-35" y="45" width="70" height="105" fill="#0f0e0b" fill-opacity=".05"/>
+          <g fill="none" stroke="#0f0e0b" stroke-opacity=".28" stroke-width="1.2" stroke-dasharray="7 5">
+            <path d="M -35 150 L -35 45 L -35 -30 L -26 -30 L -15 -24 L -20.4 -16 L -20.4 0"/>
+            <path d="M 35 150 L 35 45 L 35 -30 L 26 -30 L 15 -24 L 20.4 -16 L 20.4 0"/>
+            <path d="M -35 45 L 35 45"/>
           </g>
         </g>
 
@@ -691,76 +730,178 @@
   </div>
 </section>
 
-<!-- ============ THE BEARING ============ -->
-<section class="split flip" id="lejet">
+<!-- ============ THE SET ============
+     One piece, the way a Danish bench set has always been: the table and both
+     benches on the same two end frames. The five boards are also the bracing —
+     two rows of ties at two heights is a truss. -->
+<section class="split" id="saettet">
   <div class="split-text reveal">
-    <div class="slabel" data-da="Lejet" data-en="The bearing">Lejet</div>
-    <h2 data-da="Låsen er <em>en flade.</em>" data-en="The lock is <em>a flat.</em>">Låsen er <em>en flade.</em></h2>
-    <p class="lede" data-da="Et sæde, der kan vendes, skal stå fuldstændig fast, når det ikke bliver vendt. Man kan løse det med en fjeder, en pal eller en møtrik. Her er det løst med, at akslen ikke er helt rund."
-       data-en="A seat that can be turned has to be completely fixed when it is not being turned. You can solve that with a spring, a pawl or a nut. Here it is solved by the axle not being quite round.">Et sæde, der kan vendes, skal stå fuldstændig fast, når det ikke bliver vendt. Man kan løse det med en fjeder, en pal eller en møtrik. Her er det løst med, at akslen ikke er helt rund.</p>
+    <div class="slabel" data-da="Sættet" data-en="The set">Sættet</div>
+    <h2 data-da="Ét stykke, <em>ikke tre møbler.</em>" data-en="One piece, <em>not three pieces of furniture.</em>">Ét stykke, <em>ikke tre møbler.</em></h2>
+    <p class="lede" data-da="Bordet og de to bænke sidder på de samme to gavle, sådan som et dansk bænkesæt altid har gjort. Benene spreder sig til 1580 mm, og fødderne står under sæderne — så sættet bliver stående, også når man sætter sig ude på kanten."
+       data-en="The table and both benches sit on the same two end frames, the way a Danish bench set always has. The legs splay to 1580 mm and the feet stand under the seats — so the set stays put, even when you sit right on the edge.">Bordet og de to bænke sidder på de samme to gavle, sådan som et dansk bænkesæt altid har gjort. Benene spreder sig til 1580 mm, og fødderne står under sæderne — så sættet bliver stående, også når man sætter sig ude på kanten.</p>
     <ul class="pointlist">
       <li><span class="pn">01</span>
-        <p data-da="Akslen er <b>Ø40 mm med to flader med 24 mm imellem</b>. Den ligger i et leje, der har den samme flade i bunden. Flade mod flade kan ikke dreje — og pladen kan ikke vippe, uanset hvor på den du sætter dig."
-           data-en="The axle is <b>Ø40 mm with two flats, 24 mm across</b>. It sits in a bearing with the same flat in its floor. Flat against flat cannot turn — and the board cannot tip, wherever on it you sit.">Akslen er Ø40 mm med to flader med 24 mm imellem. Den ligger i et leje, der har den samme flade i bunden. Flade mod flade kan ikke dreje — og pladen kan ikke vippe, uanset hvor på den du sætter dig.</p></li>
+        <p data-da="<b>Alle fem plader er den samme plade.</b> Tre ligger i bordet med 8 mm imellem, to ligger som sæder 142 mm uden for bordkanten. De kan sættes i hvor som helst, vendt hvordan som helst: der er ingen venstre og højre, ingen over og under, og ingen par, der skal passe sammen."
+           data-en="<b>All five boards are the same board.</b> Three lie in the table with 8 mm between them, two lie as seats 142 mm outside the table's edge. Any of them goes in any position either way up: there is no left and right, no top and bottom, and no pairs that have to match.">Alle fem plader er den samme plade. Tre ligger i bordet med 8 mm imellem, to ligger som sæder 142 mm uden for bordkanten. De kan sættes i hvor som helst, vendt hvordan som helst: der er ingen venstre og højre, ingen over og under, og ingen par, der skal passe sammen.</p></li>
       <li><span class="pn">02</span>
-        <p data-da="<b>Otte millimeter op, og fladerne er fri af hinanden.</b> Så er akslen rund igen, og pladen drejer. Den bliver liggende i lejet hele vejen rundt — du løfter den ikke ud, du ruller den om."
-           data-en="<b>Eight millimetres up, and the flats are clear of each other.</b> Then the axle is round again and the board turns. It stays in its bearing all the way round — you are not lifting it out, you are rolling it over.">Otte millimeter op, og fladerne er fri af hinanden. Så er akslen rund igen, og pladen drejer. Den bliver liggende i lejet hele vejen rundt — du løfter den ikke ud, du ruller den om.</p></li>
+        <p data-da="<b>Pladerne er samtidig afstivningen.</b> De sidder i lejer i begge ender og holder gavlene i afstand — tre oppe i bordhøjde, to nede i sædehøjde. Træk i to højder er en gitterkonstruktion, og det er derfor sættet ikke skævvrider sig, selvom der ikke er en eneste diagonal i det."
+           data-en="<b>The boards are also the bracing.</b> They sit in pivots at both ends and hold the end frames apart — three up at table height, two down at seat height. Ties at two heights make a truss, and that is why the set does not rack, even though there is not one diagonal in it.">Pladerne er samtidig afstivningen. De sidder i lejer i begge ender og holder gavlene i afstand — tre oppe i bordhøjde, to nede i sædehøjde. Træk i to højder er en gitterkonstruktion, og det er derfor sættet ikke skævvrider sig, selvom der ikke er en eneste diagonal i det.</p></li>
       <li><span class="pn">03</span>
-        <p data-da="Over akslen sidder et <b>boltet dæksel</b> med 12 mm luft. Otte millimeter skal der til for at vende sædet — tyve for at løfte akslen fri af lejet og pladen af bænken. De to tal ligger langt nok fra hinanden til, at bænken ikke kan blæse fra hinanden, og at sædet ikke kan bæres væk. Fire bolte, og pladen kan alligevel tages helt ud."
-           data-en="Above the axle sits a <b>bolted cap</b> with 12 mm of clearance. Eight millimetres are needed to turn the seat — twenty to lift the axle clear of its bearing and the board off the bench. The two figures sit far enough apart that the bench cannot blow apart and the seat cannot be carried off. Four bolts, and the board still comes right out.">Over akslen sidder et boltet dæksel med 12 mm luft. Otte millimeter skal der til for at vende sædet — tyve for at løfte akslen fri af lejet og pladen af bænken. De to tal ligger langt nok fra hinanden til, at bænken ikke kan blæse fra hinanden, og at sædet ikke kan bæres væk. Fire bolte, og pladen kan alligevel tages helt ud.</p></li>
+        <p data-da="<b>Mellemrummene i bordpladen er en fordel.</b> En bordplade skal af med vandet nedad, ikke holde en flade tør nedenunder — så de 8 mm lader den løbe tom med det samme, og krummer og grus følger med. Vandet falder ned mellem bord og bænk, ikke ned på den side af sædet, der skal være tør."
+           data-en="<b>The gaps in the tabletop are an advantage.</b> A tabletop has to shed water downwards, not keep a face dry underneath — so the 8 mm let it empty at once, and crumbs and grit go with it. The water falls between table and bench, not onto the side of the seat that has to stay dry.">Mellemrummene i bordpladen er en fordel. En bordplade skal af med vandet nedad, ikke holde en flade tør nedenunder — så de 8 mm lader den løbe tom med det samme, og krummer og grus følger med. Vandet falder ned mellem bord og bænk, ikke ned på den side af sædet, der skal være tør.</p></li>
       <li><span class="pn">04</span>
-        <p data-da="<b>Lejet har afløb.</b> En bøsning i POM, et hus i 6 mm rustfrit A4 og et Ø5 hul i bunden. Det er ikke en lomme, der samler vand, og der er slør nok til, at en frostnat ikke låser sædet fast."
-           data-en="<b>The bearing drains.</b> A POM bush, a housing in 6 mm A4 stainless, and a Ø5 hole in the bottom. It is not a pocket that collects water, and there is enough clearance that a night of frost does not lock the seat.">Lejet har afløb. En bøsning i POM, et hus i 6 mm rustfrit A4 og et Ø5 hul i bunden. Det er ikke en lomme, der samler vand, og der er slør nok til, at en frostnat ikke låser sædet fast.</p></li>
+        <p data-da="<b>Benene er ude af knæhøjde.</b> Ved sædehøjde sidder benet 414 mm fra midten, altså 186 mm inde under bordet, og bænkevangen ligger 66 mm under sædets overkant. Der er ingenting at støde knæet på mellem bordkant og sæde."
+           data-en="<b>The legs are out of knee height.</b> At seat height the leg sits 414 mm from the centre — 186 mm in under the table — and the seat rail lies 66 mm below the top of the seat. There is nothing to catch a knee on between the table's edge and the seat.">Benene er ude af knæhøjde. Ved sædehøjde sidder benet 414 mm fra midten, altså 186 mm inde under bordet, og bænkevangen ligger 66 mm under sædets overkant. Der er ingenting at støde knæet på mellem bordkant og sæde.</p></li>
     </ul>
   </div>
 
   <div class="split-drw drw reveal">
-    <svg viewBox="-124 -62 248 182" role="img"
-         aria-label="Detaljetegning af lejet, set fra bænkens ende: aksel Ø40 med to flader hviler på fladen i bøsningen, bøsning i POM, hus i rustfrit stål, boltet dæksel med 12 mm luft over akslen, og afløbshul i bunden.">
-      <!-- 3 — the timber upright, standing just beyond the end of the board -->
-      <rect x="-47" y="-32" width="94" height="131.6" fill="#0f0e0b" fill-opacity=".05"
-            stroke="#0f0e0b" stroke-opacity=".3" stroke-width="1"/>
-      <!-- 3 — the housing, let into its top -->
-      <rect x="-50" y="-32" width="100" height="89.6" fill="#b9b3a7" fill-opacity=".55"
-            stroke="#0f0e0b" stroke-opacity=".55" stroke-width="1"/>
-      <!-- 2 — the bush: 4 mm of POM, and the flat in its floor is the lock -->
-      <path d="M -24.4 -32 L -24.4 0 A 24.4 24.4 0 0 0 24.4 0 L 24.4 -32 Z"
-            fill="#e0d8c8" stroke="#0f0e0b" stroke-opacity=".5" stroke-width="1"/>
-      <path d="M -20.4 -32 L -20.4 0 A 20.4 20.4 0 0 0 20.4 0 L 20.4 -32 Z"
-            fill="#eeebe5" stroke="#0f0e0b" stroke-opacity=".45" stroke-width=".9"/>
-      <path d="M -16.2 12 L 16.2 12 L 16.2 19 L -16.2 19 Z" fill="#e0d8c8"
-            stroke="none"/>
-      <path d="M -16.2 12 L 16.2 12" stroke="#0f0e0b" stroke-opacity=".7" stroke-width="1.6"/>
+    <svg viewBox="-1130 -910 2260 1040" role="img"
+         aria-label="Sættet set fra enden: to gavle bærer både bordet i 740 mm og de to sæder i 450 mm. Bordpladen er tre plader, 916 mm over det hele, sæderne er en plade hver, 142 mm uden for bordkanten. Benene spreder sig til 1580 mm.">
+      <!-- the frame: two legs, the seat rail, the table beam -->
+      <g fill="#eae3d5" stroke="#0f0e0b" stroke-opacity=".75" stroke-width="3.4">
+        <path d="M 711 0 L 869 0 L 279 -674 L 121 -674 Z"/>
+        <path d="M -711 0 L -869 0 L -279 -674 L -121 -674 Z"/>
+        <rect x="-800" y="-384" width="1600" height="120"/>
+        <rect x="-400" y="-674" width="800" height="120"/>
+      </g>
+      <!-- the longitudinal tie, seen end-on behind the frame -->
+      <rect x="-23" y="-264" width="46" height="120" fill="#0f0e0b" fill-opacity=".05"
+            stroke="#0f0e0b" stroke-opacity=".3" stroke-width="2.4" stroke-dasharray="14 10"/>
+      <!-- the bolted laps -->
+      <g fill="none" stroke="#0f0e0b" stroke-opacity=".45" stroke-width="2.6">
+        <circle cx="473" cy="-324" r="9"/><circle cx="553" cy="-324" r="9"/>
+        <circle cx="-473" cy="-324" r="9"/><circle cx="-553" cy="-324" r="9"/>
+        <circle cx="230" cy="-614" r="9"/><circle cx="300" cy="-614" r="9"/>
+        <circle cx="-230" cy="-614" r="9"/><circle cx="-300" cy="-614" r="9"/>
+      </g>
+      <path d="M -1090 0 L 1090 0" stroke="#0f0e0b" stroke-opacity=".4" stroke-width="4"/>
 
-      <!-- 1 — the axle, seated: its flat lying on the bearing's flat -->
+      <!-- the ten pivots, and the five boards they carry -->
+      <rect x="-40" y="-719" width="80" height="45" fill="#c8a96e" fill-opacity=".65" stroke="#0f0e0b" stroke-opacity=".5" stroke-width="2.6"/>
+      <rect x="-348" y="-719" width="80" height="45" fill="#c8a96e" fill-opacity=".65" stroke="#0f0e0b" stroke-opacity=".5" stroke-width="2.6"/>
+      <rect x="268" y="-719" width="80" height="45" fill="#c8a96e" fill-opacity=".65" stroke="#0f0e0b" stroke-opacity=".5" stroke-width="2.6"/>
+      <rect x="-790" y="-429" width="80" height="45" fill="#c8a96e" fill-opacity=".65" stroke="#0f0e0b" stroke-opacity=".5" stroke-width="2.6"/>
+      <rect x="710" y="-429" width="80" height="45" fill="#c8a96e" fill-opacity=".65" stroke="#0f0e0b" stroke-opacity=".5" stroke-width="2.6"/>
+      <path transform="translate(0,-719)" d="M -139 -11 Q 0 -31 139 -11 A 11 11 0 0 1 139 11 Q 0 31 -139 11 A 11 11 0 0 1 -139 -11 Z" fill="#c9b795" stroke="#0f0e0b" stroke-width="3.4"/>
+      <path transform="translate(-308,-719)" d="M -139 -11 Q 0 -31 139 -11 A 11 11 0 0 1 139 11 Q 0 31 -139 11 A 11 11 0 0 1 -139 -11 Z" fill="#c9b795" stroke="#0f0e0b" stroke-width="3.4"/>
+      <path transform="translate(308,-719)" d="M -139 -11 Q 0 -31 139 -11 A 11 11 0 0 1 139 11 Q 0 31 -139 11 A 11 11 0 0 1 -139 -11 Z" fill="#c9b795" stroke="#0f0e0b" stroke-width="3.4"/>
+      <path transform="translate(-750,-429)" d="M -139 -11 Q 0 -31 139 -11 A 11 11 0 0 1 139 11 Q 0 31 -139 11 A 11 11 0 0 1 -139 -11 Z" fill="#c9b795" stroke="#0f0e0b" stroke-width="3.4"/>
+      <path transform="translate(750,-429)" d="M -139 -11 Q 0 -31 139 -11 A 11 11 0 0 1 139 11 Q 0 31 -139 11 A 11 11 0 0 1 -139 -11 Z" fill="#c9b795" stroke="#0f0e0b" stroke-width="3.4"/>
+
+      <!-- where the water goes -->
+      <g stroke="#5d7b8a" stroke-width="3.4" stroke-linecap="round" stroke-opacity=".75"
+         stroke-dasharray="13 20" fill="none">
+        <path d="M -154 -700 L -154 -120"/>
+        <path d="M 154 -700 L 154 -120"/>
+        <path d="M -458 -712 L -505 -120"/>
+        <path d="M 458 -712 L 505 -120"/>
+      </g>
+      <g fill="#5d7b8a" fill-opacity=".75">
+        <path d="M -154 -108 q -10 15 0 22 q 10 -7 0 -22 Z"/>
+        <path d="M 154 -108 q -10 15 0 22 q 10 -7 0 -22 Z"/>
+        <path d="M -507 -108 q -10 15 0 22 q 10 -7 0 -22 Z"/>
+        <path d="M 507 -108 q -10 15 0 22 q 10 -7 0 -22 Z"/>
+      </g>
+
+      <!-- the measurements that make it a bench set and not a table -->
+      <g stroke="#0f0e0b" stroke-opacity=".45" stroke-width="2.6" fill="none">
+        <path d="M -458 -820 L 458 -820"/>
+        <path d="M -458 -802 L -458 -838 M 458 -802 L 458 -838"/>
+        <path d="M 458 -580 L 600 -580"/>
+        <path d="M 458 -562 L 458 -598 M 600 -562 L 600 -598"/>
+        <path d="M 600 -500 L 900 -500"/>
+        <path d="M 600 -482 L 600 -518 M 900 -482 L 900 -518"/>
+        <path d="M -1000 0 L -1000 -740"/>
+        <path d="M -1018 0 L -982 0 M -1018 -740 L -982 -740"/>
+        <path d="M 1000 0 L 1000 -450"/>
+        <path d="M 1018 0 L 982 0 M 1018 -450 L 982 -450"/>
+        <path d="M -790 60 L 790 60"/>
+        <path d="M -790 42 L -790 78 M 790 42 L 790 78"/>
+        <path d="M -458 -740 L -1000 -740" stroke-opacity=".2" stroke-dasharray="12 10"/>
+        <path d="M 911 -450 L 1000 -450" stroke-opacity=".2" stroke-dasharray="12 10"/>
+      </g>
+      <text class="dim" x="0" y="-850" text-anchor="middle" fill="#0f0e0b" fill-opacity=".65">916</text>
+      <text class="dim" x="529" y="-610" text-anchor="middle" fill="#0f0e0b" fill-opacity=".65">142</text>
+      <text class="dim" x="750" y="-530" text-anchor="middle" fill="#0f0e0b" fill-opacity=".65">300</text>
+      <text class="dim" x="-1022" y="-360" text-anchor="end" fill="#0f0e0b" fill-opacity=".65">740</text>
+      <text class="dim" x="1022" y="-212" fill="#0f0e0b" fill-opacity=".65">450</text>
+      <text class="dim" x="0" y="104" text-anchor="middle" fill="#0f0e0b" fill-opacity=".65">1580</text>
+    </svg>
+    <div class="drw-cap"
+         data-da="Sættet set fra enden — 1:20. De fem mørke plader er den samme plade fem gange; de gule er de ti vendelejer. Den stiplede blå linje er vandets vej ud."
+         data-en="The set seen from the end — 1:20. The five darker boards are the same board five times; the yellow blocks are the ten pivots. The dashed blue line is the water's way out.">Sættet set fra enden — 1:20. De fem mørke plader er den samme plade fem gange; de gule er de ti vendelejer. Den stiplede blå linje er vandets vej ud.</div>
+  </div>
+</section>
+
+<!-- ============ THE PIVOT ============ -->
+<section class="split flip" id="lejet">
+  <div class="split-text reveal">
+    <div class="slabel" data-da="Vendelejet" data-en="The pivot">Vendelejet</div>
+    <h2 data-da="To støbte dele, <em>og ikke flere.</em>" data-en="Two moulded parts, <em>and no more.</em>">To støbte dele, <em>og ikke flere.</em></h2>
+    <p class="lede" data-da="En plade, der kan vendes, skal stå fuldstændig fast, når den ikke bliver vendt — og der skal ti af dem i hvert sæt. Derfor er hele mekanikken to sprøjtestøbte dele og fire skruer pr. plade. Ingen fjeder, ingen pal, ingen møtrik, intet at spænde."
+       data-en="A board that turns has to be completely fixed when it is not being turned — and there are ten of them in every set. So the whole mechanism is two injection-moulded parts and four screws per board. No spring, no pawl, no nut, nothing to tighten.">En plade, der kan vendes, skal stå fuldstændig fast, når den ikke bliver vendt — og der skal ti af dem i hvert sæt. Derfor er hele mekanikken to sprøjtestøbte dele og fire skruer pr. plade. Ingen fjeder, ingen pal, ingen møtrik, intet at spænde.</p>
+    <ul class="pointlist">
+      <li><span class="pn">01</span>
+        <p data-da="<b>Akslen er støbt på klodsen</b> — Ø40 med to flader med 24 mm imellem. Klodsen sidder på pladens ende med en tap i et boret hul og to skruer i kanterne, og den står 3 mm ude fra endetræet på støbte ribber, så enden er i skygge, men har luft."
+           data-en="<b>The axle is moulded onto the block</b> — Ø40 with two flats 24 mm apart. The block sits on the end of the board on a spigot in a bored hole with two screws into the edges, and it stands 3 mm off the end grain on moulded ribs, so the end is shaded but has air.">Akslen er støbt på klodsen — Ø40 med to flader med 24 mm imellem. Klodsen sidder på pladens ende med en tap i et boret hul og to skruer i kanterne, og den står 3 mm ude fra endetræet på støbte ribber, så enden er i skygge, men har luft.</p></li>
+      <li><span class="pn">02</span>
+        <p data-da="<b>Skålen har den samme flade i bunden.</b> Flade mod flade kan ikke dreje, og pladen kan ikke vippe, uanset hvor på den du sætter dig. Otte millimeter op, og fladerne er fri af hinanden: så er akslen rund igen, og pladen drejer hele vejen rundt uden at komme ud af skålen."
+           data-en="<b>The cup has the same flat in its floor.</b> Flat against flat cannot turn, and the board cannot tip wherever on it you sit. Eight millimetres up and the flats are clear of each other: then the axle is round again and the board turns all the way over without leaving the cup.">Skålen har den samme flade i bunden. Flade mod flade kan ikke dreje, og pladen kan ikke vippe, uanset hvor på den du sætter dig. Otte millimeter op, og fladerne er fri af hinanden: så er akslen rund igen, og pladen drejer hele vejen rundt uden at komme ud af skålen.</p></li>
+      <li><span class="pn">03</span>
+        <p data-da="<b>Snap-tungerne er dækslet.</b> De er støbt i ét med skålen, så der er ingen bolte at tabe og intet at efterspænde. Munden er 30 mm og akslen 40: der er ti millimeter at komme op i, der skal otte til for at vende pladen, og fyrre kan ikke komme gennem tredive. Derfor bliver den siddende. Den klikkes i med tommelfingrene og skal have et fast, bevidst træk for at komme ud igen."
+           data-en="<b>The snap tongues are the cap.</b> They are moulded in one piece with the cup, so there are no bolts to lose and nothing to re-tighten. The mouth is 30 mm and the axle 40. That leaves the board ten millimetres to rise in, and turning it takes eight — but forty cannot pass thirty, so it stays put. It clicks in with your thumbs and takes a firm, deliberate pull to come out again.">Snap-tungerne er dækslet. De er støbt i ét med skålen, så der er ingen bolte at tabe og intet at efterspænde. Munden er 30 mm og akslen 40: der er ti millimeter at komme op i, der skal otte til for at vende pladen, og fyrre kan ikke komme gennem tredive. Derfor bliver den siddende. Den klikkes i med tommelfingrene og skal have et fast, bevidst træk for at komme ud igen.</p></li>
+      <li><span class="pn">04</span>
+        <p data-da="<b>Glasfyldt PA66 med UV-pakke, ikke stål.</b> Det korroderer ikke, det smører sig selv, og det kan ikke give de blåsorte tanninpletter, som jern giver i eg. Dertil kommer det egentlige argument: én form i stedet for ti drejede aksler, ti bøsninger og tyve svejsninger pr. sæt."
+           data-en="<b>Glass-filled PA66 with a UV package, not steel.</b> It does not corrode, it lubricates itself, and it cannot leave the blue-black tannin stains that iron leaves in oak. And then the real argument: one mould instead of ten turned axles, ten bushes and twenty welds per set.">Glasfyldt PA66 med UV-pakke, ikke stål. Det korroderer ikke, det smører sig selv, og det kan ikke give de blåsorte tanninpletter, som jern giver i eg. Dertil kommer det egentlige argument: én form i stedet for ti drejede aksler, ti bøsninger og tyve svejsninger pr. sæt.</p></li>
+    </ul>
+  </div>
+
+  <div class="split-drw drw reveal">
+    <svg viewBox="-124 -78 248 210" role="img"
+         aria-label="Detaljetegning af vendelejet: den støbte aksel Ø40 med to flader hviler på fladen i skålen, snap-tungerne holder den nede, og der er otte millimeter fra fladen til fladen slipper.">
+      <!-- 4 — the rail the cup is screwed to -->
+      <rect x="-35" y="46" width="70" height="86" fill="#0f0e0b" fill-opacity=".06"
+            stroke="#0f0e0b" stroke-opacity=".35" stroke-width="1"/>
+      <!-- 2 — the cup, with the flat in its floor and the snap tongues moulded in -->
+      <path d="M -35 46 L 35 46 L 35 -30 L 26 -30 L 15 -24 L 20.4 -16 L 20.4 0
+               A 20.4 20.4 0 0 1 16.5 12 L -16.5 12 A 20.4 20.4 0 0 1 -20.4 0
+               L -20.4 -16 L -15 -24 L -26 -30 L -35 -30 Z"
+            fill="#d8d0c0" stroke="#0f0e0b" stroke-opacity=".65" stroke-width="1"/>
+      <path d="M -16.5 12 L 16.5 12" stroke="#0f0e0b" stroke-opacity=".75" stroke-width="1.8"/>
+
+      <!-- 1 — the axle, seated, its flat on the cup's flat -->
       <path d="M -16 -12 L 16 -12 A 20 20 0 0 1 16 12 L -16 12 A 20 20 0 0 1 -16 -12 Z"
-            fill="#c8a96e" fill-opacity=".4" stroke="#0f0e0b" stroke-width="1.2"/>
+            fill="#c8a96e" fill-opacity=".42" stroke="#0f0e0b" stroke-width="1.2"/>
       <!-- the same axle, lifted the 8 mm and part way round -->
       <g transform="translate(0,-8) rotate(58)">
         <path d="M -16 -12 L 16 -12 A 20 20 0 0 1 16 12 L -16 12 A 20 20 0 0 1 -16 -12 Z"
               fill="none" stroke="#c8a96e" stroke-width="1.2" stroke-dasharray="5 4"/>
       </g>
 
-      <!-- 4 — the cap, and the clearance it leaves -->
-      <rect x="-50" y="-44" width="100" height="12" fill="#b9b3a7" fill-opacity=".55"
-            stroke="#0f0e0b" stroke-opacity=".55" stroke-width="1"/>
-      <g fill="none" stroke="#0f0e0b" stroke-opacity=".45" stroke-width="1">
-        <circle cx="-34" cy="-38" r="3.6"/><circle cx="34" cy="-38" r="3.6"/>
-      </g>
+      <!-- the eight millimetres, where they happen: between the two flats -->
       <g stroke="#c8a96e" stroke-width="1" fill="none">
-        <path d="M 0 -20 L 62 -20" stroke-opacity=".45" stroke-dasharray="4 4"/>
-        <path d="M 0 -32 L 62 -32" stroke-opacity=".45" stroke-dasharray="4 4"/>
-        <path d="M 56 -20 L 56 -32"/>
-        <path d="M 52 -20 L 60 -20 M 52 -32 L 60 -32"/>
+        <path d="M -20 12 L -74 12" stroke-opacity=".45" stroke-dasharray="4 4"/>
+        <path d="M -20 4 L -74 4" stroke-opacity=".45" stroke-dasharray="4 4"/>
+        <path d="M -68 4 L -68 12"/>
+        <path d="M -72 4 L -64 4 M -72 12 L -64 12"/>
       </g>
-      <text class="dim" x="64" y="-23" fill="#a8853f">12</text>
+      <text class="dim" x="-78" y="11" text-anchor="end" fill="#a8853f">8</text>
+      <!-- and the mouth that keeps it in -->
+      <g stroke="#0f0e0b" stroke-opacity=".5" stroke-width="1" fill="none">
+        <path d="M -15 -38 L 15 -38"/>
+        <path d="M -15 -34 L -15 -42 M 15 -34 L 15 -42"/>
+      </g>
+      <text class="dim" x="0" y="-44" text-anchor="middle" fill="#0f0e0b" fill-opacity=".65">30</text>
 
-      <!-- 5 — the drain, bored out through the front of the housing: from here
-           it is a hidden hole, so it is drawn dashed -->
-      <circle cx="0" cy="15.5" r="2.5" fill="none" stroke="#0f0e0b" stroke-opacity=".55"
-              stroke-width=".9" stroke-dasharray="3 2.4"/>
+      <!-- the screws that hold the cup down -->
+      <g stroke="#0f0e0b" stroke-opacity=".45" stroke-width="1" fill="none">
+        <path d="M -28 20 L -28 62 M 28 20 L 28 62"/>
+        <path d="M -32 20 L -24 20 M 24 20 L 32 20"/>
+      </g>
 
-      <!-- the seat board it all sits inside, broken off left and right -->
+      <!-- the board it all carries, broken off left and right -->
       <g fill="none" stroke="#0f0e0b" stroke-opacity=".26" stroke-width="1" stroke-dasharray="8 5">
         <path d="M -105 -15.3 Q 0 -31 105 -15.3"/>
         <path d="M -105 15.3 Q 0 31 105 15.3"/>
@@ -770,31 +911,26 @@
         <path d="M -105 -15.3 L -109 -8 L -101 -2 L -109 4 L -105 15.3"/>
       </g>
 
-      <!-- the parts, numbered rather than named: at this scale a word is
-           bigger than the part it points at -->
       <g class="dim" style="font-size:9px" text-anchor="middle" fill="#0f0e0b" fill-opacity=".75">
         <g fill="none" stroke="#0f0e0b" stroke-opacity=".4" stroke-width=".8">
           <path d="M 64 -4 L 20 -2"/>
-          <path d="M -64 34 L -22 13"/>
-          <path d="M -64 -34 L -50 -26"/>
-          <path d="M 64 -50 L 50 -41"/>
-          <path d="M 22 44 L 5 18"/>
+          <path d="M -64 34 L -30 24"/>
+          <path d="M 64 -50 L 24 -31"/>
+          <path d="M 64 56 L 36 52"/>
         </g>
         <g fill="#eeebe5" stroke="#0f0e0b" stroke-opacity=".5" stroke-width=".8">
-          <circle cx="72" cy="-4" r="8"/><circle cx="-72" cy="34" r="8"/>
-          <circle cx="-72" cy="-34" r="8"/><circle cx="72" cy="-50" r="8"/>
-          <circle cx="30" cy="44" r="8"/>
+          <circle cx="72" cy="-4" r="8"/><circle cx="-72" cy="36" r="8"/>
+          <circle cx="72" cy="-52" r="8"/><circle cx="72" cy="57" r="8"/>
         </g>
         <text x="72" y="-1" fill="#0f0e0b" fill-opacity=".75">1</text>
-        <text x="-72" y="37" fill="#0f0e0b" fill-opacity=".75">2</text>
-        <text x="-72" y="-31" fill="#0f0e0b" fill-opacity=".75">3</text>
-        <text x="72" y="-47" fill="#0f0e0b" fill-opacity=".75">4</text>
-        <text x="30" y="47" fill="#0f0e0b" fill-opacity=".75">5</text>
+        <text x="-72" y="39" fill="#0f0e0b" fill-opacity=".75">2</text>
+        <text x="72" y="-49" fill="#0f0e0b" fill-opacity=".75">3</text>
+        <text x="72" y="60" fill="#0f0e0b" fill-opacity=".75">4</text>
       </g>
     </svg>
     <div class="drw-cap"
-         data-da="Lejet, set fra bænkens ende — 1:2. Fuld streg: sædet står fast. Punkteret: løftet 8 mm og på vej rundt.<br/>1 aksel Ø40 med to flader med 24 mm imellem · 2 bøsning i POM, 4 mm · 3 hus i 6 mm A4 i opstanderen · 4 dæksel med 12 mm luft, 2 × M8 · 5 afløb Ø5, boret ud gennem forsiden"
-         data-en="The bearing, seen from the end of the bench — 1:2. Solid: the seat is fixed. Dashed: lifted 8 mm and on its way round.<br/>1 axle Ø40 with two flats, 24 mm · 2 bush in POM, 4 mm · 3 housing in 6 mm A4 in the upright · 4 cap with 12 mm clearance, 2 × M8 · 5 drain Ø5, bored out through the front">Lejet, set fra bænkens ende — 1:2. Fuld streg: sædet står fast. Punkteret: løftet 8 mm og på vej rundt.<br/>1 aksel Ø40 med to flader med 24 mm imellem · 2 bøsning i POM, 4 mm · 3 hus i 6 mm A4 i opstanderen · 4 dæksel med 12 mm luft, 2 × M8 · 5 afløb Ø5, boret ud gennem forsiden</div>
+         data-da="Vendelejet, set fra sættets ende — 1:2. Fuld streg: pladen står fast. Punkteret: løftet 8 mm og på vej rundt.<br/>1 aksel Ø40 med to flader, støbt på klodsen · 2 skål med flade i bunden · 3 snap-tunge, mund 30 mm · 4 vange, skålen skrues på med to skruer"
+         data-en="The pivot, seen from the end of the set — 1:2. Solid: the board is fixed. Dashed: lifted 8 mm and on its way round.<br/>1 axle Ø40 with two flats, moulded onto the block · 2 cup with the flat in its floor · 3 snap tongue, 30 mm mouth · 4 rail; the cup takes two screws">Vendelejet, set fra sættets ende — 1:2. Fuld streg: pladen står fast. Punkteret: løftet 8 mm og på vej rundt.<br/>1 aksel Ø40 med to flader, støbt på klodsen · 2 skål med flade i bunden · 3 snap-tunge, mund 30 mm · 4 vange, skålen skrues på med to skruer</div>
   </div>
 </section>
 
@@ -810,20 +946,20 @@
     <div>
       <div class="trio-key" data-da="Enderne" data-en="The ends">Enderne</div>
       <h3 data-da="En sko, ikke en hætte." data-en="A shoe, not a cap.">En sko, ikke en hætte.</h3>
-      <p data-da="Akslen er svejset på en plade i 5 mm A4, som sidder for enden af sædet og holdes 3 mm ude fra endetræet på rustfri afstandsbøsninger. Endetræet er dermed i skygge, men har luft — det er forskellen på en sko og en hætte. En hætte, der slutter tæt, er netop det, der får en ende til at rådne. Skruerne går i sædets kanter, i langtræ, gennem slidsede huller, så pladen kan arbejde de 4–5 mm, den bevæger sig hen over året."
-         data-en="The axle is welded to a 5 mm A4 plate that sits at the end of the seat, held 3 mm off the end grain on stainless spacers. The end grain is shaded but has air — that is the difference between a shoe and a cap. A cap that seals is exactly what makes an end rot. The screws go into the edges of the seat, into side grain, through slotted holes, so the board can move the 4–5 mm it moves over the year.">Akslen er svejset på en plade i 5 mm A4, som sidder for enden af sædet og holdes 3 mm ude fra endetræet på rustfri afstandsbøsninger. Endetræet er dermed i skygge, men har luft — det er forskellen på en sko og en hætte. En hætte, der slutter tæt, er netop det, der får en ende til at rådne. Skruerne går i sædets kanter, i langtræ, gennem slidsede huller, så pladen kan arbejde de 4–5 mm, den bevæger sig hen over året.</p>
+      <p data-da="Vendeklodsen dækker endetræet, men står 3 mm ude fra det på støbte ribber. Enden er dermed i skygge og har luft — det er forskellen på en sko og en hætte, og en hætte, der slutter tæt, er netop det, der får en ende til at rådne. Tappen sidder i et boret hul og tager lasten; de to skruer går i pladens kanter, i langtræ, gennem slidsede huller, så pladen kan arbejde de 4–5 mm, den bevæger sig hen over året."
+         data-en="The axle block covers the end grain but stands 3 mm off it on moulded ribs. The end is shaded and has air — that is the difference between a shoe and a cap, and a cap that seals is exactly what makes an end rot. The spigot sits in a bored hole and takes the load; the two screws go into the board's edges, into side grain, through slotted holes, so the board can move the 4–5 mm it moves over the year.">Vendeklodsen dækker endetræet, men står 3 mm ude fra det på støbte ribber. Enden er dermed i skygge og har luft — det er forskellen på en sko og en hætte, og en hætte, der slutter tæt, er netop det, der får en ende til at rådne. Tappen sidder i et boret hul og tager lasten; de to skruer går i pladens kanter, i langtræ, gennem slidsede huller, så pladen kan arbejde de 4–5 mm, den bevæger sig hen over året.</p>
     </div>
     <div>
       <div class="trio-key" data-da="Fødderne" data-en="The feet">Fødderne</div>
       <h3 data-da="Træet står ikke på fliserne." data-en="The timber does not stand on the paving.">Træet står ikke på fliserne.</h3>
-      <p data-da="Hvert ben ender i en fodplade i 5 mm A4, så benets endetræ står 5 mm over flisen og ikke i vandet, der ligger på den. Det er det samme sted, et almindeligt bænkesæt begynder at gå: nedefra, hvor man ikke ser det, fordi endetræet suger som et sugerør. Og den gør, at bænken kan trækkes hen over fliserne uden at flosse i kanten."
-         data-en="Every leg ends in a 5 mm A4 foot plate, so the leg's end grain stands 5 mm above the slab and not in the water lying on it. That is where an ordinary bench set starts to go: from below, out of sight, because end grain draws water like a straw. The plate is also what lets the bench be dragged without fraying at the corner.">Hvert ben ender i en fodplade i 5 mm A4, så benets endetræ står 5 mm over flisen og ikke i vandet, der ligger på den. Det er det samme sted, et almindeligt bænkesæt begynder at gå: nedefra, hvor man ikke ser det, fordi endetræet suger som et sugerør. Og den gør, at bænken kan trækkes hen over fliserne uden at flosse i kanten.</p>
+      <p data-da="Hvert ben ender i en standard nylonfod, så benets endetræ står 6 mm over flisen og ikke i vandet, der ligger på den. Det er det samme sted, et almindeligt bænkesæt begynder at gå: nedefra, hvor man ikke ser det, fordi endetræet suger som et sugerør. Foden er en hyldevare — der er ingen grund til at støbe en, når den findes."
+         data-en="Every leg ends in a standard nylon foot, so the leg's end grain stands 6 mm above the slab and not in the water lying on it. That is where an ordinary bench set starts to go: from below, out of sight, because end grain draws water like a straw. The foot is an off-the-shelf part — there is no reason to mould one when it already exists.">Hvert ben ender i en standard nylonfod, så benets endetræ står 6 mm over flisen og ikke i vandet, der ligger på den. Det er det samme sted, et almindeligt bænkesæt begynder at gå: nedefra, hvor man ikke ser det, fordi endetræet suger som et sugerør. Foden er en hyldevare — der er ingen grund til at støbe en, når den findes.</p>
     </div>
     <div>
       <div class="trio-key" data-da="Vedligehold" data-en="Upkeep">Vedligehold</div>
       <h3 data-da="Begge sider er oversiden." data-en="Both sides are the top.">Begge sider er oversiden.</h3>
-      <p data-da="Sædet har to flader, der bliver siddet på lige meget, så de bliver også slebet og behandlet ens. Derfor olie og ikke maling: olie kan gives igen på begge sider, og en olieret flade, der gråner, gråner ens. Skal pladen have en tur, løsner du fire bolte og tager den med ind på et bord — det er nemmere at olie en plade, der ligger løst, end en bænk, man ligger under."
-         data-en="The seat has two faces that get sat on equally, so they are sanded and finished equally. Hence oil and not paint: oil can be given again on both sides, and an oiled face that greys, greys evenly. When the board needs a round, you undo four bolts and take it indoors onto a table — it is easier to oil a loose board than a bench you have to lie under.">Sædet har to flader, der bliver siddet på lige meget, så de bliver også slebet og behandlet ens. Derfor olie og ikke maling: olie kan gives igen på begge sider, og en olieret flade, der gråner, gråner ens. Skal pladen have en tur, løsner du fire bolte og tager den med ind på et bord — det er nemmere at olie en plade, der ligger løst, end en bænk, man ligger under.</p>
+      <p data-da="Pladerne har to flader, der bruges lige meget, så de bliver også slebet og behandlet ens. Derfor olie og ikke maling: olie kan gives igen på begge sider, og en olieret flade, der gråner, gråner ens. Skal en plade have en tur, klikkes den ud og lægges på et bord — og bliver den ødelagt, er reservedelen den samme plade som de fire andre."
+         data-en="The boards have two faces that get used equally, so they are sanded and finished equally. Hence oil and not paint: oil can be given again on both sides, and an oiled face that greys, greys evenly. When a board needs a round it clicks out onto a table — and if it is damaged, the spare is the same board as the other four.">Pladerne har to flader, der bruges lige meget, så de bliver også slebet og behandlet ens. Derfor olie og ikke maling: olie kan gives igen på begge sider, og en olieret flade, der gråner, gråner ens. Skal en plade have en tur, klikkes den ud og lægges på et bord — og bliver den ødelagt, er reservedelen den samme plade som de fire andre.</p>
     </div>
   </div>
 </section>
@@ -832,18 +968,18 @@
 <section id="maal">
   <div class="cfg-head reveal">
     <div class="slabel" data-da="Målene" data-en="The sizes">Målene</div>
-    <h2 data-da="Se bænken <em>i dit mål.</em>" data-en="See the bench <em>in your size.</em>">Se bænken <em>i dit mål.</em></h2>
-    <p class="lede" data-da="Længden er dit valg, men den har en grænse, og grænsen er ikke styrken — den er nedbøjningen. En plade, du kan vende med to hænder, kan ikke også være to meter lang og stiv. Træk i skyderen og se, hvornår sædet deler sig."
-       data-en="The length is yours to choose, but it has a limit, and the limit is not strength — it is deflection. A board you can turn with two hands cannot also be two metres long and stiff. Pull the slider and see where the seat splits in two.">Længden er dit valg, men den har en grænse, og grænsen er ikke styrken — den er nedbøjningen. En plade, du kan vende med to hænder, kan ikke også være to meter lang og stiv. Træk i skyderen og se, hvornår sædet deler sig.</p>
+    <h2 data-da="Sættet <em>i dit mål.</em>" data-en="The set <em>in your size.</em>">Sættet <em>i dit mål.</em></h2>
+    <p class="lede" data-da="Pladens længde har en grænse, og grænsen er ikke styrken — den er nedbøjningen, som vokser med længden i tredje potens. Skal sættet være længere end det, en plade kan bære, sætter man et fag mere på i stedet for at gøre pladen længere. Pladen bliver den samme."
+       data-en="The board's length has a limit, and the limit is not strength — it is deflection, which grows with the cube of the span. If the set has to be longer than one board can carry, you add another bay rather than lengthen the board. The board stays the same.">Pladens længde har en grænse, og grænsen er ikke styrken — den er nedbøjningen, som vokser med længden i tredje potens. Skal sættet være længere end det, en plade kan bære, sætter man et fag mere på i stedet for at gøre pladen længere. Pladen bliver den samme.</p>
   </div>
 
   <div class="cfg">
     <div class="cfg-stage reveal">
-      <svg id="c-plan" viewBox="-1110 -560 2220 1280" role="img"
-           aria-label="Tegning af bænken set fra siden og ovenfra, i skala, med mål der følger den valgte længde.">
+      <svg id="c-plan" viewBox="-1090 -1060 2180 2120" role="img"
+           aria-label="Sættet set ovenfra, i skala: tre bordplader i midten, to sæder udenfor, og gavlene på tværs. Målene følger den valgte pladelængde og antal fag.">
         <defs>
-          <pattern id="c-oak" patternUnits="userSpaceOnUse" x="-1200" y="120" width="2400" height="640">
-            <image id="c-oakImg" x="0" y="0" width="2400" height="640" preserveAspectRatio="none"/>
+          <pattern id="c-oak" patternUnits="userSpaceOnUse" x="-2400" y="-1200" width="4800" height="2400">
+            <image id="c-oakImg" x="0" y="0" width="4800" height="2400" preserveAspectRatio="none"/>
           </pattern>
         </defs>
         <g id="c-body"></g>
@@ -853,16 +989,30 @@
     <div class="reveal">
       <div class="ctrl">
         <div class="ctrl-label">
-          <span data-da="Sædets længde" data-en="Length of the seat">Sædets længde</span>
+          <span data-da="Pladens længde" data-en="Length of the board">Pladens længde</span>
           <span class="ctrl-val" id="valLen">1600 mm</span>
         </div>
-        <input type="range" id="len" min="1400" max="2200" step="50" value="1600"
-               aria-label="Sædets længde i millimeter"/>
+        <input type="range" id="len" min="1400" max="1800" step="50" value="1600"
+               aria-label="Pladens længde i millimeter"/>
         <div class="range-ends">
-          <span data-da="1400 mm" data-en="1400 mm">1400 mm</span>
-          <span data-da="2200 mm" data-en="2200 mm">2200 mm</span>
+          <span>1400 mm</span>
+          <span>1800 mm</span>
         </div>
         <p class="ctrl-why" id="lenWhy"></p>
+      </div>
+
+      <div class="ctrl">
+        <div class="ctrl-label">
+          <span data-da="Fag" data-en="Bays">Fag</span>
+          <span class="ctrl-val" id="valBays"></span>
+        </div>
+        <div class="choices">
+          <button class="choice" type="button" aria-pressed="true" data-bays="1">
+            1<small data-da="To gavle" data-en="Two frames">To gavle</small></button>
+          <button class="choice" type="button" aria-pressed="false" data-bays="2">
+            2<small data-da="Tre gavle" data-en="Three frames">Tre gavle</small></button>
+        </div>
+        <p class="ctrl-why" id="bayWhy"></p>
       </div>
 
       <div class="ctrl">
@@ -871,9 +1021,9 @@
           <span class="ctrl-val" id="valWood"></span>
         </div>
         <div class="choices">
-          <button class="choice" type="button" id="w-eg" aria-pressed="true" data-wood="eg">Eg<small data-da="Klasse 2" data-en="Class 2">Klasse 2</small></button>
-          <button class="choice" type="button" id="w-robinie" aria-pressed="false" data-wood="robinie">Robinie<small data-da="Klasse 1–2" data-en="Class 1–2">Klasse 1–2</small></button>
-          <button class="choice" type="button" id="w-laerk" aria-pressed="false" data-wood="laerk">Lærk<small data-da="Klasse 3" data-en="Class 3">Klasse 3</small></button>
+          <button class="choice" type="button" aria-pressed="true" data-wood="eg">Eg<small data-da="Klasse 2" data-en="Class 2">Klasse 2</small></button>
+          <button class="choice" type="button" aria-pressed="false" data-wood="robinie">Robinie<small data-da="Klasse 1–2" data-en="Class 1–2">Klasse 1–2</small></button>
+          <button class="choice" type="button" aria-pressed="false" data-wood="laerk">Lærk<small data-da="Klasse 3" data-en="Class 3">Klasse 3</small></button>
         </div>
         <p class="ctrl-why" id="woodWhy"></p>
       </div>
@@ -887,87 +1037,186 @@
       </div>
 
       <dl class="readout">
-        <div class="rrow"><dt data-da="Sædeplader" data-en="Seat boards">Sædeplader</dt><dd id="rPlanks"></dd></div>
+        <div class="rrow"><dt data-da="Plader" data-en="Boards">Plader</dt><dd id="rPlanks"></dd></div>
         <div class="rrow"><dt data-da="Vægt pr. plade" data-en="Weight per board">Vægt pr. plade</dt><dd id="rWeight"></dd></div>
         <div class="rrow"><dt data-da="Nedbøjning ved 100 kg" data-en="Deflection under 100 kg">Nedbøjning ved 100 kg</dt><dd id="rSag"></dd></div>
         <div class="rrow"><dt data-da="Siddepladser" data-en="Places to sit">Siddepladser</dt><dd id="rSeats"></dd></div>
-        <div class="rrow"><dt data-da="Bænken i alt" data-en="Bench overall">Bænken i alt</dt><dd id="rOverall"></dd></div>
+        <div class="rrow"><dt data-da="Sættet i alt" data-en="Set overall">Sættet i alt</dt><dd id="rOverall"></dd></div>
         <div class="rrow"><dt data-da="Vægt i alt" data-en="Total weight">Vægt i alt</dt><dd id="rTotal"></dd></div>
       </dl>
 
-      <p class="cfg-note" data-da="Nedbøjningen er regnet med 100 kg midt på én plade, med pladens egentlige tværsnit — den er hvælvet, så den er stivere end 22 mm og slappere end 42 mm. Tallet er en beregning, ikke en måling: den første bænk er ikke skåret endnu."
-         data-en="The deflection is calculated with 100 kg at the middle of one board, using the board's real section — it is crowned, so it is stiffer than 22 mm and softer than 42 mm. The figure is a calculation, not a measurement: the first bench has not been cut yet.">Nedbøjningen er regnet med 100 kg midt på én plade, med pladens egentlige tværsnit — den er hvælvet, så den er stivere end 22 mm og slappere end 42 mm. Tallet er en beregning, ikke en måling: den første bænk er ikke skåret endnu.</p>
+      <div class="ctrl" style="margin-top:34px">
+        <div class="ctrl-label">
+          <span data-da="Serie" data-en="Production run">Serie</span>
+          <span class="ctrl-val" id="valQty"></span>
+        </div>
+        <div class="choices">
+          <button class="choice" type="button" aria-pressed="true" data-qty="1">1<small data-da="Sæt" data-en="Set">Sæt</small></button>
+          <button class="choice" type="button" aria-pressed="false" data-qty="10">10<small data-da="Sæt" data-en="Sets">Sæt</small></button>
+          <button class="choice" type="button" aria-pressed="false" data-qty="100">100<small data-da="Sæt" data-en="Sets">Sæt</small></button>
+        </div>
+      </div>
+      <dl class="readout">
+        <div class="rrow"><dt data-da="Plader at høvle" data-en="Boards to mould">Plader at høvle</dt><dd id="rQPlanks"></dd></div>
+        <div class="rrow"><dt data-da="Løbende meter profil" data-en="Linear metres of profile">Løbende meter profil</dt><dd id="rQMetres"></dd></div>
+        <div class="rrow"><dt data-da="Vendelejer at støbe" data-en="Pivots to mould">Vendelejer at støbe</dt><dd id="rQPivots"></dd></div>
+        <div class="rrow"><dt data-da="Træ i alt" data-en="Timber in total">Træ i alt</dt><dd id="rQTimber"></dd></div>
+      </dl>
+
+      <p class="cfg-note" data-da="Nedbøjningen er regnet med 100 kg midt på én plade, med pladens egentlige tværsnit. Rummålet er det færdige profil og det færdige stel — opskæringsspild og limfuger kommer oveni og afhænger af, hvilke dimensioner træet kommer i. Alle tal er beregnede: det første sæt er ikke skåret endnu."
+         data-en="The deflection is calculated with 100 kg at the middle of one board, using the board's real section. The volume is the finished profile and the finished frame — cutting waste and glue lines come on top and depend on the stock the timber arrives in. Every figure is calculated: the first set has not been cut yet.">Nedbøjningen er regnet med 100 kg midt på én plade, med pladens egentlige tværsnit. Rummålet er det færdige profil og det færdige stel — opskæringsspild og limfuger kommer oveni og afhænger af, hvilke dimensioner træet kommer i. Alle tal er beregnede: det første sæt er ikke skåret endnu.</p>
     </div>
   </div>
 </section>
 
-<!-- ============ THE SET ============ -->
-<section class="split" id="saettet">
-  <div class="split-text reveal">
-    <div class="slabel" data-da="Sættet" data-en="The set">Sættet</div>
-    <h2 data-da="Bordet <em>kan det samme.</em>" data-en="The table <em>can do the same.</em>">Bordet <em>kan det samme.</em></h2>
-    <p class="lede" data-da="På et bænkesæt er bordpladen lige så våd som sæderne, og det er den, du sætter kaffen på. Den er bygget af de samme plader — tre af dem, 916 mm i alt — og hver af dem vender i sit eget leje."
-       data-en="On a bench set the tabletop is just as wet as the seats, and the tabletop is what you put the coffee on. It is built from the same boards — three of them, 916 mm overall — and each one turns in its own bearing.">På et bænkesæt er bordpladen lige så våd som sæderne, og det er den, du sætter kaffen på. Den er bygget af de samme plader — tre af dem, 916 mm i alt — og hver af dem vender i sit eget leje.</p>
-    <p data-da="I bordpladen må der godt være luft mellem pladerne, og der er 8 mm. En bordplade skal af med vandet nedad, ikke holde en flade tør nedenunder, så mellemrummet er en fordel: bordpladen løber tom med det samme, og krummer og grus følger med."
-       data-en="In a tabletop there may be air between the boards, and there is 8 mm. A tabletop has to get rid of water downwards, not keep a face dry underneath, so the gap is an advantage: the top empties at once, and crumbs and grit go with it.">I bordpladen må der godt være luft mellem pladerne, og der er 8 mm. En bordplade skal af med vandet nedad, ikke holde en flade tør nedenunder, så mellemrummet er en fordel: bordpladen løber tom med det samme, og krummer og grus følger med.</p>
-    <p data-da="Sæderne sidder 142 mm uden for bordkanten. Det vand, der løber gennem bordpladen, falder derfor ned mellem bord og bænk og ikke ned på den side af sædet, der skal være tør. Hele sættet er tørt på under et halvt minut: fem plader, fem vendinger."
-       data-en="The seats sit 142 mm outside the edge of the table. So the water that runs through the tabletop falls between table and bench, not onto the side of the seat that has to stay dry. The whole set is dry in under half a minute: five boards, five turns.">Sæderne sidder 142 mm uden for bordkanten. Det vand, der løber gennem bordpladen, falder derfor ned mellem bord og bænk og ikke ned på den side af sædet, der skal være tør. Hele sættet er tørt på under et halvt minut: fem plader, fem vendinger.</p>
+<!-- ============ PRODUCTION ============
+     The design's real claim to being manufacturable is that the board's
+     section never changes along its length, so it comes off a moulder rather
+     than a router, and that the same board is used five times. -->
+<section id="produktion">
+  <div class="cfg-head reveal">
+    <div class="slabel" data-da="Produktion" data-en="Production">Produktion</div>
+    <h2 data-da="Én profil, <em>fem gange, hver gang.</em>" data-en="One profile, <em>five times, every time.</em>">Én profil, <em>fem gange, hver gang.</em></h2>
+    <p class="lede" data-da="Et møbel, der skal laves i antal, må ikke bestå af dele, der skal passes ind i hinanden. Tørvejr er tegnet bagfra: først maskinerne, så møblet. Det er derfor, der kun er fem trædele at bestille og to forme at betale for."
+       data-en="Furniture that has to be made in numbers must not consist of parts that are fitted to one another. Tørvejr is drawn backwards: the machines first, then the furniture. That is why there are only five timber parts to order and two moulds to pay for.">Et møbel, der skal laves i antal, må ikke bestå af dele, der skal passes ind i hinanden. Tørvejr er tegnet bagfra: først maskinerne, så møblet. Det er derfor, der kun er fem trædele at bestille og to forme at betale for.</p>
   </div>
-  <div class="split-drw drw reveal">
-    <svg viewBox="-1090 -880 2180 990" role="img"
-         aria-label="Sættet set fra enden: tre bordplader i 740 mm højde med 8 mm luft imellem, og to sæder i 450 mm højde, placeret 142 mm uden for bordkanten, så vandet falder ned mellem bord og bænk.">
-      <!-- the frames, ghosted: this drawing is about where the water goes -->
-      <g fill="none" stroke="#0f0e0b" stroke-opacity=".28" stroke-width="4" stroke-dasharray="16 11">
-        <path d="M -200 -708 L -330 0 M 200 -708 L 330 0 M -258 -390 L 258 -390"/>
-        <path d="M -750 -418 L -640 0 M -750 -418 L -860 0 M 750 -418 L 640 0 M 750 -418 L 860 0"/>
-      </g>
-      <path d="M -1050 0 L 1050 0" stroke="#0f0e0b" stroke-opacity=".35" stroke-width="4"/>
 
-      <g fill="#e3dbcb" stroke="#0f0e0b" stroke-width="3.4">
-        <path transform="translate(-308,-719)" d="M -139 -11 Q 0 -31 139 -11 A 11 11 0 0 1 139 11 Q 0 31 -139 11 A 11 11 0 0 1 -139 -11 Z"/>
-        <path transform="translate(0,-719)" d="M -139 -11 Q 0 -31 139 -11 A 11 11 0 0 1 139 11 Q 0 31 -139 11 A 11 11 0 0 1 -139 -11 Z"/>
-        <path transform="translate(308,-719)" d="M -139 -11 Q 0 -31 139 -11 A 11 11 0 0 1 139 11 Q 0 31 -139 11 A 11 11 0 0 1 -139 -11 Z"/>
-        <path transform="translate(-750,-429)" d="M -139 -11 Q 0 -31 139 -11 A 11 11 0 0 1 139 11 Q 0 31 -139 11 A 11 11 0 0 1 -139 -11 Z"/>
-        <path transform="translate(750,-429)" d="M -139 -11 Q 0 -31 139 -11 A 11 11 0 0 1 139 11 Q 0 31 -139 11 A 11 11 0 0 1 -139 -11 Z"/>
-      </g>
+  <div class="trio reveal">
+    <div>
+      <div class="trio-key" data-da="Pladen" data-en="The board">Pladen</div>
+      <h3 data-da="Den skal ikke fræses. Den skal høvles." data-en="It is not routed. It is moulded.">Den skal ikke fræses. Den skal høvles.</h3>
+      <p data-da="Tværsnittet er det samme i hele pladens længde — hvælvet, halvrundingen, dryprillen, alt. Derfor skal der ikke en CNC-fræser til at overfladefræse en halv kvadratmeter to gange pr. plade; der skal en kehlemaskine og et sæt knive til. Profilen kommer ud i løbende meter, og de tre former på pladen koster kun én gang: den gang knivene blev slebet."
+         data-en="The section is the same along the whole length of the board — the crown, the half-round, the drip groove, all of it. So it does not take a CNC router surfacing half a square metre twice per board; it takes a four-sided moulder and a set of knives. The profile comes out by the metre, and the three shapes on the board are paid for once: when the knives were ground.">Tværsnittet er det samme i hele pladens længde — hvælvet, halvrundingen, dryprillen, alt. Derfor skal der ikke en CNC-fræser til at overfladefræse en halv kvadratmeter to gange pr. plade; der skal en kehlemaskine og et sæt knive til. Profilen kommer ud i løbende meter, og de tre former på pladen koster kun én gang: den gang knivene blev slebet.</p>
+    </div>
+    <div>
+      <div class="trio-key" data-da="Emnet" data-en="The blank">Emnet</div>
+      <h3 data-da="Tre lameller, skiftende marvside." data-en="Three staves, alternating heart side.">Tre lameller, skiftende marvside.</h3>
+      <p data-da="En 300 mm bred massiv plade vil kaste sig, og et sæde, der kaster sig, vipper i sine lejer og holder vand. Derfor limes emnet op af tre lameller på 105 mm med skiftende marvside — samme svar som en bordplade, af samme grund, og i D4-lim. Det gør også indkøbet nemmere: 105 mm er en dimension, der kan skaffes i mængde og i lige længder."
+         data-en="A 300 mm solid board will cup, and a seat that cups rocks in its pivots and holds water. So the blank is glued up from three 105 mm staves with alternating heart side — the same answer as a tabletop, for the same reason, in D4 glue. It also makes buying easier: 105 mm is a dimension you can get in quantity and in straight lengths.">En 300 mm bred massiv plade vil kaste sig, og et sæde, der kaster sig, vipper i sine lejer og holder vand. Derfor limes emnet op af tre lameller på 105 mm med skiftende marvside — samme svar som en bordplade, af samme grund, og i D4-lim. Det gør også indkøbet nemmere: 105 mm er en dimension, der kan skaffes i mængde og i lige længder.</p>
+    </div>
+    <div>
+      <div class="trio-key" data-da="Stellet" data-en="The frame">Stellet</div>
+      <h3 data-da="Ét tværsnit, fire længder." data-en="One section, four lengths.">Ét tværsnit, fire længder.</h3>
+      <p data-da="Ben, bænkevange, bordvange og langsgående bjælke er alle 70 × 120 mm. Der er altså ét tværsnit at købe hjem og fire længder at kappe, og alle huller i gavlen sidder i ét mønster, der bores i én opstilling. Boltene er den samme M8 hele vejen rundt."
+         data-en="Legs, seat rail, table beam and the longitudinal tie are all 70 × 120 mm. So there is one section to buy and four lengths to cut, and every hole in a frame sits in one pattern, drilled in one set-up. The bolts are the same M8 throughout.">Ben, bænkevange, bordvange og langsgående bjælke er alle 70 × 120 mm. Der er altså ét tværsnit at købe hjem og fire længder at kappe, og alle huller i gavlen sidder i ét mønster, der bores i én opstilling. Boltene er den samme M8 hele vejen rundt.</p>
+    </div>
+  </div>
 
-      <!-- where the water goes: through the 8 mm gaps, and off the outer edges,
-           down between the table and the bench rather than onto the seat -->
-      <g stroke="#5d7b8a" stroke-width="3.6" stroke-linecap="round" stroke-opacity=".8"
-         stroke-dasharray="14 22" fill="none">
-        <path d="M -154 -700 L -154 -80"/>
-        <path d="M 154 -700 L 154 -80"/>
-        <path d="M -458 -712 L -520 -80"/>
-        <path d="M 458 -712 L 520 -80"/>
-      </g>
-      <g fill="#5d7b8a" fill-opacity=".8">
-        <path d="M -154 -66 q -11 16 0 24 q 11 -8 0 -24 Z"/>
-        <path d="M 154 -66 q -11 16 0 24 q 11 -8 0 -24 Z"/>
-        <path d="M -524 -66 q -11 16 0 24 q 11 -8 0 -24 Z"/>
-        <path d="M 524 -66 q -11 16 0 24 q 11 -8 0 -24 Z"/>
-      </g>
+  <div class="bom reveal">
+    <div class="bom-head">
+      <div class="bom-t" data-da="Styklisten — ét sæt, ét fag" data-en="Bill of materials — one set, one bay">Styklisten — ét sæt, ét fag</div>
+      <p data-da="Fjorten stykker træ, hvoraf fem er den samme, og fem varenumre beslag." data-en="Fourteen pieces of timber, five of them the same one, and five hardware part numbers.">Fjorten stykker træ, hvoraf fem er den samme, og fem varenumre beslag.</p>
+    </div>
+    <div class="bomwrap">
+    <table class="bomtab">
+      <thead>
+        <tr>
+          <th data-da="Del" data-en="Part">Del</th>
+          <th data-da="Mål" data-en="Size">Mål</th>
+          <th data-da="Antal" data-en="Qty">Antal</th>
+          <th data-da="Bearbejdning" data-en="Processing">Bearbejdning</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td data-da="Vendeplade" data-en="Reversible board">Vendeplade</td>
+          <td>300 × 42 × 1600</td><td>5</td>
+          <td data-da="Limes op, høvles, bores i enderne" data-en="Glued up, moulded, bored at the ends">Limes op, høvles, bores i enderne</td>
+        </tr>
+        <tr>
+          <td data-da="Ben" data-en="Leg">Ben</td>
+          <td>70 × 120 × 900</td><td>4</td>
+          <td data-da="Kappes i 40°, bores" data-en="Cut at 40°, drilled">Kappes i 40°, bores</td>
+        </tr>
+        <tr>
+          <td data-da="Bænkevange" data-en="Seat rail">Bænkevange</td>
+          <td>70 × 120 × 1600</td><td>2</td>
+          <td data-da="Kappes, bores" data-en="Cut, drilled">Kappes, bores</td>
+        </tr>
+        <tr>
+          <td data-da="Bordvange" data-en="Table beam">Bordvange</td>
+          <td>70 × 120 × 800</td><td>2</td>
+          <td data-da="Kappes, bores" data-en="Cut, drilled">Kappes, bores</td>
+        </tr>
+        <tr>
+          <td data-da="Langbjælke" data-en="Longitudinal tie">Langbjælke</td>
+          <td>70 × 120 × 1530</td><td>1</td>
+          <td data-da="Kappes, bores" data-en="Cut, drilled">Kappes, bores</td>
+        </tr>
+        <tr>
+          <td data-da="Vendeklods" data-en="Axle block">Vendeklods</td>
+          <td data-da="Støbt, PA66-GF30" data-en="Moulded, PA66-GF30">Støbt, PA66-GF30</td><td>10</td>
+          <td data-da="Form 1" data-en="Mould 1">Form 1</td>
+        </tr>
+        <tr>
+          <td data-da="Lejeskål" data-en="Pivot cup">Lejeskål</td>
+          <td data-da="Støbt, PA66-GF30" data-en="Moulded, PA66-GF30">Støbt, PA66-GF30</td><td>10</td>
+          <td data-da="Form 2" data-en="Mould 2">Form 2</td>
+        </tr>
+        <tr>
+          <td data-da="Bolt m. møtrik og skiver" data-en="Bolt, nut and washers">Bolt m. møtrik og skiver</td>
+          <td>M8 × 160, A4</td><td>20</td>
+          <td data-da="Købes" data-en="Bought in">Købes</td>
+        </tr>
+        <tr>
+          <td data-da="Skrue" data-en="Screw">Skrue</td>
+          <td>5 × 50, A4</td><td>40</td>
+          <td data-da="Købes" data-en="Bought in">Købes</td>
+        </tr>
+        <tr>
+          <td data-da="Fod" data-en="Foot">Fod</td>
+          <td data-da="Nylonfod, standard" data-en="Nylon foot, standard">Nylonfod, standard</td><td>4</td>
+          <td data-da="Købes" data-en="Bought in">Købes</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+    <p class="bom-hint" data-da="Tabellen kan trækkes til siden" data-en="The table scrolls sideways">Tabellen kan trækkes til siden</p>
+  </div>
 
-      <!-- the four measurements that make the set work -->
-      <g stroke="#0f0e0b" stroke-opacity=".45" stroke-width="2.6" fill="none">
-        <path d="M -458 -800 L 458 -800"/>
-        <path d="M -458 -782 L -458 -818 M 458 -782 L 458 -818"/>
-        <path d="M 458 -340 L 600 -340"/>
-        <path d="M 458 -322 L 458 -358 M 600 -322 L 600 -358"/>
-        <path d="M -1000 0 L -1000 -740"/>
-        <path d="M -1018 0 L -982 0 M -1018 -740 L -982 -740"/>
-        <path d="M 1000 0 L 1000 -450"/>
-        <path d="M 1018 0 L 982 0 M 1018 -450 L 982 -450"/>
-        <path d="M -458 -740 L -1000 -740" stroke-opacity=".2" stroke-dasharray="12 10"/>
-        <path d="M 611 -450 L 1000 -450" stroke-opacity=".2" stroke-dasharray="12 10"/>
-      </g>
-      <text class="dim" x="0" y="-830" text-anchor="middle" fill="#0f0e0b" fill-opacity=".65">916</text>
-      <text class="dim" x="529" y="-372" text-anchor="middle" fill="#0f0e0b" fill-opacity=".65">142</text>
-      <text class="dim" x="-1022" y="-360" text-anchor="end" fill="#0f0e0b" fill-opacity=".65">740</text>
-      <text class="dim" x="1022" y="-212" fill="#0f0e0b" fill-opacity=".65">450</text>
-    </svg>
-    <div class="drw-cap"
-         data-da="Sættet set fra enden — 1:20. Fem ens plader: tre i bordet, to i bænkene. Den stiplede blå linje er vandets vej."
-         data-en="The set seen from the end — 1:20. Five identical boards: three in the table, two in the benches. The dashed blue line is the water's way out.">Sættet set fra enden — 1:20. Fem ens plader: tre i bordet, to i bænkene. Den stiplede blå linje er vandets vej.</div>
+  <div class="steps-grid reveal">
+    <div>
+      <div class="trio-key" data-da="Linjen" data-en="The line">Linjen</div>
+      <h3 data-da="Fire stationer, og pladen er færdig." data-en="Four stations, and the board is done.">Fire stationer, og pladen er færdig.</h3>
+      <ol class="steps">
+        <li><b data-da="1 — Lim" data-en="1 — Glue">1 — Lim</b>
+          <span data-da="Tre lameller gennem limpressen til et emne på 315 × 45 mm."
+                data-en="Three staves through the press into a 315 × 45 mm blank.">Tre lameller gennem limpressen til et emne på 315 × 45 mm.</span></li>
+        <li><b data-da="2 — Høvl" data-en="2 — Mould">2 — Høvl</b>
+          <span data-da="Én gang gennem kehlemaskinen: 300 × 42 mm med hvælv, halvrunding og drypriller på begge flader."
+                data-en="One pass through the moulder: 300 × 42 mm with the crown, the half-round and the drip grooves on both faces.">Én gang gennem kehlemaskinen: 300 × 42 mm med hvælv, halvrunding og drypriller på begge flader.</span></li>
+        <li><b data-da="3 — Kap og bor" data-en="3 — Cut and bore">3 — Kap og bor</b>
+          <span data-da="I mål, og et Ø28 hul i hver ende. To operationer i samme opstilling."
+                data-en="To length, and a Ø28 hole in each end. Two operations in one set-up.">I mål, og et Ø28 hul i hver ende. To operationer i samme opstilling.</span></li>
+        <li><b data-da="4 — Olie" data-en="4 — Oil">4 — Olie</b>
+          <span data-da="Dyppet, ikke malet. Begge flader på én gang, fordi begge flader er oversiden."
+                data-en="Dipped, not brushed. Both faces at once, because both faces are the top.">Dyppet, ikke malet. Begge flader på én gang, fordi begge flader er oversiden.</span></li>
+      </ol>
+    </div>
+    <div>
+      <div class="trio-key" data-da="Samling og fragt" data-en="Assembly and freight">Samling og fragt</div>
+      <h3 data-da="Fladt, og samlet med én nøgle." data-en="Flat, and assembled with one key.">Fladt, og samlet med én nøgle.</h3>
+      <ol class="steps">
+        <li><b data-da="Gavle" data-en="Frames">Gavle</b>
+          <span data-da="Samles på fabrikken — det er der, fingerarbejdet ligger. Lejeskålene skrues på, mens gavlen ligger ned på et bord."
+                data-en="Assembled at the works — that is where the fiddly part is. The pivot cups go on while the frame is lying flat on a bench.">Samles på fabrikken — det er der, fingerarbejdet ligger. Lejeskålene skrues på, mens gavlen ligger ned på et bord.</span></li>
+        <li><b data-da="Kunden" data-en="The buyer">Kunden</b>
+          <span data-da="Fire bolte i langbjælken, og de fem plader klikkes i med tommelfingrene. Ét værktøj, under et kvarter, ingen løse beslag."
+                data-en="Four bolts in the longitudinal tie, and the five boards click in with your thumbs. One tool, under fifteen minutes, no loose fittings.">Fire bolte i langbjælken, og de fem plader klikkes i med tommelfingrene. Ét værktøj, under et kvarter, ingen løse beslag.</span></li>
+        <li><b data-da="Kolli" data-en="Cartons">Kolli</b>
+          <span data-da="Fem kolli: pladerne fladt i to, gavlene i to, og langbjælken med beslagene i et femte. Ingen af dem over 30 kg, og stakken er 230 mm høj pr. sæt."
+                data-en="Five cartons: the boards flat in two, the frames in two, and the longitudinal tie with the fittings in a fifth. None of them over 30 kg, and the stack is 230 mm tall per set.">Fem kolli: pladerne fladt i to, gavlene i to, og langbjælken med beslagene i et femte. Ingen af dem over 30 kg, og stakken er 230 mm høj pr. sæt.</span></li>
+        <li><b data-da="Reservedele" data-en="Spares">Reservedele</b>
+          <span data-da="Bliver en plade ødelagt, er reservedelen den samme plade som alle de andre. Ét varenummer dækker hele sættet."
+                data-en="If a board is damaged, the spare is the same board as all the others. One part number covers the whole set.">Bliver en plade ødelagt, er reservedelen den samme plade som alle de andre. Ét varenummer dækker hele sættet.</span></li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="notice reveal">
+    <div class="notice-t" data-da="Det, der mangler at blive prøvet" data-en="What still has to be tested">Det, der mangler at blive prøvet</div>
+    <p data-da="Tre ting kan ikke regnes, de skal måles på et emne. Snap-tungen skal holde ved frost, hvor PA66 bliver stivere og sprødere — det afgør tungens tykkelse og radius. Limfugen skal holde i en plade, der bliver våd på begge sider, hvilket er hårdere end en bordplade, der kun bliver våd på den ene. Og knivprofilen skal køres, før man ved, hvor rent hvælvet kommer ud i eg med skiftende fiberretning. Alle tre er prototypearbejde, ikke beregning."
+       data-en="Three things cannot be calculated, they have to be measured on a sample. The snap tongue has to hold in frost, where PA66 gets stiffer and more brittle — that decides the tongue's thickness and radius. The glue line has to hold in a board that gets wet on both faces, which is harder than a tabletop that only gets wet on one. And the knife profile has to be run before anyone knows how cleanly the crown comes out of oak with changing grain direction. All three are prototype work, not arithmetic.">Tre ting kan ikke regnes, de skal måles på et emne. Snap-tungen skal holde ved frost, hvor PA66 bliver stivere og sprødere — det afgør tungens tykkelse og radius. Limfugen skal holde i en plade, der bliver våd på begge sider, hvilket er hårdere end en bordplade, der kun bliver våd på den ene. Og knivprofilen skal køres, før man ved, hvor rent hvælvet kommer ud i eg med skiftende fiberretning. Alle tre er prototypearbejde, ikke beregning.</p>
   </div>
 </section>
 
@@ -975,32 +1224,32 @@
 <section id="spec">
   <div class="reveal">
     <div class="slabel" data-da="Specifikationer" data-en="Specification">Specifikationer</div>
-    <h2 data-da="Tørvejr — <em>som den er tegnet.</em>" data-en="Tørvejr — <em>as drawn.</em>">Tørvejr — <em>som den er tegnet.</em></h2>
+    <h2 data-da="Tørvejr — <em>som det er tegnet.</em>" data-en="Tørvejr — <em>as drawn.</em>">Tørvejr — <em>som det er tegnet.</em></h2>
   </div>
   <div class="spec-grid reveal">
     <dl>
-      <div class="spec-row"><dt data-da="Type" data-en="Type">Type</dt><dd data-da="Havebænk med vendbart sæde" data-en="Garden bench, reversible seat">Havebænk med vendbart sæde</dd></div>
-      <div class="spec-row"><dt data-da="Sædeplade" data-en="Seat board">Sædeplade</dt><dd data-da="Massiv eg, robinie eller lærk — 300 × 42/22 mm" data-en="Solid oak, robinia or larch — 300 × 42/22 mm">Massiv eg, robinie eller lærk — 300 × 42/22 mm</dd></div>
-      <div class="spec-row"><dt data-da="Hvælv og kant" data-en="Crown and edge">Hvælv og kant</dt><dd data-da="10 mm pr. flade, halvrund kant R11, dryprille 6 × 3 mm" data-en="10 mm per face, half-round R11 edge, 6 × 3 mm drip groove">10 mm pr. flade, halvrund kant R11, dryprille 6 × 3 mm</dd></div>
-      <div class="spec-row"><dt data-da="Længde" data-en="Length">Længde</dt><dd data-da="1400–2200 mm efter mål; over 1750 mm to plader" data-en="1400–2200 mm to measure; over 1750 mm, two boards">1400–2200 mm efter mål; over 1750 mm to plader</dd></div>
-      <div class="spec-row"><dt data-da="Sædehøjde" data-en="Seat height">Sædehøjde</dt><dd data-da="450 mm; drejeakse 429 mm" data-en="450 mm; axis of rotation 429 mm">450 mm; drejeakse 429 mm</dd></div>
-      <div class="spec-row"><dt data-da="Stel" data-en="Frame">Stel</dt><dd data-da="Eg 45 × 95, to spredte enderammer, 560 mm fodaftryk" data-en="Oak 45 × 95, two splayed end frames, 560 mm footprint">Eg 45 × 95, to spredte enderammer, 560 mm fodaftryk</dd></div>
-      <div class="spec-row"><dt data-da="Vægt" data-en="Weight">Vægt</dt><dd data-da="Plade ca. 10 kg (1600 mm, eg); bænk ca. 31 kg" data-en="Board approx. 10 kg (1600 mm, oak); bench approx. 31 kg">Plade ca. 10 kg (1600 mm, eg); bænk ca. 31 kg</dd></div>
+      <div class="spec-row"><dt data-da="Type" data-en="Type">Type</dt><dd data-da="Bord-bænkesæt i ét stykke, vendbare plader" data-en="Picnic set in one piece, reversible boards">Bord-bænkesæt i ét stykke, vendbare plader</dd></div>
+      <div class="spec-row"><dt data-da="Vendeplade" data-en="Reversible board">Vendeplade</dt><dd data-da="300 × 42/22 mm, hvælvet 10 mm pr. flade, kant R11" data-en="300 × 42/22 mm, crowned 10 mm per face, R11 edge">300 × 42/22 mm, hvælvet 10 mm pr. flade, kant R11</dd></div>
+      <div class="spec-row"><dt data-da="Emne" data-en="Blank">Emne</dt><dd data-da="Tre lameller à 105 mm, skiftende marvside, D4-lim" data-en="Three 105 mm staves, alternating heart side, D4 glue">Tre lameller à 105 mm, skiftende marvside, D4-lim</dd></div>
+      <div class="spec-row"><dt data-da="Bordplade" data-en="Tabletop">Bordplade</dt><dd data-da="Tre plader, 916 mm i alt, 8 mm mellemrum" data-en="Three boards, 916 mm overall, 8 mm gaps">Tre plader, 916 mm i alt, 8 mm mellemrum</dd></div>
+      <div class="spec-row"><dt data-da="Sæder" data-en="Seats">Sæder</dt><dd data-da="To plader, 142 mm uden for bordkanten" data-en="Two boards, 142 mm outside the table's edge">To plader, 142 mm uden for bordkanten</dd></div>
+      <div class="spec-row"><dt data-da="Højder" data-en="Heights">Højder</dt><dd data-da="Bord 740 mm, sæde 450 mm, akse 719 og 429 mm" data-en="Table 740 mm, seat 450 mm, axes 719 and 429 mm">Bord 740 mm, sæde 450 mm, akse 719 og 429 mm</dd></div>
+      <div class="spec-row"><dt data-da="Mål" data-en="Overall">Mål</dt><dd data-da="1650 × 1800 × 740 mm ved ét fag; fodaftryk 1580 mm" data-en="1650 × 1800 × 740 mm with one bay; 1580 mm footprint">1650 × 1800 × 740 mm ved ét fag; fodaftryk 1580 mm</dd></div>
     </dl>
     <dl>
-      <div class="spec-row"><dt data-da="Aksel" data-en="Axle">Aksel</dt><dd data-da="Ø40 mm A4 med to flader med 24 mm imellem" data-en="Ø40 mm A4 with two flats, 24 mm across">Ø40 mm A4 med to flader med 24 mm imellem</dd></div>
-      <div class="spec-row"><dt data-da="Leje" data-en="Bearing">Leje</dt><dd data-da="POM-bøsning i hus af 6 mm A4, boltet dæksel, afløb Ø5" data-en="POM bush in 6 mm A4 housing, bolted cap, Ø5 drain">POM-bøsning i hus af 6 mm A4, boltet dæksel, afløb Ø5</dd></div>
-      <div class="spec-row"><dt data-da="Løft for at vende" data-en="Lift to turn">Løft for at vende</dt><dd data-da="8 mm at vende, 20 mm at tage pladen af; dækslet giver 12" data-en="8 mm to turn, 20 mm to remove the board; the cap allows 12">8 mm at vende, 20 mm at tage pladen af; dækslet giver 12</dd></div>
-      <div class="spec-row"><dt data-da="Beslag" data-en="Fittings">Beslag</dt><dd data-da="A4 (AISI 316) hele vejen, også skruerne" data-en="A4 (AISI 316) throughout, screws included">A4 (AISI 316) hele vejen, også skruerne</dd></div>
-      <div class="spec-row"><dt data-da="Nedbøjning" data-en="Deflection">Nedbøjning</dt><dd data-da="Ca. 6 mm ved 100 kg midt på 1600 mm — beregnet" data-en="Approx. 6 mm under 100 kg at mid-span, 1600 mm — calculated">Ca. 6 mm ved 100 kg midt på 1600 mm — beregnet</dd></div>
-      <div class="spec-row"><dt data-da="Fremstilling" data-en="Made">Fremstilling</dt><dd data-da="CNC-fræset i to opspændinger — én flade ad gangen, samme program" data-en="CNC-cut in two set-ups — one face at a time, the same programme">CNC-fræset i to opspændinger — én flade ad gangen, samme program</dd></div>
-      <div class="spec-row"><dt data-da="Overflade" data-en="Finish">Overflade</dt><dd data-da="Olie på begge flader, fire farver — eller ubehandlet" data-en="Oil on both faces, four colours — or untreated">Olie på begge flader, fire farver — eller ubehandlet</dd></div>
+      <div class="spec-row"><dt data-da="Stel" data-en="Frame">Stel</dt><dd data-da="Eg 70 × 120 — ét tværsnit, fire længder" data-en="Oak 70 × 120 — one section, four lengths">Eg 70 × 120 — ét tværsnit, fire længder</dd></div>
+      <div class="spec-row"><dt data-da="Vendeleje" data-en="Pivot">Vendeleje</dt><dd data-da="Støbt PA66-GF30; aksel Ø40 m. to flader, 24 mm imellem" data-en="Moulded PA66-GF30; axle Ø40 with two flats, 24 mm apart">Støbt PA66-GF30; aksel Ø40 m. to flader, 24 mm imellem</dd></div>
+      <div class="spec-row"><dt data-da="Løft for at vende" data-en="Lift to turn">Løft for at vende</dt><dd data-da="8 mm; munden på 30 mm holder pladen i skålen" data-en="8 mm; the 30 mm mouth keeps the board in the cup">8 mm; munden på 30 mm holder pladen i skålen</dd></div>
+      <div class="spec-row"><dt data-da="Beslag" data-en="Fittings">Beslag</dt><dd data-da="M8 × 160 og 5 × 50, alt i A4 (AISI 316)" data-en="M8 × 160 and 5 × 50, all in A4 (AISI 316)">M8 × 160 og 5 × 50, alt i A4 (AISI 316)</dd></div>
+      <div class="spec-row"><dt data-da="Vægt" data-en="Weight">Vægt</dt><dd data-da="Plade ca. 10 kg; sættet ca. 116 kg" data-en="Board approx. 10 kg; the set approx. 116 kg">Plade ca. 10 kg; sættet ca. 116 kg</dd></div>
+      <div class="spec-row"><dt data-da="Siddepladser" data-en="Places to sit">Siddepladser</dt><dd data-da="Seks pr. fag, tre på hver side" data-en="Six per bay, three on each side">Seks pr. fag, tre på hver side</dd></div>
+      <div class="spec-row"><dt data-da="Pris" data-en="Price">Pris</dt><dd data-da="Efter mål, træsort og antal — oplyses ved forespørgsel" data-en="By size, timber and quantity — quoted on enquiry">Efter mål, træsort og antal — oplyses ved forespørgsel</dd></div>
     </dl>
   </div>
   <div class="notice reveal">
     <div class="notice-t" data-da="Status — tegnet, ikke bygget" data-en="Status — drawn, not built">Status — tegnet, ikke bygget</div>
-    <p data-da="Tørvejr er tegnet op og regnet igennem, men der står ingen færdig bænk endnu. Derfor er der ingen fotografier på denne side, kun tegninger i skala, og derfor står der heller ingen pris: hvert mål her kommer fra tegningen, og prisen kommer, når jeg har skåret den første. Sig til, hvis det skal være din."
-       data-en="Tørvejr is drawn up and calculated through, but no finished bench stands yet. That is why there are no photographs on this page, only drawings to scale — and why there is no price either: every measurement here comes from the drawing, and the price comes once I have cut the first one. Say the word if it should be yours.">Tørvejr er tegnet op og regnet igennem, men der står ingen færdig bænk endnu. Derfor er der ingen fotografier på denne side, kun tegninger i skala, og derfor står der heller ingen pris: hvert mål her kommer fra tegningen, og prisen kommer, når jeg har skåret den første. Sig til, hvis det skal være din.</p>
+    <p data-da="Tørvejr er tegnet op og regnet igennem, men der står intet færdigt sæt endnu. Derfor er der ingen fotografier på denne side, kun tegninger i skala, og derfor står der heller ingen pris: hvert mål her kommer fra tegningen, og prisen kommer, når det første er skåret. Sig til, hvis det skal være dit — eller hvis der skal hundrede af dem."
+       data-en="Tørvejr is drawn up and calculated through, but no finished set stands yet. That is why there are no photographs on this page, only drawings to scale — and why there is no price either: every measurement here comes from the drawing, and the price comes once the first one is cut. Say the word if it should be yours — or if you need a hundred of them.">Tørvejr er tegnet op og regnet igennem, men der står intet færdigt sæt endnu. Derfor er der ingen fotografier på denne side, kun tegninger i skala, og derfor står der heller ingen pris: hvert mål her kommer fra tegningen, og prisen kommer, når det første er skåret. Sig til, hvis det skal være dit — eller hvis der skal hundrede af dem.</p>
   </div>
 </section>
 
@@ -1008,9 +1257,9 @@
 <section id="bestil">
   <div class="ord-l reveal">
     <div class="slabel" data-da="Bestil" data-en="Order">Bestil</div>
-    <h2 data-da="Sig målet, <em>og få tegningen.</em>" data-en="Say the size, <em>and get the drawing.</em>">Sig målet, <em>og få tegningen.</em></h2>
-    <p class="lede" data-da="Skriv hvor lang bænken skal være, og om der skal et bord til. Så tegner jeg sættet op til dig og sender en pris og en leveringstid, før der bliver skåret noget. Der er ét menneske bag, og du kan ringe til ham."
-       data-en="Tell me how long the bench should be, and whether a table goes with it. I will draw the set up for you and send a price and a lead time before anything is cut. There is one person behind this, and you can call him.">Skriv hvor lang bænken skal være, og om der skal et bord til. Så tegner jeg sættet op til dig og sender en pris og en leveringstid, før der bliver skåret noget. Der er ét menneske bag, og du kan ringe til ham.</p>
+    <h2 data-da="Ét til haven, <em>eller hundrede til en kommune.</em>" data-en="One for the garden, <em>or a hundred for a council.</em>">Ét til haven, <em>eller hundrede til en kommune.</em></h2>
+    <p class="lede" data-da="Skriv hvor langt sættet skal være, hvor mange der skal til, og hvor de skal stå. Så tegner jeg det op i dit mål og sender en pris og en leveringstid, før der bliver skåret noget. Til ét sæt er svaret en tegning; til hundrede er svaret også en stykliste og en prøve, før resten går i produktion."
+       data-en="Tell me how long the set should be, how many you need, and where they will stand. I will draw it up in your size and send a price and a lead time before anything is cut. For one set the answer is a drawing; for a hundred it is also a stocklist and a sample, before the rest goes into production.">Skriv hvor langt sættet skal være, hvor mange der skal til, og hvor de skal stå. Så tegner jeg det op i dit mål og sender en pris og en leveringstid, før der bliver skåret noget. Til ét sæt er svaret en tegning; til hundrede er svaret også en stykliste og en prøve, før resten går i produktion.</p>
     <div class="cinfo">
       <div>
         <div class="citem-label" data-da="Skriv til" data-en="Email">Skriv til</div>
@@ -1043,11 +1292,11 @@
     </div>
     <div class="fg">
       <label class="fl" for="f-size" data-da="Ønsket mål" data-en="Size wanted">Ønsket mål</label>
-      <input class="fi" id="f-size" name="size" type="text" placeholder="1600 mm sæde, eg, olieret mørk"/>
+      <input class="fi" id="f-size" name="size" type="text" placeholder="1600 mm plade, ét fag, eg, olieret mørk"/>
     </div>
     <div class="fg">
-      <label class="fl" for="f-msg" data-da="Bænk eller helt sæt?" data-en="Bench, or the whole set?">Bænk eller helt sæt?</label>
-      <textarea class="fta" id="f-msg" name="message" placeholder="Hvor skal den stå, og skal der bord og to bænke til?"></textarea>
+      <label class="fl" for="f-msg" data-da="Hvor mange, og hvor?" data-en="How many, and where?">Hvor mange, og hvor?</label>
+      <textarea class="fta" id="f-msg" name="message" placeholder="Ét sæt til haven, eller en serie til et anlæg?"></textarea>
     </div>
     <input type="text" name="_gotcha" tabindex="-1" autocomplete="off"
            style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0" aria-hidden="true"/>
@@ -1382,52 +1631,54 @@ if (flipper) {
 }
 
 /* ===================================================================
-   The bench in your size.
+   The set in your size.
 
-   The section is fixed — it is the same board whatever length you pick —
-   so the only things that move are the length, what the board weighs and
-   how much it sags. The sag is what sets the limit, and it is cubic in
-   the span: that is why the seat divides at 1750 mm rather than simply
-   getting longer.
+   The board's section never changes, so the only things that move are how
+   long it is, how many bays there are, and what it is made of. The span
+   limit is the interesting one: deflection goes with the cube of the span,
+   so past a certain length you add a bay rather than a longer board — and
+   the board stays the same part number either way.
    =================================================================== */
 
 const A_SEC = 8349;         /* mm², the crowned section, integrated */
 const I_SEC = 1.106e6;      /* mm⁴, about the axis it is bent on */
-const AXIS = 429, UP_T = 45, UP_W = 95, GAP = 5, BREAK = 110, POST_TOP = 481;
+const SEC_W = 70, SEC_H = 120;          /* the one frame section */
+const TABLE_AXIS = 719, SEAT_AXIS = 429, TABLE_W = 916, SEAT_C = 750;
+const FOOT = 1580, GAVL_T = 70, BAY_GAP = 120, END_OVER = 50;
 
 const TIMBER = {
   eg: { da: 'Eg', en: 'Oak', rho: 730, E: 12000,
-        why: { da: 'Egekerne er holdbarhedsklasse 2 og det, et bænkesæt burde være lavet af. Ubehandlet gråner den sølvgråt, og den gør det ens på begge flader, fordi begge flader kommer op.',
-               en: 'Oak heartwood is durability class 2 and what a bench set ought to be made of. Left untreated it greys to silver, and it does so evenly on both faces, because both faces come up.' } },
+        why: { da: 'Egekerne er holdbarhedsklasse 2 og det, et bænkesæt burde være lavet af. Det er også den træsort, der kan skaffes i mængde i 105 mm lameller, og det er derfor den er sat som standard.',
+               en: 'Oak heartwood is durability class 2 and what a bench set ought to be made of. It is also the timber you can get in quantity in 105 mm staves, which is why it is the default.' } },
   robinie: { da: 'Robinie', en: 'Robinia', rho: 770, E: 13600,
-        why: { da: 'Robinie er det holdbareste træ, der kan skaffes i Danmark — klasse 1–2 — og det stiveste af de tre, så pladen bøjer mindst. Til gengæld er det det tungeste at vende og det, der er sværest at få i lange, lige længder.',
-               en: 'Robinia is the most durable timber available in Denmark — class 1–2 — and the stiffest of the three, so the board sags least. It is also the heaviest to turn and the hardest to get in long, straight lengths.' } },
+        why: { da: 'Robinie er det holdbareste træ, der kan skaffes i Danmark — klasse 1–2 — og det stiveste af de tre, så pladen bøjer mindst. Til gengæld er det tungere at vende og svært at få i lange, lige længder i antal.',
+               en: 'Robinia is the most durable timber available in Denmark — class 1–2 — and the stiffest of the three, so the board sags least. It is heavier to turn, though, and hard to get in long, straight lengths in quantity.' } },
   laerk: { da: 'Lærk', en: 'Larch', rho: 590, E: 12000,
-        why: { da: 'Lærk er klasse 3 og altså den mindst holdbare her, men også den klart letteste: en plade, der er godt et kilo lettere at vende. Den vælger man, hvis bænken skal være nem at bruge frem for at stå i tredive år.',
-               en: 'Larch is class 3, so the least durable of the three, but clearly the lightest: a board a good kilo easier to turn. You pick it if the bench should be easy to use rather than stand for thirty years.' } }
+        why: { da: 'Lærk er klasse 3 og altså den mindst holdbare her, men også den klart letteste: halvandet kilo mindre at vende pr. plade. Den vælger man, hvis sættet skal være nemt at bruge og billigt at sætte op i antal.',
+               en: 'Larch is class 3, the least durable of the three, but clearly the lightest: a kilo and a half less to turn per board. You pick it if the set should be easy to use and cheap to put out in numbers.' } }
 };
 
-const cfg = { len: 1600, wood: 'eg', fin: 'moerk' };
+const cfg = { len: 1600, bays: 1, wood: 'eg', fin: 'moerk', qty: 1 };
 let oak = null;
 
 function derive() {
-  const Ls = cfg.len;
-  const planks = Ls <= 1750 ? 1 : 2;
-  const span = planks === 1 ? Ls : Math.round((Ls - BREAK) / 2);
+  const L = cfg.len, bays = cfg.bays;
+  const boards = 5 * bays, gavle = bays + 1;
+  const runs = bays * L + (bays - 1) * BAY_GAP;       /* the boards, end to end */
   const t = TIMBER[cfg.wood];
-  const board = A_SEC * span * t.rho / 1e9;                     /* kg */
-  const sag = 1000 * Math.pow(span, 3) / (48 * t.E * I_SEC);    /* mm at 100 kg */
-  const seats = planks === 1
-    ? Math.max(2, Math.round(Ls / 520))
-    : 2 * Math.max(1, Math.round(span / 520));
-  /* the frame, in cubic metres, so the total weight is honest */
-  const fv = 2 * (.045 * .095 * .481) + 4 * (.045 * .095 * .52)
-           + (.045 * .095 * (Ls / 1000 - .10)) + 2 * (.045 * .095 * .56)
-           + (planks === 2 ? .090 * .095 * .481 : 0);
-  const steel = 3.2 + (planks === 2 ? 1.6 : 0);
-  return { Ls, planks, span, board, sag, seats, t,
-           total: fv * t.rho + planks * board + steel,
-           overall: Ls + 2 * (GAP + UP_T) };
+  const board = A_SEC * L * t.rho / 1e9;             /* kg */
+  const sag = 1000 * Math.pow(L, 3) / (48 * t.E * I_SEC);
+  const seats = 2 * bays * Math.max(1, Math.round(L / 520));
+  /* the frame, part by part, in cubic metres */
+  const m3 = (w, h, l) => w / 1000 * h / 1000 * l / 1000;
+  const vGavl = 2 * m3(SEC_W, SEC_H, 900) + m3(SEC_W, SEC_H, 1600) + m3(SEC_W, SEC_H, 800);
+  const vTie = m3(SEC_W, SEC_H, L - GAVL_T);
+  const vBoards = boards * A_SEC * L / 1e9;
+  const timber = gavle * vGavl + bays * vTie + vBoards;
+  const weight = timber * t.rho + boards * 0.5 + gavle * 1.5;
+  return { L, bays, boards, gavle, runs, t, board, sag, seats, timber, weight,
+           pivots: 2 * boards, metres: boards * L / 1000,
+           overall: runs + END_OVER };
 }
 
 const nf = (n, d) => n.toLocaleString(lang === 'en' ? 'en-GB' : 'da-DK',
@@ -1438,7 +1689,7 @@ function dimH(x1, x2, y, label) {
       <path d="M ${x1} ${y} L ${x2} ${y}"/>
       <path d="M ${x1} ${y - 15} L ${x1} ${y + 15} M ${x2} ${y - 15} L ${x2} ${y + 15}"/>
     </g>
-    <text class="dim" x="${(x1 + x2) / 2}" y="${y - 18}" text-anchor="middle" font-size="34"
+    <text class="dim" x="${(x1 + x2) / 2}" y="${y - 18}" text-anchor="middle"
           fill="#0f0e0b" fill-opacity=".7">${label}</text>`;
 }
 function dimV(y1, y2, x, label) {
@@ -1446,145 +1697,146 @@ function dimV(y1, y2, x, label) {
       <path d="M ${x} ${y1} L ${x} ${y2}"/>
       <path d="M ${x - 15} ${y1} L ${x + 15} ${y1} M ${x - 15} ${y2} L ${x + 15} ${y2}"/>
     </g>
-    <text class="dim" x="${x - 16}" y="${(y1 + y2) / 2 + 12}" text-anchor="end" font-size="34"
+    <text class="dim" x="${x - 16}" y="${(y1 + y2) / 2 + 12}" text-anchor="end"
           fill="#0f0e0b" fill-opacity=".7">${label}</text>`;
 }
 
-/* Where the seat boards start and end, in one place, so the elevation and
-   the plan can never disagree about it. */
-function boards(d) {
-  const h = d.Ls / 2;
-  return d.planks === 1
-    ? [[-h, h]]
-    : [[-h, -BREAK / 2], [BREAK / 2, h]];
+/* Where each board begins and ends along the set, in one place, so the
+   drawing and the counting can never disagree. */
+function bayRuns(d) {
+  const out = [];
+  const start = -d.runs / 2;
+  for (let i = 0; i < d.bays; i++) {
+    const x0 = start + i * (d.L + BAY_GAP);
+    out.push([x0, x0 + d.L]);
+  }
+  return out;
 }
 
-function drawBench() {
+/* The plan is the view that answers the two questions the controls ask:
+   how long does it get, and how many people fit. */
+function drawSet() {
   const d = derive();
   const svg = $('c-plan'), body = $('c-body');
   if (!svg) return;
-  const h = d.Ls / 2, oh = d.overall / 2;
-  const steel = '#b9b3a7';
+  const half = d.runs / 2;
+  const wide = SEAT_C + 150;              /* the seats are the widest part */
   const plan = oak ? 'url(#c-oak)' : '#8a6c42';
-  const edge = oak ? oak.FINISHES[cfg.fin].plan : '#6f5236';
-  const DY = 380;                     /* where the plan view sits */
+  const frame = '#0f0e0b';
   let g = '';
 
-  /* ---- elevation ---- */
-  g += `<path d="M ${-oh - 130} 0 L ${oh + 130} 0" stroke="#0f0e0b" stroke-opacity=".35" stroke-width="3"/>`;
-  for (const s of [-1, 1]) {
-    const x0 = Math.min(s * (h + GAP), s * (h + GAP + UP_T));
-    g += `<rect x="${x0}" y="${-POST_TOP}" width="${UP_T}" height="${POST_TOP}"
-            fill="#0f0e0b" fill-opacity=".07" stroke="#0f0e0b" stroke-opacity=".5" stroke-width="2"/>`;
-    g += `<rect x="${x0 - 3}" y="${-POST_TOP}" width="${UP_T + 6}" height="26" fill="${steel}"
-            stroke="#0f0e0b" stroke-opacity=".5" stroke-width="2"/>`;
-    g += `<rect x="${x0 - 6}" y="-7" width="${UP_T + 12}" height="7" fill="${steel}"
-            stroke="#0f0e0b" stroke-opacity=".5" stroke-width="2"/>`;
-  }
-  if (d.planks === 2) {
-    g += `<rect x="-45" y="${-POST_TOP}" width="90" height="${POST_TOP}"
-            fill="#0f0e0b" fill-opacity=".07" stroke="#0f0e0b" stroke-opacity=".5" stroke-width="2"/>`;
-    g += `<rect x="-48" y="${-POST_TOP}" width="96" height="26" fill="${steel}"
-            stroke="#0f0e0b" stroke-opacity=".5" stroke-width="2"/>`;
-    g += `<rect x="-51" y="-7" width="102" height="7" fill="${steel}"
-            stroke="#0f0e0b" stroke-opacity=".5" stroke-width="2"/>`;
-  }
-  g += `<rect x="${-h - GAP}" y="-260" width="${d.Ls + 2 * GAP}" height="45"
-          fill="#0f0e0b" fill-opacity=".07" stroke="#0f0e0b" stroke-opacity=".5" stroke-width="2"/>`;
-  for (const [a, b] of boards(d)) {
-    /* seen from the long side, the board shows its edge: 22 mm, not 42 */
-    g += `<rect x="${a}" y="${-AXIS - 11}" width="${b - a}" height="22" rx="11"
-            fill="${edge}" stroke="#0f0e0b" stroke-opacity=".7" stroke-width="2"/>`;
-    for (const e of [a, b]) {
-      g += `<rect x="${e < 0 ? e - 6 : e}" y="${-AXIS - 21}" width="6" height="42" fill="${steel}"
-              stroke="#0f0e0b" stroke-opacity=".5" stroke-width="1.6"/>`;
-    }
-  }
-  g += `<path d="M ${-oh} ${-AXIS} L ${oh} ${-AXIS}" stroke="#c8a96e" stroke-width="2"
-          stroke-dasharray="26 10 4 10"/>`;
+  /* footprint */
+  g += `<rect x="${-half - 25}" y="${-FOOT / 2}" width="${d.runs + 50}" height="${FOOT}"
+          fill="none" stroke="${frame}" stroke-opacity=".3" stroke-width="2.4" stroke-dasharray="18 12"/>`;
 
-  /* ---- plan ---- */
-  g += `<rect x="${-oh}" y="${DY - 280}" width="${d.overall}" height="560" fill="none"
-          stroke="#0f0e0b" stroke-opacity=".3" stroke-width="2.4" stroke-dasharray="18 12"/>`;
-  for (const [a, b] of boards(d)) {
-    g += `<rect x="${a}" y="${DY - 150}" width="${b - a}" height="300" fill="${plan}"
-            stroke="#0f0e0b" stroke-opacity=".7" stroke-width="2"/>`;
+  /* Where the end frames stand. They are under the boards, so the feet are
+     drawn solid where they stick out past them and the rails as hidden line
+     over the top — otherwise the frame disappears under the planking. */
+  const gavlX = [];
+  const runsArr = bayRuns(d);
+  for (let i = 0; i <= d.bays; i++) {
+    const x = i === 0 ? runsArr[0][0] + 45
+            : i === d.bays ? runsArr[d.bays - 1][1] - 45 - GAVL_T
+            : runsArr[i - 1][1] + (BAY_GAP - GAVL_T) / 2;
+    gavlX.push(x);
   }
-  for (const s of [-1, 1]) {
-    const x0 = Math.min(s * (h + GAP), s * (h + GAP + UP_T));
-    g += `<rect x="${x0}" y="${DY - UP_W / 2}" width="${UP_T}" height="${UP_W}"
-            fill="#0f0e0b" fill-opacity=".1" stroke="#0f0e0b" stroke-opacity=".5" stroke-width="2"/>`;
-    /* the two feet each end frame splays out to — this is the 560 */
-    for (const q of [-1, 1]) {
-      g += `<rect x="${x0 - 25}" y="${DY + q * 232 - 22}" width="95" height="45"
-              fill="${steel}" stroke="#0f0e0b" stroke-opacity=".45" stroke-width="2"/>`;
+
+  /* five boards per bay: three in the table, two as seats */
+  for (const [x0, x1] of bayRuns(d)) {
+    for (const z of [0, -308, 308, -SEAT_C, SEAT_C]) {
+      g += `<rect x="${x0}" y="${z - 150}" width="${x1 - x0}" height="300"
+              fill="${plan}" stroke="${frame}" stroke-opacity=".7" stroke-width="2.4"/>`;
     }
   }
-  if (d.planks === 2) {
-    g += `<rect x="-45" y="${DY - UP_W / 2}" width="90" height="${UP_W}"
-            fill="#0f0e0b" fill-opacity=".1" stroke="#0f0e0b" stroke-opacity=".5" stroke-width="2"/>`;
+
+  for (const x of gavlX) {
+    g += `<rect x="${x}" y="-800" width="${GAVL_T}" height="1600" fill="none"
+            stroke="${frame}" stroke-opacity=".45" stroke-width="2.4" stroke-dasharray="16 11"/>`;
     for (const q of [-1, 1]) {
-      g += `<rect x="-47" y="${DY + q * 232 - 22}" width="95" height="45"
-              fill="${steel}" stroke="#0f0e0b" stroke-opacity=".45" stroke-width="2"/>`;
+      g += `<rect x="${x - 26}" y="${q * 790 - 35}" width="122" height="70" fill="none"
+              stroke="${frame}" stroke-opacity=".45" stroke-width="2.4" stroke-dasharray="16 11"/>`;
     }
   }
+
   /* the places, marked where a person actually lands */
-  const marks = [];
-  for (const [a, b] of boards(d)) {
-    const n = d.seats / boards(d).length;
-    for (let i = 0; i < n; i++) marks.push(a + (b - a) * (i + .5) / n);
-  }
-  for (const m of marks) {
-    g += `<ellipse cx="${m.toFixed(0)}" cy="${DY}" rx="150" ry="110" fill="none"
-            stroke="#c8a96e" stroke-width="2.2" stroke-dasharray="12 10"/>`;
+  const perSide = d.seats / (2 * d.bays);
+  for (const [x0, x1] of bayRuns(d)) {
+    for (let i = 0; i < perSide; i++) {
+      const cx = x0 + (x1 - x0) * (i + .5) / perSide;
+      for (const q of [-1, 1]) {
+        g += `<ellipse cx="${cx.toFixed(0)}" cy="${q * SEAT_C}" rx="150" ry="110" fill="none"
+                stroke="#c8a96e" stroke-width="2.4" stroke-dasharray="12 10"/>`;
+      }
+    }
   }
 
-  /* ---- what it measures ---- */
-  g += dimH(-oh, oh, DY + 350, String(d.overall));
-  g += dimH(-h, h, -POST_TOP - 60, String(d.Ls));
-  g += dimV(0, -450, -oh - 90, '450');
-  g += dimV(DY - 150, DY + 150, oh + 110, '300');
-  g += dimV(DY - 280, DY + 280, -oh - 90, '560');
-  if (d.planks === 2) g += dimH(-BREAK / 2, BREAK / 2, DY - 210, String(BREAK));
+  g += dimH(-half, half, -wide - 170, String(d.runs));
+  /* At one bay the set and the board are the same length, and two dimension
+     lines saying 1600 on top of each other is a drawing error, not detail. */
+  if (d.bays > 1) g += dimH(runsArr[0][0], runsArr[0][1], -wide - 70, String(d.L));
+  g += dimV(-458, 458, half + 210, String(TABLE_W));
+  g += dimV(SEAT_C - 150, SEAT_C + 150, -half - 210, '300');
+  g += dimV(-FOOT / 2, FOOT / 2, half + 360, String(FOOT));
+  g += dimV(-wide, wide, -half - 360, String(2 * wide));
 
   body.innerHTML = g;
-  svg.setAttribute('viewBox', `${-oh - 250} ${-POST_TOP - 120} ${d.overall + 500} ${POST_TOP + 900}`);
+  svg.setAttribute('viewBox',
+    `${-half - 480} ${-wide - 250} ${d.runs + 1020} ${2 * wide + 340}`);
 }
 
 function refreshConfig() {
   const d = derive();
   const t = lang === 'en' ? 'en' : 'da';
-  $('valLen').textContent = d.Ls + ' mm';
+  $('valLen').textContent = d.L + ' mm';
+  $('valBays').textContent = d.bays + (t === 'en' ? (d.bays > 1 ? ' bays' : ' bay') : ' fag');
   $('valWood').textContent = d.t[t];
   $('woodWhy').textContent = d.t.why[t];
+  $('valQty').textContent = cfg.qty + (t === 'en' ? (cfg.qty > 1 ? ' sets' : ' set') : ' sæt');
   if (oak) $('valFin').textContent = oak.FINISHES[cfg.fin][t];
 
-  $('rPlanks').textContent = d.planks === 1
-    ? (t === 'en' ? '1 board, ' : '1 plade, ') + d.span + ' mm'
-    : (t === 'en' ? '2 boards, ' : '2 plader, ') + d.span + ' mm';
+  $('rPlanks').textContent = `${d.boards} × ${d.L} mm`;
   $('rWeight').textContent = nf(d.board, 1) + ' kg';
   $('rSag').textContent = nf(d.sag, 1) + ' mm';
   $('rSeats').textContent = String(d.seats);
-  $('rOverall').textContent = d.overall + ' × 560 × 450 mm';
-  $('rTotal').textContent = (t === 'en' ? 'approx. ' : 'ca. ') + nf(d.total, 0) + ' kg';
+  $('rOverall').textContent = `${d.overall} × ${2 * (SEAT_C + 150)} × 740 mm`;
+  $('rTotal').textContent = (t === 'en' ? 'approx. ' : 'ca. ') + nf(d.weight, 0) + ' kg';
 
-  $('lenWhy').textContent = d.planks === 1
+  const q = cfg.qty;
+  $('rQPlanks').textContent = nf(d.boards * q, 0) + (t === 'en' ? ' pcs' : ' stk');
+  $('rQMetres').textContent = nf(d.metres * q, 0) + ' m';
+  $('rQPivots').textContent = nf(d.pivots * q, 0) + (t === 'en' ? ' pcs' : ' stk');
+  $('rQTimber').textContent = nf(d.timber * q, q > 1 ? 1 : 2) + ' m³';
+
+  $('lenWhy').textContent = t === 'en'
+    ? `A ${d.L} mm board sags ${nf(d.sag, 1)} mm under 100 kg at mid-span, and turning it means lifting ${nf(d.board, 1)} kg by eight millimetres.`
+    : `En plade på ${d.L} mm bøjer ${nf(d.sag, 1)} mm ved 100 kg midt på, og at vende den er at løfte ${nf(d.board, 1)} kg otte millimeter.`;
+  $('bayWhy').textContent = d.bays === 1
     ? (t === 'en'
-        ? `One board of ${d.span} mm. Turning it means lifting ${nf(d.board, 1)} kg by eight millimetres.`
-        : `Én plade på ${d.span} mm. At vende den er at løfte ${nf(d.board, 1)} kg otte millimeter.`)
+        ? 'Two end frames and five boards. The boards themselves brace the set: three ties at table height, two at seat height.'
+        : 'To gavle og fem plader. Pladerne afstiver selve sættet: tre træk i bordhøjde, to i sædehøjde.')
     : (t === 'en'
-        ? `Two boards of ${d.span} mm with ${BREAK} mm between them. The gap lands between two places, and the middle upright is what you take hold of when you get up.`
-        : `To plader på ${d.span} mm med ${BREAK} mm imellem. Mellemrummet lander mellem to pladser, og den midterste opstander er det, du tager ved, når du rejser dig.`);
+        ? `Three end frames and ten boards, ${d.runs} mm of table in one line — a refectory set for a campsite or a schoolyard. The board is the same part in both.`
+        : `Tre gavle og ti plader, ${d.runs} mm bord i én lige linje — et langbord til en campingplads eller en skolegård. Pladen er den samme del i begge.`);
 
-  const woodBtns = document.querySelectorAll('[data-wood]');
-  woodBtns.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.wood === cfg.wood)));
+  document.querySelectorAll('[data-wood]').forEach((b) =>
+    b.setAttribute('aria-pressed', String(b.dataset.wood === cfg.wood)));
+  document.querySelectorAll('[data-bays]').forEach((b) =>
+    b.setAttribute('aria-pressed', String(+b.dataset.bays === cfg.bays)));
+  document.querySelectorAll('[data-qty]').forEach((b) =>
+    b.setAttribute('aria-pressed', String(+b.dataset.qty === cfg.qty)));
 }
 
-function render() { refreshConfig(); drawBench(); }
+function render() { refreshConfig(); drawSet(); }
 
 $('len').addEventListener('input', (e) => { cfg.len = +e.target.value; render(); });
 document.querySelectorAll('[data-wood]').forEach((b) => {
   b.addEventListener('click', () => { cfg.wood = b.dataset.wood; render(); });
+});
+document.querySelectorAll('[data-bays]').forEach((b) => {
+  b.addEventListener('click', () => { cfg.bays = +b.dataset.bays; render(); });
+});
+document.querySelectorAll('[data-qty]').forEach((b) => {
+  b.addEventListener('click', () => { cfg.qty = +b.dataset.qty; render(); });
 });
 
 /* The swatches are drawn with the same generator that fills the plan, so
@@ -1650,10 +1902,10 @@ function setLang(l) {
     if (val) el.innerHTML = val;
   });
   const ph = {
-    da: ['Fulde navn', 'din@email.dk', '1600 mm sæde, eg, olieret mørk',
-         'Hvor skal den stå, og skal der bord og to bænke til?'],
-    en: ['Full name', 'your@email.com', '1600 mm seat, oak, oiled dark',
-         'Where will it stand, and do you want a table and two benches?']
+    da: ['Fulde navn', 'din@email.dk', '1600 mm plade, ét fag, eg, olieret mørk',
+         'Ét sæt til haven, eller en serie til et anlæg?'],
+    en: ['Full name', 'your@email.com', '1600 mm board, one bay, oak, oiled dark',
+         'One set for the garden, or a series for a site?']
   };
   document.querySelectorAll('.fi, .fta').forEach((el) => {
     ph.da.forEach((da, i) => {
