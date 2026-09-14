@@ -261,15 +261,24 @@
     @media (max-width: 860px) {
       #navbar { padding: 14px 18px; }
       .nav-links { display: none; }
-      /* A ch-based measure is wider than the screen here, and the three doors
-         stack rather than sit side by side. */
-      #top h1 { font-size: clamp(2rem, 8.5vw, 3rem); max-width: none; }
+      #top h1 { font-size: clamp(1.7rem, 7.5vw, 2.6rem); max-width: none; }
       #top { min-height: 0; }
-      .intro { padding-top: calc(var(--nav-h) + 34px); }
-      .intro p { font-size: 1.02rem; }
+      .intro { padding-top: calc(var(--nav-h) + 22px); padding-bottom: 22px; }
+      .intro p { font-size: .96rem; margin-top: 12px; }
+      .eyebrow { margin-bottom: 12px; }
+      /* All three need to read as one glance, not a page to scroll through —
+         the giant photo doors become slim, un-illustrated rows instead. */
+      .scroll-cue { display: none; }
       .doors { grid-template-columns: 1fr; min-height: 0; }
-      .door { border-left: none; border-top: 1px solid rgba(239,233,221,.14); min-height: 62vw; }
-      .door-body { padding: 30px 22px 32px; }
+      .door { border-left: none; border-top: 1px solid rgba(239,233,221,.18); min-height: 0;
+              justify-content: center; }
+      .door img { display: none; }
+      .door::before { background: none; }
+      .door-body { padding: 14px 4px; }
+      .door .kind { margin-bottom: 4px; font-size: .56rem; }
+      .door h2 { font-size: 1.3rem; margin-bottom: 2px; }
+      .door p { display: none; }
+      .door .arrow { margin-top: 4px; font-size: .58rem; }
       .band, .band.flip { grid-template-columns: 1fr; }
       .band-text, .band.flip .band-text { order: 2; padding: 50px 22px 56px; }
       .band-img, .band.flip .band-img { order: 1; min-height: 300px; max-height: 62vh; }
