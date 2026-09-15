@@ -30,6 +30,7 @@
   .plate2{fill:#dcd5c5;stroke:var(--ink);stroke-width:4}
   .topthin{fill:var(--card);stroke:var(--ink);stroke-width:.00414}
   svg.detail{max-width:700px;margin-inline:auto}
+  svg.horn{max-width:520px;margin:14px auto 0;display:block}
   .lead{stroke:var(--muted);stroke-width:3;opacity:.7}
   .seat{fill:#e2ddd2}.back{fill:none;stroke:var(--ink);stroke-width:.028;opacity:.42;stroke-linecap:round}
   .arm{stroke:var(--ink);stroke-width:.02;opacity:.42;stroke-linecap:round}
@@ -69,6 +70,16 @@
   footer{padding:60px 0 90px;border-top:1px solid var(--line);margin-top:64px;
          font-family:var(--mono);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
   footer a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--line)}
+  .cmp{display:grid;grid-template-columns:1.1fr 1fr 1fr .8fr;gap:0;margin-top:26px;
+       border-top:1px solid var(--line)}
+  .cmp>div{padding:13px 14px 13px 0;border-bottom:1px solid var(--line);font-size:.95rem}
+  .cmp .ch{font-family:var(--mono);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;
+           color:var(--muted);line-height:1.5}
+  .cmp .cr{font-weight:600}
+  .cmp .cv{font-variant-numeric:tabular-nums}
+  .cmp .cd{font-variant-numeric:tabular-nums;color:var(--flag)}
+  @media (max-width:900px){.cmp{grid-template-columns:1fr 1fr}.cmp .ch:first-child{display:none}
+    .cmp .cr{grid-column:1/-1;padding-bottom:2px;border-bottom:0;padding-top:16px}}
   @media (max-width:900px){
     .wrap{padding:0 20px}header{padding:60px 0 36px}
     .facts{grid-template-columns:1fr 1fr;gap:22px 0}
@@ -264,6 +275,106 @@
     <li><b>Rummet.</b> 4,9&nbsp;m, 5,7&nbsp;m eller 6,5&nbsp;m plus ca. 900&nbsp;mm bag hver stol. Bro II vil reelt have et rum på over 8&nbsp;m. Det er en sal, ikke en spisestue.</li>
     <li><b>Hvor står pladen resten af året?</b> En tandstang på tre meter skal opbevares plant og tørt, ellers slår den sig og passer ikke næste jul. Det er det argument, der har slået tillægsplader ihjel i hundrede år.</li>
   </ul>
+</div>
+
+
+<section class="opt">
+  <div class="opt-head"><h2>Fuld bredde</h2><div class="tag">Ét aflangt tandhjul</div></div>
+  <p class="why">Med mellempladen i bordets egen dybde &mdash; kuvertfladen på 755,8&nbsp;mm og tandspidsen på 950&nbsp;mm, nøjagtig som på hjulet &mdash; hører taljen op. Der står ikke længere to hjul med en planke imellem. Der står ét bord: et tandhjul, der er trukket langt. Overgangen fra tandstangens lige tænder til de skråtstillede ude i den runde ende er indgrebet selv &mdash; nu synligt i omridset.</p>
+  <svg viewBox="-1687.8 -1391 7372 2782" role="img" aria-label="Planbillede: ét aflangt tandhjul med 18 pladser.">
+        <path class="plate" d="M-143.7,755.8 L-153.7,760 L-290.1,896.4 L-305.7,899.5 L-362.8,875.8 L-419.9,852.2 L-428.7,839 L-428.7,646.1 L-432.9,636 L-636,432.9 L-646.1,428.7 L-839,428.7 L-852.2,419.9 L-875.9,362.8 L-899.5,305.7 L-896.4,290.1 L-760,153.7 L-755.8,143.7 L-755.8,-143.7 L-760,-153.7 L-896.4,-290.1 L-899.5,-305.7 L-875.8,-362.8 L-852.2,-419.9 L-839,-428.7 L-646.1,-428.7 L-636,-432.9 L-432.9,-636 L-428.7,-646.1 L-428.7,-839 L-419.9,-852.2 L-362.8,-875.9 L-305.7,-899.5 L-290.1,-896.4 L-153.7,-760 L-143.7,-755.8 L-143.7,-755.8 L143.7,-755.8 L337.8,-950 L461.4,-950 L655.6,-755.8 L942.9,-755.8 L1137.1,-950 L1260.7,-950 L1454.9,-755.8 L1742.2,-755.8 L1936.4,-950 L2060,-950 L2254.1,-755.8 L2541.4,-755.8 L2735.6,-950 L2859.2,-950 L3053.4,-755.8 L3340.7,-755.8 L3534.9,-950 L3658.5,-950 L3852.7,-755.8 L4140,-755.8 L4140,-755.8 L4150,-760 L4286.4,-896.4 L4302,-899.5 L4359.1,-875.8 L4416.2,-852.2 L4425,-839 L4425,-646.1 L4429.2,-636 L4632.4,-432.9 L4642.4,-428.7 L4835.3,-428.7 L4848.5,-419.9 L4872.2,-362.8 L4872.2,-362.8 L4895.8,-305.7 L4892.7,-290.1 L4756.3,-153.7 L4752.2,-143.7 L4752.2,143.7 L4756.3,153.7 L4892.7,290.1 L4895.8,305.7 L4872.2,362.8 L4848.5,419.9 L4835.3,428.7 L4642.4,428.7 L4632.4,432.9 L4429.2,636 L4425,646.1 L4425,839 L4416.2,852.2 L4359.1,875.9 L4302,899.5 L4286.4,896.4 L4150,760 L4140,755.8 L4140,755.8 L3852.7,755.8 L3658.5,950 L3534.9,950 L3340.7,755.8 L3053.4,755.8 L2859.2,950 L2735.6,950 L2541.4,755.8 L2254.1,755.8 L2060,950 L1936.4,950 L1742.2,755.8 L1454.9,755.8 L1260.7,950 L1137.1,950 L942.9,755.8 L655.6,755.8 L461.4,950 L337.8,950 L143.7,755.8 L-143.7,755.8 Z"/>
+        <g transform="translate(0,0) scale(434.4)"><use href="#cog" class="disc"/></g>
+        <g transform="translate(3996.3,0) scale(434.4)"><use href="#cog" class="disc"/></g>
+        <g transform="translate(1198.9,0) scale(335.4)"><use href="#cog" class="disc"/></g>
+        <g transform="translate(2797.4,0) scale(335.4)"><use href="#cog" class="disc"/></g>
+        <use href="#chair" transform="translate(0,-887.1) scale(965.4)"/>
+        <use href="#chair" transform="translate(0,887.1) rotate(180) scale(965.4)"/>
+        <use href="#chair" transform="translate(799.3,-887.1) scale(965.4)"/>
+        <use href="#chair" transform="translate(799.3,887.1) rotate(180) scale(965.4)"/>
+        <use href="#chair" transform="translate(1598.5,-887.1) scale(965.4)"/>
+        <use href="#chair" transform="translate(1598.5,887.1) rotate(180) scale(965.4)"/>
+        <use href="#chair" transform="translate(2397.8,-887.1) scale(965.4)"/>
+        <use href="#chair" transform="translate(2397.8,887.1) rotate(180) scale(965.4)"/>
+        <use href="#chair" transform="translate(3197.1,-887.1) scale(965.4)"/>
+        <use href="#chair" transform="translate(3197.1,887.1) rotate(180) scale(965.4)"/>
+        <use href="#chair" transform="translate(3996.3,-887.1) scale(965.4)"/>
+        <use href="#chair" transform="translate(3996.3,887.1) rotate(180) scale(965.4)"/>
+        <use href="#chair" transform="translate(-623.3,623.3) rotate(225) scale(965.4)"/>
+        <use href="#chair" transform="translate(-881.5,0) rotate(270) scale(965.4)"/>
+        <use href="#chair" transform="translate(-623.3,-623.3) rotate(315) scale(965.4)"/>
+        <use href="#chair" transform="translate(4619.6,-623.3) rotate(405) scale(965.4)"/>
+        <use href="#chair" transform="translate(4877.8,0) rotate(90) scale(965.4)"/>
+        <use href="#chair" transform="translate(4619.6,623.3) rotate(135) scale(965.4)"/>
+      </svg>
+  <div class="facts">
+    <div><b>18</b><span>Pladser<br>i alt</span></div>
+    <div><b>5896&thinsp;mm</b><span>Bordets<br>fulde længde</span></div>
+    <div><b>799,3&thinsp;mm</b><span>Samme deling<br>hele vejen</span></div>
+    <div><b>4</b><span>Drejeskiver<br>i alt</span></div>
+  </div>
+</section>
+
+<section class="opt">
+  <div class="opt-head"><h2>Men det giver ikke flere pladser</h2><div class="tag">208 mm dyrere, hver gang</div></div>
+  <p class="why">Den brede plade vinder kant på midten og taber den i enderne. Tre bugter pr. bord &mdash; den ved 0&deg; og de to ved 45&deg; &mdash; bliver begravet inde i bordet, og til gengæld kommer der to nye kuverter til på den lige strækning. Det går næsten lige op. Næsten: den runde kant pakker kuverter tættere end den lige, og forskellen er den samme hver gang.</p>
+  <div class="cmp">
+    <div class="ch"></div><div class="ch">Smal bro, 857 mm</div><div class="ch">Fuld bredde, 1900 mm</div><div class="ch">Forskel</div>
+    <div class="cr">16 pladser</div><div class="cv">4889 mm</div><div class="cv">5097 mm</div><div class="cd">+208 mm</div>
+    <div class="cr">18 pladser</div><div class="cv">5689 mm</div><div class="cv">5896 mm</div><div class="cd">+208 mm</div>
+    <div class="cr">20 pladser</div><div class="cv">6488 mm</div><div class="cv">6696 mm</div><div class="cd">+208 mm</div>
+  </div>
+  <p class="why" style="margin-top:24px">Svaret på spørgsmålet er altså nej. Fuld bredde koster 208&nbsp;mm ekstra bordlængde for det samme antal stole &mdash; hver gang, uanset hvor langt bordet bliver. Det, den giver, er formen. Og formen er måske det, der er mest værd.</p>
+</section>
+
+<section class="opt">
+  <div class="opt-head"><h2>Og den kan ikke bygges af to hele borde</h2><div class="tag">6 mm</div></div>
+  <p class="why">Her er pladen alene, mellem de to hele bordplader. For at nå ud i fuld bredde skal den lappe hen over bordets kant &mdash; og netop dér løber begge kanter 45&deg;. To parallelle linjer. Strimlen imellem dem bliver aldrig tykkere: den er 6&nbsp;mm i hele sin længde på 194&nbsp;mm. Det er ikke en spids, der kan høvles ned. Det er en finérstrimmel i massiv eg, og den brækker første gang nogen sætter en albue på den.</p>
+  <svg viewBox="-1687.8 -1391 7372 2782" role="img" aria-label="Planbillede: den brede plade alene mellem to hele bordplader.">
+        <g transform="scale(965.4)"><use href="#cog" class="topthin"/></g>
+        <g transform="translate(3996.3,0) scale(965.4)"><use href="#cog" class="topthin"/></g>
+        <path class="plate2" d="M143.7,-755.8 L337.8,-950 L461.4,-950 L655.6,-755.8 L942.9,-755.8 L1137.1,-950 L1260.7,-950 L1454.9,-755.8 L1742.2,-755.8 L1936.4,-950 L2060,-950 L2254.1,-755.8 L2541.4,-755.8 L2735.6,-950 L2859.2,-950 L3053.4,-755.8 L3340.7,-755.8 L3534.9,-950 L3658.5,-950 L3852.7,-755.8 L3852.7,-755.8 L3842.6,-760 L3706.2,-896.4 L3690.7,-899.5 L3633.6,-875.9 L3576.4,-852.2 L3567.6,-839 L3567.6,-646.1 L3563.4,-636 L3360.3,-432.9 L3350.3,-428.7 L3157.3,-428.7 L3144.2,-419.9 L3120.5,-362.8 L3096.8,-305.7 L3099.9,-290.1 L3236.3,-153.7 L3240.5,-143.7 L3240.5,143.7 L3236.3,153.7 L3099.9,290.1 L3096.8,305.7 L3120.5,362.8 L3144.2,419.9 L3157.3,428.7 L3350.3,428.7 L3360.3,432.9 L3563.4,636 L3567.6,646.1 L3567.6,839 L3576.4,852.2 L3633.5,875.8 L3690.7,899.5 L3706.2,896.4 L3842.6,760 L3852.7,755.8 L3852.7,755.8 L3658.5,950 L3534.9,950 L3340.7,755.8 L3053.4,755.8 L2859.2,950 L2735.6,950 L2541.4,755.8 L2254.1,755.8 L2060,950 L1936.4,950 L1742.2,755.8 L1454.9,755.8 L1260.7,950 L1137.1,950 L942.9,755.8 L655.6,755.8 L461.4,950 L337.8,950 L143.7,755.8 L143.7,755.8 L153.7,760 L290.1,896.4 L305.7,899.5 L362.8,875.9 L419.9,852.2 L428.7,839 L428.7,646.1 L432.9,636 L636,432.9 L646.1,428.7 L839,428.7 L852.2,419.9 L875.8,362.8 L899.5,305.7 L896.4,290.1 L760,153.7 L755.8,143.7 L755.8,-143.7 L760,-153.7 L896.4,-290.1 L899.5,-305.7 L875.8,-362.8 L875.9,-362.8 L852.2,-419.9 L839,-428.7 L646.1,-428.7 L636,-432.9 L432.9,-636 L428.7,-646.1 L428.7,-839 L419.9,-852.2 L362.8,-875.8 L305.7,-899.5 L290.1,-896.4 L153.7,-760 L143.7,-755.8 Z"/>
+        <g transform="translate(0,0) scale(434.4)"><use href="#cog" class="disc"/></g>
+        <g transform="translate(3996.3,0) scale(434.4)"><use href="#cog" class="disc"/></g>
+        <g transform="translate(1198.9,0) scale(335.4)"><use href="#cog" class="disc"/></g>
+        <g transform="translate(2797.4,0) scale(335.4)"><use href="#cog" class="disc"/></g>
+        <use href="#chair" transform="translate(0,-887.1) scale(965.4)"/>
+        <use href="#chair" transform="translate(0,887.1) rotate(180) scale(965.4)"/>
+        <use href="#chair" transform="translate(799.3,-887.1) scale(965.4)"/>
+        <use href="#chair" transform="translate(799.3,887.1) rotate(180) scale(965.4)"/>
+        <use href="#chair" transform="translate(1598.5,-887.1) scale(965.4)"/>
+        <use href="#chair" transform="translate(1598.5,887.1) rotate(180) scale(965.4)"/>
+        <use href="#chair" transform="translate(2397.8,-887.1) scale(965.4)"/>
+        <use href="#chair" transform="translate(2397.8,887.1) rotate(180) scale(965.4)"/>
+        <use href="#chair" transform="translate(3197.1,-887.1) scale(965.4)"/>
+        <use href="#chair" transform="translate(3197.1,887.1) rotate(180) scale(965.4)"/>
+        <use href="#chair" transform="translate(3996.3,-887.1) scale(965.4)"/>
+        <use href="#chair" transform="translate(3996.3,887.1) rotate(180) scale(965.4)"/>
+        <use href="#chair" transform="translate(-623.3,623.3) rotate(225) scale(965.4)"/>
+        <use href="#chair" transform="translate(-881.5,0) rotate(270) scale(965.4)"/>
+        <use href="#chair" transform="translate(-623.3,-623.3) rotate(315) scale(965.4)"/>
+        <use href="#chair" transform="translate(4619.6,-623.3) rotate(405) scale(965.4)"/>
+        <use href="#chair" transform="translate(4877.8,0) rotate(90) scale(965.4)"/>
+        <use href="#chair" transform="translate(4619.6,623.3) rotate(135) scale(965.4)"/>
+      </svg>
+  <svg class="horn" viewBox="105 -975 400 355" role="img" aria-label="Detalje af hornets spids: pladens kant og bordets kant loeber begge 45 grader, saa strimlen imellem er 6 mm i hele sin laengde.">
+      <g transform="scale(965.43)"><use href="#cog" class="topthin"/></g>
+      <path class="plate2" d="M143.7,-755.8 L337.8,-950 L461.4,-950 L655.6,-755.8 L942.9,-755.8 L1137.1,-950 L1260.7,-950 L1454.9,-755.8 L1742.2,-755.8 L1936.4,-950 L2060,-950 L2254.1,-755.8 L2541.4,-755.8 L2735.6,-950 L2859.2,-950 L3053.4,-755.8 L3340.7,-755.8 L3534.9,-950 L3658.5,-950 L3852.7,-755.8 L3852.7,-755.8 L3842.6,-760 L3706.2,-896.4 L3690.7,-899.5 L3633.6,-875.9 L3576.4,-852.2 L3567.6,-839 L3567.6,-646.1 L3563.4,-636 L3360.3,-432.9 L3350.3,-428.7 L3157.3,-428.7 L3144.2,-419.9 L3120.5,-362.8 L3096.8,-305.7 L3099.9,-290.1 L3236.3,-153.7 L3240.5,-143.7 L3240.5,143.7 L3236.3,153.7 L3099.9,290.1 L3096.8,305.7 L3120.5,362.8 L3144.2,419.9 L3157.3,428.7 L3350.3,428.7 L3360.3,432.9 L3563.4,636 L3567.6,646.1 L3567.6,839 L3576.4,852.2 L3633.5,875.8 L3690.7,899.5 L3706.2,896.4 L3842.6,760 L3852.7,755.8 L3852.7,755.8 L3658.5,950 L3534.9,950 L3340.7,755.8 L3053.4,755.8 L2859.2,950 L2735.6,950 L2541.4,755.8 L2254.1,755.8 L2060,950 L1936.4,950 L1742.2,755.8 L1454.9,755.8 L1260.7,950 L1137.1,950 L942.9,755.8 L655.6,755.8 L461.4,950 L337.8,950 L143.7,755.8 L143.7,755.8 L153.7,760 L290.1,896.4 L305.7,899.5 L362.8,875.9 L419.9,852.2 L428.7,839 L428.7,646.1 L432.9,636 L636,432.9 L646.1,428.7 L839,428.7 L852.2,419.9 L875.8,362.8 L899.5,305.7 L896.4,290.1 L760,153.7 L755.8,143.7 L755.8,-143.7 L760,-153.7 L896.4,-290.1 L899.5,-305.7 L875.8,-362.8 L875.9,-362.8 L852.2,-419.9 L839,-428.7 L646.1,-428.7 L636,-432.9 L432.9,-636 L428.7,-646.1 L428.7,-839 L419.9,-852.2 L362.8,-875.8 L305.7,-899.5 L290.1,-896.4 L153.7,-760 L143.7,-755.8 Z"/>
+      <line class="lead" x1="300" y1="-742" x2="228" y2="-816"/>
+      <text x="308" y="-734" style="font-family:'DM Mono',monospace;font-size:21px;fill:#0f0e0b">6 mm, i 194 mm</text>
+      <text x="150" y="-930" style="font-family:'DM Mono',monospace;font-size:17px;fill:#8a8378;letter-spacing:1.5px">HORNETS SPIDS</text>
+    </svg>
+</section>
+
+<div class="derived">
+  <h2>Hvad tegningen i stedet peger på</h2>
+  <p class="why">Skal formen være det aflange tandhjul &mdash; og det synes jeg, den skal &mdash; så er det ikke to borde, der skal samles. Det er ét bord, der skal trækkes fra hinanden.</p>
+  <dl>
+    <dt>Snittet</dt><dd>Gennem to modstående tandspidser, ikke gennem to kuverter. Så ligger samlingen under en tand, hvor bordet i forvejen har en skillelinje, og ikke midt under en tallerken.</dd>
+    <dt>Udtrækket</dt><dd>De to halvdele kører fra hinanden på skinner, præcis som ved et hvilket som helst andet udtræksbord. Stellet følger halvdelene, så pladen aldrig hænger frit &mdash; og så er hele bæreproblemet fra den smalle bro væk.</dd>
+    <dt>Tillægspladen</dt><dd>Fuld dybde, tandstangsprofil på begge langsider, længde 799,3&nbsp;mm gange antallet af kuverter. Én plade giver to pladser, to plader fire, og tandrytmen bliver aldrig brudt.</dd>
+    <dt>Regnestykket</dt><dd>8 + 2 pladser pr. plade, ved 1900 + 799,3&nbsp;mm pr. plade. Nøjagtig samme bord som ovenfor &mdash; men du betaler for én bordplade i stedet for to, og midten af dem begge bliver ikke begravet.</dd>
+    <dt>Det, du opgiver</dt><dd>To selvstændige borde. Det her er ét møbel, der kan vokse. Skal du kunne stille to borde i to forskellige rum, holder den smalle bro &mdash; og den er 208&nbsp;mm kortere for det samme antal stole.</dd>
+  </dl>
 </div>
 
 <footer><a href="../../tandhjulet/">&larr; Tilbage til Tandhjulet</a></footer>
