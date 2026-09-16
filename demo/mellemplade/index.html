@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="robots" content="noindex, nofollow"/>
+<title>Tandstangen — mellemplade til to Tandhjul</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{--bg:#f5f2ed;--ink:#0f0e0b;--line:#d8d2c8;--accent:#c8a96e;--card:#eeebe5;
+        --serif:"Cormorant Garamond",Georgia,serif;--mono:"DM Mono",ui-monospace,monospace;
+        --muted:#8a8378;--flag:#a8523f}
+  body{background:var(--bg);color:var(--ink);font-family:var(--serif);font-size:20px;
+       line-height:1.7;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 32px}
+  .slabel{font-family:var(--mono);font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;
+          color:var(--accent);display:flex;align-items:center;gap:12px;margin-bottom:26px}
+  .slabel::after{content:'';width:34px;height:1px;background:var(--accent)}
+  header{padding:96px 0 48px}
+  h1{font-weight:300;font-size:clamp(2.25rem,5.8vw,3.9rem);line-height:1.08;letter-spacing:-.01em;max-width:17ch}
+  h1 em{font-style:italic;color:var(--accent)}
+  .lede{font-weight:500;font-size:clamp(1.02rem,2.1vw,1.2rem);max-width:62ch;margin-top:26px;color:#3a352c}
+
+  .top{fill:var(--card);stroke:var(--ink);stroke-width:.014}
+  .topthin{fill:var(--card);stroke:var(--ink);stroke-width:.00414}
+  .disc{fill:#e7e2d8;stroke:var(--ink);stroke-width:.009}
+  .plate{fill:#e5e0d5;stroke:var(--ink);stroke-width:13.5}
+  .plate2{fill:#dcd5c5;stroke:var(--ink);stroke-width:4}
+  .seat{fill:#e2ddd2}.back{fill:none;stroke:var(--ink);stroke-width:.028;opacity:.42;stroke-linecap:round}
+  .arm{stroke:var(--ink);stroke-width:.02;opacity:.42;stroke-linecap:round}
+  .dim{stroke:var(--accent);stroke-width:4;fill:none}
+  .dimtick{stroke:var(--accent);stroke-width:4}
+  .dimtxt{font-family:"DM Mono",monospace;font-size:44px;fill:var(--ink)}
+  .lbl{font-family:"DM Mono",monospace;font-size:34px;fill:var(--muted);letter-spacing:2px}
+  .lead{stroke:var(--muted);stroke-width:3;opacity:.7}
+  svg.detail{max-width:700px;margin-inline:auto}
+  svg.horn{max-width:520px;margin:14px auto 0;display:block}
+
+  .opt{border-top:1px solid var(--line);padding:44px 0 8px}
+  .opt-head{display:flex;flex-wrap:wrap;gap:6px 26px;align-items:baseline;margin-bottom:6px}
+  .opt h2{font-weight:400;font-size:clamp(1.5rem,3.4vw,2.1rem);letter-spacing:-.005em}
+  .opt .tag{font-family:var(--mono);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+  .opt p.why{font-weight:500;font-size:1rem;color:#3a352c;max-width:64ch;margin-top:10px}
+  .opt svg{width:100%;height:auto;display:block;margin:20px 0 6px}
+  .facts{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:14px;
+         border-top:1px solid var(--line);padding-top:22px}
+  .facts div{padding-right:22px}
+  .facts b{display:block;font-weight:300;font-size:clamp(1.5rem,3.6vw,2.2rem);line-height:1;
+           letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+  .facts span{display:block;font-family:var(--mono);font-size:.62rem;letter-spacing:.1em;
+              text-transform:uppercase;color:var(--muted);margin-top:11px;line-height:1.6}
+
+  .derived{margin:64px 0 0;border:1px solid var(--line);background:var(--card);padding:36px 40px 32px}
+  .derived h2{font-weight:400;font-size:clamp(1.4rem,3vw,1.9rem);margin-bottom:8px}
+  .derived p.why{font-weight:500;font-size:1rem;color:#3a352c;max-width:64ch;margin-bottom:24px}
+  .derived dl{display:grid;grid-template-columns:auto 1fr;gap:14px 26px;align-items:baseline}
+  .derived dt{font-family:var(--mono);font-size:.82rem;white-space:nowrap;font-variant-numeric:tabular-nums}
+  .derived dd{font-size:.95rem;line-height:1.55;color:#4a443a}
+
+  .against{margin:64px 0 0;border-left:2px solid var(--flag);padding:2px 0 2px 24px}
+  .against h2{font-weight:400;font-size:clamp(1.4rem,3vw,1.9rem);margin-bottom:8px}
+  .against p.why{font-weight:500;font-size:1rem;color:#3a352c;max-width:64ch;margin-bottom:22px}
+  .against ul{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:20px 40px}
+  .against li{font-size:.95rem;line-height:1.6;color:#4a443a}
+  .against li b{font-weight:600;color:var(--ink);display:block;font-size:1rem}
+
+  .cmp{display:grid;grid-template-columns:1.1fr 1fr 1fr .8fr;gap:0;margin-top:26px;
+       border-top:1px solid var(--line)}
+  .cmp>div{padding:13px 14px 13px 0;border-bottom:1px solid var(--line);font-size:.95rem}
+  .cmp .ch{font-family:var(--mono);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;
+           color:var(--muted);line-height:1.5}
+  .cmp .cr{font-weight:600}
+  .cmp .cv{font-variant-numeric:tabular-nums}
+  .cmp .cd{font-variant-numeric:tabular-nums;color:var(--accent)}
+
+  footer{padding:60px 0 90px;border-top:1px solid var(--line);margin-top:64px;
+         font-family:var(--mono);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+  footer a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--line)}
+  @media (max-width:900px){
+    .wrap{padding:0 20px}header{padding:60px 0 36px}
+    .facts{grid-template-columns:1fr 1fr;gap:22px 0}
+    .derived{padding:24px 20px}.derived dl{grid-template-columns:1fr;gap:4px 0}
+    .derived dd{margin-bottom:12px}
+    .against ul{grid-template-columns:1fr}
+    .cmp{grid-template-columns:1fr 1fr}.cmp .ch:first-child{display:none}
+    .cmp .cr{grid-column:1/-1;padding-bottom:2px;border-bottom:0;padding-top:16px}
+    .dimtxt{font-size:56px}.lbl{font-size:44px}
+  }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <path id="cog" d="M-0.3005,0.9285L-0.1592,0.7872A0.0148,0.0148 0 0,0 -0.1488,0.7829L0.1488,0.7829A0.0148,0.0148 0 0,0 0.1592,0.7872L0.3005,0.9285A0.0148,0.0148 0 0,1 0.3166,0.9317L0.4349,0.8827A0.0148,0.0148 0 0,1 0.4441,0.869L0.4441,0.6692A0.0148,0.0148 0 0,0 0.4484,0.6588L0.6588,0.4484A0.0148,0.0148 0 0,0 0.6692,0.4441L0.869,0.4441A0.0148,0.0148 0 0,1 0.8827,0.4349L0.9317,0.3166A0.0148,0.0148 0 0,1 0.9285,0.3005L0.7872,0.1592A0.0148,0.0148 0 0,0 0.7829,0.1488L0.7829,-0.1488A0.0148,0.0148 0 0,0 0.7872,-0.1592L0.9285,-0.3005A0.0148,0.0148 0 0,1 0.9317,-0.3166L0.8827,-0.4349A0.0148,0.0148 0 0,1 0.869,-0.4441L0.6692,-0.4441A0.0148,0.0148 0 0,0 0.6588,-0.4484L0.4484,-0.6588A0.0148,0.0148 0 0,0 0.4441,-0.6692L0.4441,-0.869A0.0148,0.0148 0 0,1 0.4349,-0.8827L0.3166,-0.9317A0.0148,0.0148 0 0,1 0.3005,-0.9285L0.1592,-0.7872A0.0148,0.0148 0 0,0 0.1488,-0.7829L-0.1488,-0.7829A0.0148,0.0148 0 0,0 -0.1592,-0.7872L-0.3005,-0.9285A0.0148,0.0148 0 0,1 -0.3166,-0.9317L-0.4349,-0.8827A0.0148,0.0148 0 0,1 -0.4441,-0.869L-0.4441,-0.6692A0.0148,0.0148 0 0,0 -0.4484,-0.6588L-0.6588,-0.4484A0.0148,0.0148 0 0,0 -0.6692,-0.4441L-0.869,-0.4441A0.0148,0.0148 0 0,1 -0.8827,-0.4349L-0.9317,-0.3166A0.0148,0.0148 0 0,1 -0.9285,-0.3005L-0.7872,-0.1592A0.0148,0.0148 0 0,0 -0.7829,-0.1488L-0.7829,0.1488A0.0148,0.0148 0 0,0 -0.7872,0.1592L-0.9285,0.3005A0.0148,0.0148 0 0,1 -0.9317,0.3166L-0.8827,0.4349A0.0148,0.0148 0 0,1 -0.869,0.4441L-0.6692,0.4441A0.0148,0.0148 0 0,0 -0.6588,0.4484L-0.4484,0.6588A0.0148,0.0148 0 0,0 -0.4441,0.6692L-0.4441,0.869A0.0148,0.0148 0 0,1 -0.4349,0.8827L-0.3166,0.9317A0.0148,0.0148 0 0,1 -0.3005,0.9285L-0.3005,0.9285Z"/>
+  <g id="chair">
+    <path class="seat" d="M-.235,-.07 L.235,-.07 L.235,-.44 L-.235,-.44 Z"/>
+    <path class="back" d="M-.255,-.445 L.255,-.445"/>
+    <line class="arm" x1="-.285" y1="0" x2="-.285" y2="-.42"/>
+    <line class="arm" x1=".285" y1="0" x2=".285" y2="-.42"/>
+  </g>
+</defs></svg>
+
+<div class="wrap">
+
+<header>
+  <div class="slabel">Mellemplade</div>
+  <h1>Ikke en planke med et hak. <em>En tandstang.</em></h1>
+  <p class="lede">Et tandhjul, der griber ind i en tandstang, er den ældste samling i mekanikken. Derfor behøver mellempladen ikke et nyt formsprog: den bærer bordets egen tand, rejst op. Samme krone på 123,7&nbsp;mm, samme fod på 313,0&nbsp;mm, samme højde på 194,7&nbsp;mm, samme flanke på 25,9&deg;. Ingen af målene på siden er valgt. De er målt på hjulet.</p>
+</header>
+
+<div class="against" style="margin-top:0">
+  <h2>Rettelse</h2>
+  <p class="why">Den første udgave af denne side havde tandstangens flanker på 45&deg;. Det er <em>bugtens</em> vinkel, ikke <em>tandens</em>. Tanden på hjulet står 25,9&deg; om sin egen akse, og den forskel gjorde hver eneste lige tand 512&nbsp;mm bred ved foden mod hjulets 313 &mdash; 64&nbsp;% for meget. Det kunne ses med det blotte øje, og det blev set. Alt herunder er regnet om. To konklusioner vendte på hovedet undervejs; de står som de nu er.</p>
+</div>
+
+<section class="opt">
+  <div class="opt-head"><h2>Tanden</h2><div class="tag">Målt om sin egen akse</div></div>
+  <p class="why">En tand og en bugt kan ikke rettes ud samtidig &mdash; det er hele pointen med et tandhjul. Flanken står 25,9&deg; fra tandens akse og 48,4&deg; fra bugtens, og de to akser ligger 22,5&deg; fra hinanden. Skal den lige strækning ligne resten af bordet, er det <em>tanden</em>, der skal passe: øjet sammenligner de faste former, ikke mellemrummene. Bugterne på den lige strækning bliver derfor smallere foroven end de runde &mdash; 482 mod 611&nbsp;mm. Det er den pris, ingen tegning slipper for &mdash; og den kan mærkes fra stolen: mellem to lige kroner er der 477&nbsp;mm, og en spisestol med armlæn er bredere. Den standser altså oven på kronerne i stedet for at køre ned i bugten, og man sidder 78&nbsp;mm længere ude på den lige strækning end i den runde ende. Stolene på tegningerne står, hvor de faktisk standser.</p>
+  <div class="facts">
+    <div><b>194,7&thinsp;mm</b><span>Tandens højde<br>over kuvertfladen</span></div>
+    <div><b>313,0&thinsp;mm</b><span>Dens fod &mdash;<br>hjulets er 313,0</span></div>
+    <div><b>25,9&deg;</b><span>Flanken om<br>tandens akse</span></div>
+    <div><b>600,4&thinsp;mm</b><span>Delingen, der<br>falder ud af det</span></div>
+  </div>
+</section>
+
+<section class="opt">
+  <div class="opt-head"><h2>Samlingen</h2><div class="tag">Tandstang i tandhjul</div></div>
+  <p class="why">Pladens ende er bugtens negativ. Tungen fylder den lige flade ud, og de to lommer ved siden af tager de to tænder, der flankerer bugten. Pladens sider flugter med tændernes yderflader, og derfor er bredden 857&nbsp;mm og ikke et rundt tal. Og pladens egen første tand er bordets tand, rejst op &mdash; ikke en ny form.</p>
+  <svg class="detail" viewBox="100 -900 2070 1800" role="img" aria-label="Detalje af samlingen: pladens ende er bugtens negativ, og pladens forste tand er bordets egen tand rejst op.">
+      <g transform="scale(965.4)"><use href="#cog" class="topthin"/></g>
+      <path class="plate2" d="M755.8,-0 L755.8,-143.7 L760,-153.7 L896.4,-290.1 L899.5,-305.7 L852.2,-419.9 L839,-428.7 L839,-428.7 L933.6,-623.5 L1057.3,-623.5 L1152,-428.7 L1439.3,-428.7 L1534,-623.5 L1657.7,-623.5 L1752.4,-428.7 L2039.7,-428.7 L2134.4,-623.5 L2258,-623.5 L2352.7,-428.7 L2352.7,-428.7 L2339.5,-419.9 L2292.2,-305.7 L2295.3,-290.1 L2431.7,-153.7 L2435.8,-143.7 L2435.8,-0 L2435.8,143.7 L2431.7,153.7 L2295.3,290.1 L2292.2,305.7 L2339.5,419.9 L2352.7,428.7 L2352.7,428.7 L2258,623.5 L2134.4,623.5 L2039.7,428.7 L1752.4,428.7 L1657.7,623.5 L1534,623.5 L1439.3,428.7 L1152,428.7 L1057.3,623.5 L933.6,623.5 L839,428.7 L839,428.7 L852.2,419.9 L899.5,305.7 L896.4,290.1 L760,153.7 L755.8,143.7 L755.8,0 Z"/>
+      <g>
+        <line class="dim" x1="1990" y1="-428.7" x2="1990" y2="428.7"/>
+        <line class="dimtick" x1="1968" y1="-428.7" x2="2012" y2="-428.7"/>
+        <line class="dimtick" x1="1968" y1="428.7" x2="2012" y2="428.7"/>
+        <text class="dimtxt" transform="translate(1962,0) rotate(-90)" text-anchor="middle">857 mm</text>
+        <line class="dim" x1="1245" y1="-428.7" x2="1245" y2="-623.5"/>
+        <line class="dimtick" x1="1223" y1="-428.7" x2="1267" y2="-428.7"/>
+        <line class="dimtick" x1="1223" y1="-623.5" x2="1267" y2="-623.5"/>
+        <text class="dimtxt" x="1281" y="-512.1">195 mm</text>
+        <line class="dim" x1="660" y1="-143.7" x2="660" y2="143.7"/>
+        <line class="dimtick" x1="638" y1="-143.7" x2="682" y2="-143.7"/>
+        <line class="dimtick" x1="638" y1="143.7" x2="682" y2="143.7"/>
+        <text class="dimtxt" transform="translate(632,0) rotate(-90)" text-anchor="middle">287 mm</text>
+        <line class="lead" x1="1010" y1="-680" x2="1010" y2="-628"/>
+        <text class="lbl" x="1010" y="-708" text-anchor="middle">PLADENS F&#216;RSTE TAND</text>
+        <line class="lead" x1="900" y1="700" x2="884" y2="410"/>
+        <text class="lbl" x="900" y="752" text-anchor="middle">BORDETS TAND, I PLADENS LOMME</text>
+      </g>
+    </svg>
+</section>
+
+<section class="opt">
+  <div class="opt-head"><h2>Bro 0 &mdash; to pladser</h2><div class="tag">Ét bord i stedet for to</div></div>
+  <p class="why">Den korteste, der giver mening: én tand, én kuvert, én tand på hver side. Samme antal pladser som to borde ved siden af hinanden &mdash; men det er ét bord, og alle sidder med ved det samme.</p>
+  <p class="why">Midt på broen sidder de to over for hinanden med 857&nbsp;mm imellem sig. Der er ikke bredde til en skive på 540 &mdash; den ville kun levne 159&nbsp;mm til kuvert. Skiven her er på <b>270</b>: den levner 294&nbsp;mm i hver side, og der er 488&nbsp;mm fra brystet ud til kanten af den. Målet er ikke valgt frit &mdash; det er det største, et 175&times;175 pladeleje kan bære inden for konfiguratorens egen regel om 12,5&nbsp;% udhæng.</p>
+  <svg viewBox="-2390.3 -1391 7372 2782" role="img" aria-label="Planbillede: to tandhjulsborde samlet med en tandstang, 16 pladser.">
+        <g transform="translate(0,0) scale(965.4)"><use href="#cog" class="top"/></g>
+        <g transform="translate(2591.3,0) scale(965.4)"><use href="#cog" class="top"/></g>
+        <path class="plate" d="M755.8,-0 L755.8,-143.7 L760,-153.7 L896.4,-290.1 L899.5,-305.7 L852.2,-419.9 L839,-428.7 L839,-428.7 L933.6,-623.5 L1057.3,-623.5 L1152,-428.7 L1439.3,-428.7 L1534,-623.5 L1657.7,-623.5 L1752.4,-428.7 L1752.4,-428.7 L1739.1,-419.9 L1691.8,-305.7 L1694.9,-290.1 L1831.3,-153.7 L1835.5,-143.7 L1835.5,-0 L1835.5,143.7 L1831.3,153.7 L1694.9,290.1 L1691.8,305.7 L1739.1,419.9 L1752.4,428.7 L1752.4,428.7 L1657.7,623.5 L1534,623.5 L1439.3,428.7 L1152,428.7 L1057.3,623.5 L933.6,623.5 L839,428.7 L839,428.7 L852.2,419.9 L899.5,305.7 L896.4,290.1 L760,153.7 L755.8,143.7 L755.8,0 Z"/>
+        <g transform="translate(0,0) scale(434.4)"><use href="#cog" class="disc"/></g>
+        <g transform="translate(2591.3,0) scale(434.4)"><use href="#cog" class="disc"/></g>
+        <g transform="translate(1295.7,0) scale(137.2)"><use href="#cog" class="disc"/></g>
+        <use href="#chair" transform="translate(623.3,623.3) rotate(135) scale(965.4)"/>
+        <use href="#chair" transform="translate(0,881.5) rotate(180) scale(965.4)"/>
+        <use href="#chair" transform="translate(-623.3,623.3) rotate(225) scale(965.4)"/>
+        <use href="#chair" transform="translate(-881.5,0) rotate(270) scale(965.4)"/>
+        <use href="#chair" transform="translate(-623.3,-623.3) rotate(315) scale(965.4)"/>
+        <use href="#chair" transform="translate(-0,-881.5) rotate(360) scale(965.4)"/>
+        <use href="#chair" transform="translate(623.3,-623.3) rotate(405) scale(965.4)"/>
+        <use href="#chair" transform="translate(3472.8,0) rotate(90) scale(965.4)"/>
+        <use href="#chair" transform="translate(3214.6,623.3) rotate(135) scale(965.4)"/>
+        <use href="#chair" transform="translate(2591.3,881.5) rotate(180) scale(965.4)"/>
+        <use href="#chair" transform="translate(1968,623.3) rotate(225) scale(965.4)"/>
+        <use href="#chair" transform="translate(1968,-623.3) rotate(315) scale(965.4)"/>
+        <use href="#chair" transform="translate(2591.3,-881.5) rotate(360) scale(965.4)"/>
+        <use href="#chair" transform="translate(3214.6,-623.3) rotate(405) scale(965.4)"/>
+        <use href="#chair" transform="translate(1295.7,-623.5) scale(965.4)"/>
+        <use href="#chair" transform="translate(1295.7,623.5) rotate(180) scale(965.4)"/>
+      </svg>
+  <div class="facts">
+    <div><b>16</b><span>Pladser<br>i alt</span></div>
+    <div><b>4491&thinsp;mm</b><span>Bordets<br>fulde længde</span></div>
+    <div><b>1080&thinsp;mm</b><span>Mellempladen<br>alene</span></div>
+    <div><b>3</b><span>Drejeskiver<br>i alt</span></div>
+  </div>
+</section>
+
+<section class="opt">
+  <div class="opt-head"><h2>Bro I &mdash; fire pladser</h2><div class="tag">Egen drejeskive</div></div>
+  <p class="why">To kuverter i hver side. Nu står der en tandspids midt på pladen med to kuverter på hver side af sig &mdash; og netop dér er pladen 1247&nbsp;mm bred, så en drejeskive på 540&nbsp;mm levner 353&nbsp;mm til kuvert i hver side. Den er nødvendig: fra en plads på broen er der over 900&nbsp;mm til nærmeste af de to store drejeskiver, og så langt rækker ingen.</p>
+  <svg viewBox="-2090.2 -1391 7372 2782" role="img" aria-label="Planbillede: to tandhjulsborde samlet med en tandstang, 18 pladser.">
+        <g transform="translate(0,0) scale(965.4)"><use href="#cog" class="top"/></g>
+        <g transform="translate(3191.7,0) scale(965.4)"><use href="#cog" class="top"/></g>
+        <path class="plate" d="M755.8,-0 L755.8,-143.7 L760,-153.7 L896.4,-290.1 L899.5,-305.7 L852.2,-419.9 L839,-428.7 L839,-428.7 L933.6,-623.5 L1057.3,-623.5 L1152,-428.7 L1439.3,-428.7 L1534,-623.5 L1657.7,-623.5 L1752.4,-428.7 L2039.7,-428.7 L2134.4,-623.5 L2258,-623.5 L2352.7,-428.7 L2352.7,-428.7 L2339.5,-419.9 L2292.2,-305.7 L2295.3,-290.1 L2431.7,-153.7 L2435.8,-143.7 L2435.8,-0 L2435.8,143.7 L2431.7,153.7 L2295.3,290.1 L2292.2,305.7 L2339.5,419.9 L2352.7,428.7 L2352.7,428.7 L2258,623.5 L2134.4,623.5 L2039.7,428.7 L1752.4,428.7 L1657.7,623.5 L1534,623.5 L1439.3,428.7 L1152,428.7 L1057.3,623.5 L933.6,623.5 L839,428.7 L839,428.7 L852.2,419.9 L899.5,305.7 L896.4,290.1 L760,153.7 L755.8,143.7 L755.8,0 Z"/>
+        <g transform="translate(0,0) scale(434.4)"><use href="#cog" class="disc"/></g>
+        <g transform="translate(3191.7,0) scale(434.4)"><use href="#cog" class="disc"/></g>
+        <g transform="translate(1595.8,0) scale(274.4)"><use href="#cog" class="disc"/></g>
+        <use href="#chair" transform="translate(623.3,623.3) rotate(135) scale(965.4)"/>
+        <use href="#chair" transform="translate(0,881.5) rotate(180) scale(965.4)"/>
+        <use href="#chair" transform="translate(-623.3,623.3) rotate(225) scale(965.4)"/>
+        <use href="#chair" transform="translate(-881.5,0) rotate(270) scale(965.4)"/>
+        <use href="#chair" transform="translate(-623.3,-623.3) rotate(315) scale(965.4)"/>
+        <use href="#chair" transform="translate(-0,-881.5) rotate(360) scale(965.4)"/>
+        <use href="#chair" transform="translate(623.3,-623.3) rotate(405) scale(965.4)"/>
+        <use href="#chair" transform="translate(4073.2,0) rotate(90) scale(965.4)"/>
+        <use href="#chair" transform="translate(3815,623.3) rotate(135) scale(965.4)"/>
+        <use href="#chair" transform="translate(3191.7,881.5) rotate(180) scale(965.4)"/>
+        <use href="#chair" transform="translate(2568.4,623.3) rotate(225) scale(965.4)"/>
+        <use href="#chair" transform="translate(2568.4,-623.3) rotate(315) scale(965.4)"/>
+        <use href="#chair" transform="translate(3191.7,-881.5) rotate(360) scale(965.4)"/>
+        <use href="#chair" transform="translate(3815,-623.3) rotate(405) scale(965.4)"/>
+        <use href="#chair" transform="translate(1295.7,-623.5) scale(965.4)"/>
+        <use href="#chair" transform="translate(1295.7,623.5) rotate(180) scale(965.4)"/>
+        <use href="#chair" transform="translate(1896,-623.5) scale(965.4)"/>
+        <use href="#chair" transform="translate(1896,623.5) rotate(180) scale(965.4)"/>
+      </svg>
+  <div class="facts">
+    <div><b>18</b><span>Pladser<br>i alt</span></div>
+    <div><b>5092&thinsp;mm</b><span>Bordets<br>fulde længde</span></div>
+    <div><b>1680&thinsp;mm</b><span>Mellempladen<br>alene</span></div>
+    <div><b>3</b><span>Drejeskiver<br>i alt</span></div>
+  </div>
+</section>
+
+<section class="opt">
+  <div class="opt-head"><h2>Bro II &mdash; seks pladser</h2><div class="tag">Fire drejeskiver</div></div>
+  <p class="why">Tre kuverter i hver side, og dermed to indre tandspidser &mdash; altså to drejeskiver på broen. Hver af dem har fire kuverter omkring sig, og ingen har mere end 320&nbsp;mm ud til kanten af den nærmeste. Det er her, flere drejeskiver først bliver rigtigt: ikke flere skiver for skivernes skyld, men fordi rækkevidden kræver det.</p>
+  <svg viewBox="-1790 -1391 7372 2782" role="img" aria-label="Planbillede: to tandhjulsborde samlet med en tandstang, 20 pladser.">
+        <g transform="translate(0,0) scale(965.4)"><use href="#cog" class="top"/></g>
+        <g transform="translate(3792,0) scale(965.4)"><use href="#cog" class="top"/></g>
+        <path class="plate" d="M755.8,-0 L755.8,-143.7 L760,-153.7 L896.4,-290.1 L899.5,-305.7 L852.2,-419.9 L839,-428.7 L839,-428.7 L933.6,-623.5 L1057.3,-623.5 L1152,-428.7 L1439.3,-428.7 L1534,-623.5 L1657.7,-623.5 L1752.4,-428.7 L2039.7,-428.7 L2134.4,-623.5 L2258,-623.5 L2352.7,-428.7 L2640,-428.7 L2734.7,-623.5 L2858.4,-623.5 L2953.1,-428.7 L2953.1,-428.7 L2939.9,-419.9 L2892.6,-305.7 L2895.6,-290.1 L3032.1,-153.7 L3036.2,-143.7 L3036.2,-0 L3036.2,143.7 L3032.1,153.7 L2895.6,290.1 L2892.6,305.7 L2939.9,419.9 L2953.1,428.7 L2953.1,428.7 L2858.4,623.5 L2734.7,623.5 L2640,428.7 L2352.7,428.7 L2258,623.5 L2134.4,623.5 L2039.7,428.7 L1752.4,428.7 L1657.7,623.5 L1534,623.5 L1439.3,428.7 L1152,428.7 L1057.3,623.5 L933.6,623.5 L839,428.7 L839,428.7 L852.2,419.9 L899.5,305.7 L896.4,290.1 L760,153.7 L755.8,143.7 L755.8,0 Z"/>
+        <g transform="translate(0,0) scale(434.4)"><use href="#cog" class="disc"/></g>
+        <g transform="translate(3792,0) scale(434.4)"><use href="#cog" class="disc"/></g>
+        <g transform="translate(1595.8,0) scale(274.4)"><use href="#cog" class="disc"/></g>
+        <g transform="translate(2196.2,0) scale(274.4)"><use href="#cog" class="disc"/></g>
+        <use href="#chair" transform="translate(623.3,623.3) rotate(135) scale(965.4)"/>
+        <use href="#chair" transform="translate(0,881.5) rotate(180) scale(965.4)"/>
+        <use href="#chair" transform="translate(-623.3,623.3) rotate(225) scale(965.4)"/>
+        <use href="#chair" transform="translate(-881.5,0) rotate(270) scale(965.4)"/>
+        <use href="#chair" transform="translate(-623.3,-623.3) rotate(315) scale(965.4)"/>
+        <use href="#chair" transform="translate(-0,-881.5) rotate(360) scale(965.4)"/>
+        <use href="#chair" transform="translate(623.3,-623.3) rotate(405) scale(965.4)"/>
+        <use href="#chair" transform="translate(4673.5,0) rotate(90) scale(965.4)"/>
+        <use href="#chair" transform="translate(4415.4,623.3) rotate(135) scale(965.4)"/>
+        <use href="#chair" transform="translate(3792,881.5) rotate(180) scale(965.4)"/>
+        <use href="#chair" transform="translate(3168.7,623.3) rotate(225) scale(965.4)"/>
+        <use href="#chair" transform="translate(3168.7,-623.3) rotate(315) scale(965.4)"/>
+        <use href="#chair" transform="translate(3792,-881.5) rotate(360) scale(965.4)"/>
+        <use href="#chair" transform="translate(4415.4,-623.3) rotate(405) scale(965.4)"/>
+        <use href="#chair" transform="translate(1295.7,-623.5) scale(965.4)"/>
+        <use href="#chair" transform="translate(1295.7,623.5) rotate(180) scale(965.4)"/>
+        <use href="#chair" transform="translate(1896,-623.5) scale(965.4)"/>
+        <use href="#chair" transform="translate(1896,623.5) rotate(180) scale(965.4)"/>
+        <use href="#chair" transform="translate(2496.4,-623.5) scale(965.4)"/>
+        <use href="#chair" transform="translate(2496.4,623.5) rotate(180) scale(965.4)"/>
+      </svg>
+  <div class="facts">
+    <div><b>20</b><span>Pladser<br>i alt</span></div>
+    <div><b>5692&thinsp;mm</b><span>Bordets<br>fulde længde</span></div>
+    <div><b>2280&thinsp;mm</b><span>Mellempladen<br>alene</span></div>
+    <div><b>4</b><span>Drejeskiver<br>i alt</span></div>
+  </div>
+</section>
+
+<section class="opt">
+  <div class="opt-head"><h2>Fuld bredde</h2><div class="tag">Ét aflangt tandhjul</div></div>
+  <p class="why">Med mellempladen i bordets egen dybde &mdash; kuvertfladen på 755,8&nbsp;mm og tandspidsen på 950&nbsp;mm &mdash; hører taljen op. Der står ikke længere to hjul med en planke imellem. Der står ét bord: et tandhjul, der er trukket langt. Bordets egne bugter ved 90&deg; og 270&deg; bliver den lige stræknings første kuverter, og tandrytmen løber ubrudt fra den ene runde ende til den anden. Alle fire drejeskiver er i hjulets eget mål, 855&nbsp;mm, og står jævnt fordelt over bordets længde &mdash; ikke i par om midten. Ingen kuvert har mere end 604&nbsp;mm ud til kanten af den nærmeste. På den smalle bro går det ikke: dér er pladen kun 857&nbsp;mm bred mellem kuvertfladerne, og 855&nbsp;mm ville levne 1&nbsp;mm. Derfor er broens skiver på 540.</p>
+  <svg viewBox="-2185.1 -1391 7372 2782" role="img" aria-label="Planbillede: ét aflangt tandhjul med 18 pladser.">
+        <path class="plate" d="M-143.7,755.8 L-153.7,760 L-290.1,896.4 L-305.7,899.5 L-362.8,875.8 L-419.9,852.2 L-428.7,839 L-428.7,646.1 L-432.9,636 L-636,432.9 L-646.1,428.7 L-839,428.7 L-852.2,419.9 L-875.9,362.8 L-899.5,305.7 L-896.4,290.1 L-760,153.7 L-755.8,143.7 L-755.8,-143.7 L-760,-153.7 L-896.4,-290.1 L-899.5,-305.7 L-875.8,-362.8 L-852.2,-419.9 L-839,-428.7 L-646.1,-428.7 L-636,-432.9 L-432.9,-636 L-428.7,-646.1 L-428.7,-839 L-419.9,-852.2 L-362.8,-875.9 L-305.7,-899.5 L-290.1,-896.4 L-153.7,-760 L-143.7,-755.8 L-143.7,-755.8 L143.7,-755.8 L238.3,-950.5 L362,-950.5 L456.7,-755.8 L744,-755.8 L838.7,-950.5 L962.4,-950.5 L1057.1,-755.8 L1344.4,-755.8 L1439.1,-950.5 L1562.7,-950.5 L1657.4,-755.8 L1944.7,-755.8 L2039.4,-950.5 L2163.1,-950.5 L2257.8,-755.8 L2545.1,-755.8 L2639.8,-950.5 L2763.5,-950.5 L2858.1,-755.8 L3145.5,-755.8 L3145.5,-755.8 L3155.5,-760 L3291.9,-896.4 L3307.5,-899.5 L3364.6,-875.8 L3421.7,-852.2 L3430.5,-839 L3430.5,-646.1 L3434.7,-636 L3637.8,-432.9 L3647.9,-428.7 L3840.8,-428.7 L3854,-419.9 L3877.7,-362.8 L3877.6,-362.8 L3901.3,-305.7 L3898.2,-290.1 L3761.8,-153.7 L3757.6,-143.7 L3757.6,143.7 L3761.8,153.7 L3898.2,290.1 L3901.3,305.7 L3877.6,362.8 L3854,419.9 L3840.8,428.7 L3647.9,428.7 L3637.8,432.9 L3434.7,636 L3430.5,646.1 L3430.5,839 L3421.7,852.2 L3364.6,875.9 L3307.5,899.5 L3291.9,896.4 L3155.5,760 L3145.5,755.8 L3145.5,755.8 L2858.1,755.8 L2763.5,950.5 L2639.8,950.5 L2545.1,755.8 L2257.8,755.8 L2163.1,950.5 L2039.4,950.5 L1944.7,755.8 L1657.4,755.8 L1562.7,950.5 L1439.1,950.5 L1344.4,755.8 L1057.1,755.8 L962.4,950.5 L838.7,950.5 L744,755.8 L456.7,755.8 L362,950.5 L238.3,950.5 L143.7,755.8 L-143.7,755.8 Z"/>
+        <g transform="translate(0,0) scale(434.4)"><use href="#cog" class="disc"/></g>
+        <g transform="translate(1000.6,0) scale(434.4)"><use href="#cog" class="disc"/></g>
+        <g transform="translate(2001.2,0) scale(434.4)"><use href="#cog" class="disc"/></g>
+        <g transform="translate(3001.8,0) scale(434.4)"><use href="#cog" class="disc"/></g>
+        <use href="#chair" transform="translate(0,-950.5) scale(965.4)"/>
+        <use href="#chair" transform="translate(0,950.5) rotate(180) scale(965.4)"/>
+        <use href="#chair" transform="translate(600.4,-950.5) scale(965.4)"/>
+        <use href="#chair" transform="translate(600.4,950.5) rotate(180) scale(965.4)"/>
+        <use href="#chair" transform="translate(1200.7,-950.5) scale(965.4)"/>
+        <use href="#chair" transform="translate(1200.7,950.5) rotate(180) scale(965.4)"/>
+        <use href="#chair" transform="translate(1801.1,-950.5) scale(965.4)"/>
+        <use href="#chair" transform="translate(1801.1,950.5) rotate(180) scale(965.4)"/>
+        <use href="#chair" transform="translate(2401.4,-950.5) scale(965.4)"/>
+        <use href="#chair" transform="translate(2401.4,950.5) rotate(180) scale(965.4)"/>
+        <use href="#chair" transform="translate(3001.8,-950.5) scale(965.4)"/>
+        <use href="#chair" transform="translate(3001.8,950.5) rotate(180) scale(965.4)"/>
+        <use href="#chair" transform="translate(-623.3,623.3) rotate(225) scale(965.4)"/>
+        <use href="#chair" transform="translate(-881.5,0) rotate(270) scale(965.4)"/>
+        <use href="#chair" transform="translate(-623.3,-623.3) rotate(315) scale(965.4)"/>
+        <use href="#chair" transform="translate(3625.1,-623.3) rotate(405) scale(965.4)"/>
+        <use href="#chair" transform="translate(3883.3,0) rotate(90) scale(965.4)"/>
+        <use href="#chair" transform="translate(3625.1,623.3) rotate(135) scale(965.4)"/>
+      </svg>
+  <div class="facts">
+    <div><b>18</b><span>Pladser<br>i alt</span></div>
+    <div><b>4902&thinsp;mm</b><span>Bordets<br>fulde længde</span></div>
+    <div><b>600,4&thinsp;mm</b><span>Samme deling<br>hele vejen</span></div>
+    <div><b>4 &times; 855</b><span>Drejeskiver,<br>samme mål</span></div>
+  </div>
+</section>
+
+<section class="opt">
+  <div class="opt-head"><h2>Og den vinder</h2><div class="tag">190 mm kortere, hver gang</div></div>
+  <p class="why">Med den rigtige tand er delingen 600,4&nbsp;mm &mdash; kun 7&nbsp;mm fra de 593,6&nbsp;mm, hver gæst har langs kanten af det runde bord. Kuverterne står altså lige så tæt på den lige strækning som i den runde ende, og den brede plade henter mere kant, end den begraver. Det modsatte af hvad den første udgave af siden sagde.</p>
+  <div class="cmp">
+    <div class="ch"></div><div class="ch">Smal bro, 857 mm</div><div class="ch">Fuld bredde, 1900 mm</div><div class="ch">Forskel</div>
+    <div class="cr">16 pladser</div><div class="cv">4491 mm</div><div class="cv">4301 mm</div><div class="cd">&minus;190 mm</div>
+    <div class="cr">18 pladser</div><div class="cv">5092 mm</div><div class="cv">4902 mm</div><div class="cd">&minus;190 mm</div>
+    <div class="cr">20 pladser</div><div class="cv">5692 mm</div><div class="cv">5502 mm</div><div class="cd">&minus;190 mm</div>
+  </div>
+  <p class="why" style="margin-top:24px">Fuld bredde er altså både den rigtigere form og det kortere bord. Den smalle bro har stadig én fordel tilbage, og kun den: de to borde kan skilles ad og stå hver for sig.</p>
+</section>
+
+<section class="opt">
+  <div class="opt-head"><h2>Hornet</h2><div class="tag">Stadig det svage sted</div></div>
+  <p class="why">Her er den brede plade alene, mellem de to hele bordplader. For at nå ud i fuld bredde skal den lappe hen over bordets kant. Med den rigtige tand står pladens flanke 25,9&deg; og bordets 45&deg;, så de skiller fra hinanden: strimlen er 0 i spidsen, 16&nbsp;mm ti millimeter inde, 65&nbsp;mm efter 56 og mindst 51&nbsp;mm, hvor pladen ligger an mod tanden. Det er en kile, ikke en finérstrimmel &mdash; men en kile, der stadig ender i ingenting. Løsningen er at stoppe spidsen: lad pladen begynde 60&nbsp;mm inde med en skulder, der er tyk nok, og en bevidst skyggefuge ud til bordet.</p>
+  <svg viewBox="-2185.1 -1391 7372 2782" role="img" aria-label="Planbillede: den brede plade alene mellem to hele bordplader.">
+        <g transform="scale(965.4)"><use href="#cog" class="topthin"/></g>
+        <g transform="translate(3001.8,0) scale(965.4)"><use href="#cog" class="topthin"/></g>
+        <path class="plate2" d="M143.7,-755.8 L238.3,-950.5 L362,-950.5 L456.7,-755.8 L744,-755.8 L838.7,-950.5 L962.4,-950.5 L1057.1,-755.8 L1344.4,-755.8 L1439.1,-950.5 L1562.7,-950.5 L1657.4,-755.8 L1944.7,-755.8 L2039.4,-950.5 L2163.1,-950.5 L2257.8,-755.8 L2545.1,-755.8 L2639.8,-950.5 L2763.5,-950.5 L2858.1,-755.8 L2858.1,-755.8 L2848.1,-760 L2711.7,-896.4 L2696.1,-899.5 L2639,-875.9 L2581.9,-852.2 L2573.1,-839 L2573.1,-646.1 L2568.9,-636 L2365.8,-432.9 L2355.7,-428.7 L2162.8,-428.7 L2149.6,-419.9 L2126,-362.8 L2102.3,-305.7 L2105.4,-290.1 L2241.8,-153.7 L2246,-143.7 L2246,143.7 L2241.8,153.7 L2105.4,290.1 L2102.3,305.7 L2125.9,362.8 L2149.6,419.9 L2162.8,428.7 L2355.7,428.7 L2365.8,432.9 L2568.9,636 L2573.1,646.1 L2573.1,839 L2581.9,852.2 L2639,875.8 L2696.1,899.5 L2711.7,896.4 L2848.1,760 L2858.1,755.8 L2858.1,755.8 L2763.5,950.5 L2639.8,950.5 L2545.1,755.8 L2257.8,755.8 L2163.1,950.5 L2039.4,950.5 L1944.7,755.8 L1657.4,755.8 L1562.7,950.5 L1439.1,950.5 L1344.4,755.8 L1057.1,755.8 L962.4,950.5 L838.7,950.5 L744,755.8 L456.7,755.8 L362,950.5 L238.3,950.5 L143.7,755.8 L143.7,755.8 L153.7,760 L290.1,896.4 L305.7,899.5 L362.8,875.9 L419.9,852.2 L428.7,839 L428.7,646.1 L432.9,636 L636,432.9 L646.1,428.7 L839,428.7 L852.2,419.9 L875.8,362.8 L899.5,305.7 L896.4,290.1 L760,153.7 L755.8,143.7 L755.8,-143.7 L760,-153.7 L896.4,-290.1 L899.5,-305.7 L875.8,-362.8 L875.9,-362.8 L852.2,-419.9 L839,-428.7 L646.1,-428.7 L636,-432.9 L432.9,-636 L428.7,-646.1 L428.7,-839 L419.9,-852.2 L362.8,-875.8 L305.7,-899.5 L290.1,-896.4 L153.7,-760 L143.7,-755.8 Z"/>
+        <g transform="translate(0,0) scale(434.4)"><use href="#cog" class="disc"/></g>
+        <g transform="translate(1000.6,0) scale(434.4)"><use href="#cog" class="disc"/></g>
+        <g transform="translate(2001.2,0) scale(434.4)"><use href="#cog" class="disc"/></g>
+        <g transform="translate(3001.8,0) scale(434.4)"><use href="#cog" class="disc"/></g>
+        <use href="#chair" transform="translate(0,-950.5) scale(965.4)"/>
+        <use href="#chair" transform="translate(0,950.5) rotate(180) scale(965.4)"/>
+        <use href="#chair" transform="translate(600.4,-950.5) scale(965.4)"/>
+        <use href="#chair" transform="translate(600.4,950.5) rotate(180) scale(965.4)"/>
+        <use href="#chair" transform="translate(1200.7,-950.5) scale(965.4)"/>
+        <use href="#chair" transform="translate(1200.7,950.5) rotate(180) scale(965.4)"/>
+        <use href="#chair" transform="translate(1801.1,-950.5) scale(965.4)"/>
+        <use href="#chair" transform="translate(1801.1,950.5) rotate(180) scale(965.4)"/>
+        <use href="#chair" transform="translate(2401.4,-950.5) scale(965.4)"/>
+        <use href="#chair" transform="translate(2401.4,950.5) rotate(180) scale(965.4)"/>
+        <use href="#chair" transform="translate(3001.8,-950.5) scale(965.4)"/>
+        <use href="#chair" transform="translate(3001.8,950.5) rotate(180) scale(965.4)"/>
+        <use href="#chair" transform="translate(-623.3,623.3) rotate(225) scale(965.4)"/>
+        <use href="#chair" transform="translate(-881.5,0) rotate(270) scale(965.4)"/>
+        <use href="#chair" transform="translate(-623.3,-623.3) rotate(315) scale(965.4)"/>
+        <use href="#chair" transform="translate(3625.1,-623.3) rotate(405) scale(965.4)"/>
+        <use href="#chair" transform="translate(3883.3,0) rotate(90) scale(965.4)"/>
+        <use href="#chair" transform="translate(3625.1,623.3) rotate(135) scale(965.4)"/>
+      </svg>
+  <svg class="horn" viewBox="105 -975 400 355" role="img" aria-label="Detalje af hornets spids: pladens flanke staar 25,9 grader, bordets 45, saa de skiller og materialet bygger op.">
+      <g transform="scale(965.4)"><use href="#cog" class="topthin"/></g>
+      <path class="plate2" d="M143.7,-755.8 L238.3,-950.5 L362,-950.5 L456.7,-755.8 L744,-755.8 L838.7,-950.5 L962.4,-950.5 L1057.1,-755.8 L1344.4,-755.8 L1439.1,-950.5 L1562.7,-950.5 L1657.4,-755.8 L1944.7,-755.8 L2039.4,-950.5 L2163.1,-950.5 L2257.8,-755.8 L2545.1,-755.8 L2639.8,-950.5 L2763.5,-950.5 L2858.1,-755.8 L2858.1,-755.8 L2848.1,-760 L2711.7,-896.4 L2696.1,-899.5 L2639,-875.9 L2581.9,-852.2 L2573.1,-839 L2573.1,-646.1 L2568.9,-636 L2365.8,-432.9 L2355.7,-428.7 L2162.8,-428.7 L2149.6,-419.9 L2126,-362.8 L2102.3,-305.7 L2105.4,-290.1 L2241.8,-153.7 L2246,-143.7 L2246,143.7 L2241.8,153.7 L2105.4,290.1 L2102.3,305.7 L2125.9,362.8 L2149.6,419.9 L2162.8,428.7 L2355.7,428.7 L2365.8,432.9 L2568.9,636 L2573.1,646.1 L2573.1,839 L2581.9,852.2 L2639,875.8 L2696.1,899.5 L2711.7,896.4 L2848.1,760 L2858.1,755.8 L2858.1,755.8 L2763.5,950.5 L2639.8,950.5 L2545.1,755.8 L2257.8,755.8 L2163.1,950.5 L2039.4,950.5 L1944.7,755.8 L1657.4,755.8 L1562.7,950.5 L1439.1,950.5 L1344.4,755.8 L1057.1,755.8 L962.4,950.5 L838.7,950.5 L744,755.8 L456.7,755.8 L362,950.5 L238.3,950.5 L143.7,755.8 L143.7,755.8 L153.7,760 L290.1,896.4 L305.7,899.5 L362.8,875.9 L419.9,852.2 L428.7,839 L428.7,646.1 L432.9,636 L636,432.9 L646.1,428.7 L839,428.7 L852.2,419.9 L875.8,362.8 L899.5,305.7 L896.4,290.1 L760,153.7 L755.8,143.7 L755.8,-143.7 L760,-153.7 L896.4,-290.1 L899.5,-305.7 L875.8,-362.8 L875.9,-362.8 L852.2,-419.9 L839,-428.7 L646.1,-428.7 L636,-432.9 L432.9,-636 L428.7,-646.1 L428.7,-839 L419.9,-852.2 L362.8,-875.8 L305.7,-899.5 L290.1,-896.4 L153.7,-760 L143.7,-755.8 Z"/>
+      <line class="lead" x1="330" y1="-742" x2="252" y2="-806"/>
+      <text x="338" y="-734" style="font-family:'DM Mono',monospace;font-size:21px;fill:#0f0e0b">0 &#8594; 65 mm p&#229; 56 mm</text>
+      <text x="150" y="-930" style="font-family:'DM Mono',monospace;font-size:17px;fill:#8a8378;letter-spacing:1.5px">HORNETS SPIDS</text>
+    </svg>
+</section>
+
+<div class="derived">
+  <h2>Intet mål er valgt</h2>
+  <p class="why">Hvert tal på siden kommer ud af bordets egen tegning. Tages tandhjulet i et andet mål, skalerer mellempladen med af sig selv.</p>
+  <dl>
+    <dt>194,7&nbsp;mm</dt><dd>Tandens højde, målt fra kuvertfladen til kronen om tandens egen akse. Ikke 194,2 &mdash; det var forskellen mellem to radier og førte til fejlen.</dd>
+    <dt>123,7&nbsp;mm</dt><dd>Kronen. Hjulets tandtop, uændret.</dd>
+    <dt>313,0&nbsp;mm</dt><dd>Foden. Hjulets tand måler 313,0 &mdash; forskellen er under 2&nbsp;%, og den kan ikke ses.</dd>
+    <dt>25,9&deg;</dt><dd>Flanken om tandens akse. Den samme linje står 48,4&deg; om bugtens akse; de to tal er ikke i strid, de er 22,5&deg; fra hinanden, præcis som akserne.</dd>
+    <dt>287,3&nbsp;mm</dt><dd>Kuvertens lige flade. Bordets egen, uændret.</dd>
+    <dt>600,4&nbsp;mm</dt><dd>Delingen: flade plus tandfod. Den er ikke valgt &mdash; den falder ud. Og den lander 7&nbsp;mm fra de 593,6&nbsp;mm, hjulet selv giver hver gæst.</dd>
+    <dt>857,5&nbsp;mm</dt><dd>Den smalle plades bredde: afstanden mellem yderfladerne på de to tænder, den griber om.</dd>
+  </dl>
+</div>
+
+
+<div class="derived">
+  <h2>Lejer &mdash; hvad de koster, og hvad de kan b&aelig;re</h2>
+  <p class="why">K&oslash;rt gennem konfiguratorens egen kode: mindste plade er (leje&nbsp;+&nbsp;26,5)&nbsp;/&nbsp;0,7956, st&oslash;rste er den mindste af <em>leje&nbsp;&times;&nbsp;1,25&nbsp;/&nbsp;0,7956</em> og <em>bordets diameter&nbsp;&times;&nbsp;0,7956&nbsp;&minus;&nbsp;600</em>. Det sidste led er de otte kuverters plads, og det er ofte det, der bider f&oslash;rst. Alle pladetal g&aelig;lder et bord p&aring; &Oslash;&nbsp;1855.</p>
+
+  <p class="why" style="margin-top:20px"><b>Beslagsgrossisten &mdash; den, der allerede sidder i bordet.</b> Ringlejer, alle 12&nbsp;mm tykke, dag-til-dag.</p>
+  <dl>
+    <dt>&oslash; 304</dt><dd>244,00&nbsp;kr &middot; 615371 &middot; 70&nbsp;kg. Plade <b>420&ndash;475&nbsp;mm</b>. En st&oslash;rrelse under alt, hvad serien kan i dag.</dd>
+    <dt>&oslash; 401</dt><dd>278,00&nbsp;kr &middot; 615382 &middot; 100&nbsp;kg. Plade <b>540&ndash;630&nbsp;mm</b> &mdash; alts&aring; pr&aelig;cis de 540, den levende side lover.</dd>
+    <dt>&oslash; 600</dt><dd>510,00&nbsp;kr &middot; 615395 &middot; 190&nbsp;kg. Plade <b>790&ndash;875&nbsp;mm</b>. Her er det bordet, der s&aelig;tter loftet, ikke lejet.</dd>
+  </dl>
+  <p class="why" style="margin-top:18px"><b>De to andre, til sammenligning.</b> Beslagsbutikkens &Oslash;&nbsp;600 koster 1.122,50&nbsp;kr og b&aelig;rer 280&nbsp;kg &mdash; 612,50&nbsp;kr dyrere og 90&nbsp;kg st&aelig;rkere end din. Deres &Oslash;&nbsp;320 er 369,50 og b&aelig;rer 300&nbsp;kg mod din &oslash;&nbsp;304's 70. Gedotec Ciak hos hwt-pro er ogs&aring; ringlejer og klart billigst i den tunge ende (&Oslash;&nbsp;800 til 1.139&nbsp;kr mod 2.085). M&oslash;nsteret er entydigt: <b>din leverand&oslash;r er billigst og svagest.</b> Det er et fint bytte for en drejeskive med fade p&aring; &mdash; men det bliver det tal, der betyder mest, hvis udh&aelig;ngsreglen skal l&oslash;snes.</p>
+
+  <p class="why" style="margin-top:22px"><b>Prisen i koden er forkert &mdash; og den koster dig penge.</b> Kommentaren i konfiguratoren regner med 600&nbsp;kr for det lille leje og 900 for det store. De rigtige tal er 278 og 510.</p>
+  <dl>
+    <dt>Arbejdstallet</dt><dd>10.650 er regnet som 12.000&nbsp;&minus;&nbsp;900&nbsp;&times;&nbsp;1,5. Med 510 bliver det 11.235. Arbejdet i bordet er alts&aring; 585&nbsp;kr st&oslash;rre, end din egen note siger &mdash; kundens pris er den samme, men regnskabet bag den er skævt.</dd>
+    <dt>Rabatten</dt><dd>&raquo;V&aelig;lg det lille leje og spar 500&laquo; hviler p&aring; en forskel p&aring; 300&nbsp;kr. Den rigtige forskel er 232&nbsp;kr, alts&aring; 348 med avancen &mdash; ca. 350. <b>Du forærer 150&nbsp;kr v&aelig;k hver gang en kunde v&aelig;lger det lille leje.</b></dd>
+  </dl>
+
+  <p class="why" style="margin-top:22px"><b>Serien har to huller, og de er ikke leverand&oslash;rens skyld.</b> Din r&aelig;kke giver 420&ndash;475, 540&ndash;630 og 790&ndash;875&nbsp;mm &mdash; huller p&aring; <b>65 og 160&nbsp;mm</b>. Ved 12,5&nbsp;% udh&aelig;ng skal to lejer ligge inden for 1,17&ndash;1,21 gange hinanden for at r&aelig;kken h&aelig;nger sammen. Dine springer 1,32 og 1,50. Alle kataloger springer s&aring;dan. Der findes ingen butik, der kan lukke det &mdash; kun en anden regel.</p>
+  <p class="why">At lukke &oslash;&nbsp;304&nbsp;&rarr;&nbsp;&oslash;&nbsp;401 kr&aelig;ver <b>20,7&nbsp;%</b> udh&aelig;ng. At lukke &oslash;&nbsp;401&nbsp;&rarr;&nbsp;&oslash;&nbsp;600 kr&aelig;ver <b>28,4&nbsp;%</b> &mdash; springet dertil er for stort. Men har de noget omkring &oslash;&nbsp;500 i samme serie (varenumrene 615371, 615382, 615395 ser ud til at have plads imellem sig), falder kravet til 16,0 og 12,9&nbsp;%. <b>Med ét leje mere og udh&aelig;nget sat til 20&nbsp;% er hele r&aelig;kken ubrudt fra 420 til 875&nbsp;mm.</b> Det er ét telefonopkald og én konstant.</p>
+  <p class="why" style="margin-top:22px"><b>Hvad 20&nbsp;% faktisk koster lejet.</b> En vandret ring tager v&aelig;ltemomentet rundt om sin egen diameter, s&aring; den h&oslash;jeste linjelast p&aring; ringen g&aring;r som pladens radius delt med lejets: 1&nbsp;+&nbsp;2&nbsp;&times;&nbsp;udh&aelig;ng. Fra 12,5&nbsp;% til 20&nbsp;% er det 1,25&nbsp;&rarr;&nbsp;1,40. <b>Alts&aring; 12&nbsp;% mere last</b> &mdash; ikke 60, som spring fra 12,5 til 20 ellers lyder af. Og pladen vokser n&oslash;jagtig lige s&aring; meget: p&aring; &oslash;&nbsp;401 fra 630 til 705&nbsp;mm, ogs&aring; 12&nbsp;%. Det bord, der st&aring;r i v&aelig;rkstedet nu, k&oslash;rer allerede p&aring; 12,5. Holder det, n&aring;r nogen l&aelig;ner sig, er 12&nbsp;% oveni ikke det, der br&aelig;kker noget.</p>
+  <p class="why"><b>Men argumentet vender p&aring; de sm&aring; lejer.</b> Ved samme relative udh&aelig;ng g&aring;r linjelasten som 1/diameter, s&aring; et &oslash;&nbsp;304 ser knap <b>dobbelt</b> s&aring; h&aring;rd en last som et &oslash;&nbsp;600 &mdash; og det er samtidig 2,7&nbsp;gange svagere, 70&nbsp;kg mod 190. Tilsammen sidder &oslash;&nbsp;304 <b>5,4&nbsp;gange t&aelig;ttere p&aring; sin gr&aelig;nse</b> end &oslash;&nbsp;600 under den samme albue. Det store leje er alts&aring; ikke problemet; det lille er. Skal der pr&oslash;ves ét, er det &oslash;&nbsp;304 med en plade p&aring; 530.</p>
+  <p class="why">En ting kan tegningen ikke afg&oslash;re: kg-tallet er en lodret b&aelig;reevne, ikke et v&aelig;ltemoment, og det ene kan ikke regnes om til det andet. Ringen skal ogs&aring; kunne holde sine to baner sammen p&aring; den l&oslash;ftede side &mdash; ved 20&nbsp;kg p&aring; kanten af en 705&nbsp;mm plade er det omkring 45&nbsp;kg pr. meter ring, der tr&aelig;kker opad. Det er dét, h&aring;nden skal m&aelig;rke efter.</p>
+
+  <p class="why" style="margin-top:22px"><b>Hvad 20&nbsp;% giver, uden at du k&oslash;ber noget som helst:</b> st&oslash;rste drejeskive p&aring; &oslash;&nbsp;304 g&aring;r fra 475 til 530&nbsp;mm, og p&aring; &oslash;&nbsp;401 fra 630 til <b>705&nbsp;mm</b>. &Oslash;&nbsp;600 er bordbegr&aelig;nset og r&oslash;res ikke. Hullet mellem de to f&oslash;rste falder fra 65 til 10&nbsp;mm &mdash; og de sidste 10 er ren afrunding: ved <b>21&nbsp;%</b> m&oslash;des de pr&aelig;cis ved 540, og r&aelig;kken er ubrudt fra 420 til 705.</p>
+  <p class="why">Det andet hul, 705&ndash;790, kan kun lukkes med et leje mere. Et &oslash;&nbsp;500 d&aelig;kker 665&ndash;875 og lukker det helt. <b>Med &oslash;&nbsp;500 i kurven og udh&aelig;nget p&aring; 21&nbsp;% l&oslash;ber serien ubrudt fra 420 til 875&nbsp;mm.</b> To linjer kode og ét varenummer.</p>
+
+  <p class="why" style="margin-top:22px">Til broens lille skive kan ingen af ringlejerne bruges: det mindste, &oslash;&nbsp;304, kr&aelig;ver en plade p&aring; mindst 420&nbsp;mm, og s&aring; er der kun 219&nbsp;mm tilbage til hver kuvert. Derfor pladelejet 175&times;175 og en skive p&aring; 270.</p>
+</div>
+
+<div class="against">
+  <h2>Hvad det koster</h2>
+  <p class="why">Det her er en tegning, ikke et bord. Seks ting skal afklares, før der bliver skåret.</p>
+  <ul>
+    <li><b>Den smalle bro kan ikke bæres af tungerne.</b> 1,5&ndash;2,3&nbsp;m eg spænder frit mellem to borde. Tungen holder pladen på plads i planen, ikke oppe. Broen skal have enten sine egne to ben eller en stålryg, der boltes til begge bordes stel. Fuld bredde har ikke problemet, hvis den bygges som udtræk.</li>
+    <li><b>Den låser ikke af sig selv.</b> Bugten er bredest ved munden og smallest inde ved fladen, så tungen glider lige ud igen. Den centrerer, men holder ikke. Der skal bordlåse under pladen &mdash; to i hver ende.</li>
+    <li><b>Højden er ubarmhjertig.</b> Et spring på 1&nbsp;mm ved samlingen kan mærkes med håndfladen og ses i modlys. Plade og bordplader skal være samme tykkelse fra samme parti, og stellene skal kunne justeres.</li>
+    <li><b>Hjørnepladsen skal måles efter.</b> Med den tættere deling rykker broens første tand ind mod bordet, og stolen ved 45&deg; kommer nu meget tæt på den. Efter min stolemodel rører de hinanden med ca. 80&nbsp;mm &mdash; men det er min model, ikke en målt stol. Sæt en rigtig stol ved det rigtige bord, før det afgøres.</li>
+    <li><b>Rummet.</b> 4,3&nbsp;m til 5,7&nbsp;m plus ca. 900&nbsp;mm bag hver stol. Selv den korteste vil have et rum på over 6&nbsp;m.</li>
+    <li><b>Hvor står pladen resten af året?</b> En tandstang på to meter skal opbevares plant og tørt, ellers slår den sig og passer ikke næste jul. Det er det argument, der har slået tillægsplader ihjel i hundrede år.</li>
+  </ul>
+</div>
+
+<div class="derived">
+  <h2>Hvad tegningen peger på</h2>
+  <p class="why">Skal formen være det aflange tandhjul &mdash; og nu er den også det kortere bord &mdash; så er det ikke to borde, der skal samles. Det er ét bord, der skal trækkes fra hinanden.</p>
+  <dl>
+    <dt>Snittet</dt><dd>Gennem to modstående tandspidser, ikke gennem to kuverter. Så ligger samlingen under en tand, hvor bordet i forvejen har en skillelinje, og ikke midt under en tallerken.</dd>
+    <dt>Udtrækket</dt><dd>De to halvdele kører fra hinanden på skinner. Stellet følger halvdelene, så pladen aldrig hænger frit &mdash; og så er både bæreproblemet og hornet væk på én gang.</dd>
+    <dt>Tillægspladen</dt><dd>Fuld dybde, tandstangsprofil på begge langsider, længde 600,4&nbsp;mm gange antallet af kuverter. Én plade giver to pladser, to plader fire, og tandrytmen bliver aldrig brudt.</dd>
+    <dt>Regnestykket</dt><dd>8 + 2 pladser pr. plade, ved 1900 + 600,4&nbsp;mm pr. plade. Samme bord som ovenfor &mdash; men du betaler for én bordplade i stedet for to.</dd>
+    <dt>Det, du opgiver</dt><dd>To selvstændige borde. Skal du kunne stille to borde i to forskellige rum, holder den smalle bro. Ellers er udtrækket bedre på alle målbare punkter.</dd>
+  </dl>
+</div>
+
+<footer><a href="../../tandhjulet/">&larr; Tilbage til Tandhjulet</a></footer>
+</div>
+</body>
+</html>

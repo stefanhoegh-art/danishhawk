@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="robots" content="noindex, nofollow"/>
+<title>Tandhjulet vs. andre bordtyper — sammenligning</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --bg:#f5f2ed; --ink:#0f0e0b; --line:#d8d2c8; --accent:#c8a96e; --card:#eeebe5;
+    --serif:"Cormorant Garamond",Georgia,serif; --mono:"DM Mono",ui-monospace,monospace;
+    --muted:#8a8378; --flag:#a8523f;
+  }
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--ink);font-family:var(--serif);font-size:20px;
+       line-height:1.7;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 32px}
+
+  .slabel{font-family:var(--mono);font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;
+          color:var(--accent);display:flex;align-items:center;gap:12px;margin-bottom:26px}
+  .slabel::after{content:'';width:34px;height:1px;background:var(--accent)}
+
+  header{padding:96px 0 52px}
+  h1{font-weight:300;font-size:clamp(2.25rem,5.8vw,3.9rem);line-height:1.08;letter-spacing:-.01em;max-width:17ch}
+  h1 em{font-style:italic;color:var(--accent)}
+  .lede{font-weight:500;font-size:clamp(1.02rem,2.1vw,1.2rem);max-width:62ch;margin-top:26px;color:#3a352c}
+
+  /* ---------- plan views ---------- */
+  .plans{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;padding:10px 0 60px}
+  .plan{border-top:1px solid var(--line);padding-top:18px}
+  .plan svg{width:100%;height:auto;display:block}
+  .plan-name{font-family:var(--mono);font-size:.7rem;letter-spacing:.13em;text-transform:uppercase;
+             margin-bottom:14px;color:var(--muted)}
+  .plan-note{font-size:.88rem;line-height:1.55;color:#4a443a;margin-top:12px}
+  .plan.me .plan-name{color:var(--accent)}
+
+  .top{fill:var(--card);stroke:var(--ink);stroke-width:.014}
+  .disc{fill:#e7e2d8;stroke:var(--ink);stroke-width:.009;opacity:.9}
+  .leg{fill:var(--ink);opacity:.62}
+  .seat{fill:#e2ddd2;stroke:none}
+  .back{fill:none;stroke:var(--ink);stroke-width:.028;opacity:.42;stroke-linecap:round}
+  .arm{stroke:var(--ink);stroke-width:.02;opacity:.42;stroke-linecap:round}
+  .hit{fill:var(--flag);opacity:.9}
+  .hit-ring{fill:none;stroke:var(--flag);stroke-width:.018;opacity:.45}
+
+  /* ---------- the bay detail ---------- */
+  .bay{border-top:1px solid var(--line);padding:44px 0 6px}
+  .bay-head{display:flex;flex-wrap:wrap;gap:10px 28px;align-items:baseline;margin-bottom:6px}
+  .bay h2{font-weight:400;font-size:clamp(1.5rem,3.4vw,2.1rem);letter-spacing:-.005em}
+  .bay .sub{font-family:var(--mono);font-size:.68rem;letter-spacing:.11em;text-transform:uppercase;color:var(--muted)}
+  .bay svg{width:100%;height:auto;display:block;margin:18px 0 4px}
+  .dim{stroke:var(--accent);stroke-width:3;fill:none}
+  .dimtick{stroke:var(--accent);stroke-width:3}
+  .dimtxt{font-family:"DM Mono",monospace;font-size:34px;fill:var(--ink)}
+  .lbl{font-family:"DM Mono",monospace;font-size:26px;fill:var(--muted);letter-spacing:2px}
+  .bayedge{fill:var(--card);stroke:var(--ink)}
+
+  /* ---------- numbers ---------- */
+  .nums{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin:28px 0 0;
+        border-top:1px solid var(--line);padding-top:30px}
+  .num{padding-right:24px}
+  .num b{display:block;font-weight:300;font-size:clamp(1.7rem,4.2vw,2.6rem);line-height:1;
+         letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+  .num span{display:block;font-family:var(--mono);font-size:.63rem;letter-spacing:.1em;
+            text-transform:uppercase;color:var(--muted);margin-top:12px;line-height:1.6}
+  .nums-foot{font-size:.85rem;color:var(--muted);margin-top:22px;padding-bottom:6px}
+
+  /* ---------- criteria ---------- */
+  .crit{border-top:1px solid var(--line);padding:46px 0 10px}
+  .crit h2{font-weight:400;font-size:clamp(1.5rem,3.4vw,2.1rem);line-height:1.2;letter-spacing:-.005em}
+  .crit h2 .no{font-family:var(--mono);font-size:.62rem;letter-spacing:.2em;color:var(--accent);
+               display:block;margin-bottom:10px}
+  .why{font-weight:500;font-size:1rem;color:#3a352c;max-width:62ch;margin-top:14px}
+  .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:34px}
+  .cell{padding:20px 22px 24px;border-left:1px solid var(--line)}
+  .cell:first-child{border-left:0;padding-left:0}
+  .cell.me{background:linear-gradient(to bottom,rgba(200,169,110,.12),rgba(200,169,110,0))}
+  .cname{font-family:var(--mono);font-size:.66rem;letter-spacing:.13em;text-transform:uppercase;
+         color:var(--muted);margin-bottom:12px}
+  .cell.me .cname{color:var(--accent)}
+  .verdict{font-family:var(--mono);font-size:.74rem;letter-spacing:.04em;line-height:1.45;
+           display:flex;gap:8px;align-items:baseline}
+  .verdict::before{font-size:.8rem;line-height:1}
+  .v-yes::before{content:'\25CF';color:var(--accent)}
+  .v-part::before{content:'\25D0';color:var(--muted)}
+  .v-no::before{content:'\25CB';color:var(--muted)}
+  .v-no{color:var(--muted)}
+  .cell p{font-size:.93rem;line-height:1.6;color:#4a443a;margin-top:12px}
+
+  /* ---------- honest blocks ---------- */
+  .against{margin:70px 0 0;border:1px solid var(--line);background:var(--card);padding:38px 40px 34px}
+  .against h2{font-weight:400;font-size:clamp(1.4rem,3vw,1.9rem);margin-bottom:8px}
+  .against .why{margin-bottom:26px}
+  .against ul{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:22px 40px}
+  .against li{font-size:.95rem;line-height:1.6;color:#4a443a;padding-left:18px;position:relative}
+  .against li::before{content:'';position:absolute;left:0;top:.72em;width:8px;height:1px;background:var(--accent)}
+  .against li b{font-weight:600;color:var(--ink);display:block;font-size:1rem}
+
+  .check{margin:34px 0 0;border-left:2px solid var(--flag);padding:4px 0 4px 22px}
+  .check h3{font-family:var(--mono);font-size:.66rem;letter-spacing:.15em;text-transform:uppercase;
+            color:var(--flag);margin-bottom:12px}
+  .check p{font-size:.95rem;line-height:1.65;color:#4a443a;max-width:70ch;margin-bottom:10px}
+
+  footer{padding:64px 0 90px;border-top:1px solid var(--line);margin-top:70px;
+         font-family:var(--mono);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+  footer a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--line)}
+
+  @media (max-width:900px){
+    .wrap{padding:0 20px}
+    header{padding:60px 0 38px}
+    .plans{grid-template-columns:1fr 1fr;gap:26px 18px;padding-bottom:40px}
+    .grid4{grid-template-columns:1fr;gap:0}
+    .cell{border-left:0;border-top:1px solid var(--line);padding:16px 0 18px}
+    .cell:first-child{border-top:0}
+    .cell.me{background:none;border-left:2px solid var(--accent);padding-left:16px}
+    .nums{grid-template-columns:1fr 1fr;gap:26px 0}
+    .against{padding:26px 22px 24px}
+    .against ul{grid-template-columns:1fr}
+    .crit{padding-top:34px}
+    .dimtxt{font-size:46px}
+    .lbl{font-size:36px}
+  }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <path id="cog" d="M-0.3005,0.9285L-0.1592,0.7872A0.0148,0.0148 0 0,0 -0.1488,0.7829L0.1488,0.7829A0.0148,0.0148 0 0,0 0.1592,0.7872L0.3005,0.9285A0.0148,0.0148 0 0,1 0.3166,0.9317L0.4349,0.8827A0.0148,0.0148 0 0,1 0.4441,0.869L0.4441,0.6692A0.0148,0.0148 0 0,0 0.4484,0.6588L0.6588,0.4484A0.0148,0.0148 0 0,0 0.6692,0.4441L0.869,0.4441A0.0148,0.0148 0 0,1 0.8827,0.4349L0.9317,0.3166A0.0148,0.0148 0 0,1 0.9285,0.3005L0.7872,0.1592A0.0148,0.0148 0 0,0 0.7829,0.1488L0.7829,-0.1488A0.0148,0.0148 0 0,0 0.7872,-0.1592L0.9285,-0.3005A0.0148,0.0148 0 0,1 0.9317,-0.3166L0.8827,-0.4349A0.0148,0.0148 0 0,1 0.869,-0.4441L0.6692,-0.4441A0.0148,0.0148 0 0,0 0.6588,-0.4484L0.4484,-0.6588A0.0148,0.0148 0 0,0 0.4441,-0.6692L0.4441,-0.869A0.0148,0.0148 0 0,1 0.4349,-0.8827L0.3166,-0.9317A0.0148,0.0148 0 0,1 0.3005,-0.9285L0.1592,-0.7872A0.0148,0.0148 0 0,0 0.1488,-0.7829L-0.1488,-0.7829A0.0148,0.0148 0 0,0 -0.1592,-0.7872L-0.3005,-0.9285A0.0148,0.0148 0 0,1 -0.3166,-0.9317L-0.4349,-0.8827A0.0148,0.0148 0 0,1 -0.4441,-0.869L-0.4441,-0.6692A0.0148,0.0148 0 0,0 -0.4484,-0.6588L-0.6588,-0.4484A0.0148,0.0148 0 0,0 -0.6692,-0.4441L-0.869,-0.4441A0.0148,0.0148 0 0,1 -0.8827,-0.4349L-0.9317,-0.3166A0.0148,0.0148 0 0,1 -0.9285,-0.3005L-0.7872,-0.1592A0.0148,0.0148 0 0,0 -0.7829,-0.1488L-0.7829,0.1488A0.0148,0.0148 0 0,0 -0.7872,0.1592L-0.9285,0.3005A0.0148,0.0148 0 0,1 -0.9317,0.3166L-0.8827,0.4349A0.0148,0.0148 0 0,1 -0.869,0.4441L-0.6692,0.4441A0.0148,0.0148 0 0,0 -0.6588,0.4484L-0.4484,0.6588A0.0148,0.0148 0 0,0 -0.4441,0.6692L-0.4441,0.869A0.0148,0.0148 0 0,1 -0.4349,0.8827L-0.3166,0.9317A0.0148,0.0148 0 0,1 -0.3005,0.9285L-0.3005,0.9285Z"/>
+  <!-- A dining chair seen from above. Front edge (armrest tips) sits at y=0 and
+       the body runs out along -y. Drawn to scale: 550 mm over the armrests on a
+       1900 mm table, which is 0.57 of the cog path's unit. -->
+  <g id="chair">
+    <path class="seat" d="M-.235,-.07 L.235,-.07 L.235,-.44 L-.235,-.44 Z"/>
+    <path class="back" d="M-.255,-.445 L.255,-.445"/>
+    <line class="arm" x1="-.285" y1="0" x2="-.285" y2="-.42"/>
+    <line class="arm" x1=".285" y1="0" x2=".285" y2="-.42"/>
+  </g>
+</defs></svg>
+
+<div class="wrap">
+
+<header>
+  <div class="slabel" data-da="Sammenligning" data-en="Comparison">Sammenligning</div>
+  <h1 data-da="Hvad formen gør, som <em>en rund plade ikke kan</em>." data-en="What the shape does, that <em>a plain round top cannot</em>.">Hvad formen gør, som <em>en rund plade ikke kan</em>.</h1>
+  <p class="lede" data-da="Tandhjulet er ikke et rundt bord med mønster på. Tænderne — og bugten mellem dem, hvor hver gæst sidder — ændrer noget konkret ved at være otte mennesker om ét bord. Her er hvad, holdt op mod de bordtyper man ellers vælger imellem. Målene er regnet ud af bordets egen tegning ved Ø 1900 mm, og de steder hvor Tandhjulet taber står med." data-en="The Tandhjulet is not a round table with a pattern on it. The teeth — and the bay between them, where each guest sits — change something concrete about being eight people at one table. Here is what, set against the table types you would otherwise choose between. The figures are computed from the table's own drawing at Ø 1900 mm, and the places the Tandhjulet loses are included.">Tandhjulet er ikke et rundt bord med mønster på. Tænderne — og bugten mellem dem, hvor hver gæst sidder — ændrer noget konkret ved at være otte mennesker om ét bord. Her er hvad, holdt op mod de bordtyper man ellers vælger imellem. Målene er regnet ud af bordets egen tegning ved Ø 1900 mm, og de steder hvor Tandhjulet taber står med.</p>
+</header>
+
+<!-- ============ PLAN VIEWS ============ -->
+<div class="plans">
+
+  <div class="plan me">
+    <div class="plan-name">Tandhjulet</div>
+    <svg viewBox="-1.46 -1.46 2.92 2.92" role="img" aria-label="Planbillede af Tandhjulet: ottetakket bordplade med drejeskive i midten, otte stole, hver med sin egen bugt mellem to tænder.">
+      <use href="#cog" class="top"/>
+      <use href="#cog" class="disc" transform="scale(.45)"/>
+      <g>
+        <use href="#chair" transform="rotate(0)   translate(0,-.913)"/>
+        <use href="#chair" transform="rotate(45)  translate(0,-.913)"/>
+        <use href="#chair" transform="rotate(90)  translate(0,-.913)"/>
+        <use href="#chair" transform="rotate(135) translate(0,-.913)"/>
+        <use href="#chair" transform="rotate(180) translate(0,-.913)"/>
+        <use href="#chair" transform="rotate(225) translate(0,-.913)"/>
+        <use href="#chair" transform="rotate(270) translate(0,-.913)"/>
+        <use href="#chair" transform="rotate(315) translate(0,-.913)"/>
+      </g>
+    </svg>
+    <p class="plan-note">Otte lige flader. En tand står mellem hver to gæster, og drejeskiven er en del af pladen.</p>
+  </div>
+
+  <div class="plan">
+    <div class="plan-name">Rundt, fire ben</div>
+    <svg viewBox="-1.46 -1.46 2.92 2.92" role="img" aria-label="Planbillede af et rundt bord med fire ben: otte ens pladser langs én ubrudt bue, og fire af stolene har et bordben ved knæet.">
+      <circle class="top" cx="0" cy="0" r=".984"/>
+      <g>
+        <use href="#chair" transform="rotate(0)   translate(0,-.942)"/>
+        <use href="#chair" transform="rotate(45)  translate(0,-.942)"/>
+        <use href="#chair" transform="rotate(90)  translate(0,-.942)"/>
+        <use href="#chair" transform="rotate(135) translate(0,-.942)"/>
+        <use href="#chair" transform="rotate(180) translate(0,-.942)"/>
+        <use href="#chair" transform="rotate(225) translate(0,-.942)"/>
+        <use href="#chair" transform="rotate(270) translate(0,-.942)"/>
+        <use href="#chair" transform="rotate(315) translate(0,-.942)"/>
+      </g>
+      <g>
+        <circle class="leg" cx="0" cy="-.80" r=".05"/><circle class="hit-ring" cx="0" cy="-.80" r=".115"/>
+        <circle class="leg" cx="0" cy=".80" r=".05"/><circle class="hit-ring" cx="0" cy=".80" r=".115"/>
+        <circle class="leg" cx="-.80" cy="0" r=".05"/><circle class="hit-ring" cx="-.80" cy="0" r=".115"/>
+        <circle class="leg" cx=".80" cy="0" r=".05"/><circle class="hit-ring" cx=".80" cy="0" r=".115"/>
+      </g>
+    </svg>
+    <p class="plan-note">Én ubrudt bue: ingen ved hvor deres plads slutter. Fire af de otte har et ben ved knæet.</p>
+  </div>
+
+  <div class="plan">
+    <div class="plan-name">Rundt, søjlefod</div>
+    <svg viewBox="-1.46 -1.46 2.92 2.92" role="img" aria-label="Planbillede af et rundt bord med søjlefod: frit under hele kanten, men stadig én ubrudt bue og ingen indbygget drejeskive.">
+      <circle class="top" cx="0" cy="0" r=".984"/>
+      <g class="leg" opacity=".14">
+        <rect x="-.44" y="-.05" width=".88" height=".10" rx=".05"/>
+        <rect x="-.05" y="-.44" width=".10" height=".88" rx=".05"/>
+      </g>
+      <circle class="leg" cx="0" cy="0" r=".15" opacity=".2"/>
+      <g>
+        <use href="#chair" transform="rotate(0)   translate(0,-.942)"/>
+        <use href="#chair" transform="rotate(45)  translate(0,-.942)"/>
+        <use href="#chair" transform="rotate(90)  translate(0,-.942)"/>
+        <use href="#chair" transform="rotate(135) translate(0,-.942)"/>
+        <use href="#chair" transform="rotate(180) translate(0,-.942)"/>
+        <use href="#chair" transform="rotate(225) translate(0,-.942)"/>
+        <use href="#chair" transform="rotate(270) translate(0,-.942)"/>
+        <use href="#chair" transform="rotate(315) translate(0,-.942)"/>
+      </g>
+    </svg>
+    <p class="plan-note">Frit under hele kanten — søjlefodens styrke. Men stadig én bue, og drejeskiven må stilles løst ovenpå.</p>
+  </div>
+
+  <div class="plan">
+    <div class="plan-name">Aflangt</div>
+    <svg viewBox="-1.46 -1.46 2.92 2.92" role="img" aria-label="Planbillede af et aflangt bord: lige kanter langs siderne, ben i hjørnerne, og to pladser for enden.">
+      <rect class="top" x="-.68" y="-1.12" width="1.36" height="2.24" rx=".02"/>
+      <g>
+        <use href="#chair" transform="translate(-.68,-.66) rotate(-90)"/>
+        <use href="#chair" transform="translate(-.68,0)    rotate(-90)"/>
+        <use href="#chair" transform="translate(-.68,.66)  rotate(-90)"/>
+        <use href="#chair" transform="translate(.68,-.66)  rotate(90)"/>
+        <use href="#chair" transform="translate(.68,0)     rotate(90)"/>
+        <use href="#chair" transform="translate(.68,.66)   rotate(90)"/>
+        <use href="#chair" transform="translate(0,-1.12)   rotate(0)"/>
+        <use href="#chair" transform="translate(0,1.12)    rotate(180)"/>
+      </g>
+      <g>
+        <circle class="leg" cx="-.56" cy="-1.00" r=".05"/><circle class="hit-ring" cx="-.56" cy="-1.00" r=".115"/>
+        <circle class="leg" cx=".56" cy="-1.00" r=".05"/><circle class="hit-ring" cx=".56" cy="-1.00" r=".115"/>
+        <circle class="leg" cx="-.56" cy="1.00" r=".05"/><circle class="hit-ring" cx="-.56" cy="1.00" r=".115"/>
+        <circle class="leg" cx=".56" cy="1.00" r=".05"/><circle class="hit-ring" cx=".56" cy="1.00" r=".115"/>
+      </g>
+    </svg>
+    <p class="plan-note">Lige kanter — det aflange bords styrke. Men ben i hjørnerne, og to sidder for enden i stedet for med.</p>
+  </div>
+
+</div>
+
+<!-- ============ THE BAY ============ -->
+<section class="bay">
+  <div class="bay-head">
+    <h2>Bugten, hver gæst sidder i</h2>
+    <div class="sub">Målt på bordets egen tegning · Ø&nbsp;1900&nbsp;mm</div>
+  </div>
+  <p class="why">Tænderne står ikke foran nogen. De står <em>mellem</em> kuverterne, og efterlader en bugt, der er hver gæsts eget felt: en lige flade at sidde ud for, og en tand til hver side, der markerer hvor din plads slutter og naboens begynder.</p>
+
+  <svg viewBox="-700 -1010 1400 450" role="img" aria-label="Snit gennem én bugt: den lige flade er 287 mm bred og ligger 194 mm inde bag tandspidserne, og åbningen mellem to tandspidser er 580 mm.">
+    <g transform="scale(965.43)">
+      <use href="#cog" class="bayedge" style="stroke-width:.0035"/>
+    </g>
+    <!-- depth 194 -->
+    <g>
+      <line class="dim" x1="-440" y1="-950" x2="-440" y2="-756"/>
+      <line class="dimtick" x1="-462" y1="-950" x2="-418" y2="-950"/>
+      <line class="dimtick" x1="-462" y1="-756" x2="-418" y2="-756"/>
+      <text class="dimtxt" x="-462" y="-843" text-anchor="end">194 mm</text>
+    </g>
+    <!-- mouth 580 -->
+    <g>
+      <line class="dim" x1="-290" y1="-928" x2="290" y2="-928"/>
+      <line class="dimtick" x1="-290" y1="-950" x2="-290" y2="-906"/>
+      <line class="dimtick" x1="290" y1="-950" x2="290" y2="-906"/>
+      <text class="dimtxt" x="0" y="-958" text-anchor="middle">580 mm</text>
+    </g>
+    <!-- flat 287 -->
+    <g>
+      <line class="dim" x1="-144" y1="-722" x2="144" y2="-722"/>
+      <line class="dimtick" x1="-144" y1="-744" x2="-144" y2="-700"/>
+      <line class="dimtick" x1="144" y1="-744" x2="144" y2="-700"/>
+      <text class="dimtxt" x="0" y="-680" text-anchor="middle">287 mm</text>
+    </g>
+    <text class="lbl" x="-362" y="-968" text-anchor="middle">TANDSPIDS</text>
+    <text class="lbl" x="0" y="-636" text-anchor="middle">DIN FLADE</text>
+  </svg>
+</section>
+
+<div class="nums">
+  <div class="num"><b>194&thinsp;mm</b><span>Tanden står frem<br>foran din flade</span></div>
+  <div class="num"><b>580&thinsp;mm</b><span>Bugtens åbning<br>mellem to tænder</span></div>
+  <div class="num"><b>594&thinsp;mm</b><span>Kant pr. kuvert<br>ved otte pladser</span></div>
+  <div class="num"><b>360&deg;</b><span>Drejeskiven, hele<br>vejen rundt</span></div>
+</div>
+<p class="nums-foot">Alle fire tal er regnet direkte ud af konfiguratorens egen geometri ved en diameter på 1900&nbsp;mm tand til tand. Vælger du et andet mål, skalerer de med det.</p>
+
+<!-- ============ CRITERIA ============ -->
+
+<section class="crit">
+  <h2><span class="no">01</span>Din egen plads</h2>
+  <p class="why">Ved et rundt bord er kanten én ubrudt bue. Ingen kan se, hvor deres plads slutter, og hvor naboens begynder — så glassene vandrer, og den der kommer sidst får den mindste plads.</p>
+  <div class="grid4">
+    <div class="cell me">
+      <div class="cname">Tandhjulet</div>
+      <div class="verdict v-yes">Otte markerede felter</div>
+      <p>Hver gæst sidder ud for sin egen lige flade med en tand til hver side. Formen siger, hvor din plads er, uden at der skal ligge en dækkeserviet for at vise det. 594&nbsp;mm kant pr. kuvert — over de 600&nbsp;mm, man plejer at regne med, er ikke meget, men her er de også afsat.</p>
+    </div>
+    <div class="cell">
+      <div class="cname">Rundt, fire ben</div>
+      <div class="verdict v-no">Ubrudt bue</div>
+      <p>Otte pladser, ingen grænser. Pladsen fordeles efter, hvem der sætter sig først.</p>
+    </div>
+    <div class="cell">
+      <div class="cname">Rundt, søjlefod</div>
+      <div class="verdict v-no">Ubrudt bue</div>
+      <p>Samme. Foden ændrer ikke, hvad kanten fortæller.</p>
+    </div>
+    <div class="cell">
+      <div class="cname">Aflangt</div>
+      <div class="verdict v-part">Siderne ja, enderne nej</div>
+      <p>Langsiderne deler sig nogenlunde af sig selv. Enderne er en anden slags plads.</p>
+    </div>
+  </div>
+</section>
+
+<section class="crit">
+  <h2><span class="no">02</span>En lige kant at sidde ved</h2>
+  <p class="why">En stol med armlæn og en krop er begge lige. En bue er det ikke. Ved et rundt bord møder du kanten i ét punkt og har luft til begge sider; ved en lige kant møder du hele din kuvert på én gang.</p>
+  <div class="grid4">
+    <div class="cell me">
+      <div class="cname">Tandhjulet</div>
+      <div class="verdict v-yes">Lige, otte gange</div>
+      <p>Den lige flade er 287&nbsp;mm bred og ligger vinkelret på den, der sidder der. Det er det aflange bords kant, hentet otte gange rundt om en cirkel — og bugten ved siden af er hvor armlæn og albuer har plads at være.</p>
+    </div>
+    <div class="cell">
+      <div class="cname">Rundt, fire ben</div>
+      <div class="verdict v-no">Bue</div>
+      <p>Kanten falder væk til begge sider af dig. Tallerkenen står på en kile, ikke på en flade.</p>
+    </div>
+    <div class="cell">
+      <div class="cname">Rundt, søjlefod</div>
+      <div class="verdict v-no">Bue</div>
+      <p>Samme kant, samme geometri.</p>
+    </div>
+    <div class="cell">
+      <div class="cname">Aflangt</div>
+      <div class="verdict v-yes">Lige</div>
+      <p>Her har det aflange bord fuldstændig ret. Det er præcis den egenskab, Tandhjulet henter ind i en rund form.</p>
+    </div>
+  </div>
+</section>
+
+<section class="crit">
+  <h2><span class="no">03</span>Ben ved knæene</h2>
+  <p class="why">Det klassiske skænderi om pladsen: hvem der fik stolen med bordbenet. Det afhænger af, hvor stellet møder gulvet i forhold til, hvor folk sidder.</p>
+  <div class="grid4">
+    <div class="cell me">
+      <div class="cname">Tandhjulet</div>
+      <div class="verdict v-part">Bærer ud under tænderne</div>
+      <p>Stellet bærer ud under tandspidserne — altså ud mod punkterne <em>mellem</em> kuverterne, ikke ned i dem. Fire ben, otte tandspidser, to pr. ben. Stellet er stadig under ombygning; det er tegnet efter den regel, men det er ikke prøvet af endnu.</p>
+    </div>
+    <div class="cell">
+      <div class="cname">Rundt, fire ben</div>
+      <div class="verdict v-no">Fire pladser rammer</div>
+      <p>Fire ben, otte gæster. Fire af dem får benet ind i knæet og sidder skævt hele aftenen.</p>
+    </div>
+    <div class="cell">
+      <div class="cname">Rundt, søjlefod</div>
+      <div class="verdict v-yes">Ingen ben</div>
+      <p>Her vinder søjlefoden reelt. Én søjle i midten, frit under hele kanten. Til gengæld tipper et søjlebord lettere, når nogen læner sig hårdt på kanten.</p>
+    </div>
+    <div class="cell">
+      <div class="cname">Aflangt</div>
+      <div class="verdict v-no">Hjørnerne rammer</div>
+      <p>Benene sidder i hjørnerne, hvor de fire yderste stole også skal stå. Det er altid de samme pladser, der er dårlige.</p>
+    </div>
+  </div>
+</section>
+
+<section class="crit">
+  <h2><span class="no">04</span>Bordenden</h2>
+  <p class="why">Hvem sidder for bordenden? Det er et spørgsmål, der kun findes ved nogle borde.</p>
+  <div class="grid4">
+    <div class="cell me">
+      <div class="cname">Tandhjulet</div>
+      <div class="verdict v-yes">Findes ikke</div>
+      <p>Otte ens pladser. Ingen har den gode, ingen har den dårlige, og ingen skal placeres.</p>
+    </div>
+    <div class="cell">
+      <div class="cname">Rundt, fire ben</div>
+      <div class="verdict v-yes">Findes ikke</div>
+      <p>Det er det runde bords bedste egenskab, og Tandhjulet beholder den uændret.</p>
+    </div>
+    <div class="cell">
+      <div class="cname">Rundt, søjlefod</div>
+      <div class="verdict v-yes">Findes ikke</div>
+      <p>Samme.</p>
+    </div>
+    <div class="cell">
+      <div class="cname">Aflangt</div>
+      <div class="verdict v-no">To ender</div>
+      <p>To gæster sidder på tværs af alle de andre og kan reelt kun tale med to personer.</p>
+    </div>
+  </div>
+</section>
+
+<section class="crit">
+  <h2><span class="no">05</span>Drejeskiven</h2>
+  <p class="why">En drejeskive er kun noget værd, hvis alle kan nå den, den ikke skal løftes over, og den ikke vandrer. Det afhænger af, om den er bygget ind eller stillet ovenpå.</p>
+  <div class="grid4">
+    <div class="cell me">
+      <div class="cname">Tandhjulet</div>
+      <div class="verdict v-yes">Bygget ind i pladen</div>
+      <p>Kuglelejet er fræst ned i bordpladen selv, så skiven bæres af pladen og ikke af stellet. Den drejer hele vejen rundt, den kan ikke skubbes ud af stilling, og alle otte når den lige langt.</p>
+    </div>
+    <div class="cell">
+      <div class="cname">Rundt, fire ben</div>
+      <div class="verdict v-part">Løs skive ovenpå</div>
+      <p>Kan købes til. Den står som en forhøjning midt på bordet, skal løftes af for at tørre bordet, og glider, hvis nogen støder til den.</p>
+    </div>
+    <div class="cell">
+      <div class="cname">Rundt, søjlefod</div>
+      <div class="verdict v-part">Løs skive ovenpå</div>
+      <p>Samme løsning, samme forbehold.</p>
+    </div>
+    <div class="cell">
+      <div class="cname">Aflangt</div>
+      <div class="verdict v-no">Giver ikke mening</div>
+      <p>En skive midt på et aflangt bord kan nås af de fire midterste. Enderne er lige vidt.</p>
+    </div>
+  </div>
+</section>
+
+<section class="crit">
+  <h2><span class="no">06</span>At nå maden</h2>
+  <p class="why">Hvor langt skal en skål flyttes, før alle har fået? Og hvem skal rejse sig for at gøre det?</p>
+  <div class="grid4">
+    <div class="cell me">
+      <div class="cname">Tandhjulet</div>
+      <div class="verdict v-yes">Et skub</div>
+      <p>Retterne står på skiven. Man drejer videre i stedet for at række over, og ingen skal bede om at få noget sendt.</p>
+    </div>
+    <div class="cell">
+      <div class="cname">Rundt, fire ben</div>
+      <div class="verdict v-part">Sendes rundt</div>
+      <p>Fadene går fra hånd til hånd. Det virker ved otte, men nogen skal række over midten.</p>
+    </div>
+    <div class="cell">
+      <div class="cname">Rundt, søjlefod</div>
+      <div class="verdict v-part">Sendes rundt</div>
+      <p>Samme.</p>
+    </div>
+    <div class="cell">
+      <div class="cname">Aflangt</div>
+      <div class="verdict v-no">Man rejser sig</div>
+      <p>Over to meter er der reelt to borde. Enderne får maden sidst og koldest.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ THE HONEST BIT ============ -->
+<div class="against">
+  <h2>Hvor Tandhjulet taber</h2>
+  <p class="why">Et bord, der kun vinder, er en reklame. Her er de steder, hvor du skal vælge noget andet.</p>
+  <ul>
+    <li><b>Otte pladser, ikke ni.</b> Formen definerer præcis otte flader. Ved et rundt bord kan man klemme to ekstra ind juleaften; her kan man ikke.</li>
+    <li><b>Mindre plade, end diameteren lover.</b> Bugterne er skåret væk, og drejeskiven optager midten. En rund plade med samme mål har mere fri flade at stille ting på.</li>
+    <li><b>Ingen tillægsplade.</b> Et rundt eller aflangt bord kan vokse med en plade. Et tandhjul kan ikke deles og trækkes fra hinanden uden at miste sin form.</li>
+    <li><b>Fylder den fulde cirkel.</b> Tandspidserne bestemmer målet, så bordet kræver hele cirklens plads i rummet — også der, hvor der kun er bugt.</li>
+    <li><b>Dyrere at lave.</b> Otte tænder, otte bugter og et nedfræset leje er mere arbejde end en rund plade. Det kan man se på prisen.</li>
+    <li><b>Stellet er ikke færdigt.</b> Bordpladen og drejeskiven er, som de bliver. Stellet er under ombygning til fire ben, der bærer ud under alle otte tandspidser.</li>
+  </ul>
+
+  <div class="check">
+    <h3>Én påstand, der mangler at blive målt</h3>
+    <p>At bugten skulle lade en stol med armlæn komme <em>længere</em> ind, end en rund plade med samme diameter tillader, holder ikke på tegningen alene. Regnet efter: en stol, der er 550&nbsp;mm over armlænene, stopper 881&nbsp;mm fra midten ved Tandhjulet og 909&nbsp;mm ved en rund plade på Ø&nbsp;1900. Det er 28&nbsp;mm — ikke noget man mærker.</p>
+    <p>Den lige flade og de to tænder, der markerer din plads, står uanset hvad. Men selve armlæns-fordelen skal måles på det rigtige bord med de rigtige stole, før den skrives på en side, en konkurrent kan læse.</p>
+  </div>
+</div>
+
+<footer>
+  <a href="../../tandhjulet/">&larr; Tilbage til Tandhjulet</a>
+</footer>
+
+</div>
+</body>
+</html>
