@@ -84,7 +84,7 @@
     #top { position: relative; min-height: 100svh; background: var(--dark);
            display: flex; flex-direction: column; overflow: hidden; }
     .hero-mark { position: absolute; z-index: 1; pointer-events: none; inset: 0; top: 46%;
-                 transform: translateY(-50%); height: min(74vh, 660px); opacity: .032;
+                 transform: translateY(-50%); height: min(74vh, 660px); opacity: .055; left: 22%;
                  background: var(--pale);
                  -webkit-mask: url(assets/danish-hawk-mark.png) center / contain no-repeat;
                          mask: url(assets/danish-hawk-mark.png) center / contain no-repeat; z-index: 0; }
@@ -116,7 +116,12 @@
 
     /* Three doors, each its own picture, each saying where it goes. */
     .doors { position: relative; z-index: 2; flex: 1; display: grid;
-             grid-template-columns: repeat(3, 1fr); min-height: 46svh; }
+             grid-template-columns: 1.55fr 1fr; grid-template-rows: 1fr 1fr; min-height: 48svh; }
+    /* One of the three is an object that can be photographed; the other two are
+       screens. Giving them equal panels is what forced the photograph out. */
+    .door:nth-child(1) { grid-row: 1 / 3; }
+    .door:nth-child(2) { border-top: none; }
+    .door:nth-child(3) { border-top: 1px solid rgba(239,233,221,.14); }
     .door { position: relative; display: flex; flex-direction: column; justify-content: flex-end;
             overflow: hidden; text-decoration: none; isolation: isolate;
             border-left: 1px solid rgba(239,233,221,.14);
@@ -126,16 +131,34 @@
     .door:nth-child(2) { animation-delay: .87s; }
     .door:nth-child(3) { animation-delay: .99s; }
     .door img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+                object-position: 50% 41%;
                 z-index: -2; transition: transform 1s cubic-bezier(.16,1,.3,1), filter .5s;
-                filter: saturate(.8) brightness(.6); }
-    /* A screenshot behind a headline is not texture — it is competing text. The
-       two software doors get blurred and pushed back until they read as a lit
-       screen rather than as something to be read. */
-    .door.screen img { filter: saturate(.5) brightness(.32) blur(7px); transform: scale(1.06); }
-    .door.screen:hover img { filter: saturate(.7) brightness(.44) blur(5px); }
+                filter: saturate(.95) brightness(.94) contrast(1.04); }
+    /* A screenshot behind a headline is not texture — it is competing text, and
+       blurred to mush it reads as an image that failed to load. The two software
+       doors carry their own colour and their own mark instead. A flat panel next
+       to a photograph is a choice; a blurred screenshot is a mistake. */
+    .door--app { background: linear-gradient(150deg, #171F36 0%, #0E1526 70%); }
+    .door--tool { background: linear-gradient(150deg, #13252B 0%, #0C171B 70%); }
+    .door--app::before, .door--tool::before { background: none; }
+    .door-mark { position: absolute; z-index: 0; pointer-events: none;
+                 top: clamp(20px, 2.2vw, 32px); right: clamp(22px, 2.4vw, 38px); }
+    .door-mark svg { display: block; width: clamp(38px, 3.4vw, 52px); height: auto; }
+    /* Energy Speed has no mark, so its own headline figure stands in for one. */
+    .door-fig { position: absolute; z-index: 0; pointer-events: none; user-select: none;
+                top: clamp(4px, 1vw, 14px); right: clamp(16px, 2vw, 28px);
+                font-family: var(--mono); font-weight: 300; letter-spacing: -.04em;
+                font-size: clamp(2.6rem, 4.6vw, 4.2rem); line-height: 1;
+                color: #2EA9BE; opacity: .16; }
+    .door--app .door-body, .door--tool .door-body { position: relative; z-index: 1; }
+    .door--app:hover { background: linear-gradient(150deg, #1D2745 0%, #101930 70%); }
+    .door--tool:hover { background: linear-gradient(150deg, #193038 0%, #0F1D23 70%); }
+    .door--app .kind { color: #F0A73C; }
+    .door--tool .kind { color: #4FC2D6; }
     .door::before { content: ''; position: absolute; inset: 0; z-index: -1; transition: opacity .45s;
-      background: linear-gradient(to top, rgba(10,9,6,.96) 0%, rgba(10,9,6,.86) 38%, rgba(10,9,6,.6) 100%); }
-    .door:hover img { transform: scale(1.06); filter: saturate(1) brightness(.72); }
+      background: linear-gradient(to top, rgba(10,9,6,.96) 0%, rgba(10,9,6,.88) 26%,
+                  rgba(10,9,6,.40) 52%, rgba(10,9,6,.10) 80%, rgba(10,9,6,0) 100%); }
+    .door:hover img { transform: scale(1.06); filter: saturate(1.05) brightness(1.02) contrast(1.04); }
     .door:hover::before { opacity: .86; }
     .door-body { padding: clamp(26px, 3vw, 44px) clamp(22px, 2.4vw, 38px) clamp(30px, 4vh, 48px); }
     .door .kind { font-family: var(--mono); font-size: .6rem; letter-spacing: .2em; text-transform: uppercase;
@@ -266,15 +289,28 @@
       .intro { padding-top: calc(var(--nav-h) + 22px); padding-bottom: 22px; }
       .intro p { font-size: .96rem; margin-top: 12px; }
       .eyebrow { margin-bottom: 12px; }
-      /* All three need to read as one glance, not a page to scroll through —
-         the giant photo doors become slim, un-illustrated rows instead. */
+      /* All three still read as one glance — but the one that is an actual
+         object keeps its photograph. A front page for a furniture maker that
+         shows no furniture is the worst trade there is. */
       .scroll-cue { display: none; }
-      .doors { grid-template-columns: 1fr; min-height: 0; }
+      .hero-mark { display: none; }
+      .doors { grid-template-columns: 1fr; grid-template-rows: none; min-height: 0; }
       .door { border-left: none; border-top: 1px solid rgba(239,233,221,.18); min-height: 0;
               justify-content: center; }
+      .door:nth-child(1) { grid-row: auto; min-height: 31svh; justify-content: flex-end;
+                           border-top: none; }
+      .door:nth-child(1) img { display: block; }
+      .door:nth-child(1)::before { background: linear-gradient(to top,
+          rgba(10,9,6,.95) 0%, rgba(10,9,6,.82) 28%, rgba(10,9,6,.26) 60%, rgba(10,9,6,0) 100%); }
+      .door:nth-child(1) .door-body { padding: 14px 18px 16px; }
+      .door:nth-child(1) h2 { font-size: 1.8rem; }
+      .door:nth-child(2), .door:nth-child(3) { padding-left: 18px;
+          border-left: 3px solid rgba(240,167,60,.55); }
+      .door--tool { border-left-color: rgba(79,194,214,.55) !important; }
       .door img { display: none; }
       .door::before { background: none; }
-      .door-body { padding: 14px 4px; }
+      .door-mark, .door-fig { display: none; }
+      .door-body { padding: 13px 4px; }
       .door .kind { margin-bottom: 4px; font-size: .56rem; }
       .door h2 { font-size: 1.3rem; margin-bottom: 2px; }
       .door p { display: none; }
@@ -328,9 +364,17 @@
       </div>
     </a>
 
-    <a class="door screen" href="/NaboLarm/">
-      <img src="assets/shot-nabolarm-c7d4c541.jpg" alt="" width="780" height="1560"
-           loading="lazy" decoding="async"/>
+    <a class="door door--app" href="/NaboLarm/">
+      <div class="door-mark" aria-hidden="true">
+        <svg viewBox="0 0 100 100"><defs><clipPath id="nlclip"><circle cx="50" cy="50" r="48"/></clipPath></defs>
+          <circle cx="50" cy="50" r="48" fill="none"/>
+          <g clip-path="url(#nlclip)" fill="none" stroke="#F0A73C" stroke-width="5" stroke-linecap="round" opacity=".92">
+            <path d="M -10,28 Q 38,8 112,24"/><path d="M -10,58 Q 32,76 112,52"/>
+            <path d="M 22,-10 Q 36,46 14,112"/><path d="M 72,-10 Q 54,42 78,112"/>
+            <path d="M -10,86 Q 44,60 112,92"/><path d="M -10,4 Q 52,48 112,72"/>
+            <path d="M 46,-10 Q 24,50 92,108"/><path d="M 4,108 Q 60,54 108,8"/>
+          </g></svg>
+      </div>
       <div class="door-body">
         <div class="kind">App — nabovarsling</div>
         <h2>NaboLarm</h2>
@@ -340,9 +384,8 @@
       </div>
     </a>
 
-    <a class="door screen" href="/ev/">
-      <img src="assets/shot-energy-speed-012b0383.jpg" alt="" width="1600" height="1000"
-           loading="lazy" decoding="async"/>
+    <a class="door door--tool" href="/ev/">
+      <div class="door-fig" aria-hidden="true">136</div>
       <div class="door-body">
         <div class="kind">Værktøj — elbilsberegner</div>
         <h2>Energy Speed</h2>
