@@ -1,6 +1,6 @@
 import { all, get, run, tx, bindable } from '../db.js';
 import { config, CURRENCIES } from '../config.js';
-import { commissionFor, depositFor, priceOrder, vatTreatment, formatMoney } from '../lib/money.js';
+import { commissionFor, depositFor, netOf, priceOrder, vatTreatment, formatMoney } from '../lib/money.js';
 import { badRequest } from '../lib/http.js';
 import { priceConfiguration, requireProduct } from './catalogue.js';
 import * as validate from '../lib/validate.js';
@@ -14,13 +14,18 @@ import {
 const MAX_LINES = 12;
 const MAX_QTY = 20;
 
+/* Invoice numbers must run unbroken and never repeat. Counting the rows gives
+   the same number twice if two orders are built at once, and order_no is UNIQUE,
+   so the second customer is turned away. Continue from the highest number
+   actually issued instead, and read it inside the order's own transaction. */
 export function nextOrderNo() {
   const year = new Date().getFullYear();
   const row = get(
-    `SELECT COUNT(*) AS n FROM orders WHERE order_no LIKE :prefix`,
+    `SELECT MAX(CAST(substr(order_no, 9) AS INTEGER)) AS highest
+       FROM orders WHERE order_no LIKE :prefix`,
     { prefix: `DH-${year}-%` }
   );
-  return `DH-${year}-${String((row?.n ?? 0) + 1).padStart(4, '0')}`;
+  return `DH-${year}-${String((row?.highest ?? 0) + 1).padStart(4, '0')}`;
 }
 
 /**
@@ -67,11 +72,27 @@ export function buildOrder({ cart, customer, partner, locale, kind }) {
   const depositPct = effectiveKind === 'quote' ? 0 : Math.max(...lines.map((l) => l.product.deposit_pct), 0);
   const depositAmount = depositFor(totals.total, depositPct);
 
-  // A product-level commission rate overrides the partner's default.
-  const commissionRate = partner
-    ? lines[0].product.commission_rate ?? partner.commission_rate
+  /* A product-level commission rate overrides the partner's default, and it is
+     per piece: a basket may mix rates, so each line earns its own. Taking the
+     first line's rate on the whole basket paid the partner the wrong amount on
+     every other piece in it. */
+  const rateFor = (line) => line.product.commission_rate ?? partner.commission_rate;
+  const commissionAmount = partner
+    ? lines.reduce(
+        (sum, line) => sum + commissionFor(netOf(line.lineTotal), rateFor(line)),
+        0
+      )
     : 0;
-  const commissionAmount = partner ? commissionFor(totals.subtotalExVat, commissionRate) : 0;
+  /* The order carries one rate for the invoice. When every piece agrees it is
+     that rate exactly; when they differ it is what the partner actually earned. */
+  const rates = partner ? new Set(lines.map(rateFor)) : new Set();
+  const commissionRate = !partner
+    ? 0
+    : rates.size === 1
+      ? [...rates][0]
+      : totals.subtotalExVat
+        ? commissionAmount / totals.subtotalExVat
+        : 0;
 
   return { lines, totals, treatment, depositAmount, commissionRate, commissionAmount, kind: effectiveKind };
 }
@@ -90,9 +111,9 @@ export function createOrder({
   kind = built.kind;
 
   const rate = CURRENCIES[displayCurrency]?.rate ?? 1;
-  const orderNo = nextOrderNo();
 
   const orderId = tx(() => {
+    const orderNo = nextOrderNo();
     const result = run(
       `INSERT INTO orders (
          order_no, partner_id, kind, status, locale, currency, display_currency, display_rate,

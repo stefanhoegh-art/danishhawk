@@ -46,16 +46,20 @@ export function vatTreatment({ country, vatNumber }) {
   return { charge: true, reason: 'eu_consumer', rate: config.vatRate };
 }
 
+/** The ex-VAT value inside a gross, VAT-inclusive amount. */
+export function netOf(grossMinor) {
+  return Math.round(grossMinor / (1 + config.vatRate));
+}
+
 /**
  * Turn gross (VAT-inclusive) line totals into an order total.
  * When VAT is not charged, the VAT portion is stripped from the gross price
  * rather than added on top — the listed price already contains it.
  */
 export function priceOrder({ grossLines, shippingGross = 0, treatment }) {
-  const rate = config.vatRate;
   const grossGoods = grossLines.reduce((sum, n) => sum + n, 0);
-  const netGoods = Math.round(grossGoods / (1 + rate));
-  const netShipping = Math.round(shippingGross / (1 + rate));
+  const netGoods = netOf(grossGoods);
+  const netShipping = netOf(shippingGross);
 
   // Amounts are always stored ex-VAT so that
   // total = subtotalExVat + shippingAmount + vatAmount holds in every case.
