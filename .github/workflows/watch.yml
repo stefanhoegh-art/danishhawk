@@ -1,0 +1,28 @@
+# The watchtower, on every change. The scheduled run catches what rots on its
+# own; this catches what a commit breaks, at the moment it breaks it.
+name: watch
+
+on:
+  push:
+    branches: ['**']
+  pull_request:
+  schedule:
+    - cron: '0 5 * * *'   # 07:00 Danish summer time, an hour earlier in winter
+  workflow_dispatch:
+
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: The commerce suite
+        working-directory: app
+        run: npm test
+
+      - name: The whole business
+        run: node ops/watch.mjs
