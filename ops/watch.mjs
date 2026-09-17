@@ -89,6 +89,72 @@ function checkSitemap() {
   note('sitemap', `${listed.length} pages listed, ${hidden} deliberately hidden`);
 }
 
+/* The size of a JPEG or PNG, read from the file itself. A page may declare
+   og:image:width, but most do not, and a check that only believes the tag is
+   blind exactly where nobody has been careful. */
+function pictureSize(path) {
+  let data;
+  try { data = readFileSync(path); } catch { return null; }
+  if (data.length > 24 && data.readUInt32BE(0) === 0x89504e47) {
+    return { width: data.readUInt32BE(16), height: data.readUInt32BE(20) };
+  }
+  if (data.length < 4 || data[0] !== 0xFF || data[1] !== 0xD8) return null;
+  let i = 2;
+  while (i + 9 < data.length) {
+    if (data[i] !== 0xFF) { i++; continue; }
+    const marker = data[i + 1];
+    // The frame headers that carry the picture's true dimensions.
+    if (marker >= 0xC0 && marker <= 0xCF && ![0xC4, 0xC8, 0xCC].includes(marker)) {
+      return { height: data.readUInt16BE(i + 5), width: data.readUInt16BE(i + 7) };
+    }
+    if (marker === 0xD8 || (marker >= 0xD0 && marker <= 0xD9)) { i += 2; continue; }
+    i += 2 + data.readUInt16BE(i + 2);
+  }
+  return null;
+}
+
+// How a page looks when somebody shares it. A link with no picture renders as a
+// grey box, and a grey box is not clicked. This is the cheapest promotion there
+// is and the easiest to forget, so it is checked rather than remembered.
+function checkSharing() {
+  let ready = 0;
+  for (const page of pages) {
+    if (page.endsWith('404.html')) continue;
+    const html = readFileSync(page, 'utf8');
+    if (/<meta[^>]+noindex/i.test(html)) continue;   // hidden on purpose
+    const here = '/' + relative(ROOT, page).replace(/index\.html$/, '');
+
+    const image = html.match(/property="og:image"\s+content="([^"]+)"/)?.[1];
+    if (!image) {
+      fail('sharing', `${here} has no og:image — shared anywhere, it renders as a grey box`);
+      continue;
+    }
+    // The picture has to exist, or the box is grey anyway.
+    const local = image.replace(/^https?:\/\/[^/]+/, '');
+    if (local.startsWith('/') && !existsSync(join(ROOT, local))) {
+      fail('sharing', `${here} points its preview image at ${local}, which is not there`);
+      continue;
+    }
+    if (!/property="og:title"/.test(html)) warn('sharing', `${here} has no og:title`);
+    if (!/name="twitter:card"/.test(html)) warn('sharing', `${here} has no twitter:card — the preview stays small`);
+
+    /* A large preview card crops to about 1.91:1. A portrait photograph handed
+       to it becomes a strip through the middle of the piece, showing nothing.
+       This is fixed with a camera, not with code, so it is named rather than
+       worked around. */
+    const measured = local.startsWith('/') ? pictureSize(join(ROOT, local)) : null;
+    const w = measured?.width ?? Number(html.match(/property="og:image:width"\s+content="(\d+)"/)?.[1]);
+    const h = measured?.height ?? Number(html.match(/property="og:image:height"\s+content="(\d+)"/)?.[1]);
+    if (w && h && w / h < 1.4 && /content="summary_large_image"/.test(html)) {
+      warn('sharing', `${here} shares a ${w}×${h} picture on a wide card — it will be cropped to a strip; it needs a landscape photograph, about 1200×630`);
+    } else if (w && h && w / h < 1.4) {
+      warn('sharing', `${here} has only a portrait picture to share (${w}×${h}) — a landscape one, about 1200×630, would earn a large card`);
+    }
+    ready++;
+  }
+  note('sharing', `${ready} pages ready to be shared`);
+}
+
 // Photographs are the shop window. An asset nothing points at is only clutter,
 // but it is worth saying, because it usually means a page was edited badly.
 function checkAssets() {
@@ -220,6 +286,7 @@ async function checkLive() {
 
 checkLinks();
 checkSitemap();
+checkSharing();
 checkAssets();
 checkSecrets();
 checkDeployConfig();
