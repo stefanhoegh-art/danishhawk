@@ -223,7 +223,10 @@
     .pris-note p { font-size: .88rem; color: var(--mid); line-height: 1.9; margin-bottom: 18px; }
     .pris-note p:last-child { margin-bottom: 0; }
     .pris-note strong { color: var(--ink); font-weight: 400; }
-    .vur-note { margin-top: 52px; padding-left: 22px; border-left: 2px solid var(--accent); font-size: .95rem; color: var(--ink); line-height: 1.9; max-width: 70ch; }
+    .uvildig { margin-top: 44px; padding: 34px 38px; background: var(--bg); border-left: 3px solid var(--accent); }
+    .uv-lead { font-size: clamp(1.6rem,2.4vw,2.3rem); font-weight: 300; line-height: 1.2; margin-bottom: 16px; }
+    .uv-lead em { font-style: italic; color: var(--accent); }
+    .uv-body { font-size: .97rem; color: var(--mid); line-height: 1.9; max-width: 66ch; }
 
     /* CONTACT */
     #contact { border-top: 1px solid var(--line); display: grid; grid-template-columns: 1fr 1fr; }
@@ -299,6 +302,7 @@
       .vur-grid{grid-template-columns:1fr;}
       .vur-item{border-right:none;padding-left:0;padding-right:0;}
       .vur-pris{grid-template-columns:1fr;gap:40px;}
+      .uvildig{padding:26px 22px;margin-top:34px;}
       #contact{grid-template-columns:1fr;}
       .contact-l{padding:64px 24px;border-right:none;border-bottom:1px solid var(--line);}
       .contact-r{padding:64px 24px;}
@@ -505,6 +509,10 @@
     <h2 data-da="Sæt ord på<br>det, der er <em>galt.</em>" data-en="Put words to<br>what is <em>wrong.</em>">Sæt ord på<br>det, der er <em>galt.</em></h2>
     <p class="vur-intro" data-da="Et køkken er en af de største enkeltudgifter i et hjem. Når regningen er betalt, skal resultatet også være i orden. Men du kan se, at noget er galt — og når du skal forklare det til leverandøren, bliver det til »det ser bare ikke rigtigt ud«. Så står du svagt: de har en fagmand på deres side, du har en fornemmelse. Min opgave er at oversætte: fra utilfredshed til mål, fotos og konkrete punkter, der kan svares på." data-en="A kitchen is one of the largest single purchases in a home. Once the bill is paid, the result has to be right too. But you can see that something is wrong — and when you have to explain it to the supplier it comes out as 'it just doesn't look right'. Then you are on the back foot: they have a professional on their side, you have a feeling. My job is to translate: from dissatisfaction into measurements, photographs and concrete points that can be answered.">Et køkken er en af de største enkeltudgifter i et hjem. Når regningen er betalt, skal resultatet også være i orden. Men du kan se, at noget er galt — og når du skal forklare det til leverandøren, bliver det til »det ser bare ikke rigtigt ud«. Så står du svagt: de har en fagmand på deres side, du har en fornemmelse. Min opgave er at oversætte: fra utilfredshed til mål, fotos og konkrete punkter, der kan svares på.</p>
   </div>
+  <div class="uvildig reveal">
+    <div class="uv-lead" data-da="Jeg sælger ikke <em>køkkener.</em>" data-en="I don&rsquo;t sell <em>kitchens.</em>">Jeg sælger ikke <em>køkkener.</em></div>
+    <p class="uv-body" data-da="Jeg er ikke knyttet til nogen leverandør, og jeg har ingen interesse i udfaldet. Uvildig betyder, at det går begge veje: nogle gange er svaret, at arbejdet er i orden, og at det, du ser, er sådan materialet opfører sig. Det svar får du også — og det er netop derfor, en vurdering er noget værd over for modparten." data-en="I am not tied to any supplier, and I have no stake in the outcome. Independent means it cuts both ways: sometimes the answer is that the work is sound, and that what you are seeing is simply how the material behaves. You will get that answer too — and that is exactly why an assessment carries weight with the other side.">Jeg er ikke knyttet til nogen leverandør, og jeg har ingen interesse i udfaldet. Uvildig betyder, at det går begge veje: nogle gange er svaret, at arbejdet er i orden, og at det, du ser, er sådan materialet opfører sig. Det svar får du også — og det er netop derfor, en vurdering er noget værd over for modparten.</p>
+  </div>
   <div class="vur-grid reveal">
     <div class="vur-item"><div class="vur-num">01</div><div class="vur-title" data-da="Gennemgang på stedet" data-en="On-site review">Gennemgang på stedet</div><div class="vur-desc" data-da="Jeg kommer ud og ser på arbejdet. Hver afvigelse måles op, fotograferes og noteres for sig — så der står tal, hvor der før stod en fornemmelse." data-en="I come out and look at the work. Every deviation is measured, photographed and recorded separately — so there are numbers where before there was only a feeling.">Jeg kommer ud og ser på arbejdet. Hver afvigelse måles op, fotograferes og noteres for sig — så der står tal, hvor der før stod en fornemmelse.</div></div>
     <div class="vur-item"><div class="vur-num">02</div><div class="vur-title" data-da="Skriftlig vurdering" data-en="Written assessment">Skriftlig vurdering</div><div class="vur-desc" data-da="Du får en samlet rapport med fotos, mål og en beskrivelse af hvert punkt — skrevet, så den kan sendes direkte videre til leverandøren." data-en="You get one report with photographs, measurements and a description of each point — written so it can be sent straight on to the supplier.">Du får en samlet rapport med fotos, mål og en beskrivelse af hvert punkt — skrevet, så den kan sendes direkte videre til leverandøren.</div></div>
@@ -531,7 +539,6 @@
       <p data-da="Opfølgning efter leverandørens svar, eller en ekstra gennemgang, afregnes til timeprisen. Alle priser er inkl. moms; erhverv faktureres ekskl.: 1.200, 2.000, 2.400 og 600 kr." data-en="Follow-up after the supplier replies, or a second review, is charged at the hourly rate. All prices include Danish VAT; business customers are invoiced excluding VAT: DKK 1,200, 2,000, 2,400 and 600.">Opfølgning efter leverandørens svar, eller en ekstra gennemgang, afregnes til timeprisen. Alle priser er inkl. moms; erhverv faktureres ekskl.: 1.200, 2.000, 2.400 og 600 kr.</p>
     </div>
   </div>
-  <p class="vur-note reveal" data-da="Uvildig betyder, at det går begge veje. Jeg sælger ikke køkkener, jeg er ikke knyttet til nogen leverandør, og jeg har ingen interesse i udfaldet. Nogle gange er svaret, at arbejdet er i orden, og at det, du ser, er sådan materialet opfører sig. Det svar får du også — og det er netop derfor, en vurdering er noget værd over for modparten." data-en="Independent means it cuts both ways. I do not sell kitchens, I am not tied to any supplier, and I have no stake in the outcome. Sometimes the answer is that the work is sound, and that what you are seeing is simply how the material behaves. You will get that answer too — and that is exactly why an assessment carries weight with the other side.">Uvildig betyder, at det går begge veje. Jeg sælger ikke køkkener, jeg er ikke knyttet til nogen leverandør, og jeg har ingen interesse i udfaldet. Nogle gange er svaret, at arbejdet er i orden, og at det, du ser, er sådan materialet opfører sig. Det svar får du også — og det er netop derfor, en vurdering er noget værd over for modparten.</p>
 </section>
 
 <!-- CONTACT -->
