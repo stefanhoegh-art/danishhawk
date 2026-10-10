@@ -4,7 +4,7 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Danish Hawk — møbler efter mål, tegnet og produceret i Danmark</title>
-  <meta name="description" content="Møbler tegnet efter mål og produceret i Danmark, plus software. Tandhjulet spisebord, Energy Speed elbilsberegner og NaboLarm."/>
+  <meta name="description" content="Uvildig vurdering af køkken og møbler — fast pris. Plus møbler efter mål produceret i Danmark: Tandhjulet spisebord, Energy Speed elbilsberegner og NaboLarm."/>
   <meta name="author" content="Danish Hawk — Stefan Høgh"/>
   <meta name="robots" content="index, follow"/>
   <link rel="canonical" href="https://danishhawk.com/"/>
@@ -13,8 +13,8 @@
 
   <meta property="og:type" content="website"/>
   <meta property="og:site_name" content="Danish Hawk"/>
-  <meta property="og:title" content="Danish Hawk — vi bygger det, der mangler"/>
-  <meta property="og:description" content="Møbler efter mål, CNC-fræsning og software. Tre ting i drift."/>
+  <meta property="og:title" content="Uvildig rådgivning — få en fagmand på din side"/>
+  <meta property="og:description" content="Uvildig vurdering af køkken og møbler, fast pris. Plus møbler efter mål, CNC-fræsning og software."/>
   <meta property="og:url" content="https://danishhawk.com/"/>
   <meta property="og:image" content="https://danishhawk.com/assets/tandhjulet-top-and-centre-0e4e9e71.jpg"/>
   <meta name="twitter:card" content="summary_large_image"/>
@@ -89,10 +89,19 @@
                  -webkit-mask: url(assets/danish-hawk-mark.png) center / contain no-repeat;
                          mask: url(assets/danish-hawk-mark.png) center / contain no-repeat; z-index: 0; }
 
-    .intro { position: relative; z-index: 2; padding: calc(var(--nav-h) + clamp(30px, 6vh, 70px))
-             clamp(22px, 5vw, 80px) clamp(26px, 4.5vh, 54px); }
+    .intro { position: relative; z-index: 2; padding: calc(var(--nav-h) + clamp(26px, 4.6vh, 58px))
+             clamp(22px, 5vw, 80px) clamp(22px, 3.6vh, 46px); }
     .eyebrow { font-family: var(--mono); font-size: .66rem; letter-spacing: .3em; text-transform: uppercase;
                color: var(--accent); margin-bottom: 20px; }
+    /* The top panel is the fourth window: the one thing on this page that has
+       no door of its own, because it is not a product you can photograph. */
+    .hero-cta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 30px; animation-delay: .7s; }
+    .hero-go { font-family: var(--mono); font-size: .68rem; letter-spacing: .16em; text-transform: uppercase;
+               text-decoration: none; padding: 15px 28px; background: var(--pale); color: var(--ink);
+               transition: .25s; }
+    .hero-go:hover { background: var(--accent); color: var(--ink); }
+    .hero-go--ghost { background: none; color: var(--pale); border: 1px solid rgba(239,233,221,.32); }
+    .hero-go--ghost:hover { background: none; border-color: var(--accent); color: var(--accent); }
     #top h1 { font-size: clamp(2.2rem, 5vw, 4.4rem); font-weight: 300; line-height: 1;
               letter-spacing: -.03em; color: var(--pale); max-width: 22ch; }
     #top h1 em { font-style: italic; color: var(--accent); }
@@ -102,6 +111,7 @@
     .intro .eyebrow { animation-delay: .25s; }
     .intro h1       { animation-delay: .4s; }
     .intro p        { animation-delay: .6s; }
+    .intro .hero-cta{ animation-delay: .7s; }
     @keyframes lift { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: none; } }
 
     /* Names the three doors before anyone has to scroll to discover them —
@@ -109,7 +119,7 @@
        is the one thing this page needs to say fastest. */
     .scroll-cue { display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
                   font-family: var(--mono); font-size: .62rem; letter-spacing: .12em; text-transform: uppercase;
-                  color: rgba(239,233,221,.5); margin-top: 34px; animation-delay: .75s; }
+                  color: rgba(239,233,221,.5); margin-top: 28px; animation-delay: .82s; }
     .scroll-cue span:nth-child(even) { color: var(--accent); opacity: .7; }
     .scroll-cue svg { color: var(--accent); animation: bob 1.6s ease-in-out infinite; }
     @keyframes bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(4px); } }
@@ -210,6 +220,13 @@
           background: var(--ink); color: var(--bg); transition: .25s; }
     .go:hover { background: var(--accent); color: var(--ink); }
 
+    /* NaboLarm's own mark, blown up behind its band. */
+    .band--nl .band-text { position: relative; overflow: hidden; }
+    .band--nl .nl-mark { position: absolute; z-index: 0; pointer-events: none;
+             left: -16%; top: 50%; transform: translateY(-50%); width: min(88%, 660px); opacity: .18; }
+    .band--nl .nl-mark svg { display: block; width: 100%; height: auto; }
+    .band--nl .band-text > *:not(.nl-mark) { position: relative; z-index: 1; }
+
     /* ---------- the work ---------- */
     .work { padding: clamp(70px, 9vw, 120px) clamp(26px, 5vw, 80px) 0; }
     .work-head { max-width: 62ch; margin-bottom: 50px; }
@@ -288,6 +305,8 @@
       #top { min-height: 0; }
       .intro { padding-top: calc(var(--nav-h) + 22px); padding-bottom: 22px; }
       .intro p { font-size: .96rem; margin-top: 12px; }
+      .hero-cta { margin-top: 18px; gap: 9px; }
+      .hero-go { padding: 12px 18px; font-size: .62rem; }
       .eyebrow { margin-bottom: 12px; }
       /* All three still read as one glance — but the one that is an actual
          object keeps its photograph. A front page for a furniture maker that
@@ -318,6 +337,7 @@
       .band, .band.flip { grid-template-columns: 1fr; }
       .band-text, .band.flip .band-text { order: 2; padding: 50px 22px 56px; }
       .band-img, .band.flip .band-img { order: 1; min-height: 300px; max-height: 62vh; }
+      .band--nl .nl-mark { width: 124%; left: -24%; opacity: .14; }
       .cell figcaption { opacity: 1; }
       footer { padding: 26px 22px; }
     }
@@ -328,6 +348,7 @@
 <nav id="navbar">
   <a class="home" href="/">Danish Hawk</a>
   <ul class="nav-links">
+    <li><a href="/vurdering/">Vurdering</a></li>
     <li><a href="#arbejdet">Arbejdet</a></li>
     <li><a href="/tandhjulet/">Tandhjulet</a></li>
     <li><a href="/ev/">Energy Speed</a></li>
@@ -341,10 +362,15 @@
   <div class="hero-mark" aria-hidden="true"></div>
 
   <div class="intro">
-    <div class="eyebrow">Danish Hawk — tegnet og produceret i Danmark</div>
-    <h1>Vi bygger det, <em>der mangler.</em></h1>
-    <p>Tre ting i tre felter. Fællesnævneren er ikke materialet, men at det kunne gøres bedre.
-       Vælg den, du er kommet efter.</p>
+    <div class="eyebrow">Uvildig rådgivning — vurdering af køkken og møbler</div>
+    <h1>Få en fagmand på <em>din side.</em></h1>
+    <p>Et køkken er en af de dyreste ting i et hjem. Er det ikke i orden, står du med en
+       fornemmelse — og leverandøren har en fagmand. Jeg er ikke knyttet til nogen af dem:
+       jeg kommer ud, måler op og skriver en rapport, du kan sende videre. Fast pris.</p>
+    <div class="hero-cta">
+      <a class="hero-go" href="/vurdering/">Se priser</a>
+      <a class="hero-go hero-go--ghost" href="tel:+4542493954">Ring +45 42 49 39 54</a>
+    </div>
     <div class="scroll-cue" aria-hidden="true">
       <span>Tandhjulet</span><span>·</span><span>NaboLarm</span><span>·</span><span>Energy Speed</span>
       <svg width="11" height="7" viewBox="0 0 11 7" fill="none"><path d="M1 1l4.5 4.5L10 1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -452,8 +478,17 @@
 </section>
 
 <!-- ============ NABOLARM ============ -->
-<section class="band reveal">
+<section class="band band--nl reveal">
   <div class="band-text">
+    <div class="nl-mark" aria-hidden="true">
+      <svg viewBox="0 0 100 100"><defs><clipPath id="nlbandclip"><circle cx="50" cy="50" r="48"/></clipPath></defs>
+        <g clip-path="url(#nlbandclip)" fill="none" stroke="#F0A73C" stroke-width="5" stroke-linecap="round">
+          <path d="M -10,28 Q 38,8 112,24"/><path d="M -10,58 Q 32,76 112,52"/>
+          <path d="M 22,-10 Q 36,46 14,112"/><path d="M 72,-10 Q 54,42 78,112"/>
+          <path d="M -10,86 Q 44,60 112,92"/><path d="M -10,4 Q 52,48 112,72"/>
+          <path d="M 46,-10 Q 24,50 92,108"/><path d="M 4,108 Q 60,54 108,8"/>
+        </g></svg>
+    </div>
     <div class="kind">App — vokser lige nu</div>
     <h2>NaboLarm</h2>
     <p>En app der lader naboer i samme område advare hinanden om støjgener, utryghed og
@@ -592,6 +627,7 @@
 <footer>
   <div>© 2026 Danish Hawk — DanishHawk.com</div>
   <ul class="flinks">
+    <li><a href="/vurdering/">Vurdering</a></li>
     <li><a href="/tandhjulet/">Tandhjulet</a></li>
     <li><a href="/ev/">Energy Speed</a></li>
     <li><a href="/NaboLarm/">NaboLarm</a></li>
