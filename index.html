@@ -215,6 +215,14 @@
     .vur-num { font-family: var(--mono); font-size: .58rem; letter-spacing: .2em; color: var(--accent); margin-bottom: 18px; }
     .vur-title { font-size: 1.12rem; font-weight: 400; margin-bottom: 12px; }
     .vur-desc { font-size: .86rem; color: var(--mid); line-height: 1.85; }
+    .vur-pris { margin-top: 64px; display: grid; grid-template-columns: 1fr 1fr; gap: 0 72px; align-items: start; }
+    .pris-list { border-top: 1px solid var(--line); margin-top: 4px; }
+    .pris-row { display: flex; justify-content: space-between; align-items: baseline; gap: 24px; padding: 15px 0; border-bottom: 1px solid var(--line); }
+    .pris-k { font-size: .92rem; color: var(--ink); }
+    .pris-v { font-family: var(--mono); font-size: .82rem; letter-spacing: .04em; white-space: nowrap; color: var(--ink); }
+    .pris-note p { font-size: .88rem; color: var(--mid); line-height: 1.9; margin-bottom: 18px; }
+    .pris-note p:last-child { margin-bottom: 0; }
+    .pris-note strong { color: var(--ink); font-weight: 400; }
     .vur-note { margin-top: 52px; padding-left: 22px; border-left: 2px solid var(--accent); font-size: .95rem; color: var(--ink); line-height: 1.9; max-width: 70ch; }
 
     /* CONTACT */
@@ -290,6 +298,7 @@
       #vurdering{padding:64px 24px;}
       .vur-grid{grid-template-columns:1fr;}
       .vur-item{border-right:none;padding-left:0;padding-right:0;}
+      .vur-pris{grid-template-columns:1fr;gap:40px;}
       #contact{grid-template-columns:1fr;}
       .contact-l{padding:64px 24px;border-right:none;border-bottom:1px solid var(--line);}
       .contact-r{padding:64px 24px;}
@@ -494,7 +503,7 @@
   <div class="reveal">
     <div class="slabel" data-da="Uvildig vurdering" data-en="Independent assessment">Uvildig vurdering</div>
     <h2 data-da="Sæt ord på<br>det, der er <em>galt.</em>" data-en="Put words to<br>what is <em>wrong.</em>">Sæt ord på<br>det, der er <em>galt.</em></h2>
-    <p class="vur-intro" data-da="Du kan se, at der er noget galt med det nye køkken. Men når du skal forklare det til leverandøren, bliver det til »det ser bare ikke rigtigt ud« — og så står du svagt. Min opgave er at oversætte: fra utilfredshed til mål, fotos og konkrete punkter, der kan svares på." data-en="You can see that something is wrong with the new kitchen. But when you have to explain it to the supplier it comes out as 'it just doesn't look right' — and then you are on the back foot. My job is to translate: from dissatisfaction into measurements, photographs and concrete points that can be answered.">Du kan se, at der er noget galt med det nye køkken. Men når du skal forklare det til leverandøren, bliver det til »det ser bare ikke rigtigt ud« — og så står du svagt. Min opgave er at oversætte: fra utilfredshed til mål, fotos og konkrete punkter, der kan svares på.</p>
+    <p class="vur-intro" data-da="Et køkken er en af de største enkeltudgifter i et hjem. Når regningen er betalt, skal resultatet også være i orden. Men du kan se, at noget er galt — og når du skal forklare det til leverandøren, bliver det til »det ser bare ikke rigtigt ud«. Så står du svagt: de har en fagmand på deres side, du har en fornemmelse. Min opgave er at oversætte: fra utilfredshed til mål, fotos og konkrete punkter, der kan svares på." data-en="A kitchen is one of the largest single purchases in a home. Once the bill is paid, the result has to be right too. But you can see that something is wrong — and when you have to explain it to the supplier it comes out as 'it just doesn't look right'. Then you are on the back foot: they have a professional on their side, you have a feeling. My job is to translate: from dissatisfaction into measurements, photographs and concrete points that can be answered.">Et køkken er en af de største enkeltudgifter i et hjem. Når regningen er betalt, skal resultatet også være i orden. Men du kan se, at noget er galt — og når du skal forklare det til leverandøren, bliver det til »det ser bare ikke rigtigt ud«. Så står du svagt: de har en fagmand på deres side, du har en fornemmelse. Min opgave er at oversætte: fra utilfredshed til mål, fotos og konkrete punkter, der kan svares på.</p>
   </div>
   <div class="vur-grid reveal">
     <div class="vur-item"><div class="vur-num">01</div><div class="vur-title" data-da="Gennemgang på stedet" data-en="On-site review">Gennemgang på stedet</div><div class="vur-desc" data-da="Jeg kommer ud og ser på arbejdet. Hver afvigelse måles op, fotograferes og noteres for sig — så der står tal, hvor der før stod en fornemmelse." data-en="I come out and look at the work. Every deviation is measured, photographed and recorded separately — so there are numbers where before there was only a feeling.">Jeg kommer ud og ser på arbejdet. Hver afvigelse måles op, fotograferes og noteres for sig — så der står tal, hvor der før stod en fornemmelse.</div></div>
@@ -503,6 +512,22 @@
     <div class="vur-item"><div class="vur-num">04</div><div class="vur-title" data-da="Modtagekontrol" data-en="Acceptance check">Modtagekontrol</div><div class="vur-desc" data-da="For erhverv: en gennemgang af leverancen, inden du skriver under. En fejl er langt nemmere at få rettet før godkendelsen end efter." data-en="For business: a review of the delivery before you sign it off. A defect is far easier to have put right before acceptance than after.">For erhverv: en gennemgang af leverancen, inden du skriver under. En fejl er langt nemmere at få rettet før godkendelsen end efter.</div></div>
     <div class="vur-item"><div class="vur-num">05</div><div class="vur-title" data-da="Et sæt øjne mere" data-en="A second pair of eyes">Et sæt øjne mere</div><div class="vur-desc" data-da="Et tilbud på et køkken eller en indretning, du gerne vil have gennemgået, før du siger ja. Hvad er der regnet med — og hvad er der ikke?" data-en="A quote for a kitchen or a fit-out you would like reviewed before you say yes. What has been allowed for — and what has not?">Et tilbud på et køkken eller en indretning, du gerne vil have gennemgået, før du siger ja. Hvad er der regnet med — og hvad er der ikke?</div></div>
     <div class="vur-item"><div class="vur-num">06</div><div class="vur-title" data-da="Fjernvurdering" data-en="Remote review">Fjernvurdering</div><div class="vur-desc" data-da="Er sagen enkel, kan vi starte med fotos og mål, du selv sender. Det koster mindre, og du finder hurtigt ud af, om der overhovedet er noget at komme efter." data-en="If the case is simple we can start from photographs and measurements you send yourself. It costs less, and you quickly find out whether there is a case at all.">Er sagen enkel, kan vi starte med fotos og mål, du selv sender. Det koster mindre, og du finder hurtigt ud af, om der overhovedet er noget at komme efter.</div></div>
+  </div>
+  <div class="vur-pris reveal">
+    <div>
+      <div class="slabel" data-da="Priser" data-en="Prices">Priser</div>
+      <div class="pris-list">
+      <div class="pris-row"><span class="pris-k" data-da="Opstart, pr. opgave" data-en="Start fee, per job">Opstart, pr. opgave</span><span class="pris-v" data-da="250 kr." data-en="DKK 250">250 kr.</span></div>
+      <div class="pris-row"><span class="pris-k" data-da="Gennemgang og rapport, pr. time" data-en="Review and report, per hour">Gennemgang og rapport, pr. time</span><span class="pris-v" data-da="750 kr." data-en="DKK 750">750 kr.</span></div>
+      <div class="pris-row"><span class="pris-k" data-da="Kørsel, de første 50 km hver vej" data-en="Travel, first 50 km each way">Kørsel, de første 50 km hver vej</span><span class="pris-v" data-da="0 kr." data-en="DKK 0">0 kr.</span></div>
+      <div class="pris-row"><span class="pris-k" data-da="Kørsel derudover, pr. km" data-en="Travel beyond that, per km">Kørsel derudover, pr. km</span><span class="pris-v" data-da="4 kr." data-en="DKK 4">4 kr.</span></div>
+      </div>
+    </div>
+    <div class="pris-note">
+      <p data-da="<strong>Alle priser er inkl. moms.</strong> Erhvervskunder faktureres ekskl. moms: 200 kr. i opstart, 600 kr. pr. time og 3,20 kr. pr. kilometer." data-en="<strong>All prices include Danish VAT.</strong> Business customers are invoiced excluding VAT: DKK 200 to start, DKK 600 per hour and DKK 3.20 per kilometre."><strong>Alle priser er inkl. moms.</strong> Erhvervskunder faktureres ekskl. moms: 200 kr. i opstart, 600 kr. pr. time og 3,20 kr. pr. kilometer.</p>
+      <p data-da="Et eksempel: en gennemgang på to timer hos en kunde 40 km fra Karup koster <strong>1.750 kr.</strong> — opstart plus to timer, ingen kørsel. Bor du 90 km væk, lægges der 320 kr. til for de 40 km hver vej, der ligger ud over de første 50." data-en="An example: a two-hour review for a customer 40 km from Karup costs <strong>DKK 1,750</strong> — the start fee plus two hours, no travel. At 90 km away, another DKK 320 is added for the 40 km each way beyond the first 50.">Et eksempel: en gennemgang på to timer hos en kunde 40 km fra Karup koster <strong>1.750 kr.</strong> — opstart plus to timer, ingen kørsel. Bor du 90 km væk, lægges der 320 kr. til for de 40 km hver vej, der ligger ud over de første 50.</p>
+      <p data-da="Jeg kører også til <strong>Sjælland og Fyn</strong>. På den afstand aftaler vi en fast pris på forhånd, så du ved præcis, hvad det koster, før jeg sætter mig ind i bilen." data-en="I also travel to <strong>Zealand and Funen</strong>. At that distance we agree a fixed price in advance, so you know exactly what it costs before I get in the car.">Jeg kører også til <strong>Sjælland og Fyn</strong>. På den afstand aftaler vi en fast pris på forhånd, så du ved præcis, hvad det koster, før jeg sætter mig ind i bilen.</p>
+    </div>
   </div>
   <p class="vur-note reveal" data-da="Uvildig betyder, at det går begge veje. Jeg sælger ikke køkkener, jeg er ikke knyttet til nogen leverandør, og jeg har ingen interesse i udfaldet. Nogle gange er svaret, at arbejdet er i orden, og at det, du ser, er sådan materialet opfører sig. Det svar får du også — og det er netop derfor, en vurdering er noget værd over for modparten." data-en="Independent means it cuts both ways. I do not sell kitchens, I am not tied to any supplier, and I have no stake in the outcome. Sometimes the answer is that the work is sound, and that what you are seeing is simply how the material behaves. You will get that answer too — and that is exactly why an assessment carries weight with the other side.">Uvildig betyder, at det går begge veje. Jeg sælger ikke køkkener, jeg er ikke knyttet til nogen leverandør, og jeg har ingen interesse i udfaldet. Nogle gange er svaret, at arbejdet er i orden, og at det, du ser, er sådan materialet opfører sig. Det svar får du også — og det er netop derfor, en vurdering er noget værd over for modparten.</p>
 </section>
