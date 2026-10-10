@@ -108,23 +108,12 @@
     .go--ghost { background: none; color: var(--pale); border: 1px solid rgba(239,233,221,.3); }
     .go--ghost:hover { background: none; border-color: var(--accent); color: var(--accent); }
 
-    /* The independence claim gets its own strip, because it is the argument.
-       It sits directly under the headline and is the first thing with a border
-       around it on the page. */
-    .uvildig { border-bottom: 1px solid var(--line); background: var(--card);
-               padding: clamp(44px, 6vw, 76px) clamp(26px, 5vw, 80px);
-               display: grid; grid-template-columns: 1fr 1.25fr; gap: clamp(26px, 4vw, 70px); }
     .slabel { font-family: var(--mono); font-size: .65rem; letter-spacing: .2em; text-transform: uppercase;
               color: var(--accent); margin-bottom: 26px; display: flex; align-items: center; gap: 12px; }
     .slabel::after { content: ''; width: 34px; height: 1px; background: var(--accent); }
-    .uvildig h2 { font-size: clamp(1.8rem, 2.8vw, 2.7rem); font-weight: 300; line-height: 1.08;
-                  letter-spacing: -.02em; }
-    .uvildig h2 em { font-style: italic; color: #6b8a52; }
-    .uvildig p { font-size: 1.08rem; font-weight: 500; color: var(--mid); line-height: 1.8; max-width: 58ch; }
-    .uvildig p + p { margin-top: 16px; }
 
     /* ---------- the problem ---------- */
-    .why { padding: clamp(66px, 9vw, 116px) clamp(26px, 5vw, 80px);
+    .why { background: var(--card); padding: clamp(66px, 9vw, 116px) clamp(26px, 5vw, 80px);
            display: grid; grid-template-columns: 1fr 1.25fr; gap: clamp(26px, 4vw, 70px);
            border-bottom: 1px solid var(--line); }
     h2.big { font-size: clamp(2rem, 3.4vw, 3.2rem); font-weight: 300; line-height: 1.08;
@@ -200,7 +189,7 @@
       #top h1 { font-size: clamp(1.8rem, 8vw, 2.7rem); max-width: none; }
       .hero-mark { display: none; }
       .hero-body { font-size: .99rem; }
-      .uvildig, .why, .pris-grid { grid-template-columns: 1fr; }
+      .why, .pris-grid { grid-template-columns: 1fr; }
       .six-grid { grid-template-columns: 1fr; }
       footer { padding: 26px 22px; }
     }
@@ -236,23 +225,6 @@
     <a class="go go--ghost" href="tel:+4542493954">Ring +45 42 49 39 54</a>
   </div>
 </section>
-
-<!-- ============ THE INDEPENDENCE ============ -->
-<div class="uvildig reveal">
-  <div>
-    <div class="slabel">Hvorfor uvildig betyder noget</div>
-    <h2>Ingen binding, <em>ingen bagtanke.</em></h2>
-  </div>
-  <div>
-    <p>Når du klager, møder du leverandørens egen fagmand. Han har set hundrede køkkener, han kender
-       ordene, og han er betalt af dem. Du har en fornemmelse af, at det ikke ser rigtigt ud. Det er
-       ikke en jævnbyrdig samtale.</p>
-    <p>Jeg har ingen aftale med nogen køkkenkæde, intet forhandlerled og ingen provision. Jeg skal
-       ikke lave arbejdet om bagefter, og jeg har ingen interesse i at finde flere fejl, end der er.
-       Det er hele grundlaget: en vurdering, der ikke kan skydes ned med, at den er købt og betalt
-       for at komme frem til et bestemt svar.</p>
-  </div>
-</div>
 
 <!-- ============ THE PROBLEM ============ -->
 <section class="why reveal">
