@@ -13,12 +13,12 @@ process.env.ADMIN_PASSWORD = 'test-password-1234';
 process.env.SESSION_SECRET = 'test-secret';
 
 const { config } = await import('../src/config.js');
-const { vatTreatment, priceOrder, depositFor, commissionFor, formatMoney, convert } =
+const { vatTreatment, priceOrder, depositFor, commissionFor, netOf, formatMoney, convert } =
   await import('../src/lib/money.js');
 const validate = await import('../src/lib/validate.js');
 const { hashPassword, verifyPassword } = await import('../src/lib/crypto.js');
 const { verifyStripeSignature } = await import('../src/services/payments.js');
-const { get } = await import('../src/db.js');
+const { get, run } = await import('../src/db.js');
 const { ensureSeed } = await import('../src/seed.js');
 const { priceConfiguration, requireProduct, presentProduct } = await import('../src/services/catalogue.js');
 const { createOrder, loadOrder, setOrderStatus, markPaid } = await import('../src/services/orders.js');
@@ -208,6 +208,33 @@ describe('orders', () => {
     assert.equal(order.commission_rate, partner.commission_rate);
     assert.equal(order.commission_amount, commissionFor(order.subtotal_ex_vat, partner.commission_rate));
     assert.equal(order.commission_status, 'pending', 'nothing is owed until money arrives');
+  });
+
+  test('each piece earns its own commission rate, not the first one in the basket', () => {
+    const partner = get(`SELECT * FROM partners WHERE slug = 'demo-studio'`);
+    // The console table is put on a rate of its own; the TV bench keeps the
+    // partner's default. A basket holding both must pay each of them correctly.
+    run(`UPDATE products SET commission_rate = 0.05 WHERE sku = 'DH-PAUROSA-CONSOLE'`);
+    try {
+      const order = createOrder({
+        cart: [
+          { sku: 'DH-PAUROSA-CONSOLE', quantity: 1, options: { wood: 'eg', length: '100', finish: 'natur' } },
+          { sku: 'DH-HOEGH-TV', quantity: 1, options: { lettering: 'hoegh', led: 'warm', length: '160' } },
+        ],
+        customer, partner, locale: 'da',
+      });
+      const console_ = order.items.find((i) => i.sku === 'DH-PAUROSA-CONSOLE');
+      const bench = order.items.find((i) => i.sku === 'DH-HOEGH-TV');
+      const expected = commissionFor(netOf(console_.line_total), 0.05)
+                     + commissionFor(netOf(bench.line_total), partner.commission_rate);
+      assert.equal(order.commission_amount, expected);
+      assert.ok(
+        order.commission_rate > 0.05 && order.commission_rate < partner.commission_rate,
+        'the order records what the partner actually earned across both rates'
+      );
+    } finally {
+      run(`UPDATE products SET commission_rate = NULL WHERE sku = 'DH-PAUROSA-CONSOLE'`);
+    }
   });
 
   test('a direct order carries no commission', () => {
