@@ -1519,6 +1519,7 @@
     "why.range":"Nr. {r} af {n} på reel rækkevidde","why.charge":"Nr. {r} af {n} på ladeeffekt",
     "why.rel":"Mærkepålidelighed {s} hos Consumer Reports","why.warranty":"{y} års nybilsgaranti",
     "war.byd":"Batteri 8 år / 200.000 km","war.toyota":"Batteri kan forlænges til 10 år / 1 mio. km med årligt eftersyn",
+    "why.notincat":"Står ikke i kataloget her, så den kan ikke vurderes.",
     "why.holds":"Holder værdien: {p}% tabt på fire år mod {avg}% i snit",
     "why.drops":"Værditab {p}% på fire år — mod {avg}% i snit",
     "why.explained":"Tallene forklarer den.","why.partly":"Tallene forklarer den kun delvist.",
@@ -1562,7 +1563,7 @@
     "mode.h":"Hvad er du i dag?",
     "mode.sub":"Det bestemmer kun, hvor du lander, og hvad der kommer først. Alt er stadig tilgængeligt, og du kan skifte når som helst.",
     "mode.buyer":"På udkig efter en bil","mode.buyer.short":"Køber",
-    "mode.buyer.d":"Start med alle 136 biler rangordnet efter, hvad de faktisk koster at køre i — og grav dig så ned i den, du kan lide.",
+    "mode.buyer.d":"Start med alle {cars} biler rangordnet efter, hvad de faktisk koster at køre i — og grav dig så ned i den, du kan lide.",
     "mode.owner":"Jeg ejer bilen","mode.owner.short":"Ejer",
     "mode.owner.d":"Start med din egen bil: reel rækkevidde, hvad den koster dig om året, dens servicehistorik og det, den næste ejer bør vide.",
     "sec.notes.h":"Værd at vide","sec.notes.note":"Det, en servicebog aldrig noterer, og sælgeren sjældent nævner — et batteri der holder op med at være ærligt efter et vist kilometertal, en raslen i kulden, en reservedel der er svær at skaffe. Skriv det ned til den, der ejer bilen efter dig; det følger med journalen.",
@@ -1614,7 +1615,7 @@
     "m.plate":"<b>En nummerplade kunne udfylde det her for dig — men ikke herfra.</b> I Danmark peger et registreringsnummer på den præcise variant, første registreringsdato og hele synshistorikken gennem Motorregisteret og Synsbasen, og flere kommercielle API'er pakker dem ind. Intet af det kan ske i denne side: en browser kan ikke kalde de tjenester direkte (de blokerer forespørgsler på tværs af domæner), og en API-nøgle lagt ind i en offentlig side er en nøgle, du har foræret væk. Det kræver en lille server, der holder nøglen og svarer på pladeopslag — en dags arbejde, og det punkt hvor det her holder op med at være en statisk fil. Indtil da er nummerpladen en identifikator, du selv taster, og resten skrives i hånden.",
     "m.record":"<b>Servicejournalen bor i den browser, der tastede den.</b> Stemplerne gemmes på nummerpladen eller stelnummeret, så de overlever en genindlæsning, og hver bil har sin egen historik. De ligger ikke på en server, hvilket betyder at de ikke følger med til en anden telefon — brug <b>Overdrag</b> til at eksportere journalen og <b>Indlæs</b> til at hente den ind et andet sted. Fotos følger aldrig med; de bliver på den enhed, der tilføjede dem. Rigtige konti, der bærer en bils historik mellem ejere, kræver den samme server.",
     "m.prices":"<b>Priserne er danske listepriser, og kun nogle af dem har en kilde.</b> Seksten er rettet mod offentliggjorte 2025-priser — blandt andre Citro&euml;n &euml;-C3 til 139.990, Cupra Born til 249.990, Volvo EX30 til 244.990, &Scaron;koda Enyaq og VW ID.4 til 304.995, BMW i5 til 564.900 og Audi Q6 e-tron til 685.390. Resten er skøn, og danske elbilpriser er faldet omkring 10&ndash;15% siden 2023, så læs et tal uden kilde som højt snarere end lavt. Fordi ingen håndskrevet tabel overlever mødet med et virkeligt marked, er <b>prisen redigerbar</b>: åbn <b>Justér data</b>, indsæt den faktiske udbudspris fra Bilbasen eller en forhandler, og alle tal på Økonomi-fanen følger med.",
-    "m.catalogue":"<b>Kataloget er 136 modeller fra 40 mærker, og det meste er skønnet.</b> Batteri og WLTP-rækkevidde er de to tal, der betyder mest, fordi alt forbrug udledes af dem, og de ligger tæt på de offentliggjorte specifikationer. Vægt, frontareal og ladeeffekt er begrundede skøn; de former fartkurven snarere end overskriften. Kun seksten priser har en kilde. Det hele er godt nok til at rangere biler ærligt mod hinanden og ikke godt nok til at skrive under på — derfor kan hvert eneste af felterne rettes under <b>Justér data</b>. En færdig udgave ville hente hele molevitten fra et vedligeholdt datafeed.",
+    "m.catalogue":"<b>Kataloget er {cars} modeller fra 40 mærker, og det meste er skønnet.</b> Batteri og WLTP-rækkevidde er de to tal, der betyder mest, fordi alt forbrug udledes af dem, og de ligger tæt på de offentliggjorte specifikationer. Vægt, frontareal og ladeeffekt er begrundede skøn; de former fartkurven snarere end overskriften. Kun seksten priser har en kilde. Det hele er godt nok til at rangere biler ærligt mod hinanden og ikke godt nok til at skrive under på — derfor kan hvert eneste af felterne rettes under <b>Justér data</b>. En færdig udgave ville hente hele molevitten fra et vedligeholdt datafeed.",
 
     "svcfoot.proof":"<b>Om at bevise noget af det her.</b> Alt ovenfor er tastet ind af den, der holder telefonen, så det er en påstand, ikke en kendsgerning — derfor står hvert stempel som <b>ubekræftet</b>, og intet her lader som om andet. Fotos bliver i denne browser og bliver aldrig uploadet nogen steder.",
     "svcfoot.avg":"<b>Om gennemsnitlige reparationspriser.</b> Gennemsnittene ovenfor er kun dine egne — dine regninger, delt på din måde. Et troværdigt pejlemærke for, hvad en bremsereparation på en Ioniq&nbsp;5 <em>burde</em> koste, kan ikke trylles frem af én ejers historik; det kræver en pulje af dem, og det er den rigtige værdi, en tjeneste som denne ville samle op. Hver registreret regning gør den næste ejers sammenligning bedre, og det er værd at være ærlig om frem for at vise et opdigtet landsgennemsnit.",
@@ -1657,6 +1658,7 @@
     "why.range":"No. {r} of {n} on real range","why.charge":"No. {r} of {n} on charging power",
     "why.rel":"Brand reliability {s} at Consumer Reports","why.warranty":"{y}-year vehicle warranty",
     "war.byd":"Battery 8 years / 200,000 km","war.toyota":"Battery extendable to 10 years / 1m km with annual servicing",
+    "why.notincat":"Not in this catalogue, so there is nothing to weigh it on.",
     "why.holds":"Holds its value: {p}% lost over four years against {avg}% average",
     "why.drops":"Lost {p}% over four years — against {avg}% average",
     "why.explained":"The numbers explain it.","why.partly":"The numbers only partly explain it.",
@@ -1675,6 +1677,8 @@
     "vs.ownwins":"Over {y} years, owning your {car} works out {d} cheaper than leasing it, on your own assumptions. That is the usual outcome when you keep the car for the whole period, because depreciation tapers while a lease payment does not.",
     "vs.leasewins":"Over {y} years, leasing your {car} works out {d} cheaper than owning it, on your own assumptions. That happens when the first years' depreciation costs more than the payments and the upfront together.",
     "unit.months":"months","unit.peryear":"per year",
+    "mode.buyer.d":"Start with all {cars} cars ranked by what they actually cost to drive, then dig into the one you like.",
+    "m.catalogue":"<b>The catalogue is {cars} models across 40 brands, and most of it is estimated.</b> Battery and WLTP range are the two figures that matter most, because every consumption number is derived from them, and those are close to the published specs. Weights, drag areas and charging rates are reasoned estimates; they shape the speed curve rather than the headline. Only sixteen prices are sourced. All of it is good enough to rank cars honestly against each other and not good enough to sign a contract on &mdash; which is why every one of these fields is editable under <b>Adjust spec</b>. A production version would pull the lot from a maintained feed.",
     "mode.buyer.short":"Buying","mode.owner.short":"Owner",
     "btn.addnote":"Add note","notes.delete":"Delete note",
     "notes.none":"No notes yet. Write down what you would have wanted to know before you bought it.",
@@ -1719,11 +1723,15 @@
   }
   function has(k) { return !!(T[LANG] && T[LANG][k] != null); }
 
+  /* How many cars are in the catalogue is written in the copy in several places,
+     and a car gets added most weeks. Write {cars} and it stays true by itself. */
+  function fill(s) { return s.replace(/\{cars\}/g, CARS.length); }
+
   function applyLang() {
     document.documentElement.lang = LANG;
     Array.prototype.forEach.call(document.querySelectorAll("[data-t]"), function (el) {
       var k = el.getAttribute("data-t");
-      if (has(k)) el.innerHTML = T[LANG][k];
+      if (has(k)) el.innerHTML = fill(T[LANG][k]);
     });
     Array.prototype.forEach.call(document.querySelectorAll("[data-tph]"), function (el) {
       var k = el.getAttribute("data-tph");
@@ -2015,6 +2023,7 @@
 
     ["Nissan","Ariya 87",87,533,2200,0.68,130,389000,"suv",2022],
     ["Toyota","Urban Cruiser",61,428,1800,0.72,67,269000,"suv",2025],
+    ["Toyota","C-HR+ 77",72,607,1980,0.65,150,299990,"suv",2026],
     ["Subaru","Solterra",64,466,2010,0.71,150,349000,"suv",2022],
     ["Lexus","RZ 450e",64,395,2100,0.70,150,499000,"premium",2023],
     ["Honda","e:Ny1",61.9,412,1750,0.72,78,299000,"suv",2023],
@@ -2050,14 +2059,14 @@
      and the page says so rather than pretending the match is exact.
      Nobody publishes the bottom of the list, so there is no bottom of the list. */
   var BESTSELLERS = {
-    month: "2026-07",
-    total: 14562, ev: 11671,
+    month: "2026-09",
+    total: 20025, ev: 17784,
     rows: [
-      { marque:"Toyota", model:"bZ4X",               share:4.2 },
-      { marque:"Škoda",  model:"Elroq 85" },
-      { marque:"Tesla",  model:"Model Y Long Range" },
-      { marque:"VW",     model:"ID.4 Pro" },
-      { marque:"XPeng",  model:"G6 Long Range",      share:3.2 }
+      { marque:"Tesla",  model:"Model Y Long Range",  share:6.1 },
+      { marque:"Tesla",  model:"Model 3 Long Range",  share:5.4 },
+      { marque:"Škoda",  model:"Elroq 85",            share:3.8 },
+      { marque:"Toyota", model:"bZ4X",                share:3.0 },
+      { marque:"Toyota", model:"C-HR+ 77",            share:2.7 }
     ]
   };
 
@@ -2597,7 +2606,7 @@
     return out;
   }
 
-  /* Ranking all 136 cars on cost is the most expensive read-out on the page, and
+  /* Ranking every car in the catalogue on cost is the most expensive read-out on the page, and
      it is a slow, contextual one — nobody watches it move under their thumb. It
      draws once, then settles after the conditions stop changing. */
   var marketTimer = null, marketDrawn = false;
@@ -2627,7 +2636,15 @@
       for (i = 0; i < CARS.length; i++) {
         if (CARS[i].marque === row.marque && CARS[i].model === row.model) { car = CARS[i]; break; }
       }
-      if (!car) return "";
+      if (!car) {
+        /* the catalogue does not hold this one, which is worth saying rather
+           than quietly dropping a car off a list of five */
+        return '<div class="mrow" style="cursor:default">' +
+          '<span class="mrank">' + (n + 1) + '</span>' +
+          '<span class="mbody"><span class="mname"><b>' + row.marque + '</b> ' + row.model +
+            (row.share ? ' <span class="mshare">' + row.share.toFixed(1) + '%</span>' : '') + '</span>' +
+          '<span class="mverdict" data-v="n">' + t("why.notincat") + '</span></span></div>';
+      }
       var rs = reasons(car, R), strong = rs.filter(function (x) { return x.s; }).length;
       var verdict = strong >= 3 ? "why.explained" : strong >= 1 ? "why.partly" : "why.unexplained";
 
