@@ -51,7 +51,22 @@
         "@type": "PriceSpecification",
         "description": "Pris efter mål, træsort og finish. Oplyses ved forespørgsel."
       },
-      "url": "https://danishhawk.com/tandhjulet/#bestil"
+      "url": "https://danishhawk.com/tandhjulet/#bestil",
+      "hasMerchantReturnPolicy": {
+        "@type": "MerchantReturnPolicy",
+        "applicableCountry": "DK",
+        "returnPolicyCategory": "https://schema.org/MerchantReturnNotPermitted",
+        "merchantReturnLink": "https://danishhawk.com/handelsbetingelser/",
+        "description": "Bordet skæres i det mål, kunden selv opgiver, og er derfor undtaget fra fortrydelsesretten efter forbrugeraftalelovens § 18, stk. 2, nr. 3. Borde købt fra lager har 14 dages fortrydelsesret. Reklamationsretten på to år gælder uanset."
+      },
+      "shippingDetails": {
+        "@type": "OfferShippingDetails",
+        "name": "Afhentning i Karup",
+        "description": "Bordet kan hentes i Karup uden beregning. Ved levering kører vi i hele Danmark undtagen Bornholm; prisen dækker indbæring og samling og oplyses som et fast beløb i tilbuddet.",
+        "shippingRate": { "@type": "MonetaryAmount", "value": 0, "currency": "DKK" },
+        "shippingDestination": { "@type": "DefinedRegion", "addressCountry": "DK" },
+        "availableDeliveryMethod": "https://schema.org/OnSitePickup"
+      }
     }
   }
   </script>
